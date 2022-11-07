@@ -1,0 +1,10 @@
+default:
+  test: 
+    test2: [1,2,3]
+  test3: test
+  test4: 1
+  test5: 1.0
+  test6: True
+  test7: 
+    test8: {hello: None}
+  jsonconfig: testjson.json

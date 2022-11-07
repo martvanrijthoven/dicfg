@@ -1,0 +1,44 @@
+testconfig:
+  default:
+    defaulttest: 10
+    overridetest: 10
+    test_dict:
+      test: test
+    test_list_append:
+      - test
+    test_list2@replace=false:
+      - test
+    test_list3@replace=true:
+      - test
+
+    test_object:
+      module: dicfg.reader
+      attribute: ConfigNotFoundError
+
+    test_object_type:
+      :return_type: 
+      module: dicfg.reader
+      attribute: ConfigNotFoundError
+
+    test_object_list:
+      - module: dicfg.reader
+        attribute: ConfigNotFoundError
+
+    test_object_from_file:
+      module: /home/mart/code/dicfg/dicfg/reader.py
+      attribute: ConfigNotFoundError
+
+    test_object_reference: ${test_object}
+    test_object_reference_using_name: ${testconfig:test_object.__class__.__name__}
+
+  testkey:
+    overridetest: 20
+    test_dict@replace=true:
+      test2: test2
+    test_list_append@replace=false:
+      - test2
+    test_list2:
+      - test2
+    test_list3:
+      - test2
+ 

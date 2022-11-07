@@ -1,0 +1,5 @@
+testconfig:
+  default:
+    replace@replace=error: hello
+
+  
