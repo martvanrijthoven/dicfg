@@ -4,10 +4,6 @@
 [![tests](https://github.com/martvanrijthoven/dicfg/actions/workflows/tests.yml/badge.svg)](https://github.com/martvanrijthoven/dicfg/actions/workflows/tests.yml)
 [![Coverage Status](https://coveralls.io/repos/github/martvanrijthoven/dicfg/badge.svg?branch=main)](https://coveralls.io/github/martvanrijthoven/dicfg?branch=main)
 
-
-
-
-
 A configuration system supporting direct dependency injection in config files.
 
 ## Installation
