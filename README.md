@@ -1,5 +1,3 @@
-
-
 # dicfg
 
 [![PyPI version](https://badge.fury.io/py/dicfg.svg)](https://badge.fury.io/py/dicfg)
