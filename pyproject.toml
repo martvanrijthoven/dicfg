@@ -7,7 +7,6 @@ packages = ["dicfg"]
 
 [project]
 name = "dicfg"
-description = ""
 authors = [{ name = "Mart van Rijthoven", email = "mart.vanrijthoven@gmail.com" }]
 license = { file = "LICENSE" }
 dependencies = ["PyYaml >= 5.4.1"]
