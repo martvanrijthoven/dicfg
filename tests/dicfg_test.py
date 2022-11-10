@@ -1,16 +1,16 @@
+import sys
+from dataclasses import dataclass
 from pathlib import Path
 
 from dicfg.factory import ObjectConfigFactory
-from dicfg.reader import ConfigReader, ConfigNotFoundError
+from dicfg.reader import ConfigNotFoundError, ConfigReader
 from pytest import raises
-import sys
-
-from dataclasses import dataclass
 
 
 @dataclass
 class ProjectComponent:
-    name: str 
+    name: str
+
 
 @dataclass
 class MyProject:
@@ -19,8 +19,9 @@ class MyProject:
 
 def test_my_project():
     sys.path.insert(0, str(Path(__file__).parent))
-    config = ConfigReader.read('./testconfigs/myproject.yml')
-    ObjectConfigFactory.build(config['default'])
+    config = ConfigReader.read("./testconfigs/myproject.yml")
+    ObjectConfigFactory.build(config["default"])
+
 
 def test_dicfg():
     class TestConfigReader(ConfigReader):
@@ -84,9 +85,7 @@ def test_config_not_found_error():
 
         config = TestConfigReader.read(user_config_path, fuse_keys=("testkey",))
 
-        TestConfigFactory.build(
-            config["testkey"]
-        )
+        TestConfigFactory.build(config["testkey"])
 
 
 def test_replace_error():
@@ -102,7 +101,4 @@ def test_replace_error():
 
         config = TestConfigReader.read(user_config_path, fuse_keys=("testkey",))
 
-        TestConfigFactory.build(
-            config["testkey"]
-        )
-
+        TestConfigFactory.build(config["testkey"])

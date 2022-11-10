@@ -8,7 +8,6 @@ from pathlib import Path
 from typing import List, Union
 
 import yaml
-import numpy as np
 from dicfg.config import merge
 
 
