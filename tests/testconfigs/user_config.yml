@@ -25,7 +25,7 @@ testconfig:
         attribute: ConfigNotFoundError
 
     test_object_from_file:
-      module: /Users/runner/work/dicfg/dicfg/dicfg/reader.py
+      module: /home/runner/work/dicfg/dicfg/dicfg/reader.py
       attribute: ConfigNotFoundError
 
     test_object_reference: ${test_object}
