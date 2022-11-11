@@ -2,7 +2,7 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
-from dicfg.factory import ObjectConfigFactory
+from dicfg.factory import ObjectFactory
 from dicfg.reader import ConfigNotFoundError, ConfigReader
 from pytest import raises
 
@@ -20,15 +20,12 @@ class MyProject:
 def test_my_project():
     sys.path.insert(0, str(Path(__file__).parent))
     config = ConfigReader.read("./testconfigs/myproject.yml")
-    ObjectConfigFactory.build(config["default"])
+    ObjectFactory.build(config["default"])
 
 
 def test_dicfg():
     class TestConfigReader(ConfigReader):
         NAME = "testconfig"
-
-    class TestConfigFactory(ObjectConfigFactory):
-        CONFIG_READER = TestConfigReader
 
     user_config_path = Path("./testconfigs/user_config.yml")
     config = TestConfigReader.read(
@@ -36,7 +33,7 @@ def test_dicfg():
         fuse_keys=("testkey",),
         search_paths=(user_config_path.parent,),
     )
-    test_config = TestConfigFactory.build(
+    test_config = ObjectFactory.build(
         config["testkey"],
     )
 
@@ -49,10 +46,7 @@ def test_dicfg():
     assert isinstance(test_config["test_object"], ConfigNotFoundError)
     assert test_config["test_object_type"] is ConfigNotFoundError
     assert isinstance(test_config["test_object_list"][0], ConfigNotFoundError)
-    name = test_config["test_object_from_file"].__class__.__name__
-    assert name == "ConfigNotFoundError"
     assert test_config["test_object_reference"] is test_config["test_object"]
-    assert test_config["test_object_reference_using_name"] == "ConfigNotFoundError"
 
 
 def test_cli():
@@ -78,14 +72,11 @@ def test_config_not_found_error():
         class TestConfigReader(ConfigReader):
             NAME = "testconfig"
 
-        class TestConfigFactory(ObjectConfigFactory):
-            CONFIG_READER = TestConfigReader
-
         user_config_path = Path("./testconfigs/user_config_not_found.yml")
 
         config = TestConfigReader.read(user_config_path, fuse_keys=("testkey",))
 
-        TestConfigFactory.build(config["testkey"])
+        ObjectFactory.build(config["testkey"])
 
 
 def test_replace_error():
@@ -94,11 +85,8 @@ def test_replace_error():
         class TestConfigReader(ConfigReader):
             NAME = "testconfig"
 
-        class TestConfigFactory(ObjectConfigFactory):
-            CONFIG_READER = TestConfigReader
-
         user_config_path = Path("./testconfigs/user_config_replace_error.yml")
 
         config = TestConfigReader.read(user_config_path, fuse_keys=("testkey",))
 
-        TestConfigFactory.build(config["testkey"])
+        ObjectFactory.build(config["testkey"])

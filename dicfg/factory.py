@@ -1,20 +1,19 @@
-import importlib
 import operator
+import re
 from copy import deepcopy
 from functools import reduce, singledispatchmethod
-from pathlib import Path
+from importlib import import_module
 from typing import Any, Union
 
-from dicfg.reader import ConfigReader
 
-
-class ObjectConfigFactory:
+class ObjectFactory:
 
     _REFERENCE_START_SYMBOL = "$"
     _REFERENCE_MAP_SYMBOL = ":"
     _REFERENCE_ATTRIBUTE_SYMBOL = "."
 
-    CONFIG_READER = ConfigReader
+    _OBJECT_KEY = "object*"
+    _RETURN_TYPE_KEY = ":return_type"
 
     @classmethod
     def build(cls, config):
@@ -53,24 +52,34 @@ class ObjectConfigFactory:
     def _build_str(self, config: str):
         if config.lower() == "none":
             return None
-        if config[0] == self._REFERENCE_START_SYMBOL:
+        if self._REFERENCE_START_SYMBOL in config:
             return self._get_reference(reference=config)
         return config
 
     def _build_object(self, value: dict):
-        module = _get_module(value.pop("module"))
-        attributes = value.pop("attribute").split(".")
-        attribute = reduce(getattr, attributes, module)
         value = self._build(value)
-        if ":return_type" in value:
+        object = value.pop(ObjectFactory._OBJECT_KEY)
+        attribute = self._parse_object_str(object)
+        if ObjectFactory._RETURN_TYPE_KEY in value:
             return attribute
         return attribute(**value)
 
+    def _parse_object_str(self, object: str):
+        object = object.split(".")
+        module_string = ".".join(object[:-1])
+        attribute_string = object[-1]
+        module = import_module(module_string)
+        return getattr(module, attribute_string)
+
     def _get_reference(self, reference: str):
-        reference = reference[1:].replace("{", "").replace("}", "")
+        matches = re.findall("\\${(.*?)}", reference)
+        if matches == 1 or len(matches[0]) + 3 == len(reference):
+            return self._object_interpolation(reference, matches)
+        return self._string_interpolation(reference, matches)
+
+    def _object_interpolation(self, reference, matches):
+        reference = matches[0]
         references = reference.split(self._REFERENCE_MAP_SYMBOL)
-        if references[0] == self.CONFIG_READER.NAME:
-            references = references[1:]
         reference = reduce(operator.getitem, references[:-1], self._configuration)
         attributes = references[-1].split(self._REFERENCE_ATTRIBUTE_SYMBOL)
         reference = reference[attributes[0]]
@@ -78,17 +87,14 @@ class ObjectConfigFactory:
             reference = getattr(reference, attr)
         return reference
 
+    def _string_interpolation(self, reference, matches):
+        for match in matches:
+            _reference = self._configuration[match]
+            match = "${" + match + "}"
+            reference = reference.replace(match, str(_reference))
+        return reference
+
     @staticmethod
     def _is_object(value):
-        return type(value) is dict and set(("module", "attribute")).issubset(set(value))
-
-
-def _get_module(module):
-    try:
-        return importlib.import_module(module)
-    except Exception:
-        module = Path(module)
-        spec = importlib.util.spec_from_file_location(module.stem, str(module))
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        return module
+        object_key_set = set((ObjectFactory._OBJECT_KEY,))
+        return isinstance(value, dict) and object_key_set.issubset(set(value))

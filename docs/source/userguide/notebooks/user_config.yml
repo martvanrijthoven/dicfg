@@ -1,0 +1,4 @@
+myconfig:
+    default:
+        config_int: 3
+        

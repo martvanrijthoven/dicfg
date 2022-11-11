@@ -6,36 +6,28 @@ testconfig:
       test: test
     test_list_append:
       - test
-    test_list2@replace=false:
+    test_list2@replace(false):
       - test
-    test_list3@replace=true:
+    test_list3@replace(true):
       - test
 
     test_object:
-      module: dicfg.reader
-      attribute: ConfigNotFoundError
+      object*: dicfg.reader.ConfigNotFoundError
 
     test_object_type:
+      object*: dicfg.reader.ConfigNotFoundError
       :return_type: 
-      module: dicfg.reader
-      attribute: ConfigNotFoundError
 
     test_object_list:
-      - module: dicfg.reader
-        attribute: ConfigNotFoundError
-
-    test_object_from_file:
-      module: /home/runner/work/dicfg/dicfg/dicfg/reader.py
-      attribute: ConfigNotFoundError
+      - object*: dicfg.reader.ConfigNotFoundError
 
     test_object_reference: ${test_object}
-    test_object_reference_using_name: ${testconfig:test_object.__class__.__name__}
 
   testkey:
     overridetest: 20
-    test_dict@replace=true:
+    test_dict@replace(true):
       test2: test2
-    test_list_append@replace=false:
+    test_list_append@replace(false):
       - test2
     test_list2:
       - test2

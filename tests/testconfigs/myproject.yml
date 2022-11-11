@@ -2,10 +2,8 @@ dicfg:
   default:
     project_component_name: my_project_component
     project_component:
-      module: myproject.project
-      attribute: ProjectComponent
+      object*: myproject.project.ProjectComponent
       name: ${project_component_name}
     project:
-      module: myproject.project
-      attribute: MyProject
+      object*: myproject.project.MyProject
       project_component: ${project_component}

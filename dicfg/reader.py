@@ -53,28 +53,48 @@ class ConfigReader:
 
     @classmethod
     def read(
-            cls,
-            user_config: Union[dict, str, Path],
-            presets: tuple = (),
-            fuse_keys=(),
-            search_paths=(),
+        cls,
+        user_config: Union[dict, str, Path] = None,
+        presets: tuple = (),
+        fuse_keys=(),
+        search_paths=(),
     ):
-        print(Path(user_config).parent)
+
+        is_dict = isinstance(user_config, dict)
+        user_config_search_path = None
+        if user_config is not None and not is_dict:
+            user_config_search_path = Path(user_config).parent 
+
         search_paths = (
             Path(),
-            Path(user_config).parent,
+            user_config_search_path,
             cls._CONFIGS_FOLDER,
             cls._PRESETS_FOLDER,
             *search_paths,
         )
 
-        cls_config = cls._read(cls._CONFIG_PATH) if cls._CONFIG_PATH is not None and cls._CONFIG_PATH.exists() else {}
+        cls_config = (
+            cls._read(cls._CONFIG_PATH)
+            if cls._CONFIG_PATH is not None and cls._CONFIG_PATH.exists()
+            else {}
+        )
+        preset_configs = cls._read_presets(presets)
+
+        if not is_dict:
+            if user_config is None:
+                user_config = {}
+            else:
+                user_config= cls._read_user_config(user_config)
+        else:
+            user_config = user_config[cls.NAME]
+       
+        cli_config = cls._read_cli(sys.argv[1:])
 
         configs = (
             cls_config,
-            *cls._read_presets(presets),
-            cls._read_user_config(user_config),
-            cls._read_cli(sys.argv[1:]),
+            *preset_configs,
+            user_config,
+            cli_config,
         )
         configs = cls._fuse_configs(configs, fuse_keys, search_paths)
         return merge(*configs).cast()

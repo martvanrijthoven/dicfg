@@ -48,7 +48,7 @@ class _ConfigList(_ConfigValue, UserList):
 
 
 _CONFIGS = {dict: _ConfigDict, list: _ConfigList}
-_REPLACE_IDENTIFIER = r"\@replace=(.*)"
+_REPLACE_IDENTIFIER = r"\@replace\((.*)\)"
 
 
 def _config_factory(c, merger=None):
@@ -59,7 +59,7 @@ def _config_factory(c, merger=None):
 
 def _update(a: _ConfigValue, b: _ConfigValue):
     if type(a) != type(b):
-        raise ValueError('Can not merger different types at this level', a,b)
+        raise ValueError('Can not merger different types at this level', a, b)
 
     if type(b) is not _ConfigDict:
         return b.data
