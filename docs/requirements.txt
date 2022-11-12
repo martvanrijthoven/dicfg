@@ -2,6 +2,7 @@ sphinx
 sphinx-copybutton
 sphinx_design
 myst-parser
+myst_nb
 pydata_sphinx_theme
 sphinxcontrib-napoleon
 sphinx-autodoc-typehints
