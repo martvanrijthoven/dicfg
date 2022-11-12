@@ -414,7 +414,7 @@
             <span class="k">return</span> <span class="n">user_config</span><span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">NAME</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">user_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{}</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">NAME</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="n">user_config</span><span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">NAME</span><span class="p">])</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_read_cli</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
