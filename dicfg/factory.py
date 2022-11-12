@@ -115,5 +115,4 @@ class ObjectFactory:
 
     @staticmethod
     def _is_object(value):
-        object_key_set = set((ObjectFactory._OBJECT_KEY,))
-        return isinstance(value, dict) and object_key_set.issubset(set(value))
+        return isinstance(value, dict) and ObjectFactory._OBJECT_KEY in value
