@@ -1,5 +1,8 @@
 # dicfg
 
+
+<img src="docs/source/_static/logo.png" width="50%" height="50%">
+
 [![PyPI version](https://badge.fury.io/py/dicfg.svg)](https://badge.fury.io/py/dicfg)
 [![tests](https://github.com/martvanrijthoven/dicfg/actions/workflows/tests.yml/badge.svg)](https://github.com/martvanrijthoven/dicfg/actions/workflows/tests.yml)
 [![Coverage Status](https://coveralls.io/repos/github/martvanrijthoven/dicfg/badge.svg?branch=main)](https://coveralls.io/github/martvanrijthoven/dicfg?branch=main)
