@@ -19,4 +19,6 @@ pip install dicfg
 
 ## Docs
 
+- [https://martvanrijthoven.github.io/dicfg/](https://martvanrijthoven.github.io/dicfg/)
+
 
