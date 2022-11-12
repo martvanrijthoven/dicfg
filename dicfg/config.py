@@ -4,6 +4,9 @@ from functools import reduce
 from typing import Any, Callable, Tuple
 
 
+_REPLACE_IDENTIFIER = r"\@replace\((.*)\)"
+
+
 class ConfigValue:
     """Wrapper config for values"""
 
@@ -82,14 +85,11 @@ class ConfigList(ConfigValue, UserList):
         return [value.cast() for value in self.data]
 
 
-_CONFIGS = {dict: ConfigDict, list: ConfigList}
-_REPLACE_IDENTIFIER = r"\@replace\((.*)\)"
-
-
 def _config_factory(c, merger=None):
     if isinstance(c, ConfigValue):
         return c
-    return _CONFIGS.get(type(c), ConfigValue)(c, merger=merger)
+    _configs = {dict: ConfigDict, list: ConfigList}
+    return _configs.get(type(c), ConfigValue)(c, merger=merger)
 
 
 def _update(a: ConfigValue, b: ConfigValue):
