@@ -29,14 +29,11 @@ _FILE_READERS = {
 
 
 class ConfigNotFoundError(Exception):
-    """Raised when config file can not be found.
-    """
-    ...
+    """Raised when config file can not be found."""
 
 
 class ConfigReader:
-    """Reads config files
-    """
+    """Reads config files"""
 
     NAME = "dicfg"
     DEFAULT_KEY = "default"
@@ -79,7 +76,7 @@ class ConfigReader:
         is_dict = isinstance(user_config, dict)
         user_config_search_path = None
         if user_config is not None and not is_dict:
-            user_config_search_path = Path(user_config).parent 
+            user_config_search_path = Path(user_config).parent
 
         search_paths = (
             Path(),
@@ -100,10 +97,10 @@ class ConfigReader:
             if user_config is None:
                 user_config = {}
             else:
-                user_config= cls._read_user_config(user_config)
+                user_config = cls._read_user_config(user_config)
         else:
             user_config = user_config[cls.NAME]
-       
+
         cli_config = cls._read_cli(sys.argv[1:])
 
         configs = (
@@ -149,7 +146,9 @@ class ConfigReader:
     @classmethod
     def _fuse_config(cls, config: dict, context_keys: tuple, search_paths):
         config = _include_configs(config, search_paths)
-        fused_config = deepcopy({key: deepcopy(config.get("default", {})) for key in context_keys})
+        fused_config = deepcopy(
+            {key: deepcopy(config.get("default", {})) for key in context_keys}
+        )
         return merge(fused_config, config)
 
 
