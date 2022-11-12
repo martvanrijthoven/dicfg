@@ -1,6 +1,3 @@
-# dicfg
-
-
 <img src="docs/source/_static/logo.png" width="50%" height="50%">
 
 [![PyPI version](https://badge.fury.io/py/dicfg.svg)](https://badge.fury.io/py/dicfg)
