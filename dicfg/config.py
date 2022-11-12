@@ -5,11 +5,9 @@ from typing import Any, Callable, Tuple
 
 
 class ConfigValue:
-    """Wrapper config for values
-    """
+    """Wrapper config for values"""
 
-
-    def __init__(self, data: Any, merger: Callable=None):
+    def __init__(self, data: Any, merger: Callable = None):
         """Wraps a value into a Config
 
         Args:
@@ -47,8 +45,7 @@ class ConfigValue:
 
 
 class ConfigDict(ConfigValue, UserDict):
-    """Wrapper config for dict
-    """
+    """Wrapper config for dict"""
 
     def _init(self, data: dict):
         """_summary_
@@ -97,7 +94,7 @@ def _config_factory(c, merger=None):
 
 def _update(a: ConfigValue, b: ConfigValue):
     if type(a) != type(b):
-        raise ValueError('Can not merger different types at this level', a, b)
+        raise ValueError("Can not merger different types at this level", a, b)
 
     if type(b) is not ConfigDict:
         return b.data
@@ -141,7 +138,7 @@ def _merge(a: ConfigValue, b: ConfigValue):
 
 
 def merge(*args: Tuple[dict]) -> ConfigDict:
-    """ Merges different configs
+    """Merges different configs
 
     Returns:
         ConfigDict: merged configs
