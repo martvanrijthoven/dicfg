@@ -42,7 +42,12 @@ Documentation
 
 .. image:: https://api.codiga.io/project/34959/score/svg
     :target: https://app.codiga.io/public/project/34959/dicfg/dashboard
-    
+
+.. image:: https://github.com/martvanrijthoven/dicfg/actions/workflows/docs.yml/badge.svg
+    :target: https://github.com/martvanrijthoven/dicfg/actions/workflows/docs.yml
+
+
+
 .. raw:: html
 
     </br></br>

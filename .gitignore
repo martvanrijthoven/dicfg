@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 docs/build/*
+docs/jupyter_execute/*
+docs/source/_autosummary/*
