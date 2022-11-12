@@ -323,14 +323,11 @@
 
 
 <div class="viewcode-block" id="ConfigNotFoundError"><a class="viewcode-back" href="../../_autosummary/dicfg.reader.ConfigNotFoundError.html#dicfg.reader.ConfigNotFoundError">[docs]</a><span class="k">class</span> <span class="nc">ConfigNotFoundError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Raised when config file can not be found.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="o">...</span></div>
+    <span class="sd">&quot;&quot;&quot;Raised when config file can not be found.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="ConfigReader"><a class="viewcode-back" href="../../_autosummary/dicfg.reader.ConfigReader.html#dicfg.reader.ConfigReader">[docs]</a><span class="k">class</span> <span class="nc">ConfigReader</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Reads config files</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Reads config files&quot;&quot;&quot;</span>
 
     <span class="n">NAME</span> <span class="o">=</span> <span class="s2">&quot;dicfg&quot;</span>
     <span class="n">DEFAULT_KEY</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
@@ -373,7 +370,7 @@
         <span class="n">is_dict</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">user_config</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
         <span class="n">user_config_search_path</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">user_config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_dict</span><span class="p">:</span>
-            <span class="n">user_config_search_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> 
+            <span class="n">user_config_search_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
 
         <span class="n">search_paths</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">Path</span><span class="p">(),</span>
@@ -394,10 +391,10 @@
             <span class="k">if</span> <span class="n">user_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">user_config</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">user_config</span><span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_user_config</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
+                <span class="n">user_config</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_user_config</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">user_config</span> <span class="o">=</span> <span class="n">user_config</span><span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">NAME</span><span class="p">]</span>
-       
+
         <span class="n">cli_config</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_cli</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 
         <span class="n">configs</span> <span class="o">=</span> <span class="p">(</span>
@@ -443,7 +440,9 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_fuse_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context_keys</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
         <span class="n">config</span> <span class="o">=</span> <span class="n">_include_configs</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
-        <span class="n">fused_config</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">({</span><span class="n">key</span><span class="p">:</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="p">{}))</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">context_keys</span><span class="p">})</span>
+        <span class="n">fused_config</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span>
+            <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="p">{}))</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">context_keys</span><span class="p">}</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">fused_config</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span></div>
 
 
