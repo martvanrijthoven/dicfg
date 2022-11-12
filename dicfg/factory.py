@@ -7,8 +7,7 @@ from typing import Any, Union
 
 
 class ObjectFactory:
-    """Allows for building configs
-    """
+    """Allows for building configs"""
 
     _REFERENCE_START_SYMBOL = "$"
     _REFERENCE_MAP_SYMBOL = ":"
@@ -25,13 +24,13 @@ class ObjectFactory:
             config (dict): config to be build
 
         Returns:
-            dict: build config 
+            dict: build config
         """
 
         return cls(deepcopy(config))._build_config()
 
     def __init__(self, config: dict):
-        """Initialize with config 
+        """Initialize with config
 
         Args:
             config (dict): config dictionary
@@ -75,7 +74,7 @@ class ObjectFactory:
 
     def _build_object(self, value: dict):
         kwargs = self._build(value)
-        args = [] if '*args' not in kwargs else value.pop("*args")
+        args = [] if "*args" not in kwargs else value.pop("*args")
         object = value.pop(ObjectFactory._OBJECT_KEY)
         attribute = self._parse_object_str(object)
 
