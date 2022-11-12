@@ -1,4 +1,5 @@
 sphinx
+sphinx-copybutton
 myst-parser
 pydata_sphinx_theme
 sphinxcontrib-napoleon
