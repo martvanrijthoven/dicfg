@@ -1,0 +1,6 @@
+dicfg.config.merge
+==================
+
+.. currentmodule:: dicfg.config
+
+.. autofunction:: merge

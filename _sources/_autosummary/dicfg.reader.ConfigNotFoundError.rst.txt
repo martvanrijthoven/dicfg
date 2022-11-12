@@ -1,0 +1,6 @@
+dicfg.reader.ConfigNotFoundError
+================================
+
+.. currentmodule:: dicfg.reader
+
+.. autoexception:: ConfigNotFoundError

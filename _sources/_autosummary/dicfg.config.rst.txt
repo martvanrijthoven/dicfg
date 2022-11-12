@@ -1,0 +1,40 @@
+dicfg.config
+============
+
+.. automodule:: dicfg.config
+  
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      merge
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:                                         
+      :template: custom-class-template.rst               
+   
+      ConfigDict
+      ConfigList
+      ConfigValue
+   
+   
+
+   
+   
+   
+
+
+

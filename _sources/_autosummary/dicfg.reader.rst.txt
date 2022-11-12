@@ -1,0 +1,38 @@
+dicfg.reader
+============
+
+.. automodule:: dicfg.reader
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:                                         
+      :template: custom-class-template.rst               
+   
+      ConfigReader
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      ConfigNotFoundError
+   
+   
+
+
+

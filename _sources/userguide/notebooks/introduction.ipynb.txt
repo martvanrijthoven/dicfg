@@ -1,0 +1,220 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "db36061b",
+   "metadata": {},
+   "source": [
+    "# **Introduction**\n",
+    "----"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "2cf24d07",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from pprint import pprint\n",
+    "\n",
+    "from dicfg.reader import ConfigReader"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "380de45b-27c5-43e4-9efd-726e78e7c38d",
+   "metadata": {},
+   "source": [
+    "### The first step is to **create your own ConfigReader**\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "bce6c848",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Subclass ConfigReader\n",
+    "class MyConfigReader(ConfigReader):\n",
+    "    \n",
+    "    # Specify a class variable 'NAME'. (This allows referencing the config via this name)\n",
+    "    NAME = \"myconfig\""
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "371a8084-a976-42d0-9774-964ed3922bff",
+   "metadata": {},
+   "source": [
+    "### The second step is to **create a configs folder containing** a main config file: **config.yml** \n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "b0b1ef62-d1c8-4d9c-935a-a4c6d1d51e61",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "default:\n",
+      "    config_int: 1\n",
+      "    config_string: \"fire\"\n",
+      "    config_list: [1,2,3]\n",
+      "    config_none: None\n",
+      "    config_dict:\n",
+      "        sub_config: \"water\"\n",
+      "    \n",
+      "    "
+     ]
+    }
+   ],
+   "source": [
+    "!cat ./configs/config.yml"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "45e2cf2b-94f3-49ea-b00b-5a5217194985",
+   "metadata": {},
+   "source": [
+    "### The main config file can be read with the **.read method** of the ConfigReader class"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "df6012f0",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{'default': {'config_int': 1,\n",
+      "             'config_string': 'fire',\n",
+      "             'config_list': [1, 2, 3],\n",
+      "             'config_none': 'None',\n",
+      "             'config_dict': {'sub_config': 'water'}}}\n"
+     ]
+    }
+   ],
+   "source": [
+    "# The config reader will automatically read from ./configs/config.yml\n",
+    "pprint(MyConfigReader.read(), sort_dicts=False)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "63798a36-135a-4e17-84b1-0228c2286211",
+   "metadata": {},
+   "source": [
+    "### The main config can be **updated with a user config dictionary**"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "9090b51c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{'default': {'config_int': 2,\n",
+      "             'config_string': 'fire',\n",
+      "             'config_list': [1, 2, 3],\n",
+      "             'config_none': 'None',\n",
+      "             'config_dict': {'sub_config': 'water'}}}\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Note the 'myconfig' key in the 'user_config' dict which \n",
+    "# corresponds to the class variable 'NAME' in MyConfigReader\n",
+    "\n",
+    "user_config = {\"myconfig\": {\"default\": {\"config_int\": 2}}}\n",
+    "pprint(MyConfigReader.read(user_config), sort_dicts=False)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a1da1c25-d690-4b72-97b2-5759b246b7ad",
+   "metadata": {},
+   "source": [
+    "### The main config can be **updated with a user config file** (.yml, .yaml, .json)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "id": "1c0a9ee1-af86-49de-82ef-062172d0e766",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "myconfig:\n",
+      "    default:\n",
+      "        config_int: 3\n",
+      "        "
+     ]
+    }
+   ],
+   "source": [
+    "!cat ./user_config.yml"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "d898563e",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{'default': {'config_int': 3,\n",
+      "             'config_string': 'fire',\n",
+      "             'config_list': [1, 2, 3],\n",
+      "             'config_none': 'None',\n",
+      "             'config_dict': {'sub_config': 'water'}}}\n"
+     ]
+    }
+   ],
+   "source": [
+    "user_config = \"./user_config.yml\"\n",
+    "pprint(MyConfigReader.read(user_config), sort_dicts=False)"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

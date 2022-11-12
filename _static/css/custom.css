@@ -1,0 +1,120 @@
+.cell_input {
+    border-left-color: white !important;
+    border-block-color: white !important;
+    border-right-color: white !important;
+
+}
+
+.highlight {
+    padding: 0 !important;
+}
+
+
+.cell_input pre {
+    background-color: #F8F8F8 !important;
+}
+
+.cell_output {
+    padding-left: 0.2rem !important;
+}
+
+.cell_output::before {
+    content: "Out:";
+    float: left !important;
+    font-size: smaller !important;
+    color: #888888 !important;
+
+}
+
+.cell_output pre {
+    padding-left: 0.4rem !important;
+    border-left-color: rgb(255, 255, 255) !important;
+    border-block-color: white !important;
+    border-right-color: white !important;
+    background-color: white !important;
+    color: rgb(0, 0, 0) !important;
+    border-color: white !important;
+    box-shadow: none !important;
+    border-style: none !important;
+    border-radius: 0px !important;
+    max-height: 20rem!important;
+
+}
+
+
+.stderr pre {
+    background-color: #FFDDDD !important;
+}
+
+.traceback pre{
+    background-color: #FFDDDD !important;
+}
+
+.sd-card {
+    margin-top: 0.4rem !important;
+}
+
+.sd-card {
+    border-color: #469DB9 !important;
+}
+.sd-card:hover {
+    color: #469DB9 !important;
+}
+
+.sd-card-title {
+    font-weight: normal !important;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+div.admonition {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin-left: 0px !important;
+    padding-left: 0px !important;
+}
+
+div.admonition p {
+    padding-left: 1.2rem !important;
+}
+
+
+.admonition p {
+    margin-left: 0px !important;
+}
+
+.admonition-title::before {
+    padding: 100% !important;
+}
+
+.admonition-title::after {
+    content: "" !important;
+}
+
+
+.admonition ul {
+    margin-left: 0 !important;
+}
+
+
+.admonition li p {
+    padding-left: 0 !important;
+}
+
+
+.bd-sidenav strong{
+    font-weight:normal !important;
+    text-decoration: normal !important;
+  }
+
+
+.reference {
+    font-weight:normal !important;
+  }
+
+.bd-header .navbar-nav>.active>.nav-link {
+    font-weight: normal !important;
+}
