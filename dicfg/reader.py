@@ -12,13 +12,13 @@ from dicfg.config import merge
 
 
 def _open_json_config(config_path):
-    with open(str(config_path)) as file:
+    with open(str(config_path), encoding='utf8') as file:
         return json.load(file)
 
 
 def _open_yaml_config(config_path):
-    with open(str(config_path)) as file:
-        return yaml.load(file, Loader=yaml.Loader)
+    with open(str(config_path), encoding='utf8') as file:
+        return yaml.load(file, Loader=yaml.SafeLoader)
 
 
 _FILE_READERS = {
@@ -73,9 +73,8 @@ class ConfigReader:
             dict: read configs
         """
 
-        is_dict = isinstance(user_config, dict)
         user_config_search_path = None
-        if user_config is not None and not is_dict:
+        if user_config is not None and not isinstance(user_config, dict):
             user_config_search_path = Path(user_config).parent
 
         search_paths = (
@@ -91,16 +90,9 @@ class ConfigReader:
             if cls._CONFIG_PATH is not None and cls._CONFIG_PATH.exists()
             else {}
         )
+
         preset_configs = cls._read_presets(presets)
-
-        if not is_dict:
-            if user_config is None:
-                user_config = {}
-            else:
-                user_config = cls._read_user_config(user_config)
-        else:
-            user_config = user_config[cls.NAME]
-
+        user_config = cls._read_user_config(user_config)
         cli_config = cls._read_cli(sys.argv[1:])
 
         configs = (
@@ -109,6 +101,7 @@ class ConfigReader:
             user_config,
             cli_config,
         )
+
         configs = cls._fuse_configs(configs, context_keys, search_paths)
         return merge(*configs).cast()
 
@@ -119,11 +112,15 @@ class ConfigReader:
 
     @classmethod
     def _read_presets(cls, presets):
-        return tuple([cls._read(cls._PRESETS_FOLDER / preset) for preset in presets])
+        return tuple((cls._read(cls._PRESETS_FOLDER / preset) for preset in presets))
 
     @classmethod
     def _read_user_config(cls, user_config):
-        return cls._read(user_config)[cls.NAME]
+        if isinstance(user_config, dict):
+            return user_config[cls.NAME]
+        if user_config is None:
+            return {}
+        return cls._read_user_config(user_config[cls.NAME])
 
     @classmethod
     def _read_cli(cls, args: List[str]):
