@@ -120,7 +120,7 @@ class ConfigReader:
             return user_config[cls.NAME]
         if user_config is None:
             return {}
-        return cls._read_user_config(user_config[cls.NAME])
+        return cls.read(user_config[cls.NAME])
 
     @classmethod
     def _read_cli(cls, args: List[str]):
