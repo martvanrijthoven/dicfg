@@ -299,11 +299,9 @@
 
 
 <div class="viewcode-block" id="ConfigValue"><a class="viewcode-back" href="../../_autosummary/dicfg.config.ConfigValue.html#dicfg.config.ConfigValue">[docs]</a><span class="k">class</span> <span class="nc">ConfigValue</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Wrapper config for values</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper config for values&quot;&quot;&quot;</span>
 
-
-<div class="viewcode-block" id="ConfigValue.__init__"><a class="viewcode-back" href="../../_autosummary/dicfg.config.ConfigValue.html#dicfg.config.ConfigValue.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">merger</span><span class="p">:</span> <span class="n">Callable</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfigValue.__init__"><a class="viewcode-back" href="../../_autosummary/dicfg.config.ConfigValue.html#dicfg.config.ConfigValue.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">merger</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Wraps a value into a Config</span>
 
 <span class="sd">        Args:</span>
@@ -341,8 +339,7 @@
 
 
 <div class="viewcode-block" id="ConfigDict"><a class="viewcode-back" href="../../_autosummary/dicfg.config.ConfigDict.html#dicfg.config.ConfigDict">[docs]</a><span class="k">class</span> <span class="nc">ConfigDict</span><span class="p">(</span><span class="n">ConfigValue</span><span class="p">,</span> <span class="n">UserDict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrapper config for dict</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper config for dict&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;_summary_</span>
@@ -391,7 +388,7 @@
 
 <span class="k">def</span> <span class="nf">_update</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">ConfigValue</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">ConfigValue</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Can not merger different types at this level&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can not merger different types at this level&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">ConfigDict</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="n">data</span>
@@ -435,7 +432,7 @@
 
 
 <div class="viewcode-block" id="merge"><a class="viewcode-back" href="../../_autosummary/dicfg.config.merge.html#dicfg.config.merge">[docs]</a><span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ConfigDict</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot; Merges different configs</span>
+    <span class="sd">&quot;&quot;&quot;Merges different configs</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        ConfigDict: merged configs</span>
