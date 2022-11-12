@@ -7,26 +7,43 @@ from typing import Any, Union
 
 
 class ObjectFactory:
+    """Allows for building configs
+    """
 
     _REFERENCE_START_SYMBOL = "$"
     _REFERENCE_MAP_SYMBOL = ":"
     _REFERENCE_ATTRIBUTE_SYMBOL = "."
 
-    _OBJECT_KEY = "object*"
-    _RETURN_TYPE_KEY = ":return_type"
+    _OBJECT_KEY = "*object"
+    _RETURN_TYPE_KEY = "*return_type"
 
     @classmethod
-    def build(cls, config):
+    def build(cls, config: dict):
+        """Builds a config
+
+        Args:
+            config (dict): config to be build
+
+        Returns:
+            dict: build config 
+        """
+
         return cls(deepcopy(config))._build_config()
 
-    def __init__(self, config):
+    def __init__(self, config: dict):
+        """Initialize with config 
+
+        Args:
+            config (dict): config dictionary
+        """
+
         self._configuration = config
 
     def _build_config(self):
         return self._build(self._configuration)
 
     @singledispatchmethod
-    def _build(self, config: Any):
+    def _build(self, config: dict):
         return config
 
     @_build.register
@@ -57,12 +74,14 @@ class ObjectFactory:
         return config
 
     def _build_object(self, value: dict):
-        value = self._build(value)
+        kwargs = self._build(value)
+        args = [] if '*args' not in kwargs else value.pop("*args")
         object = value.pop(ObjectFactory._OBJECT_KEY)
         attribute = self._parse_object_str(object)
+
         if ObjectFactory._RETURN_TYPE_KEY in value:
             return attribute
-        return attribute(**value)
+        return attribute(*args, **kwargs)
 
     def _parse_object_str(self, object: str):
         object = object.split(".")

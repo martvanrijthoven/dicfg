@@ -59,6 +59,7 @@ set_type_checking_flag = True  # Enable 'expensive' imports for sphinx_autodoc_t
 add_module_names = False # Remove namespaces from class/method signatures
 panels_add_bootstrap_css = False
 
+
 html_theme_options = {
     # "use_edit_page_button": True,
     # "repository_url": "https://github.com/DIAGNijmegen/pathology-whole-slide-data",
@@ -81,8 +82,6 @@ html_theme_options = {
     # 'navbar_pagenav': False,
     "navbar_end": ["navbar-icon-links"],
     # "show_prev_next": False,
-    "header_links_before_dropdown": 7,
-    "navbar_start": [],
     "icon_links": [
         {
             # Label for this link
@@ -97,6 +96,7 @@ html_theme_options = {
    ]
 
 }
+
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -120,3 +120,4 @@ html_css_files = ['css/custom.css']
 
 html_title = "dicfg"
 jupyter_execute_notebooks = "off"
+html_logo = "_static/logo.png"

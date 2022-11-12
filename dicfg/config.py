@@ -1,18 +1,37 @@
 import re
 from collections import UserDict, UserList
 from functools import reduce
-from typing import Tuple
+from typing import Any, Callable, Tuple
 
 
-class _ConfigValue:
-    def __init__(self, data, merger=None):
+class ConfigValue:
+    """Wrapper config for values
+    """
+
+
+    def __init__(self, data: Any, merger: Callable=None):
+        """Wraps a value into a Config
+
+        Args:
+            data (Any): value of the config
+            merger (Callable, optional): Callable to merge the config value. Defaults to None.
+        """
         self._merger = merger
         self.data = self._init(data)
 
     def _init(self, data):
         return data
 
-    def merge(self, b: "_ConfigValue"):
+    def merge(self, b: "ConfigValue") -> "ConfigValue":
+        """Merges config b with it self
+
+        Args:
+            b (ConfigValue): another config
+
+        Returns:
+            ConfigValue: self
+        """
+
         if self._merger is None and b._merger is None:
             self.data = _update(self, b)
         elif b._merger is not None:
@@ -23,45 +42,64 @@ class _ConfigValue:
         return self
 
     def cast(self):
+        """Cast wrapped value to builtin python value"""
         return self.data
 
 
-class _ConfigDict(_ConfigValue, UserDict):
+class ConfigDict(ConfigValue, UserDict):
+    """Wrapper config for dict
+    """
+
     def _init(self, data: dict):
+        """_summary_
+
+        Args:
+            data (dict): value of the config
+
+        """
         for key in list(data):
             _key, merger = _get_merger(key, data[key])
             data[_key] = _config_factory(data.pop(key), merger=merger)
         return data
 
     def cast(self):
+        """Cast wrapped value to builtin python value"""
         return {key: value.cast() for key, value in self.data.items()}
 
 
-class _ConfigList(_ConfigValue, UserList):
-    def _init(self, data):
+class ConfigList(ConfigValue, UserList):
+    def _init(self, data: list):
+        """_summary_
+
+        Args:
+            data (list): value of the config
+
+        """
+
         for idx, value in enumerate(data):
             data[idx] = _config_factory(value)
         return data
 
     def cast(self):
+        """Cast wrapped value to builtin python value"""
         return [value.cast() for value in self.data]
 
 
-_CONFIGS = {dict: _ConfigDict, list: _ConfigList}
+_CONFIGS = {dict: ConfigDict, list: ConfigList}
 _REPLACE_IDENTIFIER = r"\@replace\((.*)\)"
 
 
 def _config_factory(c, merger=None):
-    if isinstance(c, _ConfigValue):
+    if isinstance(c, ConfigValue):
         return c
-    return _CONFIGS.get(type(c), _ConfigValue)(c, merger=merger)
+    return _CONFIGS.get(type(c), ConfigValue)(c, merger=merger)
 
 
-def _update(a: _ConfigValue, b: _ConfigValue):
+def _update(a: ConfigValue, b: ConfigValue):
     if type(a) != type(b):
         raise ValueError('Can not merger different types at this level', a, b)
 
-    if type(b) is not _ConfigDict:
+    if type(b) is not ConfigDict:
         return b.data
 
     for k, v in b.items():
@@ -98,9 +136,15 @@ def _get_replace(replace_match: re.Match):
     return replace_str == "true"
 
 
-def _merge(a: _ConfigValue, b: _ConfigValue):
+def _merge(a: ConfigValue, b: ConfigValue):
     return a.merge(b)
 
 
-def merge(*args: Tuple[dict]):
-    return reduce(_merge, map(_config_factory, args), _ConfigDict({}))
+def merge(*args: Tuple[dict]) -> ConfigDict:
+    """ Merges different configs
+
+    Returns:
+        ConfigDict: merged configs
+    """
+
+    return reduce(_merge, map(_config_factory, args), ConfigDict({}))

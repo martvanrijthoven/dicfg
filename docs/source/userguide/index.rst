@@ -2,7 +2,6 @@ User Guide
 ==========
 
 
-
 .. toctree::
    :caption: Essentials
 
@@ -16,9 +15,7 @@ User Guide
 .. toctree::
    :caption: Supplementary
 
-   ./notebooks/searchpaths
-   ./notebooks/fusekeys
    ./notebooks/presets
-   ./api
-   ./notebooks/applicationexample
+   ./notebooks/searchpaths
+   ./notebooks/contextkeys
 

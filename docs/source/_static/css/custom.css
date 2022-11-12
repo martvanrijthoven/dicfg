@@ -37,6 +37,7 @@
     box-shadow: none !important;
     border-style: none !important;
     border-radius: 0px !important;
+    max-height: 20rem!important;
 
 }
 
@@ -101,4 +102,19 @@ div.admonition p {
 
 .admonition li p {
     padding-left: 0 !important;
+}
+
+
+.bd-sidenav strong{
+    font-weight:normal !important;
+    text-decoration: normal !important;
+  }
+
+
+.reference {
+    font-weight:normal !important;
+  }
+
+.bd-header .navbar-nav>.active>.nav-link {
+    font-weight: normal !important;
 }

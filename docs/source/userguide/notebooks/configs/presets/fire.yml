@@ -1,0 +1,4 @@
+default:
+    config_string: fire
+    config_dict:
+        sub_config: fire

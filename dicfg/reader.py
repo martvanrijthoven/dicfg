@@ -29,10 +29,15 @@ _FILE_READERS = {
 
 
 class ConfigNotFoundError(Exception):
+    """Raised when config file can not be found.
+    """
     ...
 
 
 class ConfigReader:
+    """Reads config files
+    """
+
     NAME = "dicfg"
     DEFAULT_KEY = "default"
     CONFIG_FILE = "config.yml"
@@ -56,9 +61,20 @@ class ConfigReader:
         cls,
         user_config: Union[dict, str, Path] = None,
         presets: tuple = (),
-        fuse_keys=(),
+        context_keys=(),
         search_paths=(),
-    ):
+    ) -> dict:
+        """Reads Config File
+
+        Args:
+            user_config (Union[dict, str, Path], optional): user_config Defaults to None.
+            presets (tuple, optional): presets Defaults to ().
+            context_keys (tuple, optional): context keys Defaults to ().
+            search_paths (tuple, optional): search paths Defaults to ().
+
+        Returns:
+            dict: read configs
+        """
 
         is_dict = isinstance(user_config, dict)
         user_config_search_path = None
@@ -96,7 +112,7 @@ class ConfigReader:
             user_config,
             cli_config,
         )
-        configs = cls._fuse_configs(configs, fuse_keys, search_paths)
+        configs = cls._fuse_configs(configs, context_keys, search_paths)
         return merge(*configs).cast()
 
     @classmethod
@@ -124,16 +140,16 @@ class ConfigReader:
         return cli_config.get(cls.NAME, {})
 
     @classmethod
-    def _fuse_configs(cls, configs, fuse_keys, search_paths):
+    def _fuse_configs(cls, configs, context_keys, search_paths):
         fuse_config = partial(
-            cls._fuse_config, fuse_keys=fuse_keys, search_paths=search_paths
+            cls._fuse_config, context_keys=context_keys, search_paths=search_paths
         )
         return tuple(map(fuse_config, configs))
 
     @classmethod
-    def _fuse_config(cls, config: dict, fuse_keys: tuple, search_paths):
+    def _fuse_config(cls, config: dict, context_keys: tuple, search_paths):
         config = _include_configs(config, search_paths)
-        fused_config = deepcopy({key: config.get("default", {}) for key in fuse_keys})
+        fused_config = deepcopy({key: deepcopy(config.get("default", {})) for key in context_keys})
         return merge(fused_config, config)
 
 
@@ -148,6 +164,8 @@ def _create_dict_from_keys(keys: list, value) -> dict:
 
 def _search_config(config_name: Union[str, Path], search_paths: tuple) -> Path:
     for search_path in search_paths:
+        if search_path is None:
+            continue
         config_path = Path(search_path) / config_name
         if config_path.exists():
             return config_path

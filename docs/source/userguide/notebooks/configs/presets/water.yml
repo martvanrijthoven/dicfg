@@ -1,0 +1,4 @@
+default:
+    config_string: water
+    config_dict:
+        sub_config: water
