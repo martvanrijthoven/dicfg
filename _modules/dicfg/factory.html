@@ -301,8 +301,7 @@
 
 
 <div class="viewcode-block" id="ObjectFactory"><a class="viewcode-back" href="../../_autosummary/dicfg.factory.ObjectFactory.html#dicfg.factory.ObjectFactory">[docs]</a><span class="k">class</span> <span class="nc">ObjectFactory</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Allows for building configs</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Allows for building configs&quot;&quot;&quot;</span>
 
     <span class="n">_REFERENCE_START_SYMBOL</span> <span class="o">=</span> <span class="s2">&quot;$&quot;</span>
     <span class="n">_REFERENCE_MAP_SYMBOL</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span>
@@ -319,13 +318,13 @@
 <span class="sd">            config (dict): config to be build</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            dict: build config </span>
+<span class="sd">            dict: build config</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">config</span><span class="p">))</span><span class="o">.</span><span class="n">_build_config</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ObjectFactory.__init__"><a class="viewcode-back" href="../../_autosummary/dicfg.factory.ObjectFactory.html#dicfg.factory.ObjectFactory.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize with config </span>
+        <span class="sd">&quot;&quot;&quot;Initialize with config</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            config (dict): config dictionary</span>
@@ -369,7 +368,7 @@
 
     <span class="k">def</span> <span class="nf">_build_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-        <span class="n">args</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="s1">&#39;*args&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="n">value</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;*args&quot;</span><span class="p">)</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="s2">&quot;*args&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="n">value</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;*args&quot;</span><span class="p">)</span>
         <span class="nb">object</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">ObjectFactory</span><span class="o">.</span><span class="n">_OBJECT_KEY</span><span class="p">)</span>
         <span class="n">attribute</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_object_str</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
 
