@@ -46,7 +46,7 @@ User Guide
       :color: primary
       :expand:
 
-      Interpolation: ObjectFactory
+      Interpolation: build_config
       
   .. button-link:: userguide/notebooks/dependencyinjection.html
       :color: primary
