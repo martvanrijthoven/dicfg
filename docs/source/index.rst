@@ -14,10 +14,9 @@ Documentation
 
    </div>
    <div style="width:50%;">
-   
 
-.. image:: _static/logo.svg
-  :alt: dicfg-logo
+   <img src="_static/logo.svg" class="logo__image only-light" alt="Logo image">
+   <img src="_static/logo.svg" class="logo__image only-dark" alt="Logo image">
 
 
 .. raw:: html
