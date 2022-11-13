@@ -12,14 +12,14 @@ testconfig:
       - test
 
     test_object:
-      object*: dicfg.reader.ConfigNotFoundError
+      "*object": dicfg.reader.ConfigNotFoundError
 
     test_object_type:
-      object*: dicfg.reader.ConfigNotFoundError
-      :return_type: 
+      "*object": dicfg.reader.ConfigNotFoundError
+      "*return_type": True
 
     test_object_list:
-      - object*: dicfg.reader.ConfigNotFoundError
+      - "*object": dicfg.reader.ConfigNotFoundError
 
     test_object_reference: ${test_object}
 

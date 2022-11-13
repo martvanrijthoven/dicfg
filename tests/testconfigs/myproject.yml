@@ -2,8 +2,8 @@ dicfg:
   default:
     project_component_name: my_project_component
     project_component:
-      object*: myproject.project.ProjectComponent
+      "*object": myproject.project.ProjectComponent
       name: ${project_component_name}
     project:
-      object*: myproject.project.MyProject
+      "*object": myproject.project.MyProject
       project_component: ${project_component}
