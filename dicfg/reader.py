@@ -77,33 +77,30 @@ class ConfigReader:
         if user_config is not None and not isinstance(user_config, dict):
             user_config_search_path = Path(user_config).parent
 
-        search_paths = (
+        search_paths = cls._set_search_paths(user_config_search_path, search_paths)
+
+        cls_config = {} 
+        if cls._CONFIG_PATH is not None and cls._CONFIG_PATH.exists():
+            cls_config = cls._read(cls._CONFIG_PATH)
+  
+        preset_configs = cls._read_presets(presets)
+        user_config = cls._read_user_config(user_config)
+        cli_config = cls._read_cli(sys.argv[1:])
+
+        configs = (cls_config, *preset_configs, user_config, cli_config)
+        configs = cls._fuse_configs(configs, context_keys, search_paths)
+
+        return merge(*configs).cast()
+
+    @classmethod
+    def _set_search_paths(cls, user_config_search_path, search_paths):
+        return (
             Path(),
             user_config_search_path,
             cls._CONFIGS_FOLDER,
             cls._PRESETS_FOLDER,
             *search_paths,
         )
-
-        cls_config = (
-            cls._read(cls._CONFIG_PATH)
-            if cls._CONFIG_PATH is not None and cls._CONFIG_PATH.exists()
-            else {}
-        )
-
-        preset_configs = cls._read_presets(presets)
-        user_config = cls._read_user_config(user_config)
-        cli_config = cls._read_cli(sys.argv[1:])
-
-        configs = (
-            cls_config,
-            *preset_configs,
-            user_config,
-            cli_config,
-        )
-
-        configs = cls._fuse_configs(configs, context_keys, search_paths)
-        return merge(*configs).cast()
 
     @classmethod
     def _read(cls, config_path):
