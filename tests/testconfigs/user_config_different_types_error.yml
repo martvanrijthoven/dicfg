@@ -1,6 +1,0 @@
-testconfig:
-  default:
-    different: different
-
-  testkey:
-    different: [1,2,3]
