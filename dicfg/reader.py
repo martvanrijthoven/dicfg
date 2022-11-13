@@ -95,7 +95,8 @@ class ConfigReader:
         if self._config_path.exists():
             self_config = self._read(self._config_path)
         else:
-            warn("No main config file found at: ", self._config_path)
+            warning = f"No main config file found at: {self._config_path}"
+            warn(warning)
 
         preset_configs = self._read_presets(presets)
         user_config = self._read_user_config(user_config)

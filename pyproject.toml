@@ -1,5 +1,5 @@
 [build-system]
-requires      = ["setuptools>=61.0.0", "wheel"]
+requires      = ["setuptools>=61.0.0", "wheel>=0.33.4"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
@@ -8,6 +8,7 @@ packages = ["dicfg"]
 [project]
 name = "dicfg"
 authors = [{ name = "Mart van Rijthoven", email = "mart.vanrijthoven@gmail.com" }]
+readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.6"
 classifiers = [
@@ -23,11 +24,10 @@ classifiers = [
 ]
 dependencies = ["PyYaml >= 5.4.1"]
 
-dynamic = ["version", "readme"]
+dynamic = ["version"]
 
 [project.urls]
 Homepage = "https://github.com/martvanrijthoven/dicfg/"
 
 [tool.setuptools.dynamic]
 version = { attr = "dicfg.__version__" }
-readme = { file = ["README.md"] }

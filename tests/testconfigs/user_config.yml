@@ -22,6 +22,8 @@ testconfig:
       - "*object": dicfg.reader.ConfigNotFoundError
 
     test_object_reference: ${test_object}
+    test_object_reference_attribute: ${test_object.__class__}
+    test_string_interpolation: hello${defaulttest}
 
   testkey:
     overridetest: 20
