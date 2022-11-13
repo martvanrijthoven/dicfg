@@ -19,6 +19,7 @@ Documentation
 .. image:: _static/logo.svg
   :alt: dicfg-logo
 
+
 .. raw:: html
 
    </div>
