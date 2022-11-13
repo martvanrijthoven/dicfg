@@ -50,13 +50,13 @@ class ConfigReader:
         """Init ConfigReader
 
         Args:
-            name (str, optional): _description_. Defaults to "dicfg".
-            configs_folder (_type_, optional): _description_. Defaults to Path().
-            presets_folder_name (str, optional): _description_. Defaults to 'presets'.
-            config_file_name (str, optional): _description_. Defaults to "config.yml".
-            default_key (str, optional): _description_. Defaults to "default".
-            context_keys (tuple, optional): _description_. Defaults to ().
-            search_paths (tuple, optional): _description_. Defaults to ().
+            name (str, optional): Name of config. Used as a reference in user configs and cli Defaults to "dicfg".
+            configs_folder (_type_, optional): Main configs folder. Defaults to Path().
+            presets_folder_name (str, optional): Presets folder. Defaults to 'presets'.
+            config_file_name (str, optional): Main config file name. Defaults to "config.yml".
+            default_key (str, optional): Default context keys. Defaults to "default".
+            context_keys (tuple, optional): Addtional context keys. Defaults to ().
+            search_paths (tuple, optional): Search paths for config file inerpolation. Defaults to ().
         """
 
         self._name = name

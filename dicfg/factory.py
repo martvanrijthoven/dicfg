@@ -98,4 +98,13 @@ def _is_object(value):
 
 
 def build_config(config: dict):
+    """builds config
+
+    Args:
+        config (dict): config to build
+
+    Returns:
+        dict: build config
+    """
+
     return _ObjectFactory(deepcopy(config)).build_config()
