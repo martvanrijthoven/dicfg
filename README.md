@@ -1,4 +1,4 @@
-<img src="docs/source/_static/logo.png" width="50%" height="50%">
+<img src="docs/source/_static/logo.svg" width="50%" height="50%">
 
 
 [![PyPI](https://img.shields.io/pypi/v/dicfg?color=0&label=pypi%20package)](https://pypi.org/project/dicfg/)
