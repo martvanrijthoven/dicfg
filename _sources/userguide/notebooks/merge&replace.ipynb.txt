@@ -21,8 +21,7 @@
     "from dicfg.reader import ConfigReader\n",
     "\n",
     "\n",
-    "class MyConfigReader(ConfigReader):\n",
-    "    NAME = \"myconfig\""
+    "config_reader = ConfigReader(name='myconfig')"
    ]
   },
   {
@@ -79,7 +78,7 @@
     "# primitive config values will always be replaced even when @replace(false) is used.\n",
     "\n",
     "user_config = {\"myconfig\": {\"default\": {\"config_int@replace(false)\": 2}}}\n",
-    "pprint(MyConfigReader.read(user_config), sort_dicts=False)"
+    "pprint(config_reader.read(user_config), sort_dicts=False)"
    ]
   },
   {
@@ -110,7 +109,7 @@
    ],
    "source": [
     "user_config = {\"myconfig\": {\"default\": {\"config_dict\": {\"sub_config2\": \"earth\"}}}}\n",
-    "pprint(MyConfigReader.read(user_config), sort_dicts=False)"
+    "pprint(config_reader.read(user_config), sort_dicts=False)"
    ]
   },
   {
@@ -143,7 +142,7 @@
     "user_config = {\n",
     "    \"myconfig\": {\"default\": {\"config_dict@replace(true)\": {\"sub_config2\": \"earth\"}}}\n",
     "}\n",
-    "pprint(MyConfigReader.read(user_config), sort_dicts=False)"
+    "pprint(config_reader.read(user_config), sort_dicts=False)"
    ]
   },
   {
@@ -174,7 +173,7 @@
    ],
    "source": [
     "user_config = {\"myconfig\": {\"default\": {\"config_list\": [2, 4, 6]}}}\n",
-    "pprint(MyConfigReader.read(user_config), sort_dicts=False)"
+    "pprint(config_reader.read(user_config), sort_dicts=False)"
    ]
   },
   {
@@ -205,7 +204,7 @@
    ],
    "source": [
     "user_config = {\"myconfig\": {\"default\": {\"config_list@replace(false)\": [2, 4, 6]}}}\n",
-    "pprint(MyConfigReader.read(user_config), sort_dicts=False)"
+    "pprint(config_reader.read(user_config), sort_dicts=False)"
    ]
   },
   {
@@ -236,8 +235,16 @@
    ],
    "source": [
     "user_config = {\"myconfig\": {\"default\": {\"config_list\": \"not a list anymore\"}}}\n",
-    "pprint(MyConfigReader.read(user_config), sort_dicts=False)"
+    "pprint(config_reader.read(user_config), sort_dicts=False)"
    ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "89a85a9f-76e3-4740-bce6-cac88dcf582a",
+   "metadata": {},
+   "outputs": [],
+   "source": []
   }
  ],
  "metadata": {

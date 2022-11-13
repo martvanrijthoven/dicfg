@@ -11,7 +11,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": 1,
    "id": "2e231401-4152-409b-a08c-95c1d7d50383",
    "metadata": {},
    "outputs": [],
@@ -20,13 +20,12 @@
     "\n",
     "from dicfg.reader import ConfigReader\n",
     "\n",
-    "class MyConfigReader(ConfigReader):\n",
-    "    NAME = \"myconfig\""
+    "config_reader = ConfigReader(name='myconfig')"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 80,
+   "execution_count": 2,
    "id": "844c8ee5-f0b9-4279-83bf-c74c8075c70e",
    "metadata": {},
    "outputs": [
@@ -37,12 +36,10 @@
       "default:\n",
       "    config_int: 1\n",
       "    config_string: \"fire\"\n",
-      "    config_list: [1,2,3]\n",
+      "    config_list: [1, 2, 3]\n",
       "    config_none: None\n",
       "    config_dict:\n",
-      "        sub_config: \"water\"\n",
-      "    \n",
-      "    "
+      "        sub_config: \"water\""
      ]
     }
    ],
@@ -60,7 +57,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 91,
+   "execution_count": 3,
    "id": "e7a7b09c-df13-4e20-a9c7-2f1af77cf662",
    "metadata": {},
    "outputs": [
@@ -81,7 +78,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 90,
+   "execution_count": 4,
    "id": "e773c3f8-8339-4db7-a286-6992c32a289e",
    "metadata": {},
    "outputs": [
@@ -99,12 +96,12 @@
    ],
    "source": [
     "# set the fire preset\n",
-    "pprint(MyConfigReader.read(presets=('fire.yml',)), sort_dicts=False)"
+    "pprint(config_reader.read(presets=('fire.yml',)), sort_dicts=False)"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 89,
+   "execution_count": 5,
    "id": "53e22d5f-f08d-4f93-811f-024dc797b4c7",
    "metadata": {},
    "outputs": [
@@ -125,7 +122,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 88,
+   "execution_count": 6,
    "id": "6dc0949f-c812-47b1-a6df-cfc42ca192f4",
    "metadata": {},
    "outputs": [
@@ -143,7 +140,7 @@
    ],
    "source": [
     "# set the water preset\n",
-    "pprint(MyConfigReader.read(presets=('water.yml',)), sort_dicts=False)"
+    "pprint(config_reader.read(presets=('water.yml',)), sort_dicts=False)"
    ]
   },
   {
@@ -156,7 +153,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 83,
+   "execution_count": 7,
    "id": "4bd6ca95-2950-4e17-b3dc-97b28222dda8",
    "metadata": {},
    "outputs": [
@@ -175,8 +172,16 @@
    "source": [
     "user_config = {'myconfig': {'default': {'config_string': 'water'}}}\n",
     "# set the fire preset\n",
-    "pprint(MyConfigReader.read(user_config=user_config, presets=('fire.yml',)), sort_dicts=False)"
+    "pprint(config_reader.read(user_config=user_config, presets=('fire.yml',)), sort_dicts=False)"
    ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "07b5820c-ebe0-4e80-9c77-09c8c52d8b5b",
+   "metadata": {},
+   "outputs": [],
+   "source": []
   }
  ],
  "metadata": {

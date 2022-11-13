@@ -19,7 +19,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 1,
+   "execution_count": 14,
    "id": "191a92c0-bfa0-4472-9746-9105170213c0",
    "metadata": {},
    "outputs": [],
@@ -28,14 +28,13 @@
     "\n",
     "from dicfg.reader import ConfigReader\n",
     "\n",
-    "\n",
-    "class MyConfigReader(ConfigReader):\n",
-    "    NAME = \"myconfig\""
+    "# adding context1 and context2 as context keys\n",
+    "config_reader = ConfigReader(name=\"myconfig\", context_keys=(\"context1\", \"context2\"))"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
+   "execution_count": 15,
    "id": "691df6c8-620c-4145-a44f-1a47b93495d5",
    "metadata": {},
    "outputs": [
@@ -63,8 +62,7 @@
    ],
    "source": [
     "# context1 and context2 will have the same content as the default context\n",
-    "context_keys = (\"context1\", \"context2\")\n",
-    "pprint(MyConfigReader.read(context_keys=context_keys), sort_dicts=False)"
+    "pprint(config_reader.read(), sort_dicts=False)"
    ]
   },
   {
@@ -77,7 +75,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": 16,
    "id": "7eda3c32-ab49-41ad-bed2-675184aa9b54",
    "metadata": {},
    "outputs": [
@@ -104,17 +102,16 @@
     }
    ],
    "source": [
-    "context_keys = (\"context1\", \"context2\")\n",
     "user_config = {\n",
     "    \"myconfig\": {\n",
     "        \"default\": {\"config_string\": \"default\"},\n",
     "        \"context1\": {\"config_string\": \"context1_string\"},\n",
     "        \"context2\": {\"config_string\": \"context2_string\"},\n",
-    "    }\n",
+    "    },\n",
     "}\n",
     "\n",
     "pprint(\n",
-    "    MyConfigReader.read(user_config=user_config, context_keys=context_keys),\n",
+    "    config_reader.read(user_config=user_config),\n",
     "    sort_dicts=False,\n",
     ")"
    ]

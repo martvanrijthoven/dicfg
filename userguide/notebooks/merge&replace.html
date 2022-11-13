@@ -47,7 +47,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'userguide/notebooks/merge&replace';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Interpolation: ObjectFactory" href="interpolation.html" />
+    <link rel="next" title="Interpolation: build_config" href="interpolation.html" />
     <link rel="prev" title="Command Line Interface" href="commandlineinterface.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="docsearch:language" content="en">
@@ -284,7 +284,7 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html"><strong>Introduction: ConfigReader</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="commandlineinterface.html"><strong>Command Line Interface</strong></a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Merge &amp; Replace</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpolation.html"><strong>Interpolation: ObjectFactory</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolation.html"><strong>Interpolation: build_config</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="dependencyinjection.html"><strong>Dependency Injection</strong></a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Supplementary</span></p>
@@ -330,8 +330,7 @@
 <span class="kn">from</span> <span class="nn">dicfg.reader</span> <span class="kn">import</span> <span class="n">ConfigReader</span>
 
 
-<span class="k">class</span> <span class="nc">MyConfigReader</span><span class="p">(</span><span class="n">ConfigReader</span><span class="p">):</span>
-    <span class="n">NAME</span> <span class="o">=</span> <span class="s2">&quot;myconfig&quot;</span>
+<span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;myconfig&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -361,7 +360,7 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># primitive config values will always be replaced even when @replace(false) is used.</span>
 
 <span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_int@replace(false)&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}}</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -381,7 +380,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_dict&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;sub_config2&quot;</span><span class="p">:</span> <span class="s2">&quot;earth&quot;</span><span class="p">}}}}</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -403,7 +402,7 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_dict@replace(true)&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;sub_config2&quot;</span><span class="p">:</span> <span class="s2">&quot;earth&quot;</span><span class="p">}}}</span>
 <span class="p">}</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -423,7 +422,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_list&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]}}}</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -443,7 +442,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_list@replace(false)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]}}}</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -463,7 +462,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_list&quot;</span><span class="p">:</span> <span class="s2">&quot;not a list anymore&quot;</span><span class="p">}}}</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -498,7 +497,7 @@
   <a class='right-next' id="next-link" href="interpolation.html" title="next page">
   <div class="prev-next-info">
       <p class="prev-next-subtitle">next</p>
-      <p class="prev-next-title"><strong>Interpolation: ObjectFactory</strong></p>
+      <p class="prev-next-title"><strong>Interpolation: build_config</strong></p>
   </div>
   <i class="fa-solid fa-angle-right"></i>
   </a>

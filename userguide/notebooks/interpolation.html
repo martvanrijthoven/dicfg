@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Interpolation: ObjectFactory &#8212; dicfg</title>
+    <title>Interpolation: build_config &#8212; dicfg</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -284,7 +284,7 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html"><strong>Introduction: ConfigReader</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="commandlineinterface.html"><strong>Command Line Interface</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="merge%26replace.html"><strong>Merge &amp; Replace</strong></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Interpolation: ObjectFactory</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Interpolation: build_config</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="dependencyinjection.html"><strong>Dependency Injection</strong></a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Supplementary</span></p>
@@ -320,19 +320,18 @@
             
             <article class="bd-article" role="main">
               
-  <section id="interpolation-objectfactory">
-<h1><strong>Interpolation: ObjectFactory</strong><a class="headerlink" href="#interpolation-objectfactory" title="Permalink to this heading">#</a></h1>
+  <section id="interpolation-build-config">
+<h1><strong>Interpolation: build_config</strong><a class="headerlink" href="#interpolation-build-config" title="Permalink to this heading">#</a></h1>
 <hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="kn">from</span> <span class="nn">dicfg.factory</span> <span class="kn">import</span> <span class="n">ObjectFactory</span>
+<span class="kn">from</span> <span class="nn">dicfg.factory</span> <span class="kn">import</span> <span class="n">build_config</span>
 <span class="kn">from</span> <span class="nn">dicfg.reader</span> <span class="kn">import</span> <span class="n">ConfigReader</span>
 
 
-<span class="k">class</span> <span class="nc">MyConfigReader</span><span class="p">(</span><span class="n">ConfigReader</span><span class="p">):</span>
-    <span class="n">NAME</span> <span class="o">=</span> <span class="s2">&quot;myconfig&quot;</span>
+<span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;myconfig&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -347,12 +346,10 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>default:
     config_int: 1
     config_string: &quot;fire&quot;
-    config_list: [1,2,3]
+    config_list: [1, 2, 3]
     config_none: None
     config_dict:
         sub_config: &quot;water&quot;
-    
-    
 </pre></div>
 </div>
 </div>
@@ -374,7 +371,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_dict&quot;</span><span class="p">:</span> <span class="s2">&quot;./interpolation.yml&quot;</span><span class="p">}}}</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -396,11 +393,11 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_dict&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;sub_config&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{config_string}</span><span class="s2">&quot;</span><span class="p">}}}</span>
 <span class="p">}</span>
-<span class="n">reader</span> <span class="o">=</span> <span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">default config build:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">ObjectFactory</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">reader</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">]),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">build_config</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">]),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -430,11 +427,11 @@ default config build:
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_dict&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;sub_config&quot;</span><span class="p">:</span> <span class="s2">&quot;water&amp;$</span><span class="si">{config_string}</span><span class="s2">&quot;</span><span class="p">}}}</span>
 <span class="p">}</span>
-<span class="n">reader</span> <span class="o">=</span> <span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">default config build:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">ObjectFactory</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">reader</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">]),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">build_config</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">]),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

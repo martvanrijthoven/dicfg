@@ -284,7 +284,7 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html"><strong>Introduction: ConfigReader</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="commandlineinterface.html"><strong>Command Line Interface</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="merge%26replace.html"><strong>Merge &amp; Replace</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpolation.html"><strong>Interpolation: ObjectFactory</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolation.html"><strong>Interpolation: build_config</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="dependencyinjection.html"><strong>Dependency Injection</strong></a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Supplementary</span></p>
@@ -329,8 +329,7 @@
 
 <span class="kn">from</span> <span class="nn">dicfg.reader</span> <span class="kn">import</span> <span class="n">ConfigReader</span>
 
-<span class="k">class</span> <span class="nc">MyConfigReader</span><span class="p">(</span><span class="n">ConfigReader</span><span class="p">):</span>
-    <span class="n">NAME</span> <span class="o">=</span> <span class="s2">&quot;myconfig&quot;</span>
+<span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;myconfig&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -345,12 +344,10 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>default:
     config_int: 1
     config_string: &quot;fire&quot;
-    config_list: [1,2,3]
+    config_list: [1, 2, 3]
     config_none: None
     config_dict:
         sub_config: &quot;water&quot;
-    
-    
 </pre></div>
 </div>
 </div>
@@ -375,7 +372,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set the fire preset</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">presets</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;fire.yml&#39;</span><span class="p">,)),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">presets</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;fire.yml&#39;</span><span class="p">,)),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -407,7 +404,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set the water preset</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">presets</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;water.yml&#39;</span><span class="p">,)),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">presets</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;water.yml&#39;</span><span class="p">,)),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -428,7 +425,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;myconfig&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;config_string&#39;</span><span class="p">:</span> <span class="s1">&#39;water&#39;</span><span class="p">}}}</span>
 <span class="c1"># set the fire preset</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="o">=</span><span class="n">user_config</span><span class="p">,</span> <span class="n">presets</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;fire.yml&#39;</span><span class="p">,)),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="o">=</span><span class="n">user_config</span><span class="p">,</span> <span class="n">presets</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;fire.yml&#39;</span><span class="p">,)),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

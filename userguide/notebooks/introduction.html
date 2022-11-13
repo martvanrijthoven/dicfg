@@ -284,7 +284,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Introduction: ConfigReader</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="commandlineinterface.html"><strong>Command Line Interface</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="merge%26replace.html"><strong>Merge &amp; Replace</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpolation.html"><strong>Interpolation: ObjectFactory</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolation.html"><strong>Interpolation: build_config</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="dependencyinjection.html"><strong>Dependency Injection</strong></a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Supplementary</span></p>
@@ -332,15 +332,11 @@
 </div>
 </div>
 </div>
-<section id="the-first-step-is-to-create-your-own-configreader">
-<h2>The first step is to <strong>create your own ConfigReader</strong><a class="headerlink" href="#the-first-step-is-to-create-your-own-configreader" title="Permalink to this heading">#</a></h2>
+<section id="the-first-step-is-to-create-a-configreader-object">
+<h2>The first step is to <strong>create a ConfigReader object</strong><a class="headerlink" href="#the-first-step-is-to-create-a-configreader-object" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Subclass ConfigReader</span>
-<span class="k">class</span> <span class="nc">MyConfigReader</span><span class="p">(</span><span class="n">ConfigReader</span><span class="p">):</span>
-    
-    <span class="c1"># Specify a class variable &#39;NAME&#39;. (This allows referencing the config via this name)</span>
-    <span class="n">NAME</span> <span class="o">=</span> <span class="s2">&quot;myconfig&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;myconfig&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -372,7 +368,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The config reader will automatically read from ./configs/config.yml</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -391,11 +387,11 @@
 <h2>The main config can be <strong>updated with a user config dictionary</strong><a class="headerlink" href="#the-main-config-can-be-updated-with-a-user-config-dictionary" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note the &#39;myconfig&#39; key in the &#39;user_config&#39; dict which </span>
-<span class="c1"># corresponds to the class variable &#39;NAME&#39; in MyConfigReader</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note the &#39;myconfig&#39; key in the &#39;user_config&#39;,</span>
+<span class="c1">#which corresponds to the name given when initializing ConfigReader</span>
 
 <span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_int&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}}</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -430,7 +426,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="s2">&quot;./user_config.yml&quot;</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">MyConfigReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -486,10 +482,10 @@
 <nav id="bd-toc-nav" class="page-toc">
     <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-first-step-is-to-create-your-own-configreader">
+  <a class="reference internal nav-link" href="#the-first-step-is-to-create-a-configreader-object">
    The first step is to
    <strong>
-    create your own ConfigReader
+    create a ConfigReader object
    </strong>
   </a>
  </li>
