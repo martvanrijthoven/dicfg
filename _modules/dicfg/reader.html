@@ -389,7 +389,8 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
             <span class="n">self_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_path</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">warn</span><span class="p">(</span><span class="s2">&quot;No main config file found at: &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_path</span><span class="p">)</span>
+            <span class="n">warning</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;No main config file found at: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_path</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">warn</span><span class="p">(</span><span class="n">warning</span><span class="p">)</span>
 
         <span class="n">preset_configs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_presets</span><span class="p">(</span><span class="n">presets</span><span class="p">)</span>
         <span class="n">user_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_user_config</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
