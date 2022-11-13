@@ -353,8 +353,8 @@
 </div>
 </div>
 </section>
-<section id="objectfactory-can-build-objects-with-the-object-key">
-<h2>ObjectFactory can build objects with the <strong>*object</strong> key<a class="headerlink" href="#objectfactory-can-build-objects-with-the-object-key" title="Permalink to this heading">#</a></h2>
+<section id="build-config-can-build-objects-with-the-object-key">
+<h2>build_config can build objects with the <strong>*object</strong> key<a class="headerlink" href="#build-config-can-build-objects-with-the-object-key" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
@@ -405,14 +405,14 @@
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_string&#39;: &#39;fire&#39;,
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f4676edeb50&gt;}
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f88344012b0&gt;}
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="objectfactory-can-return-types-with-the-return-type-key">
-<h2>ObjectFactory can <strong>return types with the *return_type:</strong> key<a class="headerlink" href="#objectfactory-can-return-types-with-the-return-type-key" title="Permalink to this heading">#</a></h2>
+<section id="build-config-can-return-types-with-the-return-type-key">
+<h2>build_config can <strong>return types with the *return_type:</strong> key<a class="headerlink" href="#build-config-can-return-types-with-the-return-type-key" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
@@ -518,8 +518,8 @@
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f4676edb1c0&gt;,
- &#39;project&#39;: &lt;__main__.MyProject object at 0x7f4676edbd00&gt;}
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f883440b070&gt;,
+ &#39;project&#39;: &lt;__main__.MyProject object at 0x7f883440b0a0&gt;}
 
 project component name: my_project_component
 </pre></div>
@@ -527,8 +527,8 @@ project component name: my_project_component
 </div>
 </div>
 </section>
-<section id="objectfactory-interpolation-of-objects-is-done-by-object-reference">
-<h2>ObjectFactory interpolation of objects is done by <strong>object reference</strong><a class="headerlink" href="#objectfactory-interpolation-of-objects-is-done-by-object-reference" title="Permalink to this heading">#</a></h2>
+<section id="build-config-interpolation-of-objects-is-done-by-object-reference">
+<h2>build_config interpolation of objects is done by <strong>object reference</strong><a class="headerlink" href="#build-config-interpolation-of-objects-is-done-by-object-reference" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
@@ -588,7 +588,7 @@ project component name: my_project_component
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
  &#39;project_component&#39;: {&#39;object*&#39;: &#39;__main__.ProjectComponent&#39;,
                        &#39;name&#39;: &#39;my_project_component&#39;},
- &#39;project&#39;: &lt;__main__.MyProject object at 0x7f4676ec0820&gt;,
+ &#39;project&#39;: &lt;__main__.MyProject object at 0x7f88343e8220&gt;,
  &#39;my_interpolation_component&#39;: {&#39;object*&#39;: &#39;__main__.ProjectComponent&#39;,
                                 &#39;name&#39;: &#39;my_project_component&#39;}}
 
@@ -599,8 +599,8 @@ reference interpolation_component: {&#39;object*&#39;: &#39;__main__.ProjectComp
 </div>
 </div>
 </section>
-<section id="objectfactory-allows-for-object-attribute-interpolation">
-<h2>ObjectFactory allows for <strong>object attribute interpolation</strong><a class="headerlink" href="#objectfactory-allows-for-object-attribute-interpolation" title="Permalink to this heading">#</a></h2>
+<section id="build-config-allows-for-object-attribute-interpolation">
+<h2>build_config allows for <strong>object attribute interpolation</strong><a class="headerlink" href="#build-config-allows-for-object-attribute-interpolation" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
@@ -657,10 +657,10 @@ reference interpolation_component: {&#39;object*&#39;: &#39;__main__.ProjectComp
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f4676b87700&gt;,
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f883440d460&gt;,
  &#39;project&#39;: {&#39;object*&#39;: &#39;__main__.MyProject&#39;,
-             &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f4676b87700&gt;},
- &#39;my_attribute_component&#39;: &lt;__main__.ProjectComponent object at 0x7f4676b87700&gt;,
+             &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f883440d460&gt;},
+ &#39;my_attribute_component&#39;: &lt;__main__.ProjectComponent object at 0x7f883440d460&gt;,
  &#39;my_attribute_component_name&#39;: &#39;my_project_component&#39;}
 
 my_attribute_component_name: my_project_component
@@ -718,8 +718,8 @@ my_attribute_component_name: my_project_component
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#objectfactory-can-build-objects-with-the-object-key">
-   ObjectFactory can build objects with the
+  <a class="reference internal nav-link" href="#build-config-can-build-objects-with-the-object-key">
+   build_config can build objects with the
    <strong>
     *object
    </strong>
@@ -727,8 +727,8 @@ my_attribute_component_name: my_project_component
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#objectfactory-can-return-types-with-the-return-type-key">
-   ObjectFactory can
+  <a class="reference internal nav-link" href="#build-config-can-return-types-with-the-return-type-key">
+   build_config can
    <strong>
     return types with the *return_type:
    </strong>
@@ -744,16 +744,16 @@ my_attribute_component_name: my_project_component
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#objectfactory-interpolation-of-objects-is-done-by-object-reference">
-   ObjectFactory interpolation of objects is done by
+  <a class="reference internal nav-link" href="#build-config-interpolation-of-objects-is-done-by-object-reference">
+   build_config interpolation of objects is done by
    <strong>
     object reference
    </strong>
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#objectfactory-allows-for-object-attribute-interpolation">
-   ObjectFactory allows for
+  <a class="reference internal nav-link" href="#build-config-allows-for-object-attribute-interpolation">
+   build_config allows for
    <strong>
     object attribute interpolation
    </strong>
