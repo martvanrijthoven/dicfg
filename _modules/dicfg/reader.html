@@ -300,8 +300,10 @@
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span><span class="p">,</span> <span class="n">singledispatch</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
 
 <span class="kn">import</span> <span class="nn">yaml</span>
+
 <span class="kn">from</span> <span class="nn">dicfg.config</span> <span class="kn">import</span> <span class="n">merge</span>
 
 
@@ -329,39 +331,47 @@
 <div class="viewcode-block" id="ConfigReader"><a class="viewcode-back" href="../../_autosummary/dicfg.reader.ConfigReader.html#dicfg.reader.ConfigReader">[docs]</a><span class="k">class</span> <span class="nc">ConfigReader</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Reads config files&quot;&quot;&quot;</span>
 
-    <span class="n">NAME</span> <span class="o">=</span> <span class="s2">&quot;dicfg&quot;</span>
-    <span class="n">DEFAULT_KEY</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
-    <span class="n">CONFIG_FILE</span> <span class="o">=</span> <span class="s2">&quot;config.yml&quot;</span>
-
-    <span class="n">_CONFIGS_FOLDER</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">_PRESETS_FOLDER</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">_CONFIG_PATH</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">def</span> <span class="nf">__init_subclass__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">configuration_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__module__</span><span class="p">]</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
-        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>  <span class="c1"># notebooks</span>
-            <span class="n">configuration_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">()</span>
-
-        <span class="bp">cls</span><span class="o">.</span><span class="n">_CONFIGS_FOLDER</span> <span class="o">=</span> <span class="n">configuration_folder</span> <span class="o">/</span> <span class="s2">&quot;configs&quot;</span>
-        <span class="bp">cls</span><span class="o">.</span><span class="n">_PRESETS_FOLDER</span> <span class="o">=</span> <span class="n">configuration_folder</span> <span class="o">/</span> <span class="s2">&quot;configs&quot;</span> <span class="o">/</span> <span class="s2">&quot;presets&quot;</span>
-        <span class="bp">cls</span><span class="o">.</span><span class="n">_CONFIG_PATH</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_CONFIGS_FOLDER</span> <span class="o">/</span> <span class="bp">cls</span><span class="o">.</span><span class="n">CONFIG_FILE</span>
-
-<div class="viewcode-block" id="ConfigReader.read"><a class="viewcode-back" href="../../_autosummary/dicfg.reader.ConfigReader.html#dicfg.reader.ConfigReader.read">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span>
-        <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">user_config</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">presets</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(),</span>
+<div class="viewcode-block" id="ConfigReader.__init__"><a class="viewcode-back" href="../../_autosummary/dicfg.reader.ConfigReader.html#dicfg.reader.ConfigReader.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dicfg&quot;</span><span class="p">,</span>
+        <span class="n">configs_folder</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./configs/&quot;</span><span class="p">),</span>
+        <span class="n">presets_folder_name</span><span class="o">=</span><span class="s2">&quot;presets&quot;</span><span class="p">,</span>
+        <span class="n">config_file_name</span><span class="o">=</span><span class="s2">&quot;config.yml&quot;</span><span class="p">,</span>
+        <span class="n">default_key</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
         <span class="n">context_keys</span><span class="o">=</span><span class="p">(),</span>
         <span class="n">search_paths</span><span class="o">=</span><span class="p">(),</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Init ConfigReader</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str, optional): _description_. Defaults to &quot;dicfg&quot;.</span>
+<span class="sd">            configs_folder (_type_, optional): _description_. Defaults to Path().</span>
+<span class="sd">            presets_folder_name (str, optional): _description_. Defaults to &#39;presets&#39;.</span>
+<span class="sd">            config_file_name (str, optional): _description_. Defaults to &quot;config.yml&quot;.</span>
+<span class="sd">            default_key (str, optional): _description_. Defaults to &quot;default&quot;.</span>
+<span class="sd">            context_keys (tuple, optional): _description_. Defaults to ().</span>
+<span class="sd">            search_paths (tuple, optional): _description_. Defaults to ().</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_configs_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">configs_folder</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default_key</span> <span class="o">=</span> <span class="n">default_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context_keys</span> <span class="o">=</span> <span class="n">context_keys</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_search_paths</span> <span class="o">=</span> <span class="n">search_paths</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_presets_folder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configs_folder</span> <span class="o">/</span> <span class="n">presets_folder_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configs_folder</span> <span class="o">/</span> <span class="n">config_file_name</span></div>
+
+<div class="viewcode-block" id="ConfigReader.read"><a class="viewcode-back" href="../../_autosummary/dicfg.reader.ConfigReader.html#dicfg.reader.ConfigReader.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">user_config</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">presets</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(),</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Reads Config File</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            user_config (Union[dict, str, Path], optional): user_config Defaults to None.</span>
 <span class="sd">            presets (tuple, optional): presets Defaults to ().</span>
-<span class="sd">            context_keys (tuple, optional): context keys Defaults to ().</span>
-<span class="sd">            search_paths (tuple, optional): search paths Defaults to ().</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            dict: read configs</span>
@@ -371,50 +381,49 @@
         <span class="k">if</span> <span class="n">user_config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">user_config</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="n">user_config_search_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
 
-        <span class="n">search_paths</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_set_search_paths</span><span class="p">(</span><span class="n">user_config_search_path</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
+        <span class="n">search_paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_search_paths</span><span class="p">(</span>
+            <span class="n">user_config_search_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_search_paths</span>
+        <span class="p">)</span>
 
-        <span class="n">cls_config</span> <span class="o">=</span> <span class="p">{}</span> 
-        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_CONFIG_PATH</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_CONFIG_PATH</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-            <span class="n">cls_config</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_CONFIG_PATH</span><span class="p">)</span>
-  
-        <span class="n">preset_configs</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_presets</span><span class="p">(</span><span class="n">presets</span><span class="p">)</span>
-        <span class="n">user_config</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_user_config</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
-        <span class="n">cli_config</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_cli</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">self_config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">self_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_path</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">warn</span><span class="p">(</span><span class="s2">&quot;No main config file found at: &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_path</span><span class="p">)</span>
 
-        <span class="n">configs</span> <span class="o">=</span> <span class="p">(</span><span class="n">cls_config</span><span class="p">,</span> <span class="o">*</span><span class="n">preset_configs</span><span class="p">,</span> <span class="n">user_config</span><span class="p">,</span> <span class="n">cli_config</span><span class="p">)</span>
-        <span class="n">configs</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_fuse_configs</span><span class="p">(</span><span class="n">configs</span><span class="p">,</span> <span class="n">context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
+        <span class="n">preset_configs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_presets</span><span class="p">(</span><span class="n">presets</span><span class="p">)</span>
+        <span class="n">user_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_user_config</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
+        <span class="n">cli_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_cli</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+        <span class="n">configs</span> <span class="o">=</span> <span class="p">(</span><span class="n">self_config</span><span class="p">,</span> <span class="o">*</span><span class="n">preset_configs</span><span class="p">,</span> <span class="n">user_config</span><span class="p">,</span> <span class="n">cli_config</span><span class="p">)</span>
+        <span class="n">configs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_configs</span><span class="p">(</span><span class="n">configs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="o">*</span><span class="n">configs</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">()</span></div>
 
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_set_search_paths</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">user_config_search_path</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_set_search_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_config_search_path</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="n">Path</span><span class="p">(),</span>
             <span class="n">user_config_search_path</span><span class="p">,</span>
-            <span class="bp">cls</span><span class="o">.</span><span class="n">_CONFIGS_FOLDER</span><span class="p">,</span>
-            <span class="bp">cls</span><span class="o">.</span><span class="n">_PRESETS_FOLDER</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_configs_folder</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_presets_folder</span><span class="p">,</span>
             <span class="o">*</span><span class="n">search_paths</span><span class="p">,</span>
         <span class="p">)</span>
 
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_read</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">config_path</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_path</span><span class="p">):</span>
         <span class="n">config</span> <span class="o">=</span> <span class="n">_FILE_READERS</span><span class="p">[</span><span class="n">Path</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span><span class="p">](</span><span class="n">config_path</span><span class="o">=</span><span class="n">config_path</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">config</span>
 
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_read_presets</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">presets</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">tuple</span><span class="p">((</span><span class="bp">cls</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_PRESETS_FOLDER</span> <span class="o">/</span> <span class="n">preset</span><span class="p">)</span> <span class="k">for</span> <span class="n">preset</span> <span class="ow">in</span> <span class="n">presets</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">_read_presets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">presets</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_presets_folder</span> <span class="o">/</span> <span class="n">preset</span><span class="p">)</span> <span class="k">for</span> <span class="n">preset</span> <span class="ow">in</span> <span class="n">presets</span><span class="p">))</span>
 
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_read_user_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">user_config</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_read_user_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_config</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">user_config</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">user_config</span><span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">NAME</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">user_config</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">user_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{}</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="n">user_config</span><span class="p">)[</span><span class="bp">cls</span><span class="o">.</span><span class="n">NAME</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="n">user_config</span><span class="p">)[</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">]</span>
 
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_read_cli</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+    <span class="k">def</span> <span class="nf">_read_cli</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
         <span class="n">dicts</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
             <span class="k">if</span> <span class="s2">&quot;=&quot;</span> <span class="ow">in</span> <span class="n">arg</span><span class="p">:</span>
@@ -422,17 +431,15 @@
                 <span class="n">keys</span> <span class="o">=</span> <span class="n">keys</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
                 <span class="n">dicts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_create_dict_from_keys</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
         <span class="n">cli_config</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="o">*</span><span class="n">dicts</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">cli_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">return</span> <span class="n">cli_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="p">{})</span>
 
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_fuse_configs</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configs</span><span class="p">,</span> <span class="n">context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_fuse_configs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configs</span><span class="p">,</span> <span class="n">context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
         <span class="n">fuse_config</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
-            <span class="bp">cls</span><span class="o">.</span><span class="n">_fuse_config</span><span class="p">,</span> <span class="n">context_keys</span><span class="o">=</span><span class="n">context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="o">=</span><span class="n">search_paths</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_config</span><span class="p">,</span> <span class="n">context_keys</span><span class="o">=</span><span class="n">context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="o">=</span><span class="n">search_paths</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">fuse_config</span><span class="p">,</span> <span class="n">configs</span><span class="p">))</span>
 
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_fuse_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context_keys</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_fuse_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context_keys</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
         <span class="n">config</span> <span class="o">=</span> <span class="n">_include_configs</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
         <span class="n">fused_config</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span>
             <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="p">{}))</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">context_keys</span><span class="p">}</span>

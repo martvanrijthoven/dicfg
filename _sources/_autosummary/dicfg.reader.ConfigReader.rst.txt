@@ -23,12 +23,4 @@ dicfg.reader.ConfigReader
 
    
    
-   .. rubric:: Attributes
-
-   .. autosummary::
-   
-      ~ConfigReader.CONFIG_FILE
-      ~ConfigReader.DEFAULT_KEY
-      ~ConfigReader.NAME
-   
    
