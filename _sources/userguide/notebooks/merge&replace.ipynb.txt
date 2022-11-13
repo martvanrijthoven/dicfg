@@ -11,7 +11,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 2,
+   "execution_count": 1,
    "id": "deb9ae82-eba7-430f-ae3c-299eddac9f67",
    "metadata": {},
    "outputs": [],
@@ -27,7 +27,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 24,
+   "execution_count": 2,
    "id": "ec789e78-af2a-4682-ac34-f5a91168cb2c",
    "metadata": {},
    "outputs": [
@@ -38,12 +38,10 @@
       "default:\n",
       "    config_int: 1\n",
       "    config_string: \"fire\"\n",
-      "    config_list: [1,2,3]\n",
+      "    config_list: [1, 2, 3]\n",
       "    config_none: None\n",
       "    config_dict:\n",
-      "        sub_config: \"water\"\n",
-      "    \n",
-      "    "
+      "        sub_config: \"water\""
      ]
     }
    ],
@@ -61,7 +59,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 19,
+   "execution_count": 3,
    "id": "23500c26-d715-4381-bc99-6cf294f9bb85",
    "metadata": {},
    "outputs": [
@@ -94,7 +92,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 20,
+   "execution_count": 4,
    "id": "232b0ea4-1216-42fc-a696-3e675263e96c",
    "metadata": {},
    "outputs": [
@@ -125,7 +123,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 21,
+   "execution_count": 5,
    "id": "17453754-cfd9-4b41-9761-8c50e01e7a6a",
    "metadata": {},
    "outputs": [
@@ -158,7 +156,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 22,
+   "execution_count": 6,
    "id": "57729f87-5529-46f6-8741-963c76f350e5",
    "metadata": {},
    "outputs": [
@@ -189,7 +187,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 23,
+   "execution_count": 7,
    "id": "6458707a-51bf-42b3-aeab-747a63dfe1d3",
    "metadata": {},
    "outputs": [
@@ -220,7 +218,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 17,
+   "execution_count": 8,
    "id": "b912f868-6f6c-4fc4-9bca-193b1f98880d",
    "metadata": {},
    "outputs": [
