@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>dicfg.factory.ObjectFactory &#8212; dicfg</title>
+    <title>dicfg.factory.build_config &#8212; dicfg</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -44,7 +44,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/design-tabs.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/dicfg.factory.ObjectFactory';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/dicfg.factory.build_config';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="dicfg.reader" href="dicfg.reader.html" />
@@ -289,7 +289,7 @@
 </ul>
 </li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="dicfg.factory.html">dicfg.factory</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">dicfg.factory.ObjectFactory</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">dicfg.factory.build_config</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="dicfg.reader.html">dicfg.reader</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -327,52 +327,12 @@
             
             <article class="bd-article" role="main">
               
-  <section id="dicfg-factory-objectfactory">
-<h1>dicfg.factory.ObjectFactory<a class="headerlink" href="#dicfg-factory-objectfactory" title="Permalink to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="dicfg.factory.ObjectFactory">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ObjectFactory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/factory.html#ObjectFactory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.factory.ObjectFactory" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Allows for building configs</p>
-<p>Initialize with config</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>config (dict): config dictionary</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="dicfg.factory.ObjectFactory.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/factory.html#ObjectFactory.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.factory.ObjectFactory.__init__" title="Permalink to this definition">#</a></dt>
-<dd><p>Initialize with config</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>config (dict): config dictionary</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p class="rubric">Methods</p>
-<table class="autosummary longtable table autosummary">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#dicfg.factory.ObjectFactory.__init__" title="dicfg.factory.ObjectFactory.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(config)</p></td>
-<td><p>Initialize with config</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dicfg.factory.ObjectFactory.build" title="dicfg.factory.ObjectFactory.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code></a>(config)</p></td>
-<td><p>Builds a config</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py method">
-<dt class="sig sig-object py" id="dicfg.factory.ObjectFactory.build">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/factory.html#ObjectFactory.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.factory.ObjectFactory.build" title="Permalink to this definition">#</a></dt>
-<dd><p>Builds a config</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>config (dict): config to be build</p>
-</dd>
-<dt>Returns:</dt><dd><p>dict: build config</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
+  <section id="dicfg-factory-build-config">
+<h1>dicfg.factory.build_config<a class="headerlink" href="#dicfg-factory-build-config" title="Permalink to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="dicfg.factory.build_config">
+<span class="sig-name descname"><span class="pre">build_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/factory.html#build_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.factory.build_config" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 
 </section>
 
@@ -415,33 +375,13 @@
 <nav id="bd-toc-nav" class="page-toc">
     <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dicfg.factory.ObjectFactory">
+  <a class="reference internal nav-link" href="#dicfg.factory.build_config">
    <code class="docutils literal notranslate">
     <span class="pre">
-     ObjectFactory
+     build_config()
     </span>
    </code>
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dicfg.factory.ObjectFactory.__init__">
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       ObjectFactory.__init__()
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dicfg.factory.ObjectFactory.build">
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       ObjectFactory.build()
-      </span>
-     </code>
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 

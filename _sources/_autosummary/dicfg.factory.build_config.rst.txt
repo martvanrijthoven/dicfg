@@ -1,0 +1,6 @@
+dicfg.factory.build\_config
+===========================
+
+.. currentmodule:: dicfg.factory
+
+.. autofunction:: build_config
