@@ -1,6 +1,6 @@
 default:
   test: 
-    test2: [1,2,3]
+    test2: [1, 2, 3]
   test3: test
   test4: 1
   test5: 1.0
