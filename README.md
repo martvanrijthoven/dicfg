@@ -8,7 +8,7 @@
 [![GitHub](https://img.shields.io/github/license/martvanrijthoven/dicfg)](https://github.com/martvanrijthoven/dicfg/blob/main/LICENSE)
                   
 
-Dicfg is a configuration system that supports dependency injection in config files.
+Dicfg is a configuration system that directly supports dependency injection via object interpolation in config files.
 
 ## Installation
 

@@ -16,32 +16,44 @@ User Guide
 
 **Essentials**
 
+.. role:: raw-html(raw)
+    :format: html
+
+
+
 .. grid:: 1 1 5 5
 
-  .. grid-item-card:: Introduction
-      :link: userguide/notebooks/introduction.html
 
-      +++
+  .. button-link:: userguide/notebooks/introduction.html
+      :color: primary
+      :expand:
+
+      Introduction: ConfigReader
+
+  .. button-link:: userguide/notebooks/commandlineinterface.html
+      :color: primary
+      :expand:
+
+      Command Line Interface
+
+  .. button-link:: userguide/notebooks/merge%26replace.html
+      :color: primary
+      :expand:
+
+      Merge and Replace
+
+  .. button-link:: userguide/notebooks/interpolation.html
+      :color: primary
+      :expand:
+
+      Interpolation: ObjectFactory
       
-  .. grid-item-card:: Command Line Interface
-      :link: userguide/notebooks/commandlineinterface.html
-      
-      +++
+  .. button-link:: userguide/notebooks/dependencyinjection.html
+      :color: primary
+      :expand:
 
-  .. grid-item-card:: Merge & Replace
-      :link: userguide/notebooks/merge%26replace.html
+      Dependency Injection
 
-      +++
-  
-  .. grid-item-card:: Interpolation
-      :link: userguide/notebooks/inerpolation.html
-
-      +++
- 
-  .. grid-item-card:: Dependency Injection
-      :link: userguide/notebooks/dependencyinjection.html
-
-      +++
 
 
 
@@ -49,20 +61,25 @@ User Guide
 
 .. grid:: 1 1 5 5
       
-  .. grid-item-card:: Presets
-      :link: userguide/notebooks/presets.html
+  .. button-link:: userguide/notebooks/presets.html
+      :color: primary
+      :expand:
+      
+      Presets
 
-      +++
 
-  .. grid-item-card:: Search Paths
-      :link: userguide/notebooks/searchpaths.html
+  .. button-link:: userguide/notebooks/searchpaths.html
+      :color: primary
+      :expand:
+      
+      Search Paths
 
-      +++
+  .. button-link:: userguide/notebooks/contextkeys.html
+      :color: primary
+      :expand:
+      
+      Context Keys
 
-  .. grid-item-card:: Context Keys
-      :link: userguide/notebooks/contextkeys.html
-
-      +++
 
 
 .. toctree::

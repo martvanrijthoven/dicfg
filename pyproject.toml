@@ -9,8 +9,20 @@ packages = ["dicfg"]
 name = "dicfg"
 authors = [{ name = "Mart van Rijthoven", email = "mart.vanrijthoven@gmail.com" }]
 license = { file = "LICENSE" }
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",            
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3 :: Only",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+]
 dependencies = ["PyYaml >= 5.4.1"]
-requires-python = ">=3.8"
+
 dynamic = ["version", "readme"]
 
 [project.urls]
