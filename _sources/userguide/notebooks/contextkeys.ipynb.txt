@@ -70,12 +70,12 @@
    "id": "9eac2b47-445f-42f4-ab64-f832eb086792",
    "metadata": {},
    "source": [
-    "### The **multiple contexts** can be **independent updated**."
+    "### The **multiple contexts** inherent from the default context and can be **independent updated**."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 16,
+   "execution_count": 17,
    "id": "7eda3c32-ab49-41ad-bed2-675184aa9b54",
    "metadata": {},
    "outputs": [
@@ -83,17 +83,17 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "{'context1': {'config_int': 1,\n",
+      "{'context1': {'config_int': 2,\n",
       "              'config_string': 'context1_string',\n",
       "              'config_list': [1, 2, 3],\n",
       "              'config_none': 'None',\n",
       "              'config_dict': {'sub_config': 'water'}},\n",
-      " 'context2': {'config_int': 1,\n",
+      " 'context2': {'config_int': 2,\n",
       "              'config_string': 'context2_string',\n",
       "              'config_list': [1, 2, 3],\n",
       "              'config_none': 'None',\n",
       "              'config_dict': {'sub_config': 'water'}},\n",
-      " 'default': {'config_int': 1,\n",
+      " 'default': {'config_int': 2,\n",
       "             'config_string': 'default',\n",
       "             'config_list': [1, 2, 3],\n",
       "             'config_none': 'None',\n",
@@ -104,7 +104,7 @@
    "source": [
     "user_config = {\n",
     "    \"myconfig\": {\n",
-    "        \"default\": {\"config_string\": \"default\"},\n",
+    "        \"default\": {\"config_int\": 2, \"config_string\": \"default\"},\n",
     "        \"context1\": {\"config_string\": \"context1_string\"},\n",
     "        \"context2\": {\"config_string\": \"context2_string\"},\n",
     "    },\n",

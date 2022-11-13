@@ -365,13 +365,13 @@
 </div>
 </div>
 </section>
-<section id="the-multiple-contexts-can-be-independent-updated">
-<h2>The <strong>multiple contexts</strong> can be <strong>independent updated</strong>.<a class="headerlink" href="#the-multiple-contexts-can-be-independent-updated" title="Permalink to this heading">#</a></h2>
+<section id="the-multiple-contexts-inherent-from-the-default-context-and-can-be-independent-updated">
+<h2>The <strong>multiple contexts</strong> inherent from the default context and can be <strong>independent updated</strong>.<a class="headerlink" href="#the-multiple-contexts-inherent-from-the-default-context-and-can-be-independent-updated" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_string&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_int&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;config_string&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">},</span>
         <span class="s2">&quot;context1&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_string&quot;</span><span class="p">:</span> <span class="s2">&quot;context1_string&quot;</span><span class="p">},</span>
         <span class="s2">&quot;context2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_string&quot;</span><span class="p">:</span> <span class="s2">&quot;context2_string&quot;</span><span class="p">},</span>
     <span class="p">},</span>
@@ -385,17 +385,17 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;context1&#39;: {&#39;config_int&#39;: 1,
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;context1&#39;: {&#39;config_int&#39;: 2,
               &#39;config_string&#39;: &#39;context1_string&#39;,
               &#39;config_list&#39;: [1, 2, 3],
               &#39;config_none&#39;: &#39;None&#39;,
               &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;}},
- &#39;context2&#39;: {&#39;config_int&#39;: 1,
+ &#39;context2&#39;: {&#39;config_int&#39;: 2,
               &#39;config_string&#39;: &#39;context2_string&#39;,
               &#39;config_list&#39;: [1, 2, 3],
               &#39;config_none&#39;: &#39;None&#39;,
               &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;}},
- &#39;default&#39;: {&#39;config_int&#39;: 1,
+ &#39;default&#39;: {&#39;config_int&#39;: 2,
              &#39;config_string&#39;: &#39;default&#39;,
              &#39;config_list&#39;: [1, 2, 3],
              &#39;config_none&#39;: &#39;None&#39;,
@@ -455,12 +455,12 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-multiple-contexts-can-be-independent-updated">
+  <a class="reference internal nav-link" href="#the-multiple-contexts-inherent-from-the-default-context-and-can-be-independent-updated">
    The
    <strong>
     multiple contexts
    </strong>
-   can be
+   inherent from the default context and can be
    <strong>
     independent updated
    </strong>
