@@ -1,10 +1,12 @@
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
+from pytest import raises, warns
+
 from dicfg.factory import build_config
 from dicfg.reader import ConfigNotFoundError, ConfigReader
-from pytest import raises, warns
-import sys
+
 
 @dataclass
 class ProjectComponent:
@@ -22,7 +24,7 @@ config_reader = ConfigReader(name="testconfig", context_keys=("testkey",))
 def test_dicfg():
     user_config_path = Path("./testconfigs/user_config.yml")
     config = config_reader.read()
-    config = config_reader.read({'testconfig': {'default': None}})
+    config = config_reader.read({"testconfig": {"default": None}})
     config = config_reader.read(user_config_path)
     test_config = build_config(
         config["testkey"],
@@ -42,29 +44,30 @@ def test_dicfg():
 
 def test_cli():
 
-    config_reader = ConfigReader(name="testconfig",  config_file_name='test.yml', context_keys=("testkey",))
+    sys_config_reader = ConfigReader(
+        name="testconfig", config_file_name="test.yml", context_keys=("testkey",)
+    )
     sys_argv = sys.argv
 
     sys.argv = sys_argv + ["testconfig.default.test1.test2=10"]
 
-    config = config_reader.read()
-    assert {"test1": {"test2": 10}} == config['default']
+    config = sys_config_reader.read()
+    assert {"test1": {"test2": 10}} == config["default"]
 
     sys.argv = sys_argv + ["testconfig.default.test1.test2=10.0"]
 
-    config = config_reader.read()
-    assert {"test1": {"test2": 10.0}} == config['default']
+    config = sys_config_reader.read()
+    assert {"test1": {"test2": 10.0}} == config["default"]
 
-    
     sys.argv = sys_argv + ["testconfig.default.test1.test2=True"]
 
-    config = config_reader.read()
-    assert {"test1": {"test2": True}} == config['default']
+    config = sys_config_reader.read()
+    assert {"test1": {"test2": True}} == config["default"]
 
     sys.argv = sys_argv + ["testconfig.default.test1.test2=None"]
 
-    config = config_reader.read()
-    assert {"test1": {"test2": None}} == config['default']
+    config = sys_config_reader.read()
+    assert {"test1": {"test2": None}} == config["default"]
 
 
 def test_config_not_found_error():
@@ -82,6 +85,7 @@ def test_replace_error():
         config = config_reader.read(user_config_path)
         build_config(config["testkey"])
 
+
 def test_warning():
     with warns(UserWarning):
-        _ = ConfigReader(name="testconfig", config_file_name='none').read()
+        _ = ConfigReader(name="testconfig", config_file_name="none").read()
