@@ -405,7 +405,7 @@
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_string&#39;: &#39;fire&#39;,
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f88344012b0&gt;}
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f16c00ed2b0&gt;}
 </pre></div>
 </div>
 </div>
@@ -518,8 +518,8 @@
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f883440b070&gt;,
- &#39;project&#39;: &lt;__main__.MyProject object at 0x7f883440b0a0&gt;}
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f16c00a5610&gt;,
+ &#39;project&#39;: &lt;__main__.MyProject object at 0x7f16c00a5640&gt;}
 
 project component name: my_project_component
 </pre></div>
@@ -535,7 +535,7 @@ project component name: my_project_component
     <span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s2">&quot;project_component&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;object*&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.ProjectComponent&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;*object&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.ProjectComponent&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;my_project_component&quot;</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -573,7 +573,7 @@ project component name: my_project_component
              &#39;config_list&#39;: [1, 2, 3],
              &#39;config_none&#39;: &#39;None&#39;,
              &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
-             &#39;project_component&#39;: {&#39;object*&#39;: &#39;__main__.ProjectComponent&#39;,
+             &#39;project_component&#39;: {&#39;*object&#39;: &#39;__main__.ProjectComponent&#39;,
                                    &#39;name&#39;: &#39;my_project_component&#39;},
              &#39;project&#39;: {&#39;*object&#39;: &#39;__main__.MyProject&#39;,
                          &#39;project_component&#39;: &#39;${project_component}&#39;},
@@ -586,14 +586,12 @@ project component name: my_project_component
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;project_component&#39;: {&#39;object*&#39;: &#39;__main__.ProjectComponent&#39;,
-                       &#39;name&#39;: &#39;my_project_component&#39;},
- &#39;project&#39;: &lt;__main__.MyProject object at 0x7f88343e8220&gt;,
- &#39;my_interpolation_component&#39;: {&#39;object*&#39;: &#39;__main__.ProjectComponent&#39;,
-                                &#39;name&#39;: &#39;my_project_component&#39;}}
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f16c010c2e0&gt;,
+ &#39;project&#39;: &lt;__main__.MyProject object at 0x7f16c010c7c0&gt;,
+ &#39;my_interpolation_component&#39;: &lt;__main__.ProjectComponent object at 0x7f16c010c2e0&gt;}
 
-reference       project_component: {&#39;object*&#39;: &#39;__main__.ProjectComponent&#39;, &#39;name&#39;: &#39;my_project_component&#39;}
-reference interpolation_component: {&#39;object*&#39;: &#39;__main__.ProjectComponent&#39;, &#39;name&#39;: &#39;my_project_component&#39;}
+reference       project_component: &lt;__main__.ProjectComponent object at 0x7f16c010c2e0&gt;
+reference interpolation_component: &lt;__main__.ProjectComponent object at 0x7f16c010c2e0&gt;
 </pre></div>
 </div>
 </div>
@@ -611,7 +609,7 @@ reference interpolation_component: {&#39;object*&#39;: &#39;__main__.ProjectComp
                 <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;my_project_component&quot;</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;object*&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.MyProject&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;*object&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.MyProject&quot;</span><span class="p">,</span>
                 <span class="s2">&quot;project_component&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{project_component}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="s2">&quot;my_attribute_component&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{project_component}</span><span class="s2">&quot;</span><span class="p">,</span>
@@ -645,7 +643,7 @@ reference interpolation_component: {&#39;object*&#39;: &#39;__main__.ProjectComp
              &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
              &#39;project_component&#39;: {&#39;*object&#39;: &#39;__main__.ProjectComponent&#39;,
                                    &#39;name&#39;: &#39;my_project_component&#39;},
-             &#39;project&#39;: {&#39;object*&#39;: &#39;__main__.MyProject&#39;,
+             &#39;project&#39;: {&#39;*object&#39;: &#39;__main__.MyProject&#39;,
                          &#39;project_component&#39;: &#39;${project_component}&#39;},
              &#39;my_attribute_component&#39;: &#39;${project_component}&#39;,
              &#39;my_attribute_component_name&#39;: &#39;${project_component.name}&#39;}}
@@ -657,10 +655,9 @@ reference interpolation_component: {&#39;object*&#39;: &#39;__main__.ProjectComp
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f883440d460&gt;,
- &#39;project&#39;: {&#39;object*&#39;: &#39;__main__.MyProject&#39;,
-             &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f883440d460&gt;},
- &#39;my_attribute_component&#39;: &lt;__main__.ProjectComponent object at 0x7f883440d460&gt;,
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f16c00a6be0&gt;,
+ &#39;project&#39;: &lt;__main__.MyProject object at 0x7f16c00a6c10&gt;,
+ &#39;my_attribute_component&#39;: &lt;__main__.ProjectComponent object at 0x7f16c00a6be0&gt;,
  &#39;my_attribute_component_name&#39;: &#39;my_project_component&#39;}
 
 my_attribute_component_name: my_project_component
