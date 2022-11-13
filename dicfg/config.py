@@ -118,7 +118,7 @@ def _get_merger(key: str, value):
 
     if isinstance(value, dict) and replace:
         return key, lambda a, b: b.data
-    elif isinstance(value, list) and not replace:
+    if isinstance(value, list) and not replace:
         return key, lambda a, b: a.data + b.data
     return key, _update
 
