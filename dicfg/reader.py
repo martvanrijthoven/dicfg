@@ -6,8 +6,10 @@ from copy import deepcopy
 from functools import partial, singledispatch
 from pathlib import Path
 from typing import List, Union
+from warnings import warn
 
 import yaml
+
 from dicfg.config import merge
 
 
@@ -35,39 +37,47 @@ class ConfigNotFoundError(Exception):
 class ConfigReader:
     """Reads config files"""
 
-    NAME = "dicfg"
-    DEFAULT_KEY = "default"
-    CONFIG_FILE = "config.yml"
-
-    _CONFIGS_FOLDER = None
-    _PRESETS_FOLDER = None
-    _CONFIG_PATH = None
-
-    def __init_subclass__(cls) -> None:
-        try:
-            configuration_folder = Path(sys.modules[cls.__module__].__file__).parent
-        except AttributeError:  # notebooks
-            configuration_folder = Path()
-
-        cls._CONFIGS_FOLDER = configuration_folder / "configs"
-        cls._PRESETS_FOLDER = configuration_folder / "configs" / "presets"
-        cls._CONFIG_PATH = cls._CONFIGS_FOLDER / cls.CONFIG_FILE
-
-    @classmethod
-    def read(
-        cls,
-        user_config: Union[dict, str, Path] = None,
-        presets: tuple = (),
+    def __init__(
+        self,
+        name="dicfg",
+        configs_folder=Path("./configs/"),
+        presets_folder_name="presets",
+        config_file_name="config.yml",
+        default_key="default",
         context_keys=(),
         search_paths=(),
+    ):
+        """Init ConfigReader
+
+        Args:
+            name (str, optional): _description_. Defaults to "dicfg".
+            configs_folder (_type_, optional): _description_. Defaults to Path().
+            presets_folder_name (str, optional): _description_. Defaults to 'presets'.
+            config_file_name (str, optional): _description_. Defaults to "config.yml".
+            default_key (str, optional): _description_. Defaults to "default".
+            context_keys (tuple, optional): _description_. Defaults to ().
+            search_paths (tuple, optional): _description_. Defaults to ().
+        """
+
+        self._name = name
+        self._configs_folder = Path(configs_folder)
+        self._default_key = default_key
+        self._context_keys = context_keys
+        self._search_paths = search_paths
+
+        self._presets_folder = self._configs_folder / presets_folder_name
+        self._config_path = self._configs_folder / config_file_name
+
+    def read(
+        self,
+        user_config: Union[dict, str, Path] = None,
+        presets: tuple = (),
     ) -> dict:
         """Reads Config File
 
         Args:
             user_config (Union[dict, str, Path], optional): user_config Defaults to None.
             presets (tuple, optional): presets Defaults to ().
-            context_keys (tuple, optional): context keys Defaults to ().
-            search_paths (tuple, optional): search paths Defaults to ().
 
         Returns:
             dict: read configs
@@ -77,50 +87,49 @@ class ConfigReader:
         if user_config is not None and not isinstance(user_config, dict):
             user_config_search_path = Path(user_config).parent
 
-        search_paths = cls._set_search_paths(user_config_search_path, search_paths)
+        search_paths = self._set_search_paths(
+            user_config_search_path, self._search_paths
+        )
 
-        cls_config = {} 
-        if cls._CONFIG_PATH is not None and cls._CONFIG_PATH.exists():
-            cls_config = cls._read(cls._CONFIG_PATH)
-  
-        preset_configs = cls._read_presets(presets)
-        user_config = cls._read_user_config(user_config)
-        cli_config = cls._read_cli(sys.argv[1:])
+        self_config = {}
+        if self._config_path.exists():
+            self_config = self._read(self._config_path)
+        else:
+            warn("No main config file found at: ", self._config_path)
 
-        configs = (cls_config, *preset_configs, user_config, cli_config)
-        configs = cls._fuse_configs(configs, context_keys, search_paths)
+        preset_configs = self._read_presets(presets)
+        user_config = self._read_user_config(user_config)
+        cli_config = self._read_cli(sys.argv[1:])
+
+        configs = (self_config, *preset_configs, user_config, cli_config)
+        configs = self._fuse_configs(configs, self._context_keys, search_paths)
 
         return merge(*configs).cast()
 
-    @classmethod
-    def _set_search_paths(cls, user_config_search_path, search_paths):
+    def _set_search_paths(self, user_config_search_path, search_paths):
         return (
             Path(),
             user_config_search_path,
-            cls._CONFIGS_FOLDER,
-            cls._PRESETS_FOLDER,
+            self._configs_folder,
+            self._presets_folder,
             *search_paths,
         )
 
-    @classmethod
-    def _read(cls, config_path):
+    def _read(self, config_path):
         config = _FILE_READERS[Path(config_path).suffix](config_path=config_path)
         return {} if config is None else config
 
-    @classmethod
-    def _read_presets(cls, presets):
-        return tuple((cls._read(cls._PRESETS_FOLDER / preset) for preset in presets))
+    def _read_presets(self, presets):
+        return tuple((self._read(self._presets_folder / preset) for preset in presets))
 
-    @classmethod
-    def _read_user_config(cls, user_config):
+    def _read_user_config(self, user_config):
         if isinstance(user_config, dict):
-            return user_config[cls.NAME]
+            return user_config[self._name]
         if user_config is None:
             return {}
-        return cls._read(user_config)[cls.NAME]
+        return self._read(user_config)[self._name]
 
-    @classmethod
-    def _read_cli(cls, args: List[str]):
+    def _read_cli(self, args: List[str]):
         dicts = []
         for arg in args:
             if "=" in arg:
@@ -128,17 +137,15 @@ class ConfigReader:
                 keys = keys.split(".")
                 dicts.append(_create_dict_from_keys(keys, value))
         cli_config = merge(*dicts)
-        return cli_config.get(cls.NAME, {})
+        return cli_config.get(self._name, {})
 
-    @classmethod
-    def _fuse_configs(cls, configs, context_keys, search_paths):
+    def _fuse_configs(self, configs, context_keys, search_paths):
         fuse_config = partial(
-            cls._fuse_config, context_keys=context_keys, search_paths=search_paths
+            self._fuse_config, context_keys=context_keys, search_paths=search_paths
         )
         return tuple(map(fuse_config, configs))
 
-    @classmethod
-    def _fuse_config(cls, config: dict, context_keys: tuple, search_paths):
+    def _fuse_config(self, config: dict, context_keys: tuple, search_paths):
         config = _include_configs(config, search_paths)
         fused_config = deepcopy(
             {key: deepcopy(config.get("default", {})) for key in context_keys}
