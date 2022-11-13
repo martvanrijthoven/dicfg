@@ -4,7 +4,7 @@ from pathlib import Path
 from dicfg.factory import build_config
 from dicfg.reader import ConfigNotFoundError, ConfigReader
 from pytest import raises, warns
-
+import sys
 
 @dataclass
 class ProjectComponent:
@@ -42,17 +42,29 @@ def test_dicfg():
 
 def test_cli():
 
-    config = config_reader._read_cli(["testconfig.test1.test2=10"]).cast()
-    assert {"test1": {"test2": 10}} == config
+    config_reader = ConfigReader(name="testconfig",  config_file_name='test.yml', context_keys=("testkey",))
+    sys_argv = sys.argv
 
-    config = config_reader._read_cli(["testconfig.test1.test2=10.0"]).cast()
-    assert {"test1": {"test2": 10.0}} == config
+    sys.argv = sys_argv + ["testconfig.default.test1.test2=10"]
 
-    config = config_reader._read_cli(["testconfig.test1.test2=True"]).cast()
-    assert {"test1": {"test2": True}} == config
+    config = config_reader.read()
+    assert {"test1": {"test2": 10}} == config['default']
 
-    config = config_reader._read_cli(["testconfig.test1.test2=None"]).cast()
-    assert {"test1": {"test2": None}} == config
+    sys.argv = sys_argv + ["testconfig.default.test1.test2=10.0"]
+
+    config = config_reader.read()
+    assert {"test1": {"test2": 10.0}} == config['default']
+
+    
+    sys.argv = sys_argv + ["testconfig.default.test1.test2=True"]
+
+    config = config_reader.read()
+    assert {"test1": {"test2": True}} == config['default']
+
+    sys.argv = sys_argv + ["testconfig.default.test1.test2=None"]
+
+    config = config_reader.read()
+    assert {"test1": {"test2": None}} == config['default']
 
 
 def test_config_not_found_error():
@@ -72,4 +84,4 @@ def test_replace_error():
 
 def test_warning():
     with warns(UserWarning):
-        config_reader_empty = ConfigReader(name="testconfig", config_file_name='none').read()
+        _ = ConfigReader(name="testconfig", config_file_name='none').read()
