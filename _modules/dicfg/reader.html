@@ -344,13 +344,13 @@
         <span class="sd">&quot;&quot;&quot;Init ConfigReader</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (str, optional): _description_. Defaults to &quot;dicfg&quot;.</span>
-<span class="sd">            configs_folder (_type_, optional): _description_. Defaults to Path().</span>
-<span class="sd">            presets_folder_name (str, optional): _description_. Defaults to &#39;presets&#39;.</span>
-<span class="sd">            config_file_name (str, optional): _description_. Defaults to &quot;config.yml&quot;.</span>
-<span class="sd">            default_key (str, optional): _description_. Defaults to &quot;default&quot;.</span>
-<span class="sd">            context_keys (tuple, optional): _description_. Defaults to ().</span>
-<span class="sd">            search_paths (tuple, optional): _description_. Defaults to ().</span>
+<span class="sd">            name (str, optional): Name of config. Used as a reference in user configs and cli Defaults to &quot;dicfg&quot;.</span>
+<span class="sd">            configs_folder (_type_, optional): Main configs folder. Defaults to Path().</span>
+<span class="sd">            presets_folder_name (str, optional): Presets folder. Defaults to &#39;presets&#39;.</span>
+<span class="sd">            config_file_name (str, optional): Main config file name. Defaults to &quot;config.yml&quot;.</span>
+<span class="sd">            default_key (str, optional): Default context keys. Defaults to &quot;default&quot;.</span>
+<span class="sd">            context_keys (tuple, optional): Addtional context keys. Defaults to ().</span>
+<span class="sd">            search_paths (tuple, optional): Search paths for config file inerpolation. Defaults to ().</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>

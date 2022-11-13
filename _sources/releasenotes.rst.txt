@@ -15,6 +15,16 @@ Release Notes
 
 ----
 
+Version 0.0.2
+^^^^^^^^^^^^^
+
+ - Refactoring
+ - Changed ConfigReader class calls to method calls
+ - Extracted build function from ObjectFactory 
+ - Added python and os versions tests
+ - Updated docs
+
+
 Version 0.0.1
 ^^^^^^^^^^^^^
 
