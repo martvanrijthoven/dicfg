@@ -28,8 +28,8 @@ Version 0.0.2
 Version 0.0.1
 ^^^^^^^^^^^^^
 
-- Documentation online
-- Tests online
+ - Documentation online
+ - Tests online
 
 
 
