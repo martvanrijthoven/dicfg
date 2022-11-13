@@ -23,6 +23,9 @@ Documentation
 
 ---
 
+.. |nbsp| unicode:: 0xA0 
+   :trim:
+
 .. raw:: html
 
    </div>
@@ -35,22 +38,22 @@ Documentation
     .. grid-item::
         :class: sd-text-white sd-bg-primary sd-pt-3
         
-        Dicfg is a configuration system that supports dependency injection in config files.
+        Dicfg is a configuration system that directly supports dependency injection via object interpolation in config files.
 
 
 .. grid:: 1 1 3 3
 
-  .. grid-item-card:: Get Started with Dicfg
+  .. grid-item-card:: :octicon:`rocket;2em;sd-text-info;` |nbsp| |nbsp| |nbsp| Get Started with Dicfg
      :link: getstarted.html
 
      +++
 
-  .. grid-item-card:: User Guide
+  .. grid-item-card:: :octicon:`book;2em;sd-text-info` |nbsp| |nbsp| |nbsp| User Guide
      :link: userguide/index.html
 
      +++      
 
-  .. grid-item-card:: API Reference
+  .. grid-item-card:: :octicon:`code;2em;sd-text-info` |nbsp| |nbsp| |nbsp| API Reference
      :link: api.html
 
      +++
