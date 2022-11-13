@@ -30,7 +30,7 @@ def test_dicfg():
     user_config_path = Path("./testconfigs/user_config.yml")
     config = TestConfigReader.read(
         user_config_path,
-        fuse_keys=("testkey",),
+        context_keys=("testkey",),
         search_paths=(user_config_path.parent,),
     )
     test_config = ObjectFactory.build(
@@ -74,7 +74,7 @@ def test_config_not_found_error():
 
         user_config_path = Path("./testconfigs/user_config_not_found.yml")
 
-        config = TestConfigReader.read(user_config_path, fuse_keys=("testkey",))
+        config = TestConfigReader.read(user_config_path, context_keys=("testkey",))
 
         ObjectFactory.build(config["testkey"])
 
@@ -87,6 +87,6 @@ def test_replace_error():
 
         user_config_path = Path("./testconfigs/user_config_replace_error.yml")
 
-        config = TestConfigReader.read(user_config_path, fuse_keys=("testkey",))
+        config = TestConfigReader.read(user_config_path, context_keys=("testkey",))
 
         ObjectFactory.build(config["testkey"])
