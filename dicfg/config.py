@@ -99,7 +99,7 @@ def _update(a: ConfigValue, b: ConfigValue):
     for k, v in b.items():
         if k in a:
             # merge different types
-            if not isinstance(a[k], type(b[k])):
+            if type(a[k]) != type(b[k]):
                 a[k] = b[k]
             else:
                 a[k].merge(v)
@@ -118,7 +118,7 @@ def _get_merger(key: str, value):
 
     if isinstance(value, dict) and replace:
         return key, lambda a, b: b.data
-    if isinstance(value, list) and not replace:
+    elif isinstance(value, list) and not replace:
         return key, lambda a, b: a.data + b.data
     return key, _update
 
