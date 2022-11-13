@@ -17,7 +17,7 @@ class ConfigValue:
             data (Any): value of the config
             merger (Callable, optional): Callable to merge the config value. Defaults to None.
         """
-        self._merger = merger
+        self.merger = merger
         self.data = self._init(data)
 
     def _init(self, data):
@@ -33,13 +33,13 @@ class ConfigValue:
             ConfigValue: self
         """
 
-        if self._merger is None and b._merger is None:
+        if self.merger is None and b.merger is None:
             self.data = _update(self, b)
-        elif b._merger is not None:
-            self.data = b._merger(self, b)
-            self._merger = b._merger
+        elif b.merger is not None:
+            self.data = b.merger(self, b)
+            self.merger = b.merger
         else:
-            self.data = self._merger(self, b)
+            self.data = self.merger(self, b)
         return self
 
     def cast(self):
@@ -93,16 +93,13 @@ def _config_factory(c, merger=None):
 
 
 def _update(a: ConfigValue, b: ConfigValue):
-    if type(a) != type(b):
-        raise ValueError("Can not merger different types at this level", a, b)
-
-    if type(b) is not ConfigDict:
+    if not isinstance(b,ConfigDict):
         return b.data
 
     for k, v in b.items():
         if k in a:
             # merge different types
-            if type(a[k]) != type(b[k]):
+            if not isinstance(a[k], type(b[k])):
                 a[k] = b[k]
             else:
                 a[k].merge(v)
@@ -119,9 +116,9 @@ def _get_merger(key: str, value):
     key = key.replace(replace_match.group(0), "")
     replace = _get_replace(replace_match)
 
-    if type(value) is dict and replace:
+    if isinstance(value, dict) and replace:
         return key, lambda a, b: b.data
-    elif type(value) is list and not replace:
+    elif isinstance(value, list) and not replace:
         return key, lambda a, b: a.data + b.data
     return key, _update
 

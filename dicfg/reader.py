@@ -12,12 +12,12 @@ from dicfg.config import merge
 
 
 def _open_json_config(config_path):
-    with open(str(config_path), encoding='utf8') as file:
+    with open(str(config_path), encoding="utf8") as file:
         return json.load(file)
 
 
 def _open_yaml_config(config_path):
-    with open(str(config_path), encoding='utf8') as file:
+    with open(str(config_path), encoding="utf8") as file:
         return yaml.load(file, Loader=yaml.SafeLoader)
 
 

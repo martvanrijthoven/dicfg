@@ -75,17 +75,17 @@ class ObjectFactory:
     def _build_object(self, value: dict):
         kwargs = self._build(value)
         args = [] if "*args" not in kwargs else value.pop("*args")
-        object = value.pop(ObjectFactory._OBJECT_KEY)
-        attribute = self._parse_object_str(object)
+        object_string = value.pop(ObjectFactory._OBJECT_KEY)
+        attribute = self._parse_object_str(object_string)
 
         if ObjectFactory._RETURN_TYPE_KEY in value:
             return attribute
         return attribute(*args, **kwargs)
 
-    def _parse_object_str(self, object: str):
-        object = object.split(".")
-        module_string = ".".join(object[:-1])
-        attribute_string = object[-1]
+    def _parse_object_str(self, object_string: str):
+        object_split = object_string.split(".")
+        module_string = ".".join(object_split[:-1])
+        attribute_string = object_split[-1]
         module = import_module(module_string)
         return getattr(module, attribute_string)
 
