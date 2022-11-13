@@ -1,5 +1,8 @@
 :html_theme.sidebar_secondary.remove:
 
+.. |nbsp| unicode:: 0xA0 
+   :trim:
+
 .. raw:: html
 
    <div style="visibility: hidden;">
@@ -22,9 +25,6 @@ Documentation
    <div style="visibility: hidden;">
 
 ----
-
-.. |nbsp| unicode:: 0xA0 
-   :trim:
 
 .. raw:: html
 
