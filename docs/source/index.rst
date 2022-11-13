@@ -13,8 +13,8 @@ Documentation
 .. raw:: html
 
    </div>
+   
    <div style="width:50%;">
-
    <img src="_static/logo.svg" class="logo__image only-light" alt="Logo image">
    <img src="_static/logo.svg" class="logo__image only-dark" alt="Logo image">
 
