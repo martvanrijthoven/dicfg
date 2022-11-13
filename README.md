@@ -10,7 +10,7 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/dicfg)
                   
 
-Dicfg is a configuration system that directly supports dependency injection via object interpolation in config files.
+Dicfg is a **configuration system** that directly supports **dependency injection** via **object interpolation** in config files.
 
 ## Installation
 
