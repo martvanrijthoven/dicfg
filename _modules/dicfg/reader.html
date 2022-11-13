@@ -371,33 +371,30 @@
         <span class="k">if</span> <span class="n">user_config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">user_config</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="n">user_config_search_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
 
-        <span class="n">search_paths</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">search_paths</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_set_search_paths</span><span class="p">(</span><span class="n">user_config_search_path</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
+
+        <span class="n">cls_config</span> <span class="o">=</span> <span class="p">{}</span> 
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_CONFIG_PATH</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_CONFIG_PATH</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">cls_config</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_CONFIG_PATH</span><span class="p">)</span>
+  
+        <span class="n">preset_configs</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_presets</span><span class="p">(</span><span class="n">presets</span><span class="p">)</span>
+        <span class="n">user_config</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_user_config</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
+        <span class="n">cli_config</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_cli</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+        <span class="n">configs</span> <span class="o">=</span> <span class="p">(</span><span class="n">cls_config</span><span class="p">,</span> <span class="o">*</span><span class="n">preset_configs</span><span class="p">,</span> <span class="n">user_config</span><span class="p">,</span> <span class="n">cli_config</span><span class="p">)</span>
+        <span class="n">configs</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_fuse_configs</span><span class="p">(</span><span class="n">configs</span><span class="p">,</span> <span class="n">context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="o">*</span><span class="n">configs</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">()</span></div>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_set_search_paths</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">user_config_search_path</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
             <span class="n">Path</span><span class="p">(),</span>
             <span class="n">user_config_search_path</span><span class="p">,</span>
             <span class="bp">cls</span><span class="o">.</span><span class="n">_CONFIGS_FOLDER</span><span class="p">,</span>
             <span class="bp">cls</span><span class="o">.</span><span class="n">_PRESETS_FOLDER</span><span class="p">,</span>
             <span class="o">*</span><span class="n">search_paths</span><span class="p">,</span>
         <span class="p">)</span>
-
-        <span class="n">cls_config</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="bp">cls</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_CONFIG_PATH</span><span class="p">)</span>
-            <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_CONFIG_PATH</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_CONFIG_PATH</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
-            <span class="k">else</span> <span class="p">{}</span>
-        <span class="p">)</span>
-
-        <span class="n">preset_configs</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_presets</span><span class="p">(</span><span class="n">presets</span><span class="p">)</span>
-        <span class="n">user_config</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_user_config</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
-        <span class="n">cli_config</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_cli</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-
-        <span class="n">configs</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">cls_config</span><span class="p">,</span>
-            <span class="o">*</span><span class="n">preset_configs</span><span class="p">,</span>
-            <span class="n">user_config</span><span class="p">,</span>
-            <span class="n">cli_config</span><span class="p">,</span>
-        <span class="p">)</span>
-
-        <span class="n">configs</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_fuse_configs</span><span class="p">(</span><span class="n">configs</span><span class="p">,</span> <span class="n">context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="o">*</span><span class="n">configs</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">()</span></div>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_read</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">config_path</span><span class="p">):</span>
