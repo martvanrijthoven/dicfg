@@ -10,18 +10,18 @@ Documentation
 .. raw:: html
 
    </div>
+   <div style="width:50%;">
+   
 
-
-
-.. image:: _static/logo.png
+.. image:: _static/logo.svg
   :alt: dicfg-logo
-  :scale: 25%
 
 .. raw:: html
 
+   </div>
    <div style="visibility: hidden;">
 
----
+----
 
 .. |nbsp| unicode:: 0xA0 
    :trim:

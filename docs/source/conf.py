@@ -120,4 +120,4 @@ html_css_files = ['css/custom.css']
 
 html_title = "dicfg"
 jupyter_execute_notebooks = "off"
-html_logo = "_static/logo.png"
+html_logo = "_static/logo.svg"
