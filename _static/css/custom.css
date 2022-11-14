@@ -1,7 +1,8 @@
 .cell_input {
-    border-left-color: white !important;
-    border-block-color: white !important;
-    border-right-color: white !important;
+    border-left-color: var(--background-color) !important;
+    border-block-color: var(--background-color) !important;
+    border-right-color: var(--background-color) !important;
+    border-style: none !important;
 
 }
 
@@ -11,11 +12,15 @@
 
 
 .cell_input pre {
-    background-color: #F8F8F8 !important;
+    background-color: var(--background-color) !important;
 }
+
+
+
 
 .cell_output {
     padding-left: 0.2rem !important;
+    border-style: none !important;
 }
 
 .cell_output::before {
@@ -23,17 +28,17 @@
     float: left !important;
     font-size: smaller !important;
     color: #888888 !important;
+    border-style: none !important;
 
 }
 
 .cell_output pre {
     padding-left: 0.4rem !important;
-    border-left-color: rgb(255, 255, 255) !important;
-    border-block-color: white !important;
-    border-right-color: white !important;
-    background-color: white !important;
-    color: rgb(0, 0, 0) !important;
-    border-color: white !important;
+    border-left-color:var(--background-color) !important;
+    border-block-color: var(--background-color) !important;
+    border-right-color: var(--background-color) !important;
+    background-color: var(--background-color) !important;
+    border-color: var(--background-color) !important;
     box-shadow: none !important;
     border-style: none !important;
     border-radius: 0px !important;
