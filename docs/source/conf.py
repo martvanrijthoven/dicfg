@@ -80,7 +80,7 @@ html_theme_options = {
 
     # # Render the current pages TOC in the navbar. (Default: true)
     # 'navbar_pagenav': False,
-    "navbar_end": ["navbar-icon-links"],
+    # "navbar_end": ["navbar-icon-links"],
     # "show_prev_next": False,
     "icon_links": [
         {
