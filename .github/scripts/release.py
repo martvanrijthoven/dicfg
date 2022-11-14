@@ -5,7 +5,7 @@ from dicfg import __version__
 
 def create_new_release():
     subprocess.run(
-        ["gh", "release", "create", __version__],
+        ["gh", "release", "create", "v"+__version__],
         check=True,
     )
 
