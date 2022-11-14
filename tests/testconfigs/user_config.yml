@@ -24,6 +24,7 @@ testconfig:
     test_object_reference: ${test_object}
     test_object_reference_attribute: ${test_object.__class__}
     test_string_interpolation: hello${defaulttest}
+    test_env: ${$env.ENV_TEST_VAR}
 
   testkey:
     overridetest: 20

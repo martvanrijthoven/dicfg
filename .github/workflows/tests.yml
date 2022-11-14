@@ -1,4 +1,4 @@
-name: tests
+name: Tests
 
 on:
   push:
@@ -14,4 +14,4 @@ on:
 
 jobs:
   call-reusable_tests:
-    uses: ./.github/workflows/reusable_tests.yml
+    uses: ./.github/workflows/run_tests.yml

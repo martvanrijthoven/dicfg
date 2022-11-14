@@ -1,10 +1,10 @@
 import operator
+import os
 import re
 from copy import deepcopy
 from functools import reduce, singledispatchmethod
 from importlib import import_module
 from typing import Union
-
 
 _REFERENCE_START_SYMBOL = "$"
 _REFERENCE_MAP_SYMBOL = ":"
@@ -71,12 +71,15 @@ class _ObjectFactory:
 
     def _get_reference(self, reference: str):
         matches = re.findall("\\${(.*?)}", reference)
-        if matches == 1 or len(matches[0]) + 3 == len(reference):
-            return self._object_interpolation(reference, matches)
+        if len(matches)==1 and len(matches[0])+3 == len(reference):
+            return self._object_interpolation(matches[0])
         return self._string_interpolation(reference, matches)
 
-    def _object_interpolation(self, reference, matches):
-        reference = matches[0]
+
+    def _object_interpolation(self, reference: str):
+        if reference.startswith('$env.'):
+            return os.environ[reference.split("$env.")[1]]
+
         references = reference.split(_REFERENCE_MAP_SYMBOL)
         reference = reduce(operator.getitem, references[:-1], self._configuration)
         attributes = references[-1].split(_REFERENCE_ATTRIBUTE_SYMBOL)
@@ -87,7 +90,7 @@ class _ObjectFactory:
 
     def _string_interpolation(self, reference, matches):
         for match in matches:
-            _reference = self._configuration[match]
+            _reference = self._object_interpolation(match)
             match = "${" + match + "}"
             reference = reference.replace(match, str(_reference))
         return reference

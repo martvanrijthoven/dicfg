@@ -95,12 +95,11 @@ def _config_factory(c, merger=None):
 
 
 def _update(a: ConfigValue, b: ConfigValue):
-    if not isinstance(b,ConfigDict):
+    if not isinstance(b, ConfigDict):
         return b.data
 
     for k, v in b.items():
         if k in a:
-            # merge different types
             if type(a[k]) != type(b[k]):
                 a[k] = b[k]
             else:

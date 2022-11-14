@@ -1,4 +1,5 @@
 import sys
+import os
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -6,6 +7,8 @@ from pytest import raises, warns
 
 from dicfg.factory import build_config
 from dicfg.reader import ConfigNotFoundError, ConfigReader
+
+os.environ['ENV_TEST_VAR'] = 'dicfg'
 
 
 @dataclass

@@ -38,6 +38,7 @@ extensions = [
     'sphinx_design',
     'myst_nb',
     'sphinx.ext.autosectionlabel',
+    "sphinx.ext.viewcode",
 ]
 
 
@@ -61,27 +62,6 @@ panels_add_bootstrap_css = False
 
 
 html_theme_options = {
-    # "use_edit_page_button": True,
-    # "repository_url": "https://github.com/DIAGNijmegen/pathology-whole-slide-data",
-    # "use_repository_button": True,
-    # "use_issues_button": True,
-    # "repository_branch": "main",
-    # "path_to_docs": "./docs/source",
-    # "extra_navbar": "<a href='./colophon.html'>Colophon</a>",
-    # "launch_buttons": {
-    #     "binderhub_url": "https://mybinder.org/"
-    # },
-    # 'navbar_links': [
-    #     ("Examples", "examples"),
-    #     ("Link", "http://example.com", True),
-    # ],
-    # # Render the next and previous page links in navbar. (Default: true)
-    # 'navbar_sidebarrel': False,
-
-    # # Render the current pages TOC in the navbar. (Default: true)
-    # 'navbar_pagenav': False,
-    # "navbar_end": ["navbar-icon-links"],
-    # "show_prev_next": False,
     "icon_links": [
         {
             # Label for this link
@@ -93,10 +73,13 @@ html_theme_options = {
             # The type of image to be used (see below for details)
             "type": "fontawesome",
         }
-   ]
+   ],
+    "logo": {
+      "image_light": "logo.svg",
+      "image_dark": "logo-dark.svg",
+   },
 
 }
-
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -119,5 +102,5 @@ html_static_path = ["_static"]
 html_css_files = ['css/custom.css']
 
 html_title = "dicfg"
-jupyter_execute_notebooks = "off"
+# jupyter_execute_notebooks = "off"
 html_logo = "_static/logo.svg"
