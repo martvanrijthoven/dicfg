@@ -436,6 +436,40 @@ default config build:
 </div>
 </div>
 </section>
+<section id="environment-variables-can-be-interpolated-by-using-env-var-and-building-the-config-with-build-config">
+<h2><strong>Environment variables</strong> can be interpolated by using <strong>${\$env.VAR}</strong> and building the config with <strong>build_config</strong><a class="headerlink" href="#environment-variables-can-be-interpolated-by-using-env-var-and-building-the-config-with-build-config" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_dict&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;sub_config&quot;</span><span class="p">:</span> <span class="s2">&quot;${$env.USER}&quot;</span><span class="p">}}}</span>
+<span class="p">}</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">default config build:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">build_config</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">]),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;default&#39;: {&#39;config_int&#39;: 1,
+             &#39;config_string&#39;: &#39;fire&#39;,
+             &#39;config_list&#39;: [1, 2, 3],
+             &#39;config_none&#39;: &#39;None&#39;,
+             &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;${$env.USER}&#39;}}}
+
+default config build:
+
+{&#39;config_int&#39;: 1,
+ &#39;config_string&#39;: &#39;fire&#39;,
+ &#39;config_list&#39;: [1, 2, 3],
+ &#39;config_none&#39;: None,
+ &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;mart&#39;}}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="string-values-can-be-interpolated-in-a-config-by-referencing-with-key-and-building-the-config-with-build-config">
 <h2><strong>String values</strong> can be <strong>interpolated</strong> in a config by referencing with <strong>$(key)</strong> and building the config with <strong>build_config</strong><a class="headerlink" href="#string-values-can-be-interpolated-in-a-config-by-referencing-with-key-and-building-the-config-with-build-config" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -534,6 +568,21 @@ default config build:
    in a config by referencing with
    <strong>
     $(key)
+   </strong>
+   and building the config with
+   <strong>
+    build_config
+   </strong>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#environment-variables-can-be-interpolated-by-using-env-var-and-building-the-config-with-build-config">
+   <strong>
+    Environment variables
+   </strong>
+   can be interpolated by using
+   <strong>
+    ${\$env.VAR}
    </strong>
    and building the config with
    <strong>

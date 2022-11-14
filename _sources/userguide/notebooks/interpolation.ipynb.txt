@@ -13,7 +13,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 1,
+   "execution_count": 3,
    "id": "bd5d160d-3fd7-4529-a653-b3adc2a85178",
    "metadata": {},
    "outputs": [],
@@ -29,7 +29,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 2,
+   "execution_count": 4,
    "id": "4975a47d-ccfe-409d-ba3f-3d8e65c69ca2",
    "metadata": {},
    "outputs": [
@@ -56,12 +56,12 @@
    "id": "51b53261-0967-4ffe-8386-5010924482d3",
    "metadata": {},
    "source": [
-    "### **Config files** (.yml, '.yaml', and 'json') can be **interpolated** in a config"
+    "## **Config files** (.yml, '.yaml', and 'json') can be **interpolated** in a config"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 5,
    "id": "676b8e6e-6d04-4501-882d-7e29d7674ef4",
    "metadata": {},
    "outputs": [
@@ -79,7 +79,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": 6,
    "id": "063ff673-9fbd-4e87-986b-8d4c317071ca",
    "metadata": {},
    "outputs": [
@@ -105,12 +105,12 @@
    "id": "497511f7-5111-4ea2-926f-beae24f1f772",
    "metadata": {},
    "source": [
-    "### **Config values** can be **interpolated** in a config by referencing with **$(key)** and building the config with **build_config**"
+    "## **Config values** can be **interpolated** in a config by referencing with **$(key)** and building the config with **build_config**"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
+   "execution_count": 7,
    "id": "579f4244-5343-493f-9b6a-ff301548c00c",
    "metadata": {},
    "outputs": [
@@ -147,15 +147,60 @@
   },
   {
    "cell_type": "markdown",
-   "id": "397c84d4-1309-45d8-8c24-7ea020910e2a",
+   "id": "a123263a-3665-4194-be61-8a38d6b728c3",
    "metadata": {},
    "source": [
-    "### **String values** can be **interpolated** in a config by referencing with **$(key)** and building the config with **build_config**"
+    "## **Environment variables** can be interpolated by using **${\\\\$env.VAR\\}** and building the config with **build_config**"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
+   "execution_count": 8,
+   "id": "9a349c96-7b5a-4702-8121-518ea58cd31b",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{'default': {'config_int': 1,\n",
+      "             'config_string': 'fire',\n",
+      "             'config_list': [1, 2, 3],\n",
+      "             'config_none': 'None',\n",
+      "             'config_dict': {'sub_config': '${$env.USER}'}}}\n",
+      "\n",
+      "default config build:\n",
+      "\n",
+      "{'config_int': 1,\n",
+      " 'config_string': 'fire',\n",
+      " 'config_list': [1, 2, 3],\n",
+      " 'config_none': None,\n",
+      " 'config_dict': {'sub_config': 'mart'}}\n"
+     ]
+    }
+   ],
+   "source": [
+    "user_config = {\n",
+    "    \"myconfig\": {\"default\": {\"config_dict\": {\"sub_config\": \"${$env.USER}\"}}}\n",
+    "}\n",
+    "config = config_reader.read(user_config)\n",
+    "pprint(config, sort_dicts=False)\n",
+    "\n",
+    "print(\"\\ndefault config build:\\n\")\n",
+    "pprint(build_config(config[\"default\"]), sort_dicts=False)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "397c84d4-1309-45d8-8c24-7ea020910e2a",
+   "metadata": {},
+   "source": [
+    "## **String values** can be **interpolated** in a config by referencing with **$(key)** and building the config with **build_config**"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
    "id": "bbf0d06f-c61f-4d19-826e-4b8ded5f570e",
    "metadata": {},
    "outputs": [
@@ -189,14 +234,6 @@
     "print(\"\\ndefault config build:\\n\")\n",
     "pprint(build_config(config[\"default\"]), sort_dicts=False)"
    ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "65c5eac2-1b59-4e3d-88ff-60ad23311643",
-   "metadata": {},
-   "outputs": [],
-   "source": []
   }
  ],
  "metadata": {
