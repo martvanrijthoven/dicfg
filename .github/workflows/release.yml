@@ -30,7 +30,7 @@ jobs:
       - name: "Installs dependencies"
         run: |
           python -m pip install --upgrade pip
-          python -m pip install setuptools wheel twine
+          python -m pip install setuptools build wheel twine
 
       # Build and upload to PyPI
       - name: "Builds and uploads to PyPI"
