@@ -150,7 +150,7 @@
    "id": "a123263a-3665-4194-be61-8a38d6b728c3",
    "metadata": {},
    "source": [
-    "## **Environment variables** can be interpolated by using **${\\\\$env.VAR\\}** and building the config with **build_config**"
+    "## **Environment variables** can be interpolated by using **${\\$env.VAR\\}** and building the config with **build_config**"
    ]
   },
   {
