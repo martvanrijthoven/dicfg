@@ -102,5 +102,5 @@ html_static_path = ["_static"]
 html_css_files = ['css/custom.css']
 
 html_title = "dicfg"
-# jupyter_execute_notebooks = "off"
+jupyter_execute_notebooks = "off"
 html_logo = "_static/logo.svg"
