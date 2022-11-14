@@ -33,6 +33,10 @@ jobs:
         shell: bash
         run: |
           pip install -r ./docs/requirements.txt
+
+      - name: Print version
+        run: python .github/scripts/print_version.py
+
       - name: Build the docs
         run: sphinx-build -b html docs/source docs/build/html
 
