@@ -155,7 +155,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 6,
+   "execution_count": 5,
    "id": "bbf0d06f-c61f-4d19-826e-4b8ded5f570e",
    "metadata": {},
    "outputs": [
@@ -167,7 +167,7 @@
       "             'config_string': 'fire',\n",
       "             'config_list': [1, 2, 3],\n",
       "             'config_none': 'None',\n",
-      "             'config_dict': {'sub_config': 'water&${config_string}'}}}\n",
+      "             'config_dict': {'sub_config': '${config_string}_${config_int}'}}}\n",
       "\n",
       "default config build:\n",
       "\n",
@@ -175,13 +175,13 @@
       " 'config_string': 'fire',\n",
       " 'config_list': [1, 2, 3],\n",
       " 'config_none': None,\n",
-      " 'config_dict': {'sub_config': 'water&fire'}}\n"
+      " 'config_dict': {'sub_config': 'fire_1'}}\n"
      ]
     }
    ],
    "source": [
     "user_config = {\n",
-    "    \"myconfig\": {\"default\": {\"config_dict\": {\"sub_config\": \"water&${config_string}\"}}}\n",
+    "    \"myconfig\": {\"default\": {\"config_dict\": {\"sub_config\": \"${config_string}_${config_int}\"}}}\n",
     "}\n",
     "config = config_reader.read(user_config)\n",
     "pprint(config, sort_dicts=False)\n",

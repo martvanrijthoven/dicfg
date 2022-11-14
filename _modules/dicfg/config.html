@@ -97,7 +97,7 @@
 
   
     <img src="../../_static/logo.svg" class="logo__image only-light" alt="Logo image">
-    <img src="../../_static/logo.svg" class="logo__image only-dark" alt="Logo image">
+    <img src="../../_static/logo-dark.svg" class="logo__image only-dark" alt="Logo image">
   
   
 </a>
@@ -405,12 +405,11 @@
 
 
 <span class="k">def</span> <span class="nf">_update</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">ConfigValue</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">ConfigValue</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">ConfigDict</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">ConfigDict</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="n">data</span>
 
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">b</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
-            <span class="c1"># merge different types</span>
             <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]):</span>
                 <span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>

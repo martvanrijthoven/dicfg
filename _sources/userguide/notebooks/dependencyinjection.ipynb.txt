@@ -11,7 +11,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 15,
+   "execution_count": 25,
    "id": "d9faea32-c00d-419e-a053-d818f23c7c08",
    "metadata": {},
    "outputs": [],
@@ -30,12 +30,12 @@
    "id": "8c1c6a05-5e84-4105-bcfd-d95178c3d3e4",
    "metadata": {},
    "source": [
-    "### To use dependency injection in our config we first need to setup a **project with object dependencies**"
+    "## To use dependency injection in our config we first need to setup a **project with object dependencies**."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 16,
+   "execution_count": 26,
    "id": "9a6a6245-ca33-4ca8-981e-5c216aecfcfd",
    "metadata": {},
    "outputs": [],
@@ -55,12 +55,12 @@
    "id": "98b28b0f-9e1e-4b06-8e6d-c7a6dcb65176",
    "metadata": {},
    "source": [
-    "### build_config can build objects with the **\\*object** key"
+    "## Objects can be build with build_config when using the **\\*object** key."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 17,
+   "execution_count": 27,
    "id": "0ccb0996-03e5-4dd5-ae35-3ee242736ab1",
    "metadata": {},
    "outputs": [],
@@ -85,7 +85,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 18,
+   "execution_count": 28,
    "id": "9fb9a62e-2aeb-47fa-b9d3-c2cb757bf8ae",
    "metadata": {},
    "outputs": [
@@ -108,7 +108,7 @@
       " 'config_list': [1, 2, 3],\n",
       " 'config_none': None,\n",
       " 'config_string': 'fire',\n",
-      " 'project_component': <__main__.ProjectComponent object at 0x7f16c00ed2b0>}\n"
+      " 'project_component': <__main__.ProjectComponent object at 0x7f3d18117640>}\n"
      ]
     }
    ],
@@ -127,12 +127,12 @@
    "id": "7b4e08d5-2bb6-4573-988a-0fbd13ad9646",
    "metadata": {},
    "source": [
-    "### build_config can **return types with the \\*return_type:** key"
+    "## Types can be build when using **\\*return_type:** key."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 19,
+   "execution_count": 29,
    "id": "15c2e5ee-044f-4862-ab1a-421e325b3b61",
    "metadata": {},
    "outputs": [],
@@ -153,7 +153,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 20,
+   "execution_count": 30,
    "id": "c5d4245e-3e4b-4e77-abeb-2434be499724",
    "metadata": {},
    "outputs": [
@@ -195,12 +195,12 @@
    "id": "1d188978-e0a8-4c50-89ec-f2246cdb1737",
    "metadata": {},
    "source": [
-    "### Dependency Injection can be done by **object interpolation**"
+    "## Dependency Injection can be done by **object interpolation**."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 21,
+   "execution_count": 31,
    "id": "8c2b6343-e9a9-489d-a315-9170b74c710a",
    "metadata": {},
    "outputs": [],
@@ -225,7 +225,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 22,
+   "execution_count": 32,
    "id": "aafd232e-73c2-467a-9b82-d188c097b533",
    "metadata": {},
    "outputs": [
@@ -250,8 +250,8 @@
       " 'config_list': [1, 2, 3],\n",
       " 'config_none': None,\n",
       " 'config_dict': {'sub_config': 'water'},\n",
-      " 'project_component': <__main__.ProjectComponent object at 0x7f16c00a5610>,\n",
-      " 'project': <__main__.MyProject object at 0x7f16c00a5640>}\n",
+      " 'project_component': <__main__.ProjectComponent object at 0x7f3d1811a610>,\n",
+      " 'project': <__main__.MyProject object at 0x7f3d1811a640>}\n",
       "\n",
       "project component name: my_project_component\n"
      ]
@@ -271,12 +271,12 @@
    "id": "ab3431ed-c4a1-4f69-a93d-0f0a0b80bc42",
    "metadata": {},
    "source": [
-    "### build_config interpolation of objects is done by **object reference**"
+    "## Interpolation of objects is done by **object reference**."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 23,
+   "execution_count": 33,
    "id": "e2e0899b-44df-4c18-9f72-f131217bd0c4",
    "metadata": {},
    "outputs": [],
@@ -304,7 +304,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 24,
+   "execution_count": 34,
    "id": "4cda7b75-fdb0-467e-be50-5c161fbd35dc",
    "metadata": {},
    "outputs": [
@@ -330,12 +330,12 @@
       " 'config_list': [1, 2, 3],\n",
       " 'config_none': None,\n",
       " 'config_dict': {'sub_config': 'water'},\n",
-      " 'project_component': <__main__.ProjectComponent object at 0x7f16c010c2e0>,\n",
-      " 'project': <__main__.MyProject object at 0x7f16c010c7c0>,\n",
-      " 'my_interpolation_component': <__main__.ProjectComponent object at 0x7f16c010c2e0>}\n",
+      " 'project_component': <__main__.ProjectComponent object at 0x7f3d181177c0>,\n",
+      " 'project': <__main__.MyProject object at 0x7f3d18117d30>,\n",
+      " 'my_interpolation_component': <__main__.ProjectComponent object at 0x7f3d181177c0>}\n",
       "\n",
-      "reference       project_component: <__main__.ProjectComponent object at 0x7f16c010c2e0>\n",
-      "reference interpolation_component: <__main__.ProjectComponent object at 0x7f16c010c2e0>\n"
+      "reference       project_component: <__main__.ProjectComponent object at 0x7f3d181177c0>\n",
+      "reference interpolation_component: <__main__.ProjectComponent object at 0x7f3d181177c0>\n"
      ]
     }
    ],
@@ -355,13 +355,13 @@
    "id": "57df8e6e-8c12-4d6c-8387-045ef6197aa8",
    "metadata": {},
    "source": [
-    "### build_config allows for **object attribute interpolation**"
+    "## **Object attribute interpolation** is possible via accesing attributes of object references."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 25,
-   "id": "530d57ca-cfdc-401e-97b4-3f54c5d8bd89",
+   "execution_count": 35,
+   "id": "30009fd2-2284-4de9-bbb3-4f6e07cdc120",
    "metadata": {},
    "outputs": [],
    "source": [
@@ -387,7 +387,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 26,
+   "execution_count": 36,
    "id": "21ef62ab-873e-457e-8eeb-47ec50dda007",
    "metadata": {},
    "outputs": [
@@ -414,9 +414,9 @@
       " 'config_list': [1, 2, 3],\n",
       " 'config_none': None,\n",
       " 'config_dict': {'sub_config': 'water'},\n",
-      " 'project_component': <__main__.ProjectComponent object at 0x7f16c00a6be0>,\n",
-      " 'project': <__main__.MyProject object at 0x7f16c00a6c10>,\n",
-      " 'my_attribute_component': <__main__.ProjectComponent object at 0x7f16c00a6be0>,\n",
+      " 'project_component': <__main__.ProjectComponent object at 0x7f3d18165700>,\n",
+      " 'project': <__main__.MyProject object at 0x7f3d18165dc0>,\n",
+      " 'my_attribute_component': <__main__.ProjectComponent object at 0x7f3d18165700>,\n",
       " 'my_attribute_component_name': 'my_project_component'}\n",
       "\n",
       "my_attribute_component_name: my_project_component\n"
@@ -432,14 +432,6 @@
     "\n",
     "print(\"\\nmy_attribute_component_name:\", objects[\"my_attribute_component_name\"])"
    ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "87fc27f5-b23f-4391-b33f-f60de27a2dc2",
-   "metadata": {},
-   "outputs": [],
-   "source": []
   }
  ],
  "metadata": {

@@ -57,7 +57,7 @@
    "id": "19734409-ca05-4342-bba1-be8bda43c0f6",
    "metadata": {},
    "source": [
-    "### The main config can be **updated via command line interface** arguments"
+    "## The main config can be **updated via command line interface** arguments."
    ]
   },
   {
@@ -99,7 +99,7 @@
    "id": "7b5f1c3c-7cc1-430f-9f5d-ccfffa10b9d9",
    "metadata": {},
    "source": [
-    "### **All config types** can be update via command line interface arguments"
+    "## **All config types** can be update via command line interface arguments."
    ]
   },
   {
@@ -134,7 +134,7 @@
    "id": "eef6fe29-aab5-4810-b985-7f6f5cbc8465",
    "metadata": {},
    "source": [
-    "### Command line interface arguments will **override corresponding user config values**"
+    "## Command line interface arguments will **override corresponding user config values**."
    ]
   },
   {

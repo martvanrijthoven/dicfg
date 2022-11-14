@@ -52,7 +52,7 @@
    "id": "6a4d83da-8651-4974-9524-dc7a0e20d040",
    "metadata": {},
    "source": [
-    "### A presets folder in the configs folder can be used to **save and read presets settings**"
+    "## A presets folder in the configs folder can be used to **save and read presets settings**."
    ]
   },
   {
@@ -148,7 +148,7 @@
    "id": "8228fc46-692d-4b4a-9f2b-8ce094f09c95",
    "metadata": {},
    "source": [
-    "### **User config and command line interface** settings **override presets** settings"
+    "### **User config and command line interface** settings **override presets** settings."
    ]
   },
   {

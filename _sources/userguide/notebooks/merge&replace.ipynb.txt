@@ -53,7 +53,7 @@
    "id": "80929d3c-420c-431f-a975-4b0c07b7916f",
    "metadata": {},
    "source": [
-    "### Config values can be merged or replaced with **@replace(true|false)** "
+    "## Config values can be merged or replaced with **@replace(true|false)**."
    ]
   },
   {
@@ -86,7 +86,7 @@
    "id": "bf9d7916-a0ea-400d-b705-824d8ff41cc2",
    "metadata": {},
    "source": [
-    "### **Dictionaries will be merged by default** (@replace(false)) "
+    "## **Dictionaries will be merged by default** (@replace(false))."
    ]
   },
   {
@@ -117,7 +117,7 @@
    "id": "4a07d9aa-6dc2-4eec-8543-7c486842e9bd",
    "metadata": {},
    "source": [
-    "### **Dictionaries can be replaced** by @replace(true)"
+    "## **Dictionaries can be replaced** by @replace(true)."
    ]
   },
   {
@@ -150,7 +150,7 @@
    "id": "847341ce-9a18-4d1c-92e1-03bae16eee94",
    "metadata": {},
    "source": [
-    "### **List will be replaced by default** (@replace(true))"
+    "## **List will be replaced by default** (@replace(true))."
    ]
   },
   {
@@ -181,7 +181,7 @@
    "id": "9274a908-cef9-45da-9a5f-6526a96df797",
    "metadata": {},
    "source": [
-    "### **List can be merged** with @replace(false)"
+    "## **List can be merged** with @replace(false)."
    ]
   },
   {
@@ -212,7 +212,7 @@
    "id": "a4562590-e4c3-4b6e-a7a7-4c2c6534ae5f",
    "metadata": {},
    "source": [
-    "### Updating with **type difference** will always result in a **replace**"
+    "## Updating with **type difference** will always result in a **replace**."
    ]
   },
   {
@@ -237,14 +237,6 @@
     "user_config = {\"myconfig\": {\"default\": {\"config_list\": \"not a list anymore\"}}}\n",
     "pprint(config_reader.read(user_config), sort_dicts=False)"
    ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "89a85a9f-76e3-4740-bce6-cac88dcf582a",
-   "metadata": {},
-   "outputs": [],
-   "source": []
   }
  ],
  "metadata": {

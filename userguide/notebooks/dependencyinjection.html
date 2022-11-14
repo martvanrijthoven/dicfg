@@ -100,7 +100,7 @@
 
   
     <img src="../../_static/logo.svg" class="logo__image only-light" alt="Logo image">
-    <img src="../../_static/logo.svg" class="logo__image only-dark" alt="Logo image">
+    <img src="../../_static/logo-dark.svg" class="logo__image only-dark" alt="Logo image">
   
   
 </a>
@@ -353,7 +353,7 @@
 </div>
 </div>
 <section id="to-use-dependency-injection-in-our-config-we-first-need-to-setup-a-project-with-object-dependencies">
-<h2>To use dependency injection in our config we first need to setup a <strong>project with object dependencies</strong><a class="headerlink" href="#to-use-dependency-injection-in-our-config-we-first-need-to-setup-a-project-with-object-dependencies" title="Permalink to this heading">#</a></h2>
+<h2>To use dependency injection in our config we first need to setup a <strong>project with object dependencies</strong>.<a class="headerlink" href="#to-use-dependency-injection-in-our-config-we-first-need-to-setup-a-project-with-object-dependencies" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ProjectComponent</span><span class="p">:</span>
@@ -369,8 +369,8 @@
 </div>
 </div>
 </section>
-<section id="build-config-can-build-objects-with-the-object-key">
-<h2>build_config can build objects with the <strong>*object</strong> key<a class="headerlink" href="#build-config-can-build-objects-with-the-object-key" title="Permalink to this heading">#</a></h2>
+<section id="objects-can-be-build-with-build-config-when-using-the-object-key">
+<h2>Objects can be build with build_config when using the <strong>*object</strong> key.<a class="headerlink" href="#objects-can-be-build-with-build-config-when-using-the-object-key" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
@@ -406,29 +406,43 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;default&#39;: {&#39;config_int&#39;: 1,
-             &#39;config_string&#39;: &#39;fire&#39;,
-             &#39;config_list&#39;: [1, 2, 3],
-             &#39;config_none&#39;: &#39;None&#39;,
-             &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
-             &#39;project_component&#39;: {&#39;*object&#39;: &#39;__main__.ProjectComponent&#39;,
-                                   &#39;name&#39;: &#39;my_project_component&#39;}}}
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
 
- build objects: 
+  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">IPython</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">interactiveshell</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">3433</span> <span class="ow">in</span> <span class="n">run_code</span>
+    <span class="n">exec</span><span class="p">(</span><span class="n">code_obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_global_ns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_ns</span><span class="p">)</span>
 
-{&#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;config_int&#39;: 1,
- &#39;config_list&#39;: [1, 2, 3],
- &#39;config_none&#39;: None,
- &#39;config_string&#39;: &#39;fire&#39;,
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f16c00ed2b0&gt;}
+  <span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
+
+  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">dicfg</span><span class="o">/</span><span class="n">reader</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">103</span> <span class="ow">in</span> <span class="n">read</span>
+    <span class="n">cli_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_cli</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">dicfg</span><span class="o">/</span><span class="n">reader</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">139</span> <span class="ow">in</span> <span class="n">_read_cli</span>
+    <span class="n">dicts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_create_dict_from_keys</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
+  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">dicfg</span><span class="o">/</span><span class="n">reader</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">162</span> <span class="ow">in</span> <span class="n">_create_dict_from_keys</span>
+    <span class="n">dictionary</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">_create_dict_from_keys</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">value</span><span class="p">))</span>
+
+  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">dicfg</span><span class="o">/</span><span class="n">reader</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">160</span> <span class="ow">in</span> <span class="n">_create_dict_from_keys</span>
+    <span class="n">dictionary</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">ast</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">59</span> <span class="ow">in</span> <span class="n">literal_eval</span>
+    <span class="n">node_or_string</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">node_or_string</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">)</span>
+
+  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">ast</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">47</span> <span class="ow">in</span> <span class="n">parse</span>
+    <span class="k">return</span> <span class="nb">compile</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span>
+
+  <span class="n">File</span> <span class="o">&lt;</span><span class="n">unknown</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">1</span>
+    <span class="p">:</span><span class="n">memory</span><span class="p">:</span>
+    <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="build-config-can-return-types-with-the-return-type-key">
-<h2>build_config can <strong>return types with the *return_type:</strong> key<a class="headerlink" href="#build-config-can-return-types-with-the-return-type-key" title="Permalink to this heading">#</a></h2>
+<section id="types-can-be-build-when-using-return-type-key">
+<h2>Types can be build when using <strong>*return_type:</strong> key.<a class="headerlink" href="#types-can-be-build-when-using-return-type-key" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
@@ -482,7 +496,7 @@
 </div>
 </section>
 <section id="dependency-injection-can-be-done-by-object-interpolation">
-<h2>Dependency Injection can be done by <strong>object interpolation</strong><a class="headerlink" href="#dependency-injection-can-be-done-by-object-interpolation" title="Permalink to this heading">#</a></h2>
+<h2>Dependency Injection can be done by <strong>object interpolation</strong>.<a class="headerlink" href="#dependency-injection-can-be-done-by-object-interpolation" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
@@ -534,8 +548,8 @@
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f16c00a5610&gt;,
- &#39;project&#39;: &lt;__main__.MyProject object at 0x7f16c00a5640&gt;}
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f3d1811a610&gt;,
+ &#39;project&#39;: &lt;__main__.MyProject object at 0x7f3d1811a640&gt;}
 
 project component name: my_project_component
 </pre></div>
@@ -543,8 +557,8 @@ project component name: my_project_component
 </div>
 </div>
 </section>
-<section id="build-config-interpolation-of-objects-is-done-by-object-reference">
-<h2>build_config interpolation of objects is done by <strong>object reference</strong><a class="headerlink" href="#build-config-interpolation-of-objects-is-done-by-object-reference" title="Permalink to this heading">#</a></h2>
+<section id="interpolation-of-objects-is-done-by-object-reference">
+<h2>Interpolation of objects is done by <strong>object reference</strong>.<a class="headerlink" href="#interpolation-of-objects-is-done-by-object-reference" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
@@ -602,19 +616,19 @@ project component name: my_project_component
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f16c010c2e0&gt;,
- &#39;project&#39;: &lt;__main__.MyProject object at 0x7f16c010c7c0&gt;,
- &#39;my_interpolation_component&#39;: &lt;__main__.ProjectComponent object at 0x7f16c010c2e0&gt;}
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f3d181177c0&gt;,
+ &#39;project&#39;: &lt;__main__.MyProject object at 0x7f3d18117d30&gt;,
+ &#39;my_interpolation_component&#39;: &lt;__main__.ProjectComponent object at 0x7f3d181177c0&gt;}
 
-reference       project_component: &lt;__main__.ProjectComponent object at 0x7f16c010c2e0&gt;
-reference interpolation_component: &lt;__main__.ProjectComponent object at 0x7f16c010c2e0&gt;
+reference       project_component: &lt;__main__.ProjectComponent object at 0x7f3d181177c0&gt;
+reference interpolation_component: &lt;__main__.ProjectComponent object at 0x7f3d181177c0&gt;
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="build-config-allows-for-object-attribute-interpolation">
-<h2>build_config allows for <strong>object attribute interpolation</strong><a class="headerlink" href="#build-config-allows-for-object-attribute-interpolation" title="Permalink to this heading">#</a></h2>
+<section id="object-attribute-interpolation-is-possible-via-accesing-attributes-of-object-references">
+<h2><strong>Object attribute interpolation</strong> is possible via accesing attributes of object references.<a class="headerlink" href="#object-attribute-interpolation-is-possible-via-accesing-attributes-of-object-references" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
@@ -671,9 +685,9 @@ reference interpolation_component: &lt;__main__.ProjectComponent object at 0x7f1
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f16c00a6be0&gt;,
- &#39;project&#39;: &lt;__main__.MyProject object at 0x7f16c00a6c10&gt;,
- &#39;my_attribute_component&#39;: &lt;__main__.ProjectComponent object at 0x7f16c00a6be0&gt;,
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f3d18165700&gt;,
+ &#39;project&#39;: &lt;__main__.MyProject object at 0x7f3d18165dc0&gt;,
+ &#39;my_attribute_component&#39;: &lt;__main__.ProjectComponent object at 0x7f3d18165700&gt;,
  &#39;my_attribute_component_name&#39;: &#39;my_project_component&#39;}
 
 my_attribute_component_name: my_project_component
@@ -728,24 +742,25 @@ my_attribute_component_name: my_project_component
    <strong>
     project with object dependencies
    </strong>
+   .
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#build-config-can-build-objects-with-the-object-key">
-   build_config can build objects with the
+  <a class="reference internal nav-link" href="#objects-can-be-build-with-build-config-when-using-the-object-key">
+   Objects can be build with build_config when using the
    <strong>
     *object
    </strong>
-   key
+   key.
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#build-config-can-return-types-with-the-return-type-key">
-   build_config can
+  <a class="reference internal nav-link" href="#types-can-be-build-when-using-return-type-key">
+   Types can be build when using
    <strong>
-    return types with the *return_type:
+    *return_type:
    </strong>
-   key
+   key.
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -754,22 +769,24 @@ my_attribute_component_name: my_project_component
    <strong>
     object interpolation
    </strong>
+   .
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#build-config-interpolation-of-objects-is-done-by-object-reference">
-   build_config interpolation of objects is done by
+  <a class="reference internal nav-link" href="#interpolation-of-objects-is-done-by-object-reference">
+   Interpolation of objects is done by
    <strong>
     object reference
    </strong>
+   .
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#build-config-allows-for-object-attribute-interpolation">
-   build_config allows for
+  <a class="reference internal nav-link" href="#object-attribute-interpolation-is-possible-via-accesing-attributes-of-object-references">
    <strong>
-    object attribute interpolation
+    Object attribute interpolation
    </strong>
+   is possible via accesing attributes of object references.
   </a>
  </li>
 </ul>

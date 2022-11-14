@@ -100,7 +100,7 @@
 
   
     <img src="../../_static/logo.svg" class="logo__image only-light" alt="Logo image">
-    <img src="../../_static/logo.svg" class="logo__image only-dark" alt="Logo image">
+    <img src="../../_static/logo-dark.svg" class="logo__image only-dark" alt="Logo image">
   
   
 </a>
@@ -349,7 +349,7 @@
 </div>
 </div>
 <section id="the-first-step-is-to-create-a-configreader-object">
-<h2>The first step is to <strong>create a ConfigReader object</strong><a class="headerlink" href="#the-first-step-is-to-create-a-configreader-object" title="Permalink to this heading">#</a></h2>
+<h2>The first step is to <strong>create a ConfigReader object</strong>.<a class="headerlink" href="#the-first-step-is-to-create-a-configreader-object" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;myconfig&#39;</span><span class="p">)</span>
@@ -359,7 +359,7 @@
 </div>
 </section>
 <section id="the-second-step-is-to-create-a-configs-folder-containing-a-main-config-file-config-yml">
-<h2>The second step is to <strong>create a configs folder containing</strong> a main config file: <strong>config.yml</strong><a class="headerlink" href="#the-second-step-is-to-create-a-configs-folder-containing-a-main-config-file-config-yml" title="Permalink to this heading">#</a></h2>
+<h2>The second step is to <strong>create a configs folder containing</strong> a main config file: <strong>config.yml</strong>.<a class="headerlink" href="#the-second-step-is-to-create-a-configs-folder-containing-a-main-config-file-config-yml" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ./configs/config.yml
@@ -380,7 +380,7 @@
 </div>
 </section>
 <section id="the-main-config-file-can-be-read-with-the-read-method-of-the-configreader-class">
-<h2>The main config file can be read with the <strong>.read method</strong> of the ConfigReader class<a class="headerlink" href="#the-main-config-file-can-be-read-with-the-read-method-of-the-configreader-class" title="Permalink to this heading">#</a></h2>
+<h2>The main config file can be read with the <strong>.read method</strong> of the ConfigReader class.<a class="headerlink" href="#the-main-config-file-can-be-read-with-the-read-method-of-the-configreader-class" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The config reader will automatically read from ./configs/config.yml</span>
@@ -389,18 +389,43 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;default&#39;: {&#39;config_int&#39;: 1,
-             &#39;config_string&#39;: &#39;fire&#39;,
-             &#39;config_list&#39;: [1, 2, 3],
-             &#39;config_none&#39;: &#39;None&#39;,
-             &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;}}}
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+
+  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">IPython</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">interactiveshell</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">3433</span> <span class="ow">in</span> <span class="n">run_code</span>
+    <span class="n">exec</span><span class="p">(</span><span class="n">code_obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_global_ns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_ns</span><span class="p">)</span>
+
+  <span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+    <span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">dicfg</span><span class="o">/</span><span class="n">reader</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">103</span> <span class="ow">in</span> <span class="n">read</span>
+    <span class="n">cli_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_cli</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">dicfg</span><span class="o">/</span><span class="n">reader</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">139</span> <span class="ow">in</span> <span class="n">_read_cli</span>
+    <span class="n">dicts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_create_dict_from_keys</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
+  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">dicfg</span><span class="o">/</span><span class="n">reader</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">162</span> <span class="ow">in</span> <span class="n">_create_dict_from_keys</span>
+    <span class="n">dictionary</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">_create_dict_from_keys</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">value</span><span class="p">))</span>
+
+  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">dicfg</span><span class="o">/</span><span class="n">reader</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">160</span> <span class="ow">in</span> <span class="n">_create_dict_from_keys</span>
+    <span class="n">dictionary</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">ast</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">59</span> <span class="ow">in</span> <span class="n">literal_eval</span>
+    <span class="n">node_or_string</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">node_or_string</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">)</span>
+
+  <span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.14</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">ast</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">47</span> <span class="ow">in</span> <span class="n">parse</span>
+    <span class="k">return</span> <span class="nb">compile</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span>
+
+  <span class="n">File</span> <span class="o">&lt;</span><span class="n">unknown</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">1</span>
+    <span class="p">:</span><span class="n">memory</span><span class="p">:</span>
+    <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="the-main-config-can-be-updated-with-a-user-config-dictionary">
-<h2>The main config can be <strong>updated with a user config dictionary</strong><a class="headerlink" href="#the-main-config-can-be-updated-with-a-user-config-dictionary" title="Permalink to this heading">#</a></h2>
+<h2>The main config can be <strong>updated with a user config dictionary</strong>.<a class="headerlink" href="#the-main-config-can-be-updated-with-a-user-config-dictionary" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note the &#39;myconfig&#39; key in the &#39;user_config&#39;,</span>
@@ -423,7 +448,7 @@
 </div>
 </section>
 <section id="the-main-config-can-be-updated-with-a-user-config-file-yml-yaml-json">
-<h2>The main config can be <strong>updated with a user config file</strong> (.yml, .yaml, .json)<a class="headerlink" href="#the-main-config-can-be-updated-with-a-user-config-file-yml-yaml-json" title="Permalink to this heading">#</a></h2>
+<h2>The main config can be <strong>updated with a user config file</strong> (.yml, .yaml, .json).<a class="headerlink" href="#the-main-config-can-be-updated-with-a-user-config-file-yml-yaml-json" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ./user_config.yml
@@ -503,6 +528,7 @@
    <strong>
     create a ConfigReader object
    </strong>
+   .
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -515,6 +541,7 @@
    <strong>
     config.yml
    </strong>
+   .
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -523,7 +550,7 @@
    <strong>
     .read method
    </strong>
-   of the ConfigReader class
+   of the ConfigReader class.
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -532,6 +559,7 @@
    <strong>
     updated with a user config dictionary
    </strong>
+   .
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -540,7 +568,7 @@
    <strong>
     updated with a user config file
    </strong>
-   (.yml, .yaml, .json)
+   (.yml, .yaml, .json).
   </a>
  </li>
 </ul>

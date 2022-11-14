@@ -16,7 +16,7 @@ Documentation
 
    <div style="width:50%;">
    <img src="_static/logo.svg" class="logo__image only-light" alt="Logo image">
-   <img src="_static/logo.svg" class="logo__image only-dark" alt="Logo image">
+   <img src="_static/logo-dark.svg" class="logo__image only-dark" alt="Logo image">
    
 
 .. raw:: html
@@ -38,7 +38,7 @@ Documentation
     .. grid-item::
         :class: sd-text-white sd-bg-primary sd-pt-3
         
-        Dicfg is a **configuration system** that directly supports **dependency injection** via **object interpolation** in config files.
+        Dicfg is a **configuration system** that supports **dependency injection** via **object interpolation** in config files.
 
 
 .. grid:: 1 1 3 3
