@@ -321,7 +321,7 @@
     <span class="sd">&quot;&quot;&quot;Wrapper config for values&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ConfigValue.__init__"><a class="viewcode-back" href="../../_autosummary/dicfg.config.ConfigValue.html#dicfg.config.ConfigValue.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">merger</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Wraps a value into a Config</span>
+        <span class="sd">&quot;&quot;&quot;Wraps a value into a ConfigValue</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data (Any): value of the config</span>
@@ -361,7 +361,7 @@
     <span class="sd">&quot;&quot;&quot;Wrapper config for dict&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;_summary_</span>
+        <span class="sd">&quot;&quot;&quot;Wraps a value into a ConfigDict</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data (dict): value of the config</span>
@@ -378,8 +378,10 @@
 
 
 <div class="viewcode-block" id="ConfigList"><a class="viewcode-back" href="../../_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList">[docs]</a><span class="k">class</span> <span class="nc">ConfigList</span><span class="p">(</span><span class="n">ConfigValue</span><span class="p">,</span> <span class="n">UserList</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper config for List&quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;_summary_</span>
+        <span class="sd">&quot;&quot;&quot;Wraps a value into a ConfigList</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data (list): value of the config</span>

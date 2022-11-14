@@ -349,7 +349,8 @@
 <dt class="sig sig-object py" id="dicfg.config.ConfigList">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ConfigList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/config.html#ConfigList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.config.ConfigList" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="dicfg.config.ConfigValue.html#dicfg.config.ConfigValue" title="dicfg.config.ConfigValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigValue</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">UserList</span></code></p>
-<p>Wraps a value into a Config</p>
+<p>Wrapper config for List</p>
+<p>Wraps a value into a ConfigValue</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>data (Any): value of the config
 merger (Callable, optional): Callable to merge the config value. Defaults to None.</p>
@@ -358,7 +359,7 @@ merger (Callable, optional): Callable to merge the config value. Defaults to Non
 <dl class="py method">
 <dt class="sig sig-object py" id="dicfg.config.ConfigList.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dicfg.config.ConfigList.__init__" title="Permalink to this definition">#</a></dt>
-<dd><p>Wraps a value into a Config</p>
+<dd><p>Wraps a value into a ConfigValue</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>data (Any): value of the config
 merger (Callable, optional): Callable to merge the config value. Defaults to None.</p>
@@ -370,7 +371,7 @@ merger (Callable, optional): Callable to merge the config value. Defaults to Non
 <table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#dicfg.config.ConfigList.__init__" title="dicfg.config.ConfigList.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(data[, merger])</p></td>
-<td><p>Wraps a value into a Config</p></td>
+<td><p>Wraps a value into a ConfigValue</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#dicfg.config.ConfigList.append" title="dicfg.config.ConfigList.append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">append</span></code></a>(item)</p></td>
 <td><p>S.append(value) -- append value to the end of the sequence</p></td>
