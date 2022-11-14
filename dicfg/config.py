@@ -11,7 +11,7 @@ class ConfigValue:
     """Wrapper config for values"""
 
     def __init__(self, data: Any, merger: Callable = None):
-        """Wraps a value into a Config
+        """Wraps a value into a ConfigValue
 
         Args:
             data (Any): value of the config
@@ -51,7 +51,7 @@ class ConfigDict(ConfigValue, UserDict):
     """Wrapper config for dict"""
 
     def _init(self, data: dict):
-        """_summary_
+        """Wraps a value into a ConfigDict
 
         Args:
             data (dict): value of the config
@@ -68,8 +68,10 @@ class ConfigDict(ConfigValue, UserDict):
 
 
 class ConfigList(ConfigValue, UserList):
+    """Wrapper config for List"""
+
     def _init(self, data: list):
-        """_summary_
+        """Wraps a value into a ConfigList
 
         Args:
             data (list): value of the config
