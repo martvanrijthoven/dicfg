@@ -15,6 +15,15 @@ Release Notes
 
 ----
 
+Version 0.0.3
+^^^^^^^^^^^^^
+
+ - Added environment interpolation feature
+ - Fixed bug when using multiple object interpolations
+ - Automatic release via github actions
+ - Updated docs
+
+
 Version 0.0.2
 ^^^^^^^^^^^^^
 
