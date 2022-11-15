@@ -5,4 +5,4 @@
 [![codeinspector](https://api.codiga.io/project/34959/score/svg)](https://app.codiga.io/public/project/34959/dicfg/dashboard)
 [![GitHub](https://img.shields.io/github/license/martvanrijthoven/dicfg)](https://github.com/martvanrijthoven/dicfg/blob/main/LICENSE)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/dicfg)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7324047.svg)](https://doi.org/10.5281/zenodo.7324047)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7320310.svg)](https://doi.org/10.5281/zenodo.7320310)
