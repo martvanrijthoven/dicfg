@@ -21,7 +21,7 @@ Version 0.0.4
  - ConfigReader and build_config can now be imported directly form dicfg
  - name argument in ConfigReader is now mandatory
  - renamed configs_name to main_config_path
- - configs folder is now infered from main_config_path
+ - configs folder is now inferred from main_config_path
  - update readme with absolute path to image
  - refactored github workflows
 
