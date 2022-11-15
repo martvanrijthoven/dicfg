@@ -30,12 +30,12 @@ pip install dicfg
 
 Main Features
 
-- Loading of predefined config files (YAML and JSON)
+- Loading of predefined config files (YAML and JSON).
 - Overwrite config with user_config files/dictionaries, command line interface, and/or presets.
 - Customize merge/replace behavior for dictionaries and lists.
-- Config interpolation support for subconfig files, config variables, and environment variables.
-- Build python types and instances from objects directly in the config.
-- Dependency inject via object interpolation: configure all object dependencies directly in the config
-- Object attribute interpolation: referencing objects attributes directly in the config file
+- Interpolation support for sub-config files, config variables, and environment variables.
+- Build instances from objects directly in the config.
+- Dependency inject via object interpolation: configure all object dependencies directly in the config.
+- Use object attribute interpolation for referencing object attributes directly in the config file.
 
 
