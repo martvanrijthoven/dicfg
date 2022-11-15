@@ -15,7 +15,7 @@ Release Notes
 
 ----
 
-Version 0.0.3
+Version 0.0.4
 ^^^^^^^^^^^^^
 
  - ConfigReader and build_config can now be imported directly form dicfg
