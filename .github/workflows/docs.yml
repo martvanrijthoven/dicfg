@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
 
     concurrency: 
-      group: ${{ github.workflow }}-${{ github.ref }}
+      group: ${{ github.workflow }}-${{ github.ref }}-docs
       cancel-in-progress: true
 
     steps:

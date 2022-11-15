@@ -23,7 +23,7 @@ jobs:
   call-tests:
 
     concurrency: 
-      group: ${{ github.workflow }}-${{ github.ref }}
+      group: ${{ github.workflow }}-${{ github.ref }}-ci-test
       cancel-in-progress: true
 
     uses: ./.github/workflows/tests.yml
