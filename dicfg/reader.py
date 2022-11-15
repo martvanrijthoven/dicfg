@@ -59,7 +59,7 @@ class ConfigReader:
         self._main_config_path = Path(main_config_path)
 
         if not self._main_config_path.exists():
-            raise ValueError(
+            raise ConfigNotFoundError(
                 f"No main config file found at: {self._main_config_path}. The default main config path can be set via the 'main_config_path argument'"
             )
 
