@@ -42,7 +42,7 @@ class ConfigReader:
         presets_folder_name (str, optional): Presets folder. Defaults to 'presets'.
         default_key (str, optional): Default context keys. Defaults to "default".
         context_keys (tuple, optional): Addtional context keys. Defaults to ().
-        search_paths (tuple, optional): Search paths for config file inerpolation. Defaults to ().
+        search_paths (tuple, optional): Search paths for config file interpolation. Defaults to ().
     """
 
     def __init__(
