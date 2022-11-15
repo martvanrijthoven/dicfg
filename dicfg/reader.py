@@ -34,27 +34,26 @@ class ConfigNotFoundError(Exception):
 
 
 class ConfigReader:
-    """Reads config files"""
+    """ConfigReader
+
+    Args:
+        name (str): Name of config. Used as a reference in user configs and cli settings.
+        main_config_path (Union[str, Path], optional): Main config file name. Defaults to "config.yml".
+        presets_folder_name (str, optional): Presets folder. Defaults to 'presets'.
+        default_key (str, optional): Default context keys. Defaults to "default".
+        context_keys (tuple, optional): Addtional context keys. Defaults to ().
+        search_paths (tuple, optional): Search paths for config file inerpolation. Defaults to ().
+    """
 
     def __init__(
         self,
         name: str,
-        main_config_path=Path("./configs/config.yml"),
-        presets_folder_name="presets",
-        default_key="default",
-        context_keys=(),
-        search_paths=(),
+        main_config_path: Union[str, Path] = Path("./configs/config.yml"),
+        presets_folder_name: str = "presets",
+        default_key: str = "default",
+        context_keys: tuple = (),
+        search_paths: tuple = (),
     ):
-        """Init ConfigReader
-
-        Args:
-            name (str): Name of config. Used as a reference in user configs and cli settings.
-            config_file_nam (str, optional): Main config file name. Defaults to "config.yml".
-            presets_folder_name (str, optional): Presets folder. Defaults to 'presets'.
-            default_key (str, optional): Default context keys. Defaults to "default".
-            context_keys (tuple, optional): Addtional context keys. Defaults to ().
-            search_paths (tuple, optional): Search paths for config file inerpolation. Defaults to ().
-        """
 
         self._name = name
         self._main_config_path = Path(main_config_path)

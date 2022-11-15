@@ -8,15 +8,15 @@ _REPLACE_IDENTIFIER = r"\@replace\((.*)\)"
 
 
 class ConfigValue:
-    """Wrapper config for values"""
+    """Wraps a value into a ConfigValue
+
+    Args:
+        data (Any): value of the config
+        merger (Callable, optional): Callable to merge the config value. Defaults to None.
+    """
 
     def __init__(self, data: Any, merger: Callable = None):
-        """Wraps a value into a ConfigValue
 
-        Args:
-            data (Any): value of the config
-            merger (Callable, optional): Callable to merge the config value. Defaults to None.
-        """
         self.merger = merger
         self.data = self._init(data)
 
@@ -48,15 +48,15 @@ class ConfigValue:
 
 
 class ConfigDict(ConfigValue, UserDict):
-    """Wrapper config for dict"""
+    """Wraps a value into a ConfigDict
+
+    Args:
+        data (dict): value of the config
+
+    """
 
     def _init(self, data: dict):
-        """Wraps a value into a ConfigDict
 
-        Args:
-            data (dict): value of the config
-
-        """
         for key in list(data):
             _key, merger = _get_merger(key, data[key])
             data[_key] = _config_factory(data.pop(key), merger=merger)
@@ -68,15 +68,14 @@ class ConfigDict(ConfigValue, UserDict):
 
 
 class ConfigList(ConfigValue, UserList):
-    """Wrapper config for List"""
+    """Wraps a value into a ConfigList
+
+    Args:
+        data (list): value of the config
+
+    """
 
     def _init(self, data: list):
-        """Wraps a value into a ConfigList
-
-        Args:
-            data (list): value of the config
-
-        """
 
         for idx, value in enumerate(data):
             data[idx] = _config_factory(value)
@@ -90,8 +89,8 @@ class ConfigList(ConfigValue, UserList):
 def _config_factory(c, merger=None):
     if isinstance(c, ConfigValue):
         return c
-    _configs = {dict: ConfigDict, list: ConfigList}
-    return _configs.get(type(c), ConfigValue)(c, merger=merger)
+    config_types = {dict: ConfigDict, list: ConfigList}
+    return config_types.get(type(c), ConfigValue)(c, merger=merger)
 
 
 def _update(a: ConfigValue, b: ConfigValue):

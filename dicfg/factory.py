@@ -100,7 +100,7 @@ def _is_object(value):
 
 
 def build_config(config: dict):
-    """builds config
+    """Builds config
 
     Args:
         config (dict): config to build
