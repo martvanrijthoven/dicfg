@@ -1,19 +1,21 @@
 name: docs
 
 on:
-  workflow_dispatch:
   push:
     branches: [main]
     paths:
       - "dicfg/**"
       - "docs/**"
       - .github/workflows/docs.yml
+      - pyproject.toml
+
   pull_request:
     branches: [main]
     paths:
       - "dicfg/**"
       - "docs/**"
       - .github/workflows/docs.yml
+      - pyproject.toml
 
 env:
   PYTHON_VERSION: "3.8"

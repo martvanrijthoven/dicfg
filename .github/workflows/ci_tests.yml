@@ -1,18 +1,22 @@
 name: Tests
 
 on:
-  workflow_dispatch:
   push:
     paths:
       - "dicfg/**"
       - "tests/**"
       - .github/workflows/tests.yml
+      - .github/workflows/ci_tests.yml
+      - pyproject.toml
       - "!dicfg/_version.py"
+      
   pull_request:
     paths:
       - "dicfg/**"
       - "tests/**"
       - .github/workflows/tests.yml
+      - .github/workflows/ci_tests.yml
+      - pyproject.toml
       - "!dicfg/_version.py"
 
 jobs:
