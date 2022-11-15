@@ -369,7 +369,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_main_config_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">main_config_path</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_config_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="k">raise</span> <span class="n">ConfigNotFoundError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;No main config file found at: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_main_config_path</span><span class="si">}</span><span class="s2">. The default main config path can be set via the &#39;main_config_path argument&#39;&quot;</span>
             <span class="p">)</span>
 
