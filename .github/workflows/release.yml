@@ -2,6 +2,9 @@ name: Create GitHub Release
 
 on:
   workflow_call:
+    secrets:
+      GITHUB_TOKEN:
+        required: true
 
 jobs:
   create-github-release:

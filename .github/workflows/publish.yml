@@ -12,7 +12,11 @@ jobs:
   call-pypi:
     needs: call-tests
     uses: ./.github/workflows/pypi.yml
+    secrets:
+      TWINE_PASS: ${{ secrets.TWINE_PASS }}
 
   call-release:
     needs: call-pypi
     uses: ./.github/workflows/release.yml
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

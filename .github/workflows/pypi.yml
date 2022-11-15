@@ -2,6 +2,9 @@ name: Upload to PyPi
 
 on:
   workflow_call:
+    secrets:
+      TWINE_PASS:
+        required: true
 
 jobs:
   upload-to-pypi:
@@ -29,7 +32,8 @@ jobs:
       - name: "Builds and uploads to PyPI"
         run: |
           python -m build
-          python -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+          python -m twine upload dist/*
+
         env:
           TWINE_USERNAME: martvanrijthoven
           TWINE_PASSWORD: ${{ secrets.TWINE_PASS }}
