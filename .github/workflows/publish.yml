@@ -9,10 +9,10 @@ jobs:
   call-tests:
     uses: ./.github/workflows/tests.yml
 
-  call-deploy_pypi:
-    needs: call-run_tests
+  call-pypi:
+    needs: call-tests
     uses: ./.github/workflows/pypi.yml
 
-  call-create_github_release:
-    needs: call-deploy_pypi
+  call-release:
+    needs: call-pypi
     uses: ./.github/workflows/release.yml
