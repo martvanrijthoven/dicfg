@@ -48,7 +48,7 @@ def test_dicfg():
 def test_cli():
 
     sys_config_reader = ConfigReader(
-        name="testconfig", config_file_name="test.yml", context_keys=("testkey",)
+        name="testconfig", main_config_path="./configs/test.yml", context_keys=("testkey",)
     )
     sys_argv = sys.argv
 
