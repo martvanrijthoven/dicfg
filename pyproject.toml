@@ -1,5 +1,5 @@
 [build-system]
-requires      = ["setuptools>=61.0.0", "wheel>=0.33.4"]
+requires = ["setuptools>=61.0.0", "wheel>=0.33.4"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
@@ -7,12 +7,14 @@ packages = ["dicfg"]
 
 [project]
 name = "dicfg"
-authors = [{ name = "Mart van Rijthoven", email = "mart.vanrijthoven@gmail.com" }]
+authors = [
+    { name = "Mart van Rijthoven", email = "mart.vanrijthoven@gmail.com" },
+]
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.8"
 classifiers = [
-    "Programming Language :: Python :: 3",            
+    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -22,7 +24,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "Development Status :: 4 - Beta",
 ]
-dependencies = ["PyYaml >= 5.4.1"]
+dependencies = ["PyYaml>=5.4.1"]
 
 dynamic = ["version"]
 
