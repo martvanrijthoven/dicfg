@@ -79,7 +79,7 @@ html_theme_options = {
     ],
     "logo": {
         "image_light": "logo.svg",
-        "image_dark": "logo-dark.svg",
+        "image_dark": "logo-darkgrey.svg",
     },
 }
 
