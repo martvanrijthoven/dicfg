@@ -4,7 +4,7 @@ Release Notes
 
 .. raw:: html
 
-   <div style="zoom: 0.75;-moz-transform: scale(0.5);">
+   <div style="zoom: 0.8;-moz-transform: scale(0.8);">
 
 .. include:: badges.md
    :parser: myst_parser.sphinx_
