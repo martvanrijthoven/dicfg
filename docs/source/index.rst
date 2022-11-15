@@ -39,7 +39,7 @@ Documentation
         :class: sd-text-white sd-bg-primary sd-pt-3
         
         Dicfg is a **configuration system** that supports **dependency injection** via **object interpolation** in config files.
-
+        
 
 .. grid:: 1 1 3 3
 
@@ -57,6 +57,18 @@ Documentation
      :link: api.html
 
      +++
+
+
+Main Features
+^^^^^^^^^^^^^
+
+- Loading of predefined config files (YAML and JSON)
+- Overwrite config with user_config files/dictionaries, command line interface, and/or presets.
+- Customize merge/replace behavior for dictionaries and lists.
+- Config interpolation support for subconfig files, config variables, and environment variables.
+- Build python types and instances from objects directly in the config.
+- Dependency inject via object interpolation: configure all object dependencies directly in the config
+- Object attribute interpolation: referencing objects attributes directly in the config file
 
 ----
 
