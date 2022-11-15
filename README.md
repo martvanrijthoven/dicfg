@@ -34,7 +34,7 @@ Main Features
 - Overwrite config with user_config files/dictionaries, command line interface, and/or presets.
 - Customize merge/replace behavior for dictionaries and lists.
 - Interpolation support for sub-config files, config variables, and environment variables.
-- Build instance objects directly in the config.
+- Build object instances directly in the config.
 - Dependency injection via object interpolation: configure all object dependencies directly in the config.
 - Use object attribute interpolation for referencing object attributes directly in the config file.
 
