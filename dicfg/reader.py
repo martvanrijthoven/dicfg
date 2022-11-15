@@ -38,7 +38,7 @@ class ConfigReader:
 
     Args:
         name (str): Name of config. Used as a reference in user configs and cli settings.
-        main_config_path (Union[str, Path], optional): Main config file name. Defaults to "config.yml".
+        main_config_path (Union[str, Path], optional): Path to main config. Defaults to Path("./configs/config.yml").
         presets_folder_name (str, optional): Presets folder. Defaults to 'presets'.
         default_key (str, optional): Default context keys. Defaults to "default".
         context_keys (tuple, optional): Addtional context keys. Defaults to ().
