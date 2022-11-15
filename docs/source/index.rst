@@ -4,8 +4,8 @@
    :trim:
 
 .. raw:: html
-
-   <div style="visibility: hidden;">
+   
+   <div style="display: none;">
 
 Documentation
 =============
@@ -13,11 +13,11 @@ Documentation
 .. raw:: html
 
    </div>
-
+   <div style="display: block;">
    <div style="width:50%;">
    <img src="_static/logo.svg" class="logo__image only-light" alt="Logo image">
    <img src="_static/logo-dark.svg" class="logo__image only-dark" alt="Logo image">
-   
+ 
 
 .. raw:: html
 
@@ -75,6 +75,7 @@ Main Features
 
 ----
 
+
 .. toctree::
   :hidden:
 
@@ -83,7 +84,9 @@ Main Features
   ./api
   releasenotes
 
+.. raw:: html
 
+   </div>
 
 .. .. raw:: html
 
