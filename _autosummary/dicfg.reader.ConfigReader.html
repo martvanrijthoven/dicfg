@@ -347,39 +347,30 @@
 <h1>dicfg.reader.ConfigReader<a class="headerlink" href="#dicfg-reader-configreader" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="dicfg.reader.ConfigReader">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ConfigReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">main_config_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PosixPath('configs/config.yml')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">presets_folder_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'presets'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_paths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/reader.html#ConfigReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.reader.ConfigReader" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ConfigReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">main_config_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PosixPath('configs/config.yml')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">presets_folder_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'presets'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context_keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/reader.html#ConfigReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.reader.ConfigReader" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Reads config files</p>
-<p>Init ConfigReader</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>name (str): Name of config. Used as a reference in user configs and cli settings.
-config_file_nam (str, optional): Main config file name. Defaults to “config.yml”.
-presets_folder_name (str, optional): Presets folder. Defaults to ‘presets’.
-default_key (str, optional): Default context keys. Defaults to “default”.
-context_keys (tuple, optional): Addtional context keys. Defaults to ().
-search_paths (tuple, optional): Search paths for config file inerpolation. Defaults to ().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of config. Used as a reference in user configs and cli settings.</p></li>
+<li><p><strong>main_config_path</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>Path</em><em>]</em><em>, </em><em>optional</em>) – Main config file name. Defaults to “config.yml”.</p></li>
+<li><p><strong>presets_folder_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Presets folder. Defaults to ‘presets’.</p></li>
+<li><p><strong>default_key</strong> (<em>str</em><em>, </em><em>optional</em>) – Default context keys. Defaults to “default”.</p></li>
+<li><p><strong>context_keys</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Addtional context keys. Defaults to ().</p></li>
+<li><p><strong>search_paths</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Search paths for config file inerpolation. Defaults to ().</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="dicfg.reader.ConfigReader.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">main_config_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PosixPath('configs/config.yml')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">presets_folder_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'presets'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_paths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/reader.html#ConfigReader.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.reader.ConfigReader.__init__" title="Permalink to this definition">#</a></dt>
-<dd><p>Init ConfigReader</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>name (str): Name of config. Used as a reference in user configs and cli settings.
-config_file_nam (str, optional): Main config file name. Defaults to “config.yml”.
-presets_folder_name (str, optional): Presets folder. Defaults to ‘presets’.
-default_key (str, optional): Default context keys. Defaults to “default”.
-context_keys (tuple, optional): Addtional context keys. Defaults to ().
-search_paths (tuple, optional): Search paths for config file inerpolation. Defaults to ().</p>
-</dd>
-</dl>
-</dd></dl>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">main_config_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PosixPath('configs/config.yml')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">presets_folder_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'presets'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context_keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/reader.html#ConfigReader.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.reader.ConfigReader.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 
 <p class="rubric">Methods</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#dicfg.reader.ConfigReader.__init__" title="dicfg.reader.ConfigReader.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(name[, main_config_path, ...])</p></td>
-<td><p>Init ConfigReader</p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#dicfg.reader.ConfigReader.read" title="dicfg.reader.ConfigReader.read"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read</span></code></a>([user_config, presets])</p></td>
 <td><p>Reads Config File</p></td>
@@ -390,11 +381,18 @@ search_paths (tuple, optional): Search paths for config file inerpolation. Defau
 <dt class="sig sig-object py" id="dicfg.reader.ConfigReader.read">
 <span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">presets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/dicfg/reader.html#ConfigReader.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.reader.ConfigReader.read" title="Permalink to this definition">#</a></dt>
 <dd><p>Reads Config File</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>user_config (Union[dict, str, Path], optional): user_config Defaults to None.
-presets (tuple, optional): presets Defaults to ().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_config</strong> (<em>Union</em><em>[</em><em>dict</em><em>, </em><em>str</em><em>, </em><em>Path</em><em>]</em><em>, </em><em>optional</em>) – user_config Defaults to None.</p></li>
+<li><p><strong>presets</strong> (<em>tuple</em><em>, </em><em>optional</em>) – presets Defaults to ().</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>dict: read configs</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>read configs</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
