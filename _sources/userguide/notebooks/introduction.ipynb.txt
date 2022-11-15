@@ -11,32 +11,14 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 1,
+   "execution_count": 21,
    "id": "2cf24d07",
    "metadata": {},
    "outputs": [],
    "source": [
     "from pprint import pprint\n",
     "\n",
-    "from dicfg.reader import ConfigReader"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "380de45b-27c5-43e4-9efd-726e78e7c38d",
-   "metadata": {},
-   "source": [
-    "## The first step is to **create a ConfigReader object**."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 5,
-   "id": "bce6c848",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "config_reader = ConfigReader(name='myconfig')"
+    "from dicfg import ConfigReader"
    ]
   },
   {
@@ -44,12 +26,12 @@
    "id": "371a8084-a976-42d0-9774-964ed3922bff",
    "metadata": {},
    "source": [
-    "## The second step is to **create a configs folder containing** a main config file: **config.yml**."
+    "## The first step is to **create a configs folder containing** a main config file: **config.yml**."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 22,
    "id": "b0b1ef62-d1c8-4d9c-935a-a4c6d1d51e61",
    "metadata": {},
    "outputs": [
@@ -73,6 +55,25 @@
   },
   {
    "cell_type": "markdown",
+   "id": "380de45b-27c5-43e4-9efd-726e78e7c38d",
+   "metadata": {},
+   "source": [
+    "## The second step is to **create a ConfigReader object**."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "bce6c848",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# A name should be set, which will be used later as a reference in user configs and command line interface.\n",
+    "config_reader = ConfigReader(name=\"myconfig\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
    "id": "45e2cf2b-94f3-49ea-b00b-5a5217194985",
    "metadata": {},
    "source": [
@@ -81,7 +82,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 8,
+   "execution_count": 14,
    "id": "df6012f0",
    "metadata": {},
    "outputs": [
@@ -98,7 +99,8 @@
     }
    ],
    "source": [
-    "# The config reader will automatically read from ./configs/config.yml\n",
+    "# ConfigReader will automatically read  from .configs/config.\n",
+    "# However you can change this by setting a different main_config_path when initializing ConfigReader\n",
     "pprint(config_reader.read(), sort_dicts=False)"
    ]
   },
@@ -112,7 +114,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 10,
+   "execution_count": 15,
    "id": "9090b51c",
    "metadata": {},
    "outputs": [
@@ -130,7 +132,7 @@
    ],
    "source": [
     "# Note the 'myconfig' key in the 'user_config',\n",
-    "#which corresponds to the name given when initializing ConfigReader\n",
+    "# which corresponds to the name given when initializing ConfigReader\n",
     "\n",
     "user_config = {\"myconfig\": {\"default\": {\"config_int\": 2}}}\n",
     "pprint(config_reader.read(user_config), sort_dicts=False)"
@@ -146,7 +148,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 12,
+   "execution_count": 16,
    "id": "1c0a9ee1-af86-49de-82ef-062172d0e766",
    "metadata": {},
    "outputs": [
@@ -167,7 +169,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 13,
+   "execution_count": 17,
    "id": "d898563e",
    "metadata": {},
    "outputs": [
@@ -187,14 +189,6 @@
     "user_config = \"./user_config.yml\"\n",
     "pprint(config_reader.read(user_config), sort_dicts=False)"
    ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "24428730-cb08-4f2b-8e71-7f7d3a6eb4fc",
-   "metadata": {},
-   "outputs": [],
-   "source": []
   }
  ],
  "metadata": {

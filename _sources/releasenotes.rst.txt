@@ -18,6 +18,18 @@ Release Notes
 Version 0.0.3
 ^^^^^^^^^^^^^
 
+ - ConfigReader and build_config can now be imported directly form dicfg
+ - name argument in ConfigReader is now mandatory
+ - renamed configs_name to main_config_path
+ - configs folder is now infered from main_config_path
+ - update readme with absolute path to image
+ - refactored github workflows
+
+
+
+Version 0.0.3
+^^^^^^^^^^^^^
+
  - Added environment interpolation feature
  - Fixed bug when using multiple object interpolations
  - Automatic release via github actions

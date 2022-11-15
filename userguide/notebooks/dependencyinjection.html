@@ -343,11 +343,26 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="kn">from</span> <span class="nn">dicfg.factory</span> <span class="kn">import</span> <span class="n">build_config</span>
-<span class="kn">from</span> <span class="nn">dicfg.reader</span> <span class="kn">import</span> <span class="n">ConfigReader</span>
-
-
-<span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;myconfig&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">dicfg</span> <span class="kn">import</span> <span class="n">ConfigReader</span><span class="p">,</span> <span class="n">build_config</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ./configs/config.yml
+<span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;myconfig&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>default:
+    config_int: 1
+    config_string: &quot;fire&quot;
+    config_list: [1, 2, 3]
+    config_none: None
+    config_dict:
+        sub_config: &quot;water&quot;
 </pre></div>
 </div>
 </div>
@@ -379,10 +394,8 @@
             <span class="s2">&quot;project_component&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="c1"># a classes/functions can be build via the *object key</span>
                 <span class="s2">&quot;*object&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.ProjectComponent&quot;</span><span class="p">,</span>
-                
                 <span class="c1"># any arguments can specified below</span>
                 <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;my_project_component&quot;</span><span class="p">,</span>
-        
                 <span class="c1"># non-keyword arguments can be specified with *args, e.g.,</span>
                 <span class="c1"># &quot;*args&quot;: [&quot;my_project_component&quot;],</span>
             <span class="p">},</span>
@@ -421,7 +434,7 @@
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_string&#39;: &#39;fire&#39;,
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f3d18117640&gt;}
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7fe904235580&gt;}
 </pre></div>
 </div>
 </div>
@@ -494,7 +507,6 @@
             <span class="p">},</span>
             <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;*object&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.MyProject&quot;</span><span class="p">,</span>
-                
                 <span class="c1"># object interpolation</span>
                 <span class="s2">&quot;project_component&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{project_component}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="p">},</span>
@@ -534,8 +546,8 @@
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f3d1811a610&gt;,
- &#39;project&#39;: &lt;__main__.MyProject object at 0x7f3d1811a640&gt;}
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7fe904193100&gt;,
+ &#39;project&#39;: &lt;__main__.MyProject object at 0x7fe904193130&gt;}
 
 project component name: my_project_component
 </pre></div>
@@ -556,11 +568,9 @@ project component name: my_project_component
             <span class="p">},</span>
             <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;*object&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.MyProject&quot;</span><span class="p">,</span>
-                
                 <span class="c1"># object interpolation by object reference</span>
                 <span class="s2">&quot;project_component&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{project_component}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="p">},</span>
-            
             <span class="c1"># object interpolation by object reference</span>
             <span class="s2">&quot;my_interpolation_component&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{project_component}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="p">},</span>
@@ -602,12 +612,12 @@ project component name: my_project_component
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f3d181177c0&gt;,
- &#39;project&#39;: &lt;__main__.MyProject object at 0x7f3d18117d30&gt;,
- &#39;my_interpolation_component&#39;: &lt;__main__.ProjectComponent object at 0x7f3d181177c0&gt;}
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7fe90418f220&gt;,
+ &#39;project&#39;: &lt;__main__.MyProject object at 0x7fe90418f400&gt;,
+ &#39;my_interpolation_component&#39;: &lt;__main__.ProjectComponent object at 0x7fe90418f220&gt;}
 
-reference       project_component: &lt;__main__.ProjectComponent object at 0x7f3d181177c0&gt;
-reference interpolation_component: &lt;__main__.ProjectComponent object at 0x7f3d181177c0&gt;
+reference       project_component: &lt;__main__.ProjectComponent object at 0x7fe90418f220&gt;
+reference interpolation_component: &lt;__main__.ProjectComponent object at 0x7fe90418f220&gt;
 </pre></div>
 </div>
 </div>
@@ -629,9 +639,8 @@ reference interpolation_component: &lt;__main__.ProjectComponent object at 0x7f3
                 <span class="s2">&quot;project_component&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{project_component}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="s2">&quot;my_attribute_component&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{project_component}</span><span class="s2">&quot;</span><span class="p">,</span>
-            
             <span class="c1"># object attribute interpolation</span>
-            <span class="s2">&quot;my_attribute_component_name&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{project_component.name}</span><span class="s2">&quot;</span><span class="p">,</span>  
+            <span class="s2">&quot;my_attribute_component_name&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{project_component.name}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">}</span>
@@ -671,9 +680,9 @@ reference interpolation_component: &lt;__main__.ProjectComponent object at 0x7f3
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f3d18165700&gt;,
- &#39;project&#39;: &lt;__main__.MyProject object at 0x7f3d18165dc0&gt;,
- &#39;my_attribute_component&#39;: &lt;__main__.ProjectComponent object at 0x7f3d18165700&gt;,
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7fe904193ca0&gt;,
+ &#39;project&#39;: &lt;__main__.MyProject object at 0x7fe904193250&gt;,
+ &#39;my_attribute_component&#39;: &lt;__main__.ProjectComponent object at 0x7fe904193ca0&gt;,
  &#39;my_attribute_component_name&#39;: &#39;my_project_component&#39;}
 
 my_attribute_component_name: my_project_component

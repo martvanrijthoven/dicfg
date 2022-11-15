@@ -343,7 +343,26 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="kn">from</span> <span class="nn">dicfg.reader</span> <span class="kn">import</span> <span class="n">ConfigReader</span>
+<span class="kn">from</span> <span class="nn">dicfg</span> <span class="kn">import</span> <span class="n">ConfigReader</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ./configs/config.yml
+<span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;myconfig&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>default:
+    config_int: 1
+    config_string: &quot;fire&quot;
+    config_list: [1, 2, 3]
+    config_none: None
+    config_dict:
+        sub_config: &quot;water&quot;
 </pre></div>
 </div>
 </div>
@@ -364,8 +383,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;myconfig&#39;</span><span class="p">)</span>
-<span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_int&quot;</span><span class="p">:</span> <span class="s2">&quot;my_other_config.yml&quot;</span><span class="p">}}}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_int&quot;</span><span class="p">:</span> <span class="s2">&quot;my_other_config.yml&quot;</span><span class="p">}}}</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -373,44 +391,30 @@
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ConfigNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [5],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;myconfig&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_int&quot;</span><span class="p">:</span> <span class="s2">&quot;my_other_config.yml&quot;</span><span class="p">}}}</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nn">Input In [8],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_int&quot;</span><span class="p">:</span> <span class="s2">&quot;my_other_config.yml&quot;</span><span class="p">}}}</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="nn">File ~/code/dicfg/dicfg/reader.py:106,</span> in <span class="ni">ConfigReader.read</span><span class="nt">(self, user_config, presets)</span>
-<span class="g g-Whitespace">    </span><span class="mi">103</span> <span class="n">cli_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_cli</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-<span class="g g-Whitespace">    </span><span class="mi">105</span> <span class="n">configs</span> <span class="o">=</span> <span class="p">(</span><span class="n">self_config</span><span class="p">,</span> <span class="o">*</span><span class="n">preset_configs</span><span class="p">,</span> <span class="n">user_config</span><span class="p">,</span> <span class="n">cli_config</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">106</span> <span class="n">configs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_configs</span><span class="p">(</span><span class="n">configs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="o">*</span><span class="n">configs</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">()</span>
+<span class="nn">File ~/code/dicfg/dicfg/reader.py:109,</span> in <span class="ni">ConfigReader.read</span><span class="nt">(self, user_config, presets)</span>
+<span class="g g-Whitespace">    </span><span class="mi">106</span> <span class="n">cli_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_cli</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="n">configs</span> <span class="o">=</span> <span class="p">(</span><span class="n">self_config</span><span class="p">,</span> <span class="o">*</span><span class="n">preset_configs</span><span class="p">,</span> <span class="n">user_config</span><span class="p">,</span> <span class="n">cli_config</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">109</span> <span class="n">configs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_configs</span><span class="p">(</span><span class="n">configs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">111</span> <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="o">*</span><span class="n">configs</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">()</span>
 
-<span class="nn">File ~/code/dicfg/dicfg/reader.py:147,</span> in <span class="ni">ConfigReader._fuse_configs</span><span class="nt">(self, configs, context_keys, search_paths)</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span> <span class="k">def</span> <span class="nf">_fuse_configs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configs</span><span class="p">,</span> <span class="n">context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">144</span>     <span class="n">fuse_config</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">145</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_config</span><span class="p">,</span> <span class="n">context_keys</span><span class="o">=</span><span class="n">context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="o">=</span><span class="n">search_paths</span>
-<span class="g g-Whitespace">    </span><span class="mi">146</span>     <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">147</span>     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">fuse_config</span><span class="p">,</span> <span class="n">configs</span><span class="p">))</span>
+<span class="nn">File ~/code/dicfg/dicfg/reader.py:150,</span> in <span class="ni">ConfigReader._fuse_configs</span><span class="nt">(self, configs, context_keys, search_paths)</span>
+<span class="g g-Whitespace">    </span><span class="mi">146</span> <span class="k">def</span> <span class="nf">_fuse_configs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configs</span><span class="p">,</span> <span class="n">context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span>     <span class="n">fuse_config</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_config</span><span class="p">,</span> <span class="n">context_keys</span><span class="o">=</span><span class="n">context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="o">=</span><span class="n">search_paths</span>
+<span class="g g-Whitespace">    </span><span class="mi">149</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">150</span>     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">fuse_config</span><span class="p">,</span> <span class="n">configs</span><span class="p">))</span>
 
-<span class="nn">File ~/code/dicfg/dicfg/reader.py:150,</span> in <span class="ni">ConfigReader._fuse_config</span><span class="nt">(self, config, context_keys, search_paths)</span>
-<span class="g g-Whitespace">    </span><span class="mi">149</span> <span class="k">def</span> <span class="nf">_fuse_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context_keys</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">150</span>     <span class="n">config</span> <span class="o">=</span> <span class="n">_include_configs</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">151</span>     <span class="n">fused_config</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">152</span>         <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="p">{}))</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">context_keys</span><span class="p">}</span>
-<span class="g g-Whitespace">    </span><span class="mi">153</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">154</span>     <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">fused_config</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
-
-<span class="nn">File ~/anaconda3/envs/mart/lib/python3.8/functools.py:875,</span> in <span class="ni">singledispatch.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kw)</span>
-<span class="g g-Whitespace">    </span><span class="mi">871</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">872</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">funcname</span><span class="si">}</span><span class="s1"> requires at least &#39;</span>
-<span class="g g-Whitespace">    </span><span class="mi">873</span>                     <span class="s1">&#39;1 positional argument&#39;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">875</span> <span class="k">return</span> <span class="n">dispatch</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
-
-<span class="nn">File ~/code/dicfg/dicfg/reader.py:193,</span> in <span class="ni">_include_configs_dict</span><span class="nt">(config, search_paths)</span>
-<span class="g g-Whitespace">    </span><span class="mi">190</span> <span class="nd">@_include_configs</span><span class="o">.</span><span class="n">register</span>
-<span class="g g-Whitespace">    </span><span class="mi">191</span> <span class="k">def</span> <span class="nf">_include_configs_dict</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">192</span>     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="ne">--&gt; </span><span class="mi">193</span>         <span class="n">config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_include_configs</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">194</span>     <span class="k">return</span> <span class="n">config</span>
+<span class="nn">File ~/code/dicfg/dicfg/reader.py:153,</span> in <span class="ni">ConfigReader._fuse_config</span><span class="nt">(self, config, context_keys, search_paths)</span>
+<span class="g g-Whitespace">    </span><span class="mi">152</span> <span class="k">def</span> <span class="nf">_fuse_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">context_keys</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">153</span>     <span class="n">config</span> <span class="o">=</span> <span class="n">_include_configs</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">154</span>     <span class="n">fused_config</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">155</span>         <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="p">{}))</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">context_keys</span><span class="p">}</span>
+<span class="g g-Whitespace">    </span><span class="mi">156</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">157</span>     <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">fused_config</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
 
 <span class="nn">File ~/anaconda3/envs/mart/lib/python3.8/functools.py:875,</span> in <span class="ni">singledispatch.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kw)</span>
 <span class="g g-Whitespace">    </span><span class="mi">871</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="p">:</span>
@@ -418,12 +422,12 @@
 <span class="g g-Whitespace">    </span><span class="mi">873</span>                     <span class="s1">&#39;1 positional argument&#39;</span><span class="p">)</span>
 <span class="ne">--&gt; </span><span class="mi">875</span> <span class="k">return</span> <span class="n">dispatch</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
 
-<span class="nn">File ~/code/dicfg/dicfg/reader.py:193,</span> in <span class="ni">_include_configs_dict</span><span class="nt">(config, search_paths)</span>
-<span class="g g-Whitespace">    </span><span class="mi">190</span> <span class="nd">@_include_configs</span><span class="o">.</span><span class="n">register</span>
-<span class="g g-Whitespace">    </span><span class="mi">191</span> <span class="k">def</span> <span class="nf">_include_configs_dict</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">192</span>     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="ne">--&gt; </span><span class="mi">193</span>         <span class="n">config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_include_configs</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">194</span>     <span class="k">return</span> <span class="n">config</span>
+<span class="nn">File ~/code/dicfg/dicfg/reader.py:196,</span> in <span class="ni">_include_configs_dict</span><span class="nt">(config, search_paths)</span>
+<span class="g g-Whitespace">    </span><span class="mi">193</span> <span class="nd">@_include_configs</span><span class="o">.</span><span class="n">register</span>
+<span class="g g-Whitespace">    </span><span class="mi">194</span> <span class="k">def</span> <span class="nf">_include_configs_dict</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">195</span>     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">196</span>         <span class="n">config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_include_configs</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span>     <span class="k">return</span> <span class="n">config</span>
 
 <span class="nn">File ~/anaconda3/envs/mart/lib/python3.8/functools.py:875,</span> in <span class="ni">singledispatch.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kw)</span>
 <span class="g g-Whitespace">    </span><span class="mi">871</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="p">:</span>
@@ -431,18 +435,31 @@
 <span class="g g-Whitespace">    </span><span class="mi">873</span>                     <span class="s1">&#39;1 positional argument&#39;</span><span class="p">)</span>
 <span class="ne">--&gt; </span><span class="mi">875</span> <span class="k">return</span> <span class="n">dispatch</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
 
-<span class="nn">File ~/code/dicfg/dicfg/reader.py:184,</span> in <span class="ni">_include_configs_str</span><span class="nt">(config, search_paths)</span>
-<span class="g g-Whitespace">    </span><span class="mi">181</span> <span class="nd">@_include_configs</span><span class="o">.</span><span class="n">register</span>
-<span class="g g-Whitespace">    </span><span class="mi">182</span> <span class="k">def</span> <span class="nf">_include_configs_str</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">183</span>     <span class="k">if</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span> <span class="ow">in</span> <span class="n">_FILE_READERS</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">184</span>         <span class="n">config_path</span> <span class="o">=</span> <span class="n">_search_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">185</span>         <span class="n">open_config</span> <span class="o">=</span> <span class="n">_FILE_READERS</span><span class="p">[</span><span class="n">Path</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span><span class="p">](</span><span class="n">config_path</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">186</span>         <span class="k">return</span> <span class="n">_include_configs</span><span class="p">(</span><span class="n">open_config</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
+<span class="nn">File ~/code/dicfg/dicfg/reader.py:196,</span> in <span class="ni">_include_configs_dict</span><span class="nt">(config, search_paths)</span>
+<span class="g g-Whitespace">    </span><span class="mi">193</span> <span class="nd">@_include_configs</span><span class="o">.</span><span class="n">register</span>
+<span class="g g-Whitespace">    </span><span class="mi">194</span> <span class="k">def</span> <span class="nf">_include_configs_dict</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">195</span>     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">196</span>         <span class="n">config</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_include_configs</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span>     <span class="k">return</span> <span class="n">config</span>
 
-<span class="nn">File ~/code/dicfg/dicfg/reader.py:173,</span> in <span class="ni">_search_config</span><span class="nt">(config_name, search_paths)</span>
-<span class="g g-Whitespace">    </span><span class="mi">171</span>     <span class="k">if</span> <span class="n">config_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-<span class="g g-Whitespace">    </span><span class="mi">172</span>         <span class="k">return</span> <span class="n">config_path</span>
-<span class="ne">--&gt; </span><span class="mi">173</span> <span class="k">raise</span> <span class="n">ConfigNotFoundError</span><span class="p">(</span><span class="n">config_name</span><span class="p">)</span>
+<span class="nn">File ~/anaconda3/envs/mart/lib/python3.8/functools.py:875,</span> in <span class="ni">singledispatch.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">871</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">872</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">funcname</span><span class="si">}</span><span class="s1"> requires at least &#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">873</span>                     <span class="s1">&#39;1 positional argument&#39;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">875</span> <span class="k">return</span> <span class="n">dispatch</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+<span class="nn">File ~/code/dicfg/dicfg/reader.py:187,</span> in <span class="ni">_include_configs_str</span><span class="nt">(config, search_paths)</span>
+<span class="g g-Whitespace">    </span><span class="mi">184</span> <span class="nd">@_include_configs</span><span class="o">.</span><span class="n">register</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span> <span class="k">def</span> <span class="nf">_include_configs_str</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span>     <span class="k">if</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span> <span class="ow">in</span> <span class="n">_FILE_READERS</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">187</span>         <span class="n">config_path</span> <span class="o">=</span> <span class="n">_search_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span>         <span class="n">open_config</span> <span class="o">=</span> <span class="n">_FILE_READERS</span><span class="p">[</span><span class="n">Path</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span><span class="p">](</span><span class="n">config_path</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">189</span>         <span class="k">return</span> <span class="n">_include_configs</span><span class="p">(</span><span class="n">open_config</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
+
+<span class="nn">File ~/code/dicfg/dicfg/reader.py:176,</span> in <span class="ni">_search_config</span><span class="nt">(config_name, search_paths)</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span>     <span class="k">if</span> <span class="n">config_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">175</span>         <span class="k">return</span> <span class="n">config_path</span>
+<span class="ne">--&gt; </span><span class="mi">176</span> <span class="k">raise</span> <span class="n">ConfigNotFoundError</span><span class="p">(</span><span class="n">config_name</span><span class="p">)</span>
 
 <span class="ne">ConfigNotFoundError</span>: my_other_config.yml
 </pre></div>
@@ -467,7 +484,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># adding &quot;./my_other_config_dir&quot; to search path</span>
-<span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;myconfig&#39;</span><span class="p">,</span> <span class="n">search_paths</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;./my_other_config_dir&quot;</span><span class="p">,))</span>
+<span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;myconfig&quot;</span><span class="p">,</span> <span class="n">search_paths</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;./my_other_config_dir&quot;</span><span class="p">,))</span>
 <span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_int&quot;</span><span class="p">:</span> <span class="s2">&quot;my_other_config.yml&quot;</span><span class="p">}}}</span>
 <span class="n">pprint</span><span class="p">(</span>
     <span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="o">=</span><span class="n">user_config</span><span class="p">),</span>

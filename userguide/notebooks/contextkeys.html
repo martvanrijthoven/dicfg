@@ -345,10 +345,27 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="kn">from</span> <span class="nn">dicfg.reader</span> <span class="kn">import</span> <span class="n">ConfigReader</span>
-
+<span class="kn">from</span> <span class="nn">dicfg</span> <span class="kn">import</span> <span class="n">ConfigReader</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ./configs/config.yml
 <span class="c1"># adding context1 and context2 as context keys</span>
 <span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;myconfig&quot;</span><span class="p">,</span> <span class="n">context_keys</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;context1&quot;</span><span class="p">,</span> <span class="s2">&quot;context2&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>default:
+    config_int: 1
+    config_string: &quot;fire&quot;
+    config_list: [1, 2, 3]
+    config_none: None
+    config_dict:
+        sub_config: &quot;water&quot;
 </pre></div>
 </div>
 </div>
@@ -356,6 +373,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># context1 and context2 will have the same content as the default context</span>
+
 <span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>

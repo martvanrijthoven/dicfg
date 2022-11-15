@@ -19,22 +19,45 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 14,
+   "execution_count": 3,
    "id": "191a92c0-bfa0-4472-9746-9105170213c0",
    "metadata": {},
    "outputs": [],
    "source": [
     "from pprint import pprint\n",
     "\n",
-    "from dicfg.reader import ConfigReader\n",
-    "\n",
+    "from dicfg import ConfigReader"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "4759d00d-b5d5-4dd3-bec7-6b76360e08ae",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "default:\n",
+      "    config_int: 1\n",
+      "    config_string: \"fire\"\n",
+      "    config_list: [1, 2, 3]\n",
+      "    config_none: None\n",
+      "    config_dict:\n",
+      "        sub_config: \"water\""
+     ]
+    }
+   ],
+   "source": [
+    "!cat ./configs/config.yml\n",
     "# adding context1 and context2 as context keys\n",
     "config_reader = ConfigReader(name=\"myconfig\", context_keys=(\"context1\", \"context2\"))"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 15,
+   "execution_count": 5,
    "id": "691df6c8-620c-4145-a44f-1a47b93495d5",
    "metadata": {},
    "outputs": [
@@ -62,6 +85,7 @@
    ],
    "source": [
     "# context1 and context2 will have the same content as the default context\n",
+    "\n",
     "pprint(config_reader.read(), sort_dicts=False)"
    ]
   },
@@ -75,7 +99,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 17,
+   "execution_count": 6,
    "id": "7eda3c32-ab49-41ad-bed2-675184aa9b54",
    "metadata": {},
    "outputs": [

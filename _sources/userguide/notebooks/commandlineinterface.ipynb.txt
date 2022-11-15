@@ -11,7 +11,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 2,
+   "execution_count": 6,
    "id": "5fa54f33",
    "metadata": {},
    "outputs": [],
@@ -20,9 +20,7 @@
     "from copy import copy\n",
     "from pprint import pprint\n",
     "\n",
-    "from dicfg.reader import ConfigReader\n",
-    "\n",
-    "config_reader = ConfigReader(name='myconfig')\n",
+    "from dicfg import ConfigReader\n",
     "\n",
     "# copying sys.argv such that we can re-use it later\n",
     "sys_argv = copy(sys.argv)"
@@ -30,7 +28,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 7,
    "id": "d72945a7-0345-4c2a-8578-6041378e1fb5",
    "metadata": {},
    "outputs": [
@@ -49,7 +47,8 @@
     }
    ],
    "source": [
-    "!cat ./configs/config.yml"
+    "!cat ./configs/config.yml\n",
+    "config_reader = ConfigReader(name=\"myconfig\")"
    ]
   },
   {
@@ -62,7 +61,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": 8,
    "id": "64b3bf25",
    "metadata": {},
    "outputs": [],
@@ -73,7 +72,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
+   "execution_count": 9,
    "id": "01a63449",
    "metadata": {},
    "outputs": [
@@ -104,7 +103,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 6,
+   "execution_count": 10,
    "id": "97b05381",
    "metadata": {},
    "outputs": [
@@ -139,7 +138,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": 11,
    "id": "2d07a39b-5d5b-4e25-ad9e-fc8084879777",
    "metadata": {},
    "outputs": [
@@ -160,14 +159,6 @@
     "user_config = {\"myconfig\": {\"default\": {\"config_int\": -1}}}\n",
     "pprint(config_reader.read(user_config), sort_dicts=False)"
    ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "47b1a5f9-234f-449c-b7a9-6d89ff5d59a8",
-   "metadata": {},
-   "outputs": [],
-   "source": []
   }
  ],
  "metadata": {

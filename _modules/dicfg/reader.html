@@ -349,10 +349,9 @@
 
 <div class="viewcode-block" id="ConfigReader.__init__"><a class="viewcode-back" href="../../_autosummary/dicfg.reader.ConfigReader.html#dicfg.reader.ConfigReader.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dicfg&quot;</span><span class="p">,</span>
-        <span class="n">configs_folder</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./configs/&quot;</span><span class="p">),</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">main_config_path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./configs/config.yml&quot;</span><span class="p">),</span>
         <span class="n">presets_folder_name</span><span class="o">=</span><span class="s2">&quot;presets&quot;</span><span class="p">,</span>
-        <span class="n">config_file_name</span><span class="o">=</span><span class="s2">&quot;config.yml&quot;</span><span class="p">,</span>
         <span class="n">default_key</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
         <span class="n">context_keys</span><span class="o">=</span><span class="p">(),</span>
         <span class="n">search_paths</span><span class="o">=</span><span class="p">(),</span>
@@ -360,23 +359,32 @@
         <span class="sd">&quot;&quot;&quot;Init ConfigReader</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (str, optional): Name of config. Used as a reference in user configs and cli Defaults to &quot;dicfg&quot;.</span>
-<span class="sd">            configs_folder (_type_, optional): Main configs folder. Defaults to Path().</span>
+<span class="sd">            name (str): Name of config. Used as a reference in user configs and cli settings.</span>
+<span class="sd">            config_file_nam (str, optional): Main config file name. Defaults to &quot;config.yml&quot;.</span>
 <span class="sd">            presets_folder_name (str, optional): Presets folder. Defaults to &#39;presets&#39;.</span>
-<span class="sd">            config_file_name (str, optional): Main config file name. Defaults to &quot;config.yml&quot;.</span>
 <span class="sd">            default_key (str, optional): Default context keys. Defaults to &quot;default&quot;.</span>
 <span class="sd">            context_keys (tuple, optional): Addtional context keys. Defaults to ().</span>
 <span class="sd">            search_paths (tuple, optional): Search paths for config file inerpolation. Defaults to ().</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_configs_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">configs_folder</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_main_config_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">main_config_path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_config_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;&quot;&quot;No main config file found at: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_main_config_path</span><span class="si">}</span><span class="s2">. </span>
+<span class="s2">                    The default main config path can be set via the &#39;main_config_path argument&#39;&quot;&quot;&quot;</span>
+            <span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_default_key</span> <span class="o">=</span> <span class="n">default_key</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_context_keys</span> <span class="o">=</span> <span class="n">context_keys</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_search_paths</span> <span class="o">=</span> <span class="n">search_paths</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_presets_folder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configs_folder</span> <span class="o">/</span> <span class="n">presets_folder_name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_config_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configs_folder</span> <span class="o">/</span> <span class="n">config_file_name</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_configs_folder</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_presets_folder</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_configs_folder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_config_path</span><span class="o">.</span><span class="n">parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_presets_folder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configs_folder</span> <span class="o">/</span> <span class="n">presets_folder_name</span></div>
 
 <div class="viewcode-block" id="ConfigReader.read"><a class="viewcode-back" href="../../_autosummary/dicfg.reader.ConfigReader.html#dicfg.reader.ConfigReader.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -401,12 +409,7 @@
             <span class="n">user_config_search_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_search_paths</span>
         <span class="p">)</span>
 
-        <span class="n">self_config</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-            <span class="n">self_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_path</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">warning</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;No main config file found at: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_path</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="n">warn</span><span class="p">(</span><span class="n">warning</span><span class="p">)</span>
+        <span class="n">self_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_main_config_path</span><span class="p">)</span>
 
         <span class="n">preset_configs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_presets</span><span class="p">(</span><span class="n">presets</span><span class="p">)</span>
         <span class="n">user_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_user_config</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>

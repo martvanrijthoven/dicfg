@@ -343,23 +343,13 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="kn">from</span> <span class="nn">dicfg.reader</span> <span class="kn">import</span> <span class="n">ConfigReader</span>
+<span class="kn">from</span> <span class="nn">dicfg</span> <span class="kn">import</span> <span class="n">ConfigReader</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="the-first-step-is-to-create-a-configreader-object">
-<h2>The first step is to <strong>create a ConfigReader object</strong>.<a class="headerlink" href="#the-first-step-is-to-create-a-configreader-object" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;myconfig&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="the-second-step-is-to-create-a-configs-folder-containing-a-main-config-file-config-yml">
-<h2>The second step is to <strong>create a configs folder containing</strong> a main config file: <strong>config.yml</strong>.<a class="headerlink" href="#the-second-step-is-to-create-a-configs-folder-containing-a-main-config-file-config-yml" title="Permalink to this heading">#</a></h2>
+<section id="the-first-step-is-to-create-a-configs-folder-containing-a-main-config-file-config-yml">
+<h2>The first step is to <strong>create a configs folder containing</strong> a main config file: <strong>config.yml</strong>.<a class="headerlink" href="#the-first-step-is-to-create-a-configs-folder-containing-a-main-config-file-config-yml" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ./configs/config.yml
@@ -379,11 +369,23 @@
 </div>
 </div>
 </section>
+<section id="the-second-step-is-to-create-a-configreader-object">
+<h2>The second step is to <strong>create a ConfigReader object</strong>.<a class="headerlink" href="#the-second-step-is-to-create-a-configreader-object" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A name should be set, which will be used later as a reference in user configs and command line interface.</span>
+<span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;myconfig&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="the-main-config-file-can-be-read-with-the-read-method-of-the-configreader-class">
 <h2>The main config file can be read with the <strong>.read method</strong> of the ConfigReader class.<a class="headerlink" href="#the-main-config-file-can-be-read-with-the-read-method-of-the-configreader-class" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The config reader will automatically read from ./configs/config.yml</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ConfigReader will automatically read  from .configs/config.</span>
+<span class="c1"># However you can change this by setting a different main_config_path when initializing ConfigReader</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -404,7 +406,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note the &#39;myconfig&#39; key in the &#39;user_config&#39;,</span>
-<span class="c1">#which corresponds to the name given when initializing ConfigReader</span>
+<span class="c1"># which corresponds to the name given when initializing ConfigReader</span>
 
 <span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;config_int&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}}</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -498,23 +500,23 @@
 <nav id="bd-toc-nav" class="page-toc">
     <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-first-step-is-to-create-a-configreader-object">
+  <a class="reference internal nav-link" href="#the-first-step-is-to-create-a-configs-folder-containing-a-main-config-file-config-yml">
    The first step is to
-   <strong>
-    create a ConfigReader object
-   </strong>
-   .
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-second-step-is-to-create-a-configs-folder-containing-a-main-config-file-config-yml">
-   The second step is to
    <strong>
     create a configs folder containing
    </strong>
    a main config file:
    <strong>
     config.yml
+   </strong>
+   .
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-second-step-is-to-create-a-configreader-object">
+   The second step is to
+   <strong>
+    create a ConfigReader object
    </strong>
    .
   </a>
