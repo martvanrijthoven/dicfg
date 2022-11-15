@@ -39,10 +39,9 @@ class ConfigReader:
 
     def __init__(
         self,
-        name="dicfg",
-        configs_folder=Path("./configs/"),
+        name: str,
+        main_config_path=Path("./configs/config.yml"),
         presets_folder_name="presets",
-        config_file_name="config.yml",
         default_key="default",
         context_keys=(),
         search_paths=(),
@@ -50,23 +49,32 @@ class ConfigReader:
         """Init ConfigReader
 
         Args:
-            name (str, optional): Name of config. Used as a reference in user configs and cli Defaults to "dicfg".
-            configs_folder (_type_, optional): Main configs folder. Defaults to Path().
+            name (str): Name of config. Used as a reference in user configs and cli settings.
+            config_file_nam (str, optional): Main config file name. Defaults to "config.yml".
             presets_folder_name (str, optional): Presets folder. Defaults to 'presets'.
-            config_file_name (str, optional): Main config file name. Defaults to "config.yml".
             default_key (str, optional): Default context keys. Defaults to "default".
             context_keys (tuple, optional): Addtional context keys. Defaults to ().
             search_paths (tuple, optional): Search paths for config file inerpolation. Defaults to ().
         """
 
         self._name = name
-        self._configs_folder = Path(configs_folder)
+        self._main_config_path = Path(main_config_path)
+
+        if not self._main_config_path.exists():
+            raise ValueError(
+                f"""No main config file found at: {self._main_config_path}. 
+                    The default main config path can be set via the 'main_config_path argument'"""
+            )
+
         self._default_key = default_key
         self._context_keys = context_keys
         self._search_paths = search_paths
 
+        self._configs_folder = None
+        self._presets_folder = None
+
+        self._configs_folder = self._main_config_path.parent
         self._presets_folder = self._configs_folder / presets_folder_name
-        self._config_path = self._configs_folder / config_file_name
 
     def read(
         self,
@@ -91,12 +99,7 @@ class ConfigReader:
             user_config_search_path, self._search_paths
         )
 
-        self_config = {}
-        if self._config_path.exists():
-            self_config = self._read(self._config_path)
-        else:
-            warning = f"No main config file found at: {self._config_path}"
-            warn(warning)
+        self_config = self._read(self._main_config_path)
 
         preset_configs = self._read_presets(presets)
         user_config = self._read_user_config(user_config)

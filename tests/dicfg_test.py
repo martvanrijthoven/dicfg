@@ -3,10 +3,10 @@ import os
 from dataclasses import dataclass
 from pathlib import Path
 
-from pytest import raises, warns
+from pytest import raises
 
-from dicfg.factory import build_config
-from dicfg.reader import ConfigNotFoundError, ConfigReader
+from dicfg import ConfigReader, build_config
+from dicfg.reader import ConfigNotFoundError
 
 os.environ['ENV_TEST_VAR'] = 'dicfg'
 
@@ -87,8 +87,3 @@ def test_replace_error():
         user_config_path = Path("./testconfigs/user_config_replace_error.yml")
         config = config_reader.read(user_config_path)
         build_config(config["testkey"])
-
-
-def test_warning():
-    with warns(UserWarning):
-        _ = ConfigReader(name="testconfig", config_file_name="none").read()

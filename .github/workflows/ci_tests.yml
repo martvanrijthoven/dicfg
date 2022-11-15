@@ -1,0 +1,19 @@
+name: Tests
+
+on:
+  push:
+    paths:
+      - "dicfg/**"
+      - "tests/**"
+      - .github/workflows/tests.yml
+      - "!dicfg/_version.py"
+  pull_request:
+    paths:
+      - "dicfg/**"
+      - "tests/**"
+      - .github/workflows/tests.yml
+      - "!dicfg/_version.py"
+
+jobs:
+  call-tests:
+    uses: ./.github/workflows/tests.yml
