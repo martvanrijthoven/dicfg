@@ -100,7 +100,7 @@ def _update(a: ConfigValue, b: ConfigValue):
 
     for k, v in b.items():
         if k in a:
-            if type(a[k]) != type(b[k]):
+            if not isinstance(b[k], type(a[k])):
                 a[k] = b[k]
             else:
                 a[k].merge(v)

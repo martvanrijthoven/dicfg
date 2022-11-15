@@ -8,7 +8,7 @@ from pytest import raises
 from dicfg import ConfigReader, build_config
 from dicfg.reader import ConfigNotFoundError
 
-os.environ['ENV_TEST_VAR'] = 'dicfg'
+os.environ["ENV_TEST_VAR"] = "dicfg"
 
 
 @dataclass
@@ -48,7 +48,9 @@ def test_dicfg():
 def test_cli():
 
     sys_config_reader = ConfigReader(
-        name="testconfig", main_config_path="./configs/test.yml", context_keys=("testkey",)
+        name="testconfig",
+        main_config_path="./configs/test.yml",
+        context_keys=("testkey",),
     )
     sys_argv = sys.argv
 

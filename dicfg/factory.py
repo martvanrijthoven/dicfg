@@ -71,13 +71,12 @@ class _ObjectFactory:
 
     def _get_reference(self, reference: str):
         matches = re.findall("\\${(.*?)}", reference)
-        if len(matches)==1 and len(matches[0])+3 == len(reference):
+        if len(matches) == 1 and len(matches[0]) + 3 == len(reference):
             return self._object_interpolation(matches[0])
         return self._string_interpolation(reference, matches)
 
-
     def _object_interpolation(self, reference: str):
-        if reference.startswith('$env.'):
+        if reference.startswith("$env."):
             return os.environ[reference.split("$env.")[1]]
 
         references = reference.split(_REFERENCE_MAP_SYMBOL)

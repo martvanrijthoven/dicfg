@@ -6,7 +6,6 @@ from copy import deepcopy
 from functools import partial, singledispatch
 from pathlib import Path
 from typing import List, Union
-from warnings import warn
 
 import yaml
 
@@ -62,8 +61,7 @@ class ConfigReader:
 
         if not self._main_config_path.exists():
             raise ValueError(
-                f"""No main config file found at: {self._main_config_path}. 
-                    The default main config path can be set via the 'main_config_path argument'"""
+                f"No main config file found at: {self._main_config_path}. The default main config path can be set via the 'main_config_path argument'"
             )
 
         self._default_key = default_key
