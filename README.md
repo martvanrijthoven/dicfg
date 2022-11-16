@@ -13,6 +13,15 @@
 
 Dicfg is a **configuration system** that supports **dependency injection** via **object interpolation** in config files.
 
+**Main Features**
+
+- Loading of predefined config files (YAML and JSON).
+- Overwrite config with user_config files/dictionaries, command line interface, and/or presets.
+- Customize merge/replace behavior for dictionaries and lists.
+- Interpolation support for sub-config files, config variables, and environment variables.
+- Build object instances directly in the config.
+- Dependency injection via object interpolation: configure all object dependencies directly in the config.
+- Use object attribute interpolation for referencing object attributes directly in the config file.
 
 ## Installation 
 
@@ -32,15 +41,5 @@ conda install -c conda-forge dicfg
 
 
 
-
-Main Features
-
-- Loading of predefined config files (YAML and JSON).
-- Overwrite config with user_config files/dictionaries, command line interface, and/or presets.
-- Customize merge/replace behavior for dictionaries and lists.
-- Interpolation support for sub-config files, config variables, and environment variables.
-- Build object instances directly in the config.
-- Dependency injection via object interpolation: configure all object dependencies directly in the config.
-- Use object attribute interpolation for referencing object attributes directly in the config file.
 
 
