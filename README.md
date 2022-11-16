@@ -14,12 +14,21 @@
 Dicfg is a **configuration system** that supports **dependency injection** via **object interpolation** in config files.
 
 
-## Installation
+## Installation 
 
-```bash
-pip install dicfg
-```
-----
+<table>
+  <thead>
+    <tr>
+      <th width="500px"><pre><code>pip install dicfg</code></pre></th>
+      <th width="500px"><pre><code>conda install -c conda-forge dicfg</code></pre></th>
+    </tr>
+  </thead>
+  <tbody>
+</td>
+</tr>
+
+  </tbody>
+</table>
 
 ## Docs
 
