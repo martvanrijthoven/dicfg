@@ -1,15 +1,24 @@
 :html_theme.sidebar_secondary.remove:
 
 Get Started with Dicfg
-===========
+======================
 
 Installation
 ^^^^^^^^^^^^
 
-.. code-block:: bash
-   
-   pip install dicfg
+.. grid:: 1 1 2 2
 
+    .. grid-item::
+
+        .. code-block:: bash
+        
+            pip install dicfg
+
+    .. grid-item::
+
+        .. code-block:: bash
+
+            conda install -c conda-forge dicfg
 
 User Guide
 ^^^^^^^^^^
@@ -22,7 +31,6 @@ User Guide
 
 
 .. grid:: 1 1 5 5
-
 
   .. button-link:: userguide/notebooks/introduction.html
       :color: primary
