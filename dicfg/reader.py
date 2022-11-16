@@ -38,7 +38,7 @@ class ConfigReader:
 
     Args:
         name (str): Name of config. Used as a reference in user configs and cli settings.
-        main_config_path (Union[str, Path], optional): Path to main config. Defaults to Path("./configs/config.yml").
+        main_config_path (Union[str, Path], optional): Path to main config. Defaults to  "./configs/config.yml".
         presets_folder_name (str, optional): Presets folder. Defaults to 'presets'.
         default_key (str, optional): Default context keys. Defaults to "default".
         context_keys (tuple, optional): Addtional context keys. Defaults to ().
@@ -48,7 +48,7 @@ class ConfigReader:
     def __init__(
         self,
         name: str,
-        main_config_path: Union[str, Path] = Path("./configs/config.yml"),
+        main_config_path: Union[str, Path] = "./configs/config.yml",
         presets_folder_name: str = "presets",
         default_key: str = "default",
         context_keys: tuple = (),

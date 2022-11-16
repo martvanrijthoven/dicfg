@@ -33,3 +33,20 @@ Homepage = "https://github.com/martvanrijthoven/dicfg/"
 
 [tool.setuptools.dynamic]
 version = { attr = "dicfg.__version__" }
+
+[tool.ruff]
+ignore = [
+    'E501',
+    'F403',
+]
+line-length = 79
+select = [
+    'B',
+    'C',
+    'E',
+    'F',
+    'W',
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ['F401']
