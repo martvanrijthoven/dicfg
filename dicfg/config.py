@@ -4,7 +4,7 @@ from functools import reduce
 from typing import Any, Callable, Tuple
 
 
-_REPLACE_IDENTIFIER = r"\@replace\((.*)\)"
+_REPLACE_PATTERN = r"\@replace\((.*)\)"
 
 
 class ConfigValue:
@@ -109,7 +109,7 @@ def _update(a: ConfigValue, b: ConfigValue):
 
 
 def _get_merger(key: str, value):
-    replace_match = re.search(_REPLACE_IDENTIFIER, key)
+    replace_match = re.search(_REPLACE_PATTERN, key)
     if replace_match is None:
         return key, None
 

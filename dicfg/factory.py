@@ -11,12 +11,16 @@ _REFERENCE_MAP_SYMBOL = ":"
 _REFERENCE_ATTRIBUTE_SYMBOL = "."
 
 _OBJECT_KEY = "*object"
-_RETURN_TYPE_KEY = "*return_type"
 
 
 class _ObjectFactory:
     def __init__(self, config: dict):
         self._configuration = config
+
+        self._re_pattern_map = {
+            "\\${\\$env.(.*)}": os.environ.get,
+            "\\${\\$(.*)}": self._parse_object_str,
+        }
 
     def build_config(self):
         return self._build(self._configuration)
@@ -54,12 +58,9 @@ class _ObjectFactory:
 
     def _build_object(self, value: dict):
         kwargs = self._build(value)
-        args = [] if "*args" not in kwargs else value.pop("*args")
         object_string = value.pop(_OBJECT_KEY)
+        args = value.pop("*args", ())
         attribute = self._parse_object_str(object_string)
-
-        if _RETURN_TYPE_KEY in value:
-            return attribute
         return attribute(*args, **kwargs)
 
     def _parse_object_str(self, object_string: str):
@@ -70,15 +71,17 @@ class _ObjectFactory:
         return getattr(module, attribute_string)
 
     def _get_reference(self, reference: str):
+        for pattern, parse in self._re_pattern_map.items():
+            match = re.fullmatch(pattern, reference)
+            if match is not None:
+                return parse(match.group(1))
+
         matches = re.findall("\\${(.*?)}", reference)
         if len(matches) == 1 and len(matches[0]) + 3 == len(reference):
             return self._object_interpolation(matches[0])
         return self._string_interpolation(reference, matches)
 
     def _object_interpolation(self, reference: str):
-        if reference.startswith("$env."):
-            return os.environ[reference.split("$env.")[1]]
-
         references = reference.split(_REFERENCE_MAP_SYMBOL)
         reference = reduce(operator.getitem, references[:-1], self._configuration)
         attributes = references[-1].split(_REFERENCE_ATTRIBUTE_SYMBOL)

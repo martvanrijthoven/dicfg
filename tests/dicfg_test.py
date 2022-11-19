@@ -5,7 +5,7 @@ from pathlib import Path
 
 from pytest import raises
 
-from dicfg import ConfigReader, build_config
+from dicfg import ConfigReader, build_config, __version__
 from dicfg.reader import ConfigNotFoundError
 
 os.environ["ENV_TEST_VAR"] = "dicfg"
@@ -40,7 +40,7 @@ def test_dicfg():
     assert test_config["test_list2"] == ["test", "test2"]
     assert test_config["test_list3"] == ["test2"]
     assert isinstance(test_config["test_object"], ConfigNotFoundError)
-    assert test_config["test_object_type"] is ConfigNotFoundError
+    assert test_config["test_object_interpolation"] == __version__
     assert isinstance(test_config["test_object_list"][0], ConfigNotFoundError)
     assert test_config["test_object_reference"] is test_config["test_object"]
 
