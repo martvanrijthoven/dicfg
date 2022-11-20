@@ -6,11 +6,6 @@ on:
     paths:
       - "dicfg/_version.py"
 
-  pull_request:
-    branches: [main]
-    paths:
-      - "dicfg/_version.py"
-
 jobs:
   call-tests:
     uses: ./.github/workflows/tests.yml
