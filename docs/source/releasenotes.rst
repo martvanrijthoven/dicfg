@@ -15,6 +15,18 @@ Release Notes
 
 ----
 
+
+Version 0.0.5
+^^^^^^^^^^^^^
+
+ - Feature: added direct/python object interpolation
+ - Removed: return type option (can now be done via direct/python object interpolation)
+ - Packages: added conda forge package
+ - Docs: fixed api formating 
+ - CI: added pre-commit
+
+
+
 Version 0.0.4
 ^^^^^^^^^^^^^
 
