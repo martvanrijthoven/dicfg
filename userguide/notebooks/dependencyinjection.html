@@ -7,24 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Dependency Injection &#8212; dicfg</title>
-  <script>
+  
+  
+  
+  <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+  <link href="../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
 
   
-  <link rel="stylesheet"
-    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
@@ -33,7 +33,8 @@
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -55,6 +56,10 @@
   
   
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
   
   <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
@@ -118,32 +123,32 @@
     </p>
     <ul id="navbar-main-elements" class="navbar-nav">
         
-                <li class="nav-item">
-                    <a class="nav-link" href="../../getstarted.html">
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../getstarted.html">
                         Get Started with Dicfg
-                    </a>
-                </li>
+                      </a>
+                    </li>
                 
 
-                <li class="nav-item current active">
-                    <a class="nav-link" href="../index.html">
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
                         User Guide
-                    </a>
-                </li>
+                      </a>
+                    </li>
                 
 
-                <li class="nav-item">
-                    <a class="nav-link" href="../../api.html">
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api.html">
                         API Reference
-                    </a>
-                </li>
+                      </a>
+                    </li>
                 
 
-                <li class="nav-item">
-                    <a class="nav-link" href="../../releasenotes.html">
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../releasenotes.html">
                         Release Notes
-                    </a>
-                </li>
+                      </a>
+                    </li>
                 
     </ul>
 </nav>
@@ -152,19 +157,21 @@
     </div>
 
     <div id="navbar-end">
-      <div class="navbar-end-item navbar-end__search-button-container">
-        
-<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
   <i class="fa-solid fa-magnifying-glass"></i>
 </button>
-      </div>
+        </div>
+      
       
       <div class="navbar-end-item">
-        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
-    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
-    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
-    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
-</span>
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
       </div>
       
       <div class="navbar-end-item">
@@ -188,11 +195,13 @@
 
 
   
-  <div class="search-button-container--mobile">
-<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
   <i class="fa-solid fa-magnifying-glass"></i>
 </button>
-  </div>
+    </div>
+  
 
   
   <label class="sidebar-toggle secondary-toggle" for="__secondary">
@@ -222,32 +231,32 @@
     </p>
     <ul id="navbar-main-elements" class="navbar-nav">
         
-                <li class="nav-item">
-                    <a class="nav-link" href="../../getstarted.html">
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../getstarted.html">
                         Get Started with Dicfg
-                    </a>
-                </li>
+                      </a>
+                    </li>
                 
 
-                <li class="nav-item current active">
-                    <a class="nav-link" href="../index.html">
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
                         User Guide
-                    </a>
-                </li>
+                      </a>
+                    </li>
                 
 
-                <li class="nav-item">
-                    <a class="nav-link" href="../../api.html">
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api.html">
                         API Reference
-                    </a>
-                </li>
+                      </a>
+                    </li>
                 
 
-                <li class="nav-item">
-                    <a class="nav-link" href="../../releasenotes.html">
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../releasenotes.html">
                         Release Notes
-                    </a>
-                </li>
+                      </a>
+                    </li>
                 
     </ul>
 </nav>
@@ -261,11 +270,11 @@
     <div class="sidebar-header-items__end">
       
       <div class="navbar-end-item">
-        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
-    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
-    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
-    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
-</span>
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
       </div>
       
       <div class="navbar-end-item">
@@ -322,8 +331,11 @@
     </div>
   </div>
 
+  
+  <div id="rtd-footer-container"></div>
+
       </div>
-      <main class="bd-main">
+      <main id="main-content" class="bd-main">
         
         
         <div class="bd-content">
@@ -338,7 +350,6 @@
               
   <section id="dependency-injection">
 <h1><strong>Dependency Injection</strong><a class="headerlink" href="#dependency-injection" title="Permalink to this heading">#</a></h1>
-<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
@@ -434,61 +445,7 @@
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_string&#39;: &#39;fire&#39;,
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7fe904235580&gt;}
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="types-can-be-build-when-using-return-type-key">
-<h2>Types can be build when using <strong>*return_type:</strong> key.<a class="headerlink" href="#types-can-be-build-when-using-return-type-key" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;myconfig&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;project_component&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;*object&quot;</span><span class="p">:</span> <span class="s2">&quot;__main__.ProjectComponent&quot;</span><span class="p">,</span>
-                <span class="c1"># The value for *return_type can be anything.</span>
-                <span class="c1"># However, it is highly recommended to use True as convention</span>
-                <span class="s2">&quot;*return_type&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
-            <span class="p">},</span>
-        <span class="p">},</span>
-    <span class="p">},</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">objects</span> <span class="o">=</span> <span class="n">build_config</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">])</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> build objects: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="n">pprint</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;default&#39;: {&#39;config_int&#39;: 1,
-             &#39;config_string&#39;: &#39;fire&#39;,
-             &#39;config_list&#39;: [1, 2, 3],
-             &#39;config_none&#39;: &#39;None&#39;,
-             &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
-             &#39;project_component&#39;: {&#39;*object&#39;: &#39;__main__.ProjectComponent&#39;,
-                                   &#39;*return_type&#39;: &#39;True&#39;}}}
-
- build objects: 
-
-{&#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;config_int&#39;: 1,
- &#39;config_list&#39;: [1, 2, 3],
- &#39;config_none&#39;: None,
- &#39;config_string&#39;: &#39;fire&#39;,
- &#39;project_component&#39;: &lt;class &#39;__main__.ProjectComponent&#39;&gt;}
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f1dc82a0df0&gt;}
 </pre></div>
 </div>
 </div>
@@ -546,8 +503,8 @@
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7fe904193100&gt;,
- &#39;project&#39;: &lt;__main__.MyProject object at 0x7fe904193130&gt;}
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f1dc82a0ac0&gt;,
+ &#39;project&#39;: &lt;__main__.MyProject object at 0x7f1dc82a0be0&gt;}
 
 project component name: my_project_component
 </pre></div>
@@ -612,12 +569,12 @@ project component name: my_project_component
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7fe90418f220&gt;,
- &#39;project&#39;: &lt;__main__.MyProject object at 0x7fe90418f400&gt;,
- &#39;my_interpolation_component&#39;: &lt;__main__.ProjectComponent object at 0x7fe90418f220&gt;}
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f1dc82a02b0&gt;,
+ &#39;project&#39;: &lt;__main__.MyProject object at 0x7f1dc82a08b0&gt;,
+ &#39;my_interpolation_component&#39;: &lt;__main__.ProjectComponent object at 0x7f1dc82a02b0&gt;}
 
-reference       project_component: &lt;__main__.ProjectComponent object at 0x7fe90418f220&gt;
-reference interpolation_component: &lt;__main__.ProjectComponent object at 0x7fe90418f220&gt;
+reference       project_component: &lt;__main__.ProjectComponent object at 0x7f1dc82a02b0&gt;
+reference interpolation_component: &lt;__main__.ProjectComponent object at 0x7f1dc82a02b0&gt;
 </pre></div>
 </div>
 </div>
@@ -680,9 +637,9 @@ reference interpolation_component: &lt;__main__.ProjectComponent object at 0x7fe
  &#39;config_list&#39;: [1, 2, 3],
  &#39;config_none&#39;: None,
  &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
- &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7fe904193ca0&gt;,
- &#39;project&#39;: &lt;__main__.MyProject object at 0x7fe904193250&gt;,
- &#39;my_attribute_component&#39;: &lt;__main__.ProjectComponent object at 0x7fe904193ca0&gt;,
+ &#39;project_component&#39;: &lt;__main__.ProjectComponent object at 0x7f1dc830c790&gt;,
+ &#39;project&#39;: &lt;__main__.MyProject object at 0x7f1dc830c6d0&gt;,
+ &#39;my_attribute_component&#39;: &lt;__main__.ProjectComponent object at 0x7f1dc830c790&gt;,
  &#39;my_attribute_component_name&#39;: &#39;my_project_component&#39;}
 
 my_attribute_component_name: my_project_component
@@ -750,15 +707,6 @@ my_attribute_component_name: my_project_component
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#types-can-be-build-when-using-return-type-key">
-   Types can be build when using
-   <strong>
-    *return_type:
-   </strong>
-   key.
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dependency-injection-can-be-done-by-object-interpolation">
    Dependency Injection can be done by
    <strong>
@@ -819,7 +767,8 @@ my_attribute_component_name: my_project_component
   
     
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
 
   <footer class="bd-footer"><div class="bd-footer__inner container">
   
@@ -831,6 +780,16 @@ my_attribute_component_name: my_project_component
 
 </p>
 
+  </div>
+  
+  <div class="footer-item">
+    <p class="theme-version">
+    Built with the
+    <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">
+        PyData Sphinx Theme
+    </a>
+    0.12.0.
+</p>
   </div>
   
   <div class="footer-item">
