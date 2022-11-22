@@ -16,6 +16,13 @@ Release Notes
 ----
 
 
+Version 0.0.6
+^^^^^^^^^^^^^
+
+ - Fix: replace behavior for type differences
+
+
+
 Version 0.0.5
 ^^^^^^^^^^^^^
 
