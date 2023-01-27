@@ -87,32 +87,3 @@ Main Features
 
    </div>
 
-.. .. raw:: html
-
-..     <div class="container">
-..     <div class="row">
-..         <div class="col">
-..             <div class="card">
-..             <img class="mx-auto" style="width:4rem; height:auto;" src="./_static/injection-up.png" alt="Card image cap">
-..             <a href="#" class="btn btn-primary">Get started</a>
-..             </div>
-
-..         </div>
-..         <div class="col">
-
-..             <div class="card">
-..             <img class="mx-auto" style="width:4rem; height:auto;" src="./_static/injection-up.png" alt="Card image cap">
-..             <a href="#" class="btn btn-primary">User Guide</a>
-..             </div>
-
-..         </div>
-..         <div class="col">
-
-..             <div class="card">
-..             <img class="mx-auto" style="width:4rem; height:auto;" src="./_static/injection-up.png" alt="Card image cap">
-..             <a href="#" class="btn btn-primary">API</a>
-..             </div>
-
-..         </div>
-..     </div>
-..     </div>
