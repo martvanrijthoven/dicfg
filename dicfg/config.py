@@ -37,7 +37,6 @@ class ConfigValue:
             self.data = _update(self, b)
         elif b.merger is not None:
             self.data = b.merger(self, b)
-            self.merger = b.merger
         else:
             self.data = self.merger(self, b)
         return self

@@ -8,3 +8,8 @@ default:
   test7: 
     test8: {hello: None}
   jsonconfig: testjson.json
+
+  deep_replace: 
+    a: 1
+    b: 2
+    

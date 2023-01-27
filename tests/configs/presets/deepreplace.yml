@@ -1,0 +1,4 @@
+default:
+  deep_replace@replace(true): 
+    c: 1
+    d: 2

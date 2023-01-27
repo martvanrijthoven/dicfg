@@ -83,6 +83,19 @@ def test_config_not_found_error():
         build_config(config["testkey"])
 
 
+def test_deep_replace():
+    config_reader = ConfigReader(
+        name="testconfig",
+        main_config_path="./configs/config.yml",
+    )
+    config = config_reader.read(
+        {"testconfig": {"default": {"deep_replace": {"c": 2}}}},
+        presets=("deepreplace.yml",),
+    )
+    test_config = build_config(config["default"])
+    assert test_config["deep_replace"] == {"c": 2, "d": 2}
+
+
 def test_replace_error():
     with raises(ValueError):
 
