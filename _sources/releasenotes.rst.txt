@@ -15,6 +15,11 @@ Release Notes
 
 ----
 
+Version 0.0.7
+^^^^^^^^^^^^^
+
+ - Fix: multiple replace behavior (e.g., with cli, presets, env vars)
+
 
 Version 0.0.6
 ^^^^^^^^^^^^^
