@@ -46,7 +46,6 @@ def test_dicfg():
 
 
 def test_cli():
-
     sys_config_reader = ConfigReader(
         name="testconfig",
         main_config_path="./configs/test.yml",
@@ -77,7 +76,6 @@ def test_cli():
 
 def test_config_not_found_error():
     with raises(ConfigNotFoundError):
-
         user_config_path = Path("./testconfigs/user_config_not_found.yml")
         config = config_reader.read(user_config_path)
         build_config(config["testkey"])
@@ -98,7 +96,6 @@ def test_deep_replace():
 
 def test_replace_error():
     with raises(ValueError):
-
         user_config_path = Path("./testconfigs/user_config_replace_error.yml")
         config = config_reader.read(user_config_path)
         build_config(config["testkey"])

@@ -16,7 +16,6 @@ class ConfigValue:
     """
 
     def __init__(self, data: Any, merger: Callable = None):
-
         self.merger = merger
         self.data = self._init(data)
 
@@ -55,7 +54,6 @@ class ConfigDict(ConfigValue, UserDict):
     """
 
     def _init(self, data: dict):
-
         for key in list(data):
             _key, merger = _get_merger(key, data[key])
             data[_key] = _config_factory(data.pop(key), merger=merger)
@@ -75,7 +73,6 @@ class ConfigList(ConfigValue, UserList):
     """
 
     def _init(self, data: list):
-
         for idx, value in enumerate(data):
             data[idx] = _config_factory(value)
         return data

@@ -54,7 +54,6 @@ class ConfigReader:
         context_keys: tuple = (),
         search_paths: tuple = (),
     ):
-
         self._name = name
         self._main_config_path = Path(main_config_path)
 
