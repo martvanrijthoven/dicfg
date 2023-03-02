@@ -156,7 +156,7 @@ class ConfigReader:
 def _create_dict_from_keys(keys: list, value) -> dict:
     dictionary = defaultdict(dict)
     if len(keys) <= 1:
-        dictionary[keys[0]] = ast.literal_eval(value)
+        dictionary[keys[0]] = ast.literal_eval("\'" + value + "\'")
     else:
         dictionary[keys[0]] = dict(_create_dict_from_keys(keys[1:], value))
     return dict(dictionary)
