@@ -93,6 +93,7 @@ def _update(a: ConfigValue, b: ConfigValue):
     if not isinstance(b, ConfigDict):
         return b.data
 
+    prev_key = None
     for k, v in b.items():
         if k in a:
             if type(b[k]) != type(a[k]):  # noqa: E721
@@ -100,7 +101,11 @@ def _update(a: ConfigValue, b: ConfigValue):
             else:
                 a[k].merge(v)
         else:
-            a[k] = v
+            if prev_key is None:
+                a.data = {**{k: v}, **a.data}
+            else:
+                a.data = _insert(a, prev_key, k, v)
+        prev_key = k
     return a.data
 
 
@@ -128,6 +133,15 @@ def _get_replace(replace_match: re.Match):
 
 def _merge(a: ConfigValue, b: ConfigValue):
     return a.merge(b)
+
+
+def _insert(dictionary, prev_key, k, v):
+    new_dict = {}
+    for _k, _v in dictionary.items():
+        new_dict[_k] = _v
+        if prev_key == _k:
+            new_dict[k] = v
+    return new_dict
 
 
 def merge(*args: Tuple[dict]) -> ConfigDict:
