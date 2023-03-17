@@ -6,7 +6,7 @@ from functools import reduce, singledispatchmethod
 from importlib import import_module
 from typing import Union
 
-from loguru import logger
+
 
 _REFERENCE_START_SYMBOL = "$"
 _REFERENCE_MAP_SYMBOL = ":"
@@ -36,7 +36,8 @@ class _ObjectFactory:
             "\\${\\$(.*)}": self._parse_object_str,
         }
 
-        self._logger = get_logger(log_folder=log_folder)
+#         self._logger = get_logger(log_folder=log_folder)
+        self._logger = None
 
     def build_config(self):
         return self._build(self._configuration)
