@@ -7,7 +7,6 @@ from importlib import import_module
 from typing import Union
 
 
-
 _REFERENCE_START_SYMBOL = "$"
 _REFERENCE_MAP_SYMBOL = ":"
 _REFERENCE_ATTRIBUTE_SYMBOL = "."
@@ -27,16 +26,17 @@ def get_logger(log_folder):
     )
     return logger.bind(task="Dicfg")
 
+
 class _ObjectFactory:
     def __init__(self, config: dict, log_folder=None):
         self._configuration = config
-        
+
         self._re_pattern_map = {
             "\\${\\$env.(.*)}": os.environ.get,
             "\\${\\$(.*)}": self._parse_object_str,
         }
 
-#         self._logger = get_logger(log_folder=log_folder)
+        #         self._logger = get_logger(log_folder=log_folder)
         self._logger = None
 
     def build_config(self):
