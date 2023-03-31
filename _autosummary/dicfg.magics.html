@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>dicfg.config.ConfigValue &#8212; dicfg</title>
+    <title>dicfg.magics &#8212; dicfg</title>
   
   
   
@@ -48,11 +48,11 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/design-tabs.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/dicfg.config.ConfigValue';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/dicfg.magics';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="dicfg.factory" href="dicfg.factory.html" />
-    <link rel="prev" title="dicfg.config.ConfigList" href="dicfg.config.ConfigList.html" />
+    <link rel="next" title="dicfg.magics.ConfigMagics" href="dicfg.magics.ConfigMagics.html" />
+    <link rel="prev" title="dicfg.factory.build_config" href="dicfg.factory.build_config.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -231,10 +231,6 @@ document.write(`
   
 
   
-    <label class="sidebar-toggle secondary-toggle" for="__secondary">
-      <span class="fa-solid fa-outdent"></span>
-    </label>
-  
 </div>
 
     </nav>
@@ -333,18 +329,18 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="dicfg.html">dicfg</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="dicfg.config.html">dicfg.config</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="dicfg.config.html">dicfg.config</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="dicfg.config.merge.html">dicfg.config.merge</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dicfg.config.ConfigDict.html">dicfg.config.ConfigDict</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dicfg.config.ConfigList.html">dicfg.config.ConfigList</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">dicfg.config.ConfigValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.config.ConfigValue.html">dicfg.config.ConfigValue</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="dicfg.factory.html">dicfg.factory</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="dicfg.factory.build_config.html">dicfg.factory.build_config</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="dicfg.magics.html">dicfg.magics</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">dicfg.magics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="dicfg.magics.ConfigMagics.html">dicfg.magics.ConfigMagics</a></li>
 </ul>
 </li>
@@ -401,9 +397,9 @@ document.write(`
     <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
     
     
-    <li class="breadcrumb-item"><a href="dicfg.config.html" class="nav-link">dicfg.config</a></li>
+    <li class="breadcrumb-item"><a href="dicfg.html" class="nav-link">dicfg</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">dicfg.config.ConfigValue</li>
+    <li class="breadcrumb-item active" aria-current="page">dicfg.magics</li>
   </ul>
 </nav>
 </div>
@@ -420,65 +416,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="dicfg-config-configvalue">
-<h1>dicfg.config.ConfigValue<a class="headerlink" href="#dicfg-config-configvalue" title="Permalink to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="dicfg.config.ConfigValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ConfigValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/config.html#ConfigValue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.config.ConfigValue" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Wraps a value into a ConfigValue</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>Any</em>) – value of the config</p></li>
-<li><p><strong>merger</strong> (<em>Callable</em><em>, </em><em>optional</em>) – Callable to merge the config value. Defaults to None.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="dicfg.config.ConfigValue.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/config.html#ConfigValue.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.config.ConfigValue.__init__" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<p class="rubric">Methods</p>
+  <section id="module-dicfg.magics">
+<span id="dicfg-magics"></span><h1>dicfg.magics<a class="headerlink" href="#module-dicfg.magics" title="Permalink to this heading">#</a></h1>
+<p class="rubric">Classes</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#dicfg.config.ConfigValue.__init__" title="dicfg.config.ConfigValue.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(data[, merger])</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#dicfg.config.ConfigValue.cast" title="dicfg.config.ConfigValue.cast"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cast</span></code></a>()</p></td>
-<td><p>Cast wrapped value to builtin python value</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#dicfg.config.ConfigValue.merge" title="dicfg.config.ConfigValue.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge</span></code></a>(b)</p></td>
-<td><p>Merges config b with it self</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics" title="dicfg.magics.ConfigMagics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConfigMagics</span></code></a>(**kwargs)</p></td>
+<td><p>IPython magic for loading YAML configuration files.</p></td>
 </tr>
 </tbody>
 </table>
-<dl class="py method">
-<dt class="sig sig-object py" id="dicfg.config.ConfigValue.cast">
-<span class="sig-name descname"><span class="pre">cast</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/config.html#ConfigValue.cast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.config.ConfigValue.cast" title="Permalink to this definition">#</a></dt>
-<dd><p>Cast wrapped value to builtin python value</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="dicfg.config.ConfigValue.merge">
-<span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dicfg.config.ConfigValue" title="dicfg.config.ConfigValue"><span class="pre">ConfigValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#dicfg.config.ConfigValue" title="dicfg.config.ConfigValue"><span class="pre">ConfigValue</span></a></span></span><a class="reference internal" href="../_modules/dicfg/config.html#ConfigValue.merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.config.ConfigValue.merge" title="Permalink to this definition">#</a></dt>
-<dd><p>Merges config b with it self</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>b</strong> (<a class="reference internal" href="#dicfg.config.ConfigValue" title="dicfg.config.ConfigValue"><em>ConfigValue</em></a>) – another config</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>self</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#dicfg.config.ConfigValue" title="dicfg.config.ConfigValue">ConfigValue</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 
 
@@ -493,20 +440,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="dicfg.config.ConfigList.html"
+       href="dicfg.factory.build_config.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">dicfg.config.ConfigList</p>
+        <p class="prev-next-title">dicfg.factory.build_config</p>
       </div>
     </a>
     <a class="right-next"
-       href="dicfg.factory.html"
+       href="dicfg.magics.ConfigMagics.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">dicfg.factory</p>
+        <p class="prev-next-title">dicfg.magics.ConfigMagics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -519,25 +466,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dicfg.config.ConfigValue"><code class="docutils literal notranslate"><span class="pre">ConfigValue</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dicfg.config.ConfigValue.__init__"><code class="docutils literal notranslate"><span class="pre">ConfigValue.__init__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dicfg.config.ConfigValue.cast"><code class="docutils literal notranslate"><span class="pre">ConfigValue.cast()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dicfg.config.ConfigValue.merge"><code class="docutils literal notranslate"><span class="pre">ConfigValue.merge()</span></code></a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

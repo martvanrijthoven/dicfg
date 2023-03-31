@@ -1,0 +1,71 @@
+dicfg.magics.ConfigMagics
+=========================
+
+.. currentmodule:: dicfg.magics
+
+.. autoclass:: ConfigMagics
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ConfigMagics.__init__
+      ~ConfigMagics.add_traits
+      ~ConfigMagics.arg_err
+      ~ConfigMagics.class_config_rst_doc
+      ~ConfigMagics.class_config_section
+      ~ConfigMagics.class_get_help
+      ~ConfigMagics.class_get_trait_help
+      ~ConfigMagics.class_own_trait_events
+      ~ConfigMagics.class_own_traits
+      ~ConfigMagics.class_print_help
+      ~ConfigMagics.class_trait_names
+      ~ConfigMagics.class_traits
+      ~ConfigMagics.default_option
+      ~ConfigMagics.format_latex
+      ~ConfigMagics.has_trait
+      ~ConfigMagics.hold_trait_notifications
+      ~ConfigMagics.notify_change
+      ~ConfigMagics.observe
+      ~ConfigMagics.on_trait_change
+      ~ConfigMagics.parse_options
+      ~ConfigMagics.register_magics
+      ~ConfigMagics.section_names
+      ~ConfigMagics.set_trait
+      ~ConfigMagics.setup_instance
+      ~ConfigMagics.trait_defaults
+      ~ConfigMagics.trait_events
+      ~ConfigMagics.trait_has_value
+      ~ConfigMagics.trait_metadata
+      ~ConfigMagics.trait_names
+      ~ConfigMagics.trait_values
+      ~ConfigMagics.traits
+      ~ConfigMagics.unobserve
+      ~ConfigMagics.unobserve_all
+      ~ConfigMagics.update_config
+      ~ConfigMagics.yaml
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ConfigMagics.config
+      ~ConfigMagics.cross_validation_lock
+      ~ConfigMagics.magics
+      ~ConfigMagics.options_table
+      ~ConfigMagics.parent
+      ~ConfigMagics.registered
+      ~ConfigMagics.shell
+   
+   

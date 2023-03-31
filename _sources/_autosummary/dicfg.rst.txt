@@ -30,5 +30,6 @@
 
    dicfg.config
    dicfg.factory
+   dicfg.magics
    dicfg.reader
 

@@ -15,6 +15,14 @@ Release Notes
 
 ----
 
+
+Version 0.0.8
+^^^^^^^^^^^^^
+
+ - Fix: merge at correct place
+ - Feature: magics to load plain yaml from a notebook cell
+
+
 Version 0.0.7
 ^^^^^^^^^^^^^
 
