@@ -103,7 +103,7 @@ def _is_object(value):
     return isinstance(value, dict) and _OBJECT_KEY in value
 
 
-def build_config(config: dict, log_folder=None):
+def build_config(config: dict):
     """Builds config
 
     Args:
@@ -113,4 +113,4 @@ def build_config(config: dict, log_folder=None):
         dict: build config
     """
 
-    return _ObjectFactory(deepcopy(config), log_folder).build_config()
+    return _ObjectFactory(deepcopy(config)).build_config()
