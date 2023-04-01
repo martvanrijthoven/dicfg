@@ -16,6 +16,12 @@ Release Notes
 ----
 
 
+Version 0.0.9
+^^^^^^^^^^^^^
+
+ - Removed loguro requirement
+
+
 Version 0.0.8
 ^^^^^^^^^^^^^
 
@@ -46,7 +52,6 @@ Version 0.0.5
  - CI: added pre-commit
 
 
-
 Version 0.0.4
 ^^^^^^^^^^^^^
 
@@ -56,7 +61,6 @@ Version 0.0.4
  - configs folder is now inferred from main_config_path
  - update readme with absolute path to image
  - refactored github workflows
-
 
 
 Version 0.0.3
