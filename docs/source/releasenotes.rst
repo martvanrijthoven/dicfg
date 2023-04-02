@@ -15,6 +15,26 @@ Release Notes
 
 ----
 
+
+Version 0.0.10
+^^^^^^^^^^^^^
+
+ - Removed logoru from pyproject.toml
+
+
+Version 0.0.9
+^^^^^^^^^^^^^
+
+ - Removed logoru from requirements.txt
+
+
+Version 0.0.8
+^^^^^^^^^^^^^
+
+ - Fix: merge at correct place
+ - Feature: magics to load plain yaml from a notebook cell
+
+
 Version 0.0.7
 ^^^^^^^^^^^^^
 
@@ -38,7 +58,6 @@ Version 0.0.5
  - CI: added pre-commit
 
 
-
 Version 0.0.4
 ^^^^^^^^^^^^^
 
@@ -48,7 +67,6 @@ Version 0.0.4
  - configs folder is now inferred from main_config_path
  - update readme with absolute path to image
  - refactored github workflows
-
 
 
 Version 0.0.3

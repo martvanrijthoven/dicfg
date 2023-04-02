@@ -24,7 +24,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "Development Status :: 4 - Beta",
 ]
-dependencies = ["PyYaml>=5.4.1", "loguru>=0.6.0"]
+dependencies = ["PyYaml>=5.4.1"]
 
 dynamic = ["version"]
 

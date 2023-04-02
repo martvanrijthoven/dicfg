@@ -13,31 +13,15 @@ _REFERENCE_ATTRIBUTE_SYMBOL = "."
 _OBJECT_KEY = "*object"
 
 
-def get_logger(log_folder):
-    if log_folder is None:
-        return None
-    logger.remove(0)
-    logger.add(
-        log_folder / "dicfg_{time}.log",
-        level="DEBUG",
-        format="{time} - {name} - {level} - {message}",
-        enqueue=True,
-        filter=lambda record: record["extra"]["task"] == "Dicfg",
-    )
-    return logger.bind(task="Dicfg")
-
 
 class _ObjectFactory:
-    def __init__(self, config: dict, log_folder=None):
+    def __init__(self, config: dict):
         self._configuration = config
 
         self._re_pattern_map = {
             "\\${\\$env.(.*)}": os.environ.get,
             "\\${\\$(.*)}": self._parse_object_str,
         }
-
-        #         self._logger = get_logger(log_folder=log_folder)
-        self._logger = None
 
     def build_config(self):
         return self._build(self._configuration)
@@ -79,8 +63,6 @@ class _ObjectFactory:
         args = value.pop("*args", ())
         kwargs.update(value.pop("**kwargs", {}))
         attribute = self._parse_object_str(object_string)
-        if self._logger is not None:
-            self._logger.info(f"Building object: {attribute}")
         return attribute(*args, **kwargs)
 
     def _parse_object_str(self, object_string: str):
@@ -122,7 +104,7 @@ def _is_object(value):
     return isinstance(value, dict) and _OBJECT_KEY in value
 
 
-def build_config(config: dict, log_folder=None):
+def build_config(config: dict):
     """Builds config
 
     Args:
@@ -132,4 +114,4 @@ def build_config(config: dict, log_folder=None):
         dict: build config
     """
 
-    return _ObjectFactory(deepcopy(config), log_folder).build_config()
+    return _ObjectFactory(deepcopy(config)).build_config()
