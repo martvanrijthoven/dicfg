@@ -16,10 +16,16 @@ Release Notes
 ----
 
 
+Version 0.0.10
+^^^^^^^^^^^^^
+
+ - Removed logoru from pyproject.toml
+
+
 Version 0.0.9
 ^^^^^^^^^^^^^
 
- - Removed loguro requirement
+ - Removed logoru from requirements.txt
 
 
 Version 0.0.8
