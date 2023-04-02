@@ -13,7 +13,6 @@ _REFERENCE_ATTRIBUTE_SYMBOL = "."
 _OBJECT_KEY = "*object"
 
 
-
 class _ObjectFactory:
     def __init__(self, config: dict):
         self._configuration = config
