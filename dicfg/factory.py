@@ -32,7 +32,9 @@ class _ObjectFactory:
     @_build.register
     def _build_dict(self, config: dict):
         for key, value in config.items():
-            if _is_object(value):
+            if _dont_build(value):
+                config[key] = value
+            elif _is_object(value):
                 config[key] = self._build_object(value)
             else:
                 config[key] = self._build(value)
@@ -101,6 +103,12 @@ class _ObjectFactory:
 
 def _is_object(value):
     return isinstance(value, dict) and _OBJECT_KEY in value
+
+
+def _dont_build(value):
+    if isinstance(value, dict):
+        return value.pop('!build', False)
+    return False 
 
 
 def build_config(config: dict):

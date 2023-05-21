@@ -77,8 +77,12 @@ def test_cli():
 def test_config_not_found_error():
     with raises(ConfigNotFoundError):
         user_config_path = Path("./testconfigs/user_config_not_found.yml")
-        config = config_reader.read(user_config_path)
-        build_config(config["testkey"])
+        _ = config_reader.read(user_config_path)
+
+
+def test_main_config_not_found_error():
+    with raises(ConfigNotFoundError):
+        _ = ConfigReader(name="_", main_config_path="./dont_exists.yml")
 
 
 def test_deep_replace():
@@ -97,5 +101,18 @@ def test_deep_replace():
 def test_replace_error():
     with raises(ValueError):
         user_config_path = Path("./testconfigs/user_config_replace_error.yml")
-        config = config_reader.read(user_config_path)
-        build_config(config["testkey"])
+        _ = config_reader.read(user_config_path)
+
+def test_dont_build():
+    config_reader_dont_build = ConfigReader(
+        name="testconfig_dont_build",
+        main_config_path="./testconfigs/config_dont_build.yml",
+    )
+    config_dont_build = config_reader_dont_build.read()
+    config_dont_build_build = build_config(config_dont_build)['default']
+    config_reader = ConfigReader(
+        name="test_config",
+        main_config_path="./testconfigs/config.yml",
+    )
+    config= config_reader.read()['default']
+    assert config_dont_build_build == config

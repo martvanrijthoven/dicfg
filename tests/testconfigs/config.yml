@@ -1,0 +1,21 @@
+default:
+  defaulttest: 10
+  overridetest: 10
+  test_dict:
+    test: test
+  test_list_append:
+    - test
+  test_list2@replace(false):
+    - test
+  test_list3@replace(true):
+    - test
+
+  test_object:
+    "*object": dicfg.reader.ConfigNotFoundError
+
+  test_object_list:
+    - "*object": dicfg.reader.ConfigNotFoundError
+
+  test_object_interpolation: ${$dicfg.__version__}
+  test_env: ${$env.ENV_TEST_VAR}
+
