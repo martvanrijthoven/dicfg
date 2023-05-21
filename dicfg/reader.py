@@ -159,7 +159,7 @@ def _create_dict_from_keys(keys: list, value) -> dict:
         try:
             value = ast.literal_eval(value)
         except ValueError:
-            value = ast.literal_eval("\'" + value + "\'")
+            value = ast.literal_eval("'" + value + "'")
         dictionary[keys[0]] = value
     else:
         dictionary[keys[0]] = dict(_create_dict_from_keys(keys[1:], value))
