@@ -158,7 +158,7 @@ def _create_dict_from_keys(keys: list, value) -> dict:
     if len(keys) <= 1:
         try:
             value = ast.literal_eval(value)
-        except ValueError:
+        except (ValueError, SyntaxError):
             value = ast.literal_eval("'" + value + "'")
         dictionary[keys[0]] = value
     else:
