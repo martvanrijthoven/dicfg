@@ -107,8 +107,8 @@ def _is_object(value):
 
 def _dont_build(value):
     if isinstance(value, dict):
-        return value.pop('!build', False)
-    return False 
+        return value.pop("!build", False)
+    return False
 
 
 def build_config(config: dict):
