@@ -103,16 +103,17 @@ def test_replace_error():
         user_config_path = Path("./testconfigs/user_config_replace_error.yml")
         _ = config_reader.read(user_config_path)
 
+
 def test_dont_build():
     config_reader_dont_build = ConfigReader(
         name="testconfig_dont_build",
         main_config_path="./testconfigs/config_dont_build.yml",
     )
     config_dont_build = config_reader_dont_build.read()
-    config_dont_build_build = build_config(config_dont_build)['default']
+    config_dont_build_build = build_config(config_dont_build)["default"]
     config_reader = ConfigReader(
         name="test_config",
         main_config_path="./testconfigs/config.yml",
     )
-    config= config_reader.read()['default']
+    config = config_reader.read()["default"]
     assert config_dont_build_build == config
