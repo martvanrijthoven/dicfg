@@ -96,9 +96,13 @@ class ConfigReader:
         )
 
         self_config = self._read(self._main_config_path)
-
-        preset_configs = self._read_presets(presets)
         user_config = self._read_user_config(user_config)
+
+        arg_preset_configs = self._read_presets(presets)
+        user_presets = user_config.pop("presets", ())
+        user_preset_configs = self._read_presets(user_presets)
+        preset_configs = arg_preset_configs + user_preset_configs
+
         cli_config = self._read_cli(sys.argv[1:])
 
         configs = (self_config, *preset_configs, user_config, cli_config)
