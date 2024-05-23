@@ -54,24 +54,26 @@ def test_cli():
     sys_argv = sys.argv
 
     sys.argv = sys_argv + ["testconfig.default.test1.test2=10"]
-
     config = sys_config_reader.read()
     assert {"test1": {"test2": 10}} == config["default"]
 
     sys.argv = sys_argv + ["testconfig.default.test1.test2=10.0"]
-
     config = sys_config_reader.read()
     assert {"test1": {"test2": 10.0}} == config["default"]
 
     sys.argv = sys_argv + ["testconfig.default.test1.test2=True"]
-
     config = sys_config_reader.read()
     assert {"test1": {"test2": True}} == config["default"]
 
     sys.argv = sys_argv + ["testconfig.default.test1.test2=None"]
-
     config = sys_config_reader.read()
     assert {"test1": {"test2": None}} == config["default"]
+
+    sys.argv = sys_argv + ["notestconfig.default.test1.test2=True"]
+    config = sys_config_reader.read()
+    assert {"test1": {"test2": "None"}} == config["default"]
+
+
 
 
 def test_config_not_found_error():

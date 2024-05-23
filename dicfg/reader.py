@@ -136,7 +136,7 @@ class ConfigReader:
     def _read_cli(self, args: List[str]):
         dicts = []
         for arg in args:
-            if "=" in arg:
+            if arg.startswith(self._name) and "=" in arg:
                 keys, value = arg.split("=")
                 keys = keys.split(".")
                 dicts.append(_create_dict_from_keys(keys, value))
