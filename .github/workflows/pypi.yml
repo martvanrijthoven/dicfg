@@ -30,6 +30,8 @@ jobs:
 
       # Build and upload to PyPI
       - name: "Builds and uploads to PyPI"
+        env: 
+          PYPI_UPLOAD: ${{ secrets.PYPI_UPLOAD }} 
         run: |
           python -m build
-          python -m twine upload -u __token__ -p ${{ secrets.PYPI_UPLOAD }} dist/*
+          python -m twine upload -u __token__ -p "$PYPI_UPLOAD" dist/*
