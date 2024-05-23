@@ -32,8 +32,4 @@ jobs:
       - name: "Builds and uploads to PyPI"
         run: |
           python -m build
-          python -m twine upload dist/*
-
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_UPLOAD }}
+          python -m twine upload -u __token__ -p ${{ secrets.PYPI_UPLOAD }} dist/*
