@@ -74,8 +74,6 @@ def test_cli():
     assert {"test1": {"test2": "None"}} == config["default"]
 
 
-
-
 def test_config_not_found_error():
     with raises(ConfigNotFoundError):
         user_config_path = Path("./testconfigs/user_config_not_found.yml")
@@ -99,13 +97,19 @@ def test_deep_replace():
     test_config = build_config(config["default"])
     assert test_config["deep_replace"] == {"c": 2, "d": 2}
 
+
 def test_deep_replace_preset_in_config():
     config_reader = ConfigReader(
         name="testconfig",
         main_config_path="./configs/config.yml",
     )
     config = config_reader.read(
-        {"testconfig": {"presets": ["deepreplace.yml"], "default": {"deep_replace": {"c": 2}}}},
+        {
+            "testconfig": {
+                "presets": ["deepreplace.yml"],
+                "default": {"deep_replace": {"c": 2}},
+            }
+        },
     )
     test_config = build_config(config["default"])
     assert test_config["deep_replace"] == {"c": 2, "d": 2}
