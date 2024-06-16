@@ -12,20 +12,20 @@ import yaml
 from dicfg.config import merge
 
 
-def _open_json_config(config_path):
+def open_json_config(config_path):
     with open(str(config_path), encoding="utf8") as file:
         return json.load(file)
 
 
-def _open_yaml_config(config_path):
+def open_yaml_config(config_path):
     with open(str(config_path), encoding="utf8") as file:
         return yaml.load(file, Loader=yaml.SafeLoader)
 
 
 _FILE_READERS = {
-    ".json": _open_json_config,
-    ".yml": _open_yaml_config,
-    ".yaml": _open_yaml_config,
+    ".json": open_json_config,
+    ".yml": open_yaml_config,
+    ".yaml": open_yaml_config,
 }
 
 
