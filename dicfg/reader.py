@@ -52,7 +52,7 @@ class ConfigReader:
         context_keys: tuple = (),
         search_paths: tuple = (),
     ):
-        
+
         self._config = None
         self._name = None
         self._version = None
@@ -98,8 +98,8 @@ class ConfigReader:
         )
 
         self._config = self._read(self._main_config_path)
-        self._name = self._config.pop('NAME')
-        self._version = self._config.pop('VERSION', "N/A")
+        self._name = self._config.pop("NAME")
+        self._version = self._config.pop("VERSION", "N/A")
         user_config = self._read_user_config(user_config)
 
         arg_preset_configs = self._read_presets(presets)
@@ -164,11 +164,9 @@ class ConfigReader:
         )
         return merge(fused_config, config)
 
-
     @singledispatchmethod
     def _include_configs(self, config, search_paths):
         return config
-
 
     @_include_configs.register
     def _include_configs_str(self, config: str, search_paths):
@@ -181,13 +179,11 @@ class ConfigReader:
             return self._include_configs(open_config, search_paths)
         return config
 
-
     @_include_configs.register
     def _include_configs_dict(self, config: dict, search_paths):
         for key, value in config.items():
             config[key] = self._include_configs(value, search_paths)
         return config
-
 
 
 def _create_dict_from_keys(keys: list, value) -> dict:
@@ -211,4 +207,3 @@ def _search_config(config_name: Union[str, Path], search_paths: tuple) -> Path:
         if config_path.exists():
             return config_path
     raise ConfigNotFoundError(config_name)
-
