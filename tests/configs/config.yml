@@ -1,4 +1,8 @@
+NAME: testconfig
+VERSION: 
+
 default:
+  items: items.yml
   test: 
     test2: [1, 2, 3]
   test3: test

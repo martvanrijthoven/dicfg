@@ -11,6 +11,7 @@ _REFERENCE_START_SYMBOL = "$"
 _REFERENCE_MAP_SYMBOL = ":"
 _REFERENCE_ATTRIBUTE_SYMBOL = "."
 _OBJECT_KEY = "*object"
+_TEMPLATE_KEY = "*template"
 
 
 class _ObjectFactory:
@@ -32,7 +33,7 @@ class _ObjectFactory:
     @_build.register
     def _build_dict(self, config: dict):
         for key, value in config.items():
-            if _dont_build(value):
+            if _dont_build(value) or _is_template(key):
                 config[key] = value
             elif _is_object(value):
                 config[key] = self._build_object(value)
@@ -103,6 +104,10 @@ class _ObjectFactory:
 
 def _is_object(value):
     return isinstance(value, dict) and _OBJECT_KEY in value
+
+
+def _is_template(key):
+    return key == _TEMPLATE_KEY
 
 
 def _dont_build(value):

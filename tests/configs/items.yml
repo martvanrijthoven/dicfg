@@ -1,0 +1,9 @@
+"*template": &items
+  "*object": __main__.Item
+  a: 10
+  
+testconfig:
+  - <<: *items
+    a: 20
+  - <<: *items
+    a: 30
