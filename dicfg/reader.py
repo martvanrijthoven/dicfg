@@ -5,7 +5,7 @@ from collections import defaultdict
 from copy import deepcopy
 from functools import partial, singledispatch
 from pathlib import Path
-from typing import List, Union
+from typing import List, Optional, Union
 
 import yaml
 
@@ -74,13 +74,13 @@ class ConfigReader:
 
     def read(
         self,
-        user_config: Union[dict, str, Path] = None,
+        user_config: Optional[Union[dict, str, Path, list[dict, str, Path]]] = None,
         presets: tuple = (),
     ) -> dict:
         """Reads Config File
 
         Args:
-            user_config (Union[dict, str, Path], optional): user_config Defaults to None.
+            user_config Optional[Union[dict, str, Path, list[dict, str, Path]]]: user_config Defaults to None.
             presets (tuple, optional): presets Defaults to ().
 
         Returns:
@@ -96,16 +96,21 @@ class ConfigReader:
         )
 
         self_config = self._read(self._main_config_path)
-        user_config = self._read_user_config(user_config)
-
         arg_preset_configs = self._read_presets(presets)
-        user_presets = user_config.pop("presets", ())
-        user_preset_configs = self._read_presets(user_presets)
-        preset_configs = arg_preset_configs + user_preset_configs
+        preset_configs = arg_preset_configs
+
+        if not isinstance(user_config, (tuple, list)):
+            user_config = [user_config]
+            
+        user_configs = []
+        for cfg in user_config:
+            user_configs.append(self._read_user_config(cfg))
+            user_presets = cfg.pop("presets", ())
+            user_preset_configs = self._read_presets(user_presets)
+            preset_configs += user_preset_configs
 
         cli_config = self._read_cli(sys.argv[1:])
-
-        configs = (self_config, *preset_configs, user_config, cli_config)
+        configs = (self_config, *preset_configs, *user_configs, cli_config)
         configs = self._fuse_configs(configs, self._context_keys, search_paths)
 
         return merge(*configs).cast()
