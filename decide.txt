@@ -1,0 +1,3 @@
+should main_config_path have default value -->  NO, no breaking changes for wholeslidedata
+should name/version specified in main config --> ???
+should name have specific characteristics, e.g. using in subconfig without might be confusing
