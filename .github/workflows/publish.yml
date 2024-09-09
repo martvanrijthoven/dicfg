@@ -1,6 +1,7 @@
 name: Publish
 
 on:
+  workflow_call:
   push:
     branches: [main]
     paths:
