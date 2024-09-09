@@ -102,7 +102,7 @@ def _update(a: ConfigValue, b: ConfigValue):
                 a[k].merge(v)
         else:
             if prev_key is None:
-                a.data = {**{k: v}, **a.data}
+                a.data = {**a.data, **{k: v}}
             else:
                 a.data = _insert(a, prev_key, k, v)
         prev_key = k
