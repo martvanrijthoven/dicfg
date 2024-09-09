@@ -134,3 +134,28 @@ def test_dont_build():
     )
     config = config_reader.read()["default"]
     assert config_dont_build_build == config
+
+
+def test_multiple_configs():
+    config_reader = ConfigReader(
+        name="testconfig",
+        main_config_path="./configs/config.yml",
+    )
+
+    config_1 ={
+            "testconfig": {
+                "presets": ["deepreplace.yml"],
+                "default": {"deep_replace": {"c": 2}},
+            }
+        }
+
+    config_2 ={
+            "testconfig": {
+                "presets": ["deepreplace.yml"],
+                "default": {"deep_replace": {"c": 3}},
+            }
+        }
+
+    config = config_reader.read([config_1, config_2])
+    test_config = build_config(config["default"])
+    assert test_config["deep_replace"] == {"c": 3, "d": 2}
