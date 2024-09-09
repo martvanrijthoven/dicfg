@@ -108,7 +108,6 @@ class ConfigReader:
                 user_configs.append(read_user_config)
                 user_presets_configs.extend(self._read_presets(user_presets))
 
-
         configs = (
             self_config,
             *tuple(user_presets_configs),

@@ -142,19 +142,19 @@ def test_multiple_configs():
         main_config_path="./configs/config.yml",
     )
 
-    config_1 ={
-            "testconfig": {
-                "presets": ["deepreplace.yml"],
-                "default": {"deep_replace": {"c": 2}},
-            }
+    config_1 = {
+        "testconfig": {
+            "presets": ["deepreplace.yml"],
+            "default": {"deep_replace": {"c": 2}},
         }
+    }
 
-    config_2 ={
-            "testconfig": {
-                "presets": ["deepreplace.yml"],
-                "default": {"deep_replace": {"c": 3}},
-            }
+    config_2 = {
+        "testconfig": {
+            "presets": ["deepreplace.yml"],
+            "default": {"deep_replace": {"c": 3}},
         }
+    }
 
     config = config_reader.read([config_1, config_2])
     test_config = build_config(config["default"])
