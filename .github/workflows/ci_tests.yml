@@ -9,6 +9,7 @@ on:
       - .github/workflows/ci_tests.yml
       - pyproject.toml
       - "!dicfg/_version.py"
+      - requirements.txt
       
   pull_request:
     paths:
@@ -18,6 +19,7 @@ on:
       - .github/workflows/ci_tests.yml
       - pyproject.toml
       - "!dicfg/_version.py"
+      - requirements.txt
 
 jobs:
   call-tests:

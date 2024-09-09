@@ -5,7 +5,7 @@ from collections import defaultdict
 from copy import deepcopy
 from functools import partial, singledispatch
 from pathlib import Path
-from typing import List, Union
+from typing import List, Optional, Union
 
 import yaml
 
@@ -74,7 +74,7 @@ class ConfigReader:
 
     def read(
         self,
-        user_config: Union[dict, str, Path] = None,
+        user_config: Optional[Union[dict, str, Path, list[dict, str, Path]]] = None,
         presets: tuple = (),
     ) -> dict:
         """Reads Config File
@@ -87,33 +87,47 @@ class ConfigReader:
             dict: read configs
         """
 
-        user_config_search_path = None
-        if user_config is not None and not isinstance(user_config, dict):
-            user_config_search_path = Path(user_config).parent
-
-        search_paths = self._set_search_paths(
-            user_config_search_path, self._search_paths
-        )
-
         self_config = self._read(self._main_config_path)
-        user_config = self._read_user_config(user_config)
-
         arg_preset_configs = self._read_presets(presets)
-        user_presets = user_config.pop("presets", ())
-        user_preset_configs = self._read_presets(user_presets)
-        preset_configs = arg_preset_configs + user_preset_configs
-
         cli_config = self._read_cli(sys.argv[1:])
 
-        configs = (self_config, *preset_configs, user_config, cli_config)
+        user_configs = []
+        user_presets_configs = []
+        user_config_search_paths = []
+        if user_config is not None:
+            if not isinstance(user_config, list):
+                user_config = [user_config]
+
+            for config in user_config:
+                if isinstance(config, (str, Path)) and not isinstance(config, dict):
+                    user_config_search_path = Path(config).parent
+                    user_config_search_paths.append(user_config_search_path)
+
+                read_user_config = self._read_user_config(config)
+                user_presets = read_user_config.pop("presets", ())
+                user_configs.append(read_user_config)
+                user_presets_configs.extend(self._read_presets(user_presets))
+
+        configs = (
+            self_config,
+            *tuple(user_presets_configs),
+            *tuple(arg_preset_configs),
+            *tuple(user_configs),
+            cli_config,
+        )
+
+        search_paths = self._set_search_paths(
+            user_config_search_paths, self._search_paths
+        )
+
         configs = self._fuse_configs(configs, self._context_keys, search_paths)
 
         return merge(*configs).cast()
 
-    def _set_search_paths(self, user_config_search_path, search_paths):
+    def _set_search_paths(self, user_config_search_paths, search_paths):
         return (
             Path(),
-            user_config_search_path,
+            *tuple(user_config_search_paths),
             self._configs_folder,
             self._presets_folder,
             *search_paths,
