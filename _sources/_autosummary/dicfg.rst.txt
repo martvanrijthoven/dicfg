@@ -28,8 +28,8 @@
    :template: custom-module-template.rst                 
    :recursive:
 
-   dicfg.config
-   dicfg.factory
-   dicfg.magics
-   dicfg.reader
+   config
+   factory
+   magics
+   reader
 

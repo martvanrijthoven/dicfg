@@ -1,0 +1,6 @@
+dicfg.reader.open\_yaml\_config
+===============================
+
+.. currentmodule:: dicfg.reader
+
+.. autofunction:: open_yaml_config
