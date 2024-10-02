@@ -88,6 +88,12 @@ User Guide
       
       Context Keys
 
+  .. button-link:: userguide/notebooks/validators.html
+      :color: primary
+      :expand:
+      
+      Validators
+
 
 
 .. toctree::
