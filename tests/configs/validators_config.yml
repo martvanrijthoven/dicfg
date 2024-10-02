@@ -1,0 +1,9 @@
+test@validate(positive-number): 2
+test2@validate(not-empty): "test"
+test3@validate(positive-list): [2, 22]
+test4:
+  test5@validate(positive-list): [2]
+testing@validate(object):
+  "*object": "io.StringIO"
+  initial_value: "Hello, World!"
+  newline: "\n"

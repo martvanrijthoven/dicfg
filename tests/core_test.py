@@ -73,6 +73,10 @@ def test_cli():
     config = sys_config_reader.read()
     assert {"test1": {"test2": "None"}} == config["default"]
 
+    sys.argv = sys_argv + ["notestconfig.default.test1.test2=True"]
+    config = sys_config_reader.read()
+    assert {"test1": {"test2": "None"}} == config["default"]
+
 
 def test_config_not_found_error():
     with raises(ConfigNotFoundError):

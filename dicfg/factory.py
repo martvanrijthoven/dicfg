@@ -7,10 +7,15 @@ from importlib import import_module
 from typing import Union
 
 
-_REFERENCE_START_SYMBOL = "$"
-_REFERENCE_MAP_SYMBOL = ":"
-_REFERENCE_ATTRIBUTE_SYMBOL = "."
-_OBJECT_KEY = "*object"
+REFERENCE_START_SYMBOL = "$"
+REFERENCE_MAP_SYMBOL = ":"
+REFERENCE_ATTRIBUTE_SYMBOL = "."
+
+OBJECT_KEY = "*object"
+ARGS_KEY = "*args"
+KWARGS_KEY = "**kargs"
+BUILD_KEY = "*build"
+WHITE_LIST_FACTORY_KEYS = [OBJECT_KEY, ARGS_KEY, KWARGS_KEY, BUILD_KEY]
 
 
 class _ObjectFactory:
@@ -32,9 +37,9 @@ class _ObjectFactory:
     @_build.register
     def _build_dict(self, config: dict):
         for key, value in config.items():
-            if _dont_build(value):
+            if not _build(value):
                 config[key] = value
-            elif _is_object(value):
+            elif _is_object_config(value):
                 config[key] = self._build_object(value)
             else:
                 config[key] = self._build(value)
@@ -44,7 +49,7 @@ class _ObjectFactory:
     @_build.register(tuple)
     def _build_list(self, config: Union[list, tuple]):
         for idx, item in enumerate(config):
-            if _is_object(item):
+            if _is_object_config(item):
                 config[idx] = self._build_object(item)
             else:
                 config[idx] = self._build(item)
@@ -54,15 +59,15 @@ class _ObjectFactory:
     def _build_str(self, config: str):
         if config.lower() == "none":
             return None
-        if _REFERENCE_START_SYMBOL in config:
+        if REFERENCE_START_SYMBOL in config:
             return self._get_reference(reference=config)
         return config
 
     def _build_object(self, value: dict):
         kwargs = self._build(value)
-        object_string = value.pop(_OBJECT_KEY)
-        args = value.pop("*args", ())
-        kwargs.update(value.pop("**kwargs", {}))
+        object_string = value.pop(OBJECT_KEY)
+        args = value.pop(ARGS_KEY, ())
+        kwargs.update(value.pop(KWARGS_KEY, {}))
         attribute = self._parse_object_str(object_string)
         return attribute(*args, **kwargs)
 
@@ -85,9 +90,9 @@ class _ObjectFactory:
         return self._string_interpolation(reference, matches)
 
     def _object_interpolation(self, reference: str):
-        references = reference.split(_REFERENCE_MAP_SYMBOL)
+        references = reference.split(REFERENCE_MAP_SYMBOL)
         reference = reduce(operator.getitem, references[:-1], self._configuration)
-        attributes = references[-1].split(_REFERENCE_ATTRIBUTE_SYMBOL)
+        attributes = references[-1].split(REFERENCE_ATTRIBUTE_SYMBOL)
         reference = reference[attributes[0]]
         for attr in attributes[1:]:
             reference = getattr(reference, attr)
@@ -101,14 +106,14 @@ class _ObjectFactory:
         return reference
 
 
-def _is_object(value):
-    return isinstance(value, dict) and _OBJECT_KEY in value
+def _is_object_config(value):
+    return isinstance(value, dict) and OBJECT_KEY in value
 
 
-def _dont_build(value):
+def _build(value):
     if isinstance(value, dict):
-        return value.pop("!build", False)
-    return False
+        return value.pop(BUILD_KEY, True)
+    return True
 
 
 def build_config(config: dict):
