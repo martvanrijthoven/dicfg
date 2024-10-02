@@ -100,6 +100,7 @@ def test_object_no_callable_error():
     with raises(ValidationErrors):
         config_reader.read(user_config)
 
+
 def test_invalid_validator_error():
     user_config = {"validators": {"testing@validate(error)@replace(true)": []}}
     config_reader = ConfigReader(
@@ -108,4 +109,3 @@ def test_invalid_validator_error():
     )
     with raises(UnsupportedValidatorError):
         config_reader.read(user_config)
-

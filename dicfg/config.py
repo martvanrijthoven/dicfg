@@ -63,6 +63,7 @@ class ConfigDict(ConfigValue, UserDict):
         data (dict): value of the config
 
     """
+
     def _init(self, data: dict):
         for key in list(data):
             _key, merger = _get_merger(key, data[key])
@@ -101,7 +102,7 @@ class ConfigList(ConfigValue, UserList):
         yield from super().validate()
         for value in self.data:
             yield from value.validate()
-        
+
     def cast(self):
         """Cast wrapped value to builtin python value"""
         return [value.cast() for value in self.data]

@@ -108,7 +108,7 @@ class ConfigReader:
                 user_presets = read_user_config.pop("presets", ())
                 user_configs.append(read_user_config)
                 user_presets_configs.extend(self._read_presets(user_presets))
-                
+
         configs = (
             self_config,
             *tuple(user_presets_configs),
@@ -126,7 +126,7 @@ class ConfigReader:
 
         if errors := list(merged_configs.validate()):
             raise ValidationErrors(errors)
-        
+
         return merged_configs.cast()
 
     def _set_search_paths(self, user_config_search_paths, search_paths):

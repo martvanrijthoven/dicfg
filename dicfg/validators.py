@@ -7,15 +7,18 @@ import inspect
 
 from dicfg.factory import WHITE_LIST_FACTORY_KEYS, OBJECT_KEY
 
+
 @dataclass(frozen=True)
 class ValidationError:
     message: str
 
-class UnsupportedValidatorError(ValueError):
-    ...
+
+class UnsupportedValidatorError(ValueError): ...
+
 
 class ValidationErrors(Exception):
     """Exception raised when validation errors occur"""
+
     def __init__(self, errors: list[ValidationError]):
         formatted_errors = "\n".join([err.message for err in errors])
         super().__init__(f"\n{formatted_errors}")
@@ -66,7 +69,7 @@ class ConfigPositiveNumberValidator(ConfigValidator):
     def validate(self, value):
         if not (isinstance(value, Number) and value >= 0):
             return ValidationError("Value must be a positive number.")
-    
+
 
 class ConfigPositiveNumberListValidator(ConfigValidator):
     """Validator that checks if a value is a positive number"""
@@ -76,8 +79,8 @@ class ConfigPositiveNumberListValidator(ConfigValidator):
     def validate(self, value):
         if not (isinstance(value, list) and all([v.cast() >= 0 for v in value])):
             return ValidationError("Value must be a list with only positive numbers.")
-               
-      
+
+
 class ConfigObjectValidator(ConfigValidator):
     """Validator that checks if a value is a valid object configuration"""
 
@@ -88,7 +91,9 @@ class ConfigObjectValidator(ConfigValidator):
             return ValidationError("Value must be a dictionary.")
 
         if OBJECT_KEY not in value:
-            return ValidationError(f"The key {OBJECT_KEY} must be present in the configuration.")
+            return ValidationError(
+                f"The key {OBJECT_KEY} must be present in the configuration."
+            )
 
         object_path = value[OBJECT_KEY].cast()
         try:
@@ -98,7 +103,9 @@ class ConfigObjectValidator(ConfigValidator):
             if not callable(obj):
                 return ValidationError(f"'{object_path}' is not callable.")
         except (ImportError, AttributeError, ValueError) as e:
-            return ValidationError(f"Failed to import or access callable for {OBJECT_KEY}: {str(e)}")
+            return ValidationError(
+                f"Failed to import or access callable for {OBJECT_KEY}: {str(e)}"
+            )
 
         sig = inspect.signature(obj)
 
@@ -108,4 +115,6 @@ class ConfigObjectValidator(ConfigValidator):
 
         for key in remaining_keys:
             if key not in sig.parameters:
-                return ValidationError(f"'{key}' is not a valid argument for '{object_path}'.")
+                return ValidationError(
+                    f"'{key}' is not a valid argument for '{object_path}'."
+                )
