@@ -77,7 +77,7 @@ class ConfigPositiveNumberListValidator(ConfigValidator):
     NAME = "positive-number-list"
 
     def validate(self, value):
-        if not (isinstance(value, list) and all([v.cast() >= 0 for v in value])):
+        if not (isinstance(value, list) and all(v.cast() >= 0 for v in value)):
             return ValidationError("Value must be a list with only positive numbers.")
 
 
