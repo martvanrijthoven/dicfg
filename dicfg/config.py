@@ -3,7 +3,9 @@ from collections import UserDict, UserList
 from functools import reduce
 from typing import Any, Callable, Tuple
 
+from dicfg.validators import ConfigValidator, ValidationError
 
+_VALIDATION_PATTERN = r"\@validate\((.*)\)"
 _REPLACE_PATTERN = r"\@replace\((.*)\)"
 
 
@@ -15,8 +17,11 @@ class ConfigValue:
         merger (Callable, optional): Callable to merge the config value. Defaults to None.
     """
 
-    def __init__(self, data: Any, merger: Callable = None):
+    def __init__(
+        self, data: Any, merger: Callable = None, validator: ConfigValidator = None
+    ):
         self.merger = merger
+        self.validator = validator
         self.data = self._init(data)
 
     def _init(self, data):
@@ -40,6 +45,12 @@ class ConfigValue:
             self.data = self.merger(self, b)
         return self
 
+    def validate(self):
+        """Validate the config"""
+        if self.validator is not None:
+            if error := self.validator.validate(self.data):
+                yield error
+
     def cast(self):
         """Cast wrapped value to builtin python value"""
         return self.data
@@ -56,8 +67,18 @@ class ConfigDict(ConfigValue, UserDict):
     def _init(self, data: dict):
         for key in list(data):
             _key, merger = _get_merger(key, data[key])
-            data[_key] = _config_factory(data.pop(key), merger=merger)
+            _key, validator = _get_validator(_key)
+
+            data[_key] = _config_factory(
+                data.pop(key), merger=merger, validator=validator
+            )
         return data
+
+    def validate(self):
+        yield from super().validate()
+        for key, value in self.data.items():
+            for err in value.validate():
+                yield ValidationError(f"{key}:{err.message}")
 
     def cast(self):
         """Cast wrapped value to builtin python value"""
@@ -77,16 +98,21 @@ class ConfigList(ConfigValue, UserList):
             data[idx] = _config_factory(value)
         return data
 
+    def validate(self):
+        yield from super().validate()
+        for value in self.data:
+            yield from value.validate()
+
     def cast(self):
         """Cast wrapped value to builtin python value"""
         return [value.cast() for value in self.data]
 
 
-def _config_factory(c, merger=None):
+def _config_factory(c, merger=None, validator=None):
     if isinstance(c, ConfigValue):
         return c
     config_types = {dict: ConfigDict, list: ConfigList}
-    return config_types.get(type(c), ConfigValue)(c, merger=merger)
+    return config_types.get(type(c), ConfigValue)(c, merger=merger, validator=validator)
 
 
 def _update(a: ConfigValue, b: ConfigValue):
@@ -107,6 +133,17 @@ def _update(a: ConfigValue, b: ConfigValue):
                 a.data = _insert(a, prev_key, k, v)
         prev_key = k
     return a.data
+
+
+def _get_validator(key: str):
+    validation_match = re.search(_VALIDATION_PATTERN, key)
+    if validation_match is None:
+        return key, None
+
+    key = key.replace(validation_match.group(0), "")
+    validator_str = validation_match.group(1)
+    validator = ConfigValidator.get_validator(validator_str)
+    return key, validator
 
 
 def _get_merger(key: str, value):

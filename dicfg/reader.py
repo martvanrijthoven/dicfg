@@ -10,6 +10,7 @@ from typing import List, Optional, Union
 import yaml
 
 from dicfg.config import merge
+from dicfg.validators import ValidationErrors
 
 
 def open_json_config(config_path):
@@ -107,7 +108,7 @@ class ConfigReader:
                 user_presets = read_user_config.pop("presets", ())
                 user_configs.append(read_user_config)
                 user_presets_configs.extend(self._read_presets(user_presets))
-                
+
         configs = (
             self_config,
             *tuple(user_presets_configs),
@@ -121,8 +122,12 @@ class ConfigReader:
         )
 
         configs = self._fuse_configs(configs, self._context_keys, search_paths)
+        merged_configs = merge(*configs)
 
-        return merge(*configs).cast()
+        if errors := list(merged_configs.validate()):
+            raise ValidationErrors(errors)
+
+        return merged_configs.cast()
 
     def _set_search_paths(self, user_config_search_paths, search_paths):
         return (
@@ -143,8 +148,6 @@ class ConfigReader:
     def _read_user_config(self, user_config):
         if isinstance(user_config, dict):
             return user_config[self._name]
-        if user_config is None:
-            return {}
         return self._read(user_config)[self._name]
 
     def _read_cli(self, args: List[str]):

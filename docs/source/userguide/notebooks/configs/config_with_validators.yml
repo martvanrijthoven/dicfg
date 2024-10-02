@@ -1,0 +1,7 @@
+default:
+    config_int@validate(positive-number): 1
+    config_string: "fire"
+    config_list: [1, 2, 3]
+    config_none: None
+    config_dict:
+        sub_config: "water"

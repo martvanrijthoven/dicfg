@@ -1,5 +1,5 @@
 default: 
-  "!build": True
+  "*build": False
   defaulttest: 10
   overridetest: 10
   test_dict:
