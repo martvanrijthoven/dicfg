@@ -15,6 +15,11 @@ Release Notes
 
 ----
 
+Version 0.0.16
+^^^^^^^^^^^^^
+
+ - Feature: support for validators
+
 Version 0.0.15
 ^^^^^^^^^^^^^
 
