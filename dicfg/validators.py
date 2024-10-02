@@ -68,10 +68,10 @@ class ConfigPositiveNumberValidator(ConfigValidator):
             return ValidationError("Value must be a positive number.")
     
 
-class ConfigPositiveNumberValidator(ConfigValidator):
+class ConfigPositiveNumberListValidator(ConfigValidator):
     """Validator that checks if a value is a positive number"""
 
-    NAME = "positive-list"
+    NAME = "positive-number-list"
 
     def validate(self, value):
         if not (isinstance(value, list) and all([v.cast() >= 0 for v in value])):
