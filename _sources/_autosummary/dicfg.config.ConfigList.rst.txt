@@ -30,6 +30,7 @@ dicfg.config.ConfigList
       ~ConfigList.remove
       ~ConfigList.reverse
       ~ConfigList.sort
+      ~ConfigList.validate
    
    
 

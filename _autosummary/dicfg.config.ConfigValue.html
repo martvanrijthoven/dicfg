@@ -370,6 +370,17 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="dicfg.reader.ConfigNotFoundError.html">dicfg.reader.ConfigNotFoundError</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="dicfg.validators.html">dicfg.validators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.ConfigNotEmptyValidator.html">dicfg.validators.ConfigNotEmptyValidator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.ConfigObjectValidator.html">dicfg.validators.ConfigObjectValidator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.ConfigPositiveNumberListValidator.html">dicfg.validators.ConfigPositiveNumberListValidator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.ConfigPositiveNumberValidator.html">dicfg.validators.ConfigPositiveNumberValidator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.ConfigValidator.html">dicfg.validators.ConfigValidator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.ValidationError.html">dicfg.validators.ValidationError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.UnsupportedValidatorError.html">dicfg.validators.UnsupportedValidatorError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.ValidationErrors.html">dicfg.validators.ValidationErrors</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 </ul>
@@ -441,7 +452,7 @@ document.write(`
 <h1>dicfg.config.ConfigValue<a class="headerlink" href="#dicfg-config-configvalue" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="dicfg.config.ConfigValue">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ConfigValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/config.html#ConfigValue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.config.ConfigValue" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ConfigValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dicfg.validators.ConfigValidator.html#dicfg.validators.ConfigValidator" title="dicfg.validators.ConfigValidator"><span class="pre">ConfigValidator</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/config.html#ConfigValue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.config.ConfigValue" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Wraps a value into a ConfigValue</p>
 <dl class="field-list simple">
@@ -454,13 +465,13 @@ document.write(`
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="dicfg.config.ConfigValue.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/config.html#ConfigValue.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.config.ConfigValue.__init__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dicfg.validators.ConfigValidator.html#dicfg.validators.ConfigValidator" title="dicfg.validators.ConfigValidator"><span class="pre">ConfigValidator</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/config.html#ConfigValue.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.config.ConfigValue.__init__" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#dicfg.config.ConfigValue.__init__" title="dicfg.config.ConfigValue.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(data[, merger])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dicfg.config.ConfigValue.__init__" title="dicfg.config.ConfigValue.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(data[, merger, validator])</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#dicfg.config.ConfigValue.cast" title="dicfg.config.ConfigValue.cast"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cast</span></code></a>()</p></td>
@@ -468,6 +479,9 @@ document.write(`
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#dicfg.config.ConfigValue.merge" title="dicfg.config.ConfigValue.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge</span></code></a>(b)</p></td>
 <td><p>Merges config b with it self</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dicfg.config.ConfigValue.validate" title="dicfg.config.ConfigValue.validate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate</span></code></a>()</p></td>
+<td><p>Validate the config</p></td>
 </tr>
 </tbody>
 </table>
@@ -493,6 +507,12 @@ document.write(`
 <dd class="field-odd"><p><a class="reference internal" href="#dicfg.config.ConfigValue" title="dicfg.config.ConfigValue">ConfigValue</a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicfg.config.ConfigValue.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dicfg/config.html#ConfigValue.validate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicfg.config.ConfigValue.validate" title="Link to this definition">#</a></dt>
+<dd><p>Validate the config</p>
 </dd></dl>
 
 </dd></dl>
@@ -549,6 +569,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dicfg.config.ConfigValue.__init__"><code class="docutils literal notranslate"><span class="pre">ConfigValue.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dicfg.config.ConfigValue.cast"><code class="docutils literal notranslate"><span class="pre">ConfigValue.cast()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dicfg.config.ConfigValue.merge"><code class="docutils literal notranslate"><span class="pre">ConfigValue.merge()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dicfg.config.ConfigValue.validate"><code class="docutils literal notranslate"><span class="pre">ConfigValue.validate()</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -401,6 +401,7 @@ document.write(`
 <span class="kn">import</span> <span class="nn">yaml</span>
 
 <span class="kn">from</span> <span class="nn">dicfg.config</span> <span class="kn">import</span> <span class="n">merge</span>
+<span class="kn">from</span> <span class="nn">dicfg.validators</span> <span class="kn">import</span> <span class="n">ValidationErrors</span>
 
 
 <div class="viewcode-block" id="open_json_config">
@@ -514,7 +515,7 @@ document.write(`
                 <span class="n">user_presets</span> <span class="o">=</span> <span class="n">read_user_config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;presets&quot;</span><span class="p">,</span> <span class="p">())</span>
                 <span class="n">user_configs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">read_user_config</span><span class="p">)</span>
                 <span class="n">user_presets_configs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_read_presets</span><span class="p">(</span><span class="n">user_presets</span><span class="p">))</span>
-                
+
         <span class="n">configs</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">self_config</span><span class="p">,</span>
             <span class="o">*</span><span class="nb">tuple</span><span class="p">(</span><span class="n">user_presets_configs</span><span class="p">),</span>
@@ -528,8 +529,12 @@ document.write(`
         <span class="p">)</span>
 
         <span class="n">configs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fuse_configs</span><span class="p">(</span><span class="n">configs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context_keys</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">)</span>
+        <span class="n">merged_configs</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="o">*</span><span class="n">configs</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="o">*</span><span class="n">configs</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">()</span></div>
+        <span class="k">if</span> <span class="n">errors</span> <span class="o">:=</span> <span class="nb">list</span><span class="p">(</span><span class="n">merged_configs</span><span class="o">.</span><span class="n">validate</span><span class="p">()):</span>
+            <span class="k">raise</span> <span class="n">ValidationErrors</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">merged_configs</span><span class="o">.</span><span class="n">cast</span><span class="p">()</span></div>
 
 
     <span class="k">def</span> <span class="nf">_set_search_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_config_search_paths</span><span class="p">,</span> <span class="n">search_paths</span><span class="p">):</span>
@@ -551,8 +556,6 @@ document.write(`
     <span class="k">def</span> <span class="nf">_read_user_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_config</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">user_config</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">user_config</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">user_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">{}</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="n">user_config</span><span class="p">)[</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_read_cli</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>

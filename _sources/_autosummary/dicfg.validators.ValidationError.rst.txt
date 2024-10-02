@@ -1,0 +1,31 @@
+dicfg.validators.ValidationError
+================================
+
+.. currentmodule:: dicfg.validators
+
+.. autoclass:: ValidationError
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ValidationError.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ValidationError.message
+   
+   

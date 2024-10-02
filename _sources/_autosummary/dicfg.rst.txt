@@ -32,4 +32,5 @@
    factory
    magics
    reader
+   validators
 

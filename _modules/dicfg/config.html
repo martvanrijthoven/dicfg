@@ -394,7 +394,9 @@ document.write(`
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span>
 
+<span class="kn">from</span> <span class="nn">dicfg.validators</span> <span class="kn">import</span> <span class="n">ConfigValidator</span><span class="p">,</span> <span class="n">ValidationError</span>
 
+<span class="n">_VALIDATION_PATTERN</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\@validate\((.*)\)&quot;</span>
 <span class="n">_REPLACE_PATTERN</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\@replace\((.*)\)&quot;</span>
 
 
@@ -410,8 +412,11 @@ document.write(`
 
 <div class="viewcode-block" id="ConfigValue.__init__">
 <a class="viewcode-back" href="../../_autosummary/dicfg.config.ConfigValue.html#dicfg.config.ConfigValue.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">merger</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">merger</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">validator</span><span class="p">:</span> <span class="n">ConfigValidator</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">merger</span> <span class="o">=</span> <span class="n">merger</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="n">validator</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 
@@ -439,6 +444,15 @@ document.write(`
         <span class="k">return</span> <span class="bp">self</span></div>
 
 
+<div class="viewcode-block" id="ConfigValue.validate">
+<a class="viewcode-back" href="../../_autosummary/dicfg.config.ConfigValue.html#dicfg.config.ConfigValue.validate">[docs]</a>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate the config&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">error</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
+                <span class="k">yield</span> <span class="n">error</span></div>
+
+
 <div class="viewcode-block" id="ConfigValue.cast">
 <a class="viewcode-back" href="../../_autosummary/dicfg.config.ConfigValue.html#dicfg.config.ConfigValue.cast">[docs]</a>
     <span class="k">def</span> <span class="nf">cast</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -461,8 +475,21 @@ document.write(`
     <span class="k">def</span> <span class="nf">_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
             <span class="n">_key</span><span class="p">,</span> <span class="n">merger</span> <span class="o">=</span> <span class="n">_get_merger</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
-            <span class="n">data</span><span class="p">[</span><span class="n">_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_config_factory</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">merger</span><span class="o">=</span><span class="n">merger</span><span class="p">)</span>
+            <span class="n">_key</span><span class="p">,</span> <span class="n">validator</span> <span class="o">=</span> <span class="n">_get_validator</span><span class="p">(</span><span class="n">_key</span><span class="p">)</span>
+
+            <span class="n">data</span><span class="p">[</span><span class="n">_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_config_factory</span><span class="p">(</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">merger</span><span class="o">=</span><span class="n">merger</span><span class="p">,</span> <span class="n">validator</span><span class="o">=</span><span class="n">validator</span>
+            <span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span>
+
+<div class="viewcode-block" id="ConfigDict.validate">
+<a class="viewcode-back" href="../../_autosummary/dicfg.config.ConfigDict.html#dicfg.config.ConfigDict.validate">[docs]</a>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">yield from</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">err</span> <span class="ow">in</span> <span class="n">value</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
+                <span class="k">yield</span> <span class="n">ValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">err</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="ConfigDict.cast">
 <a class="viewcode-back" href="../../_autosummary/dicfg.config.ConfigDict.html#dicfg.config.ConfigDict.cast">[docs]</a>
@@ -488,6 +515,14 @@ document.write(`
             <span class="n">data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">_config_factory</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span>
 
+<div class="viewcode-block" id="ConfigList.validate">
+<a class="viewcode-back" href="../../_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList.validate">[docs]</a>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">yield from</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="k">yield from</span> <span class="n">value</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span></div>
+
+
 <div class="viewcode-block" id="ConfigList.cast">
 <a class="viewcode-back" href="../../_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList.cast">[docs]</a>
     <span class="k">def</span> <span class="nf">cast</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -497,11 +532,11 @@ document.write(`
 
 
 
-<span class="k">def</span> <span class="nf">_config_factory</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">merger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_config_factory</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">merger</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">validator</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">ConfigValue</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">c</span>
     <span class="n">config_types</span> <span class="o">=</span> <span class="p">{</span><span class="nb">dict</span><span class="p">:</span> <span class="n">ConfigDict</span><span class="p">,</span> <span class="nb">list</span><span class="p">:</span> <span class="n">ConfigList</span><span class="p">}</span>
-    <span class="k">return</span> <span class="n">config_types</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">ConfigValue</span><span class="p">)(</span><span class="n">c</span><span class="p">,</span> <span class="n">merger</span><span class="o">=</span><span class="n">merger</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">config_types</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">ConfigValue</span><span class="p">)(</span><span class="n">c</span><span class="p">,</span> <span class="n">merger</span><span class="o">=</span><span class="n">merger</span><span class="p">,</span> <span class="n">validator</span><span class="o">=</span><span class="n">validator</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_update</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">ConfigValue</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">ConfigValue</span><span class="p">):</span>
@@ -522,6 +557,17 @@ document.write(`
                 <span class="n">a</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">_insert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">prev_key</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
         <span class="n">prev_key</span> <span class="o">=</span> <span class="n">k</span>
     <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">data</span>
+
+
+<span class="k">def</span> <span class="nf">_get_validator</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">validation_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">_VALIDATION_PATTERN</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">validation_match</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">key</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">validation_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">validator_str</span> <span class="o">=</span> <span class="n">validation_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">validator</span> <span class="o">=</span> <span class="n">ConfigValidator</span><span class="o">.</span><span class="n">get_validator</span><span class="p">(</span><span class="n">validator_str</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">key</span><span class="p">,</span> <span class="n">validator</span>
 
 
 <span class="k">def</span> <span class="nf">_get_merger</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>

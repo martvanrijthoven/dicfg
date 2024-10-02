@@ -1,0 +1,6 @@
+dicfg.validators.UnsupportedValidatorError
+==========================================
+
+.. currentmodule:: dicfg.validators
+
+.. autoexception:: UnsupportedValidatorError

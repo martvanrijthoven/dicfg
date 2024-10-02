@@ -19,6 +19,7 @@ dicfg.config.ConfigValue
       ~ConfigValue.__init__
       ~ConfigValue.cast
       ~ConfigValue.merge
+      ~ConfigValue.validate
    
    
 

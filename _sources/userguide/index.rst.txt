@@ -18,4 +18,5 @@ User Guide
    ./notebooks/presets
    ./notebooks/searchpaths
    ./notebooks/contextkeys
+   ./notebooks/validators
 

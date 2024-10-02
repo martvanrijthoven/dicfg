@@ -29,6 +29,7 @@ dicfg.config.ConfigDict
       ~ConfigDict.popitem
       ~ConfigDict.setdefault
       ~ConfigDict.update
+      ~ConfigDict.validate
       ~ConfigDict.values
    
    

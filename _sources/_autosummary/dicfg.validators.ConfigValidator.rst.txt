@@ -1,0 +1,34 @@
+dicfg.validators.ConfigValidator
+================================
+
+.. currentmodule:: dicfg.validators
+
+.. autoclass:: ConfigValidator
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ConfigValidator.__init__
+      ~ConfigValidator.get_validator
+      ~ConfigValidator.validate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ConfigValidator.MESSAGE
+      ~ConfigValidator.NAME
+   
+   
