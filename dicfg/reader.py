@@ -1,5 +1,6 @@
 import ast
 import json
+from pprint import pprint
 import sys
 from collections import defaultdict
 from copy import deepcopy
@@ -10,8 +11,8 @@ from typing import List, Optional, Union
 import yaml
 
 from dicfg.config import merge
-from dicfg.validators import ValidationErrors
-
+from dicfg.addons.validators import ValidationErrors
+from dicfg.addons import load as _
 
 def open_json_config(config_path):
     with open(str(config_path), encoding="utf8") as file:
@@ -125,6 +126,7 @@ class ConfigReader:
         merged_configs = merge(*configs)
 
         if errors := list(merged_configs.validate()):
+            pprint(merged_configs.cast(), sort_dicts=False)
             raise ValidationErrors(errors)
 
         return merged_configs.cast()

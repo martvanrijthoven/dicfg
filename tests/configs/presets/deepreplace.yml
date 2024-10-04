@@ -1,4 +1,4 @@
 default:
-  deep_replace@replace(true): 
+  deep_replace@updater(replace): 
     c: 1
     d: 2

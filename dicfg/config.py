@@ -1,12 +1,17 @@
-import re
 from collections import UserDict, UserList
 from functools import reduce
-from typing import Any, Callable, Tuple
+from typing import Any, Optional, Tuple
 
-from dicfg.validators import ConfigValidator, ValidationError
-
-_VALIDATION_PATTERN = r"\@validate\((.*)\)"
-_REPLACE_PATTERN = r"\@replace\((.*)\)"
+from dicfg.addons.addons import (
+    CONFIG_ADDONS,
+    Addon,
+    TemplateAddon,
+    UpdaterAddon,
+    ValidatorAddon,
+    process_addons,
+    select_addon,
+)
+from dicfg.addons.validators import ValidationError
 
 
 class ConfigValue:
@@ -18,16 +23,19 @@ class ConfigValue:
     """
 
     def __init__(
-        self, data: Any, merger: Callable = None, validator: ConfigValidator = None
+        self,
+        data: Any,
+        updater: UpdaterAddon = None,
+        validator: ValidatorAddon = None,
     ):
-        self.merger = merger
+        self.updater = updater
         self.validator = validator
         self.data = self._init(data)
 
     def _init(self, data):
         return data
 
-    def merge(self, b: "ConfigValue") -> "ConfigValue":
+    def modify(self, b: "ConfigValue") -> "ConfigValue":
         """Merges config b with it self
 
         Args:
@@ -37,12 +45,12 @@ class ConfigValue:
             ConfigValue: self
         """
 
-        if self.merger is None and b.merger is None:
-            self.data = _update(self, b)
-        elif b.merger is not None:
-            self.data = b.merger(self, b)
+        if self.updater is None and b.updater is None:
+            self.data = update(self, b)
+        elif b.updater is not None:
+            self.data = b.updater.update(self, b)
         else:
-            self.data = self.merger(self, b)
+            self.data = self.updater.update(self, b)
         return self
 
     def validate(self):
@@ -65,13 +73,25 @@ class ConfigDict(ConfigValue, UserDict):
     """
 
     def _init(self, data: dict):
+    
         for key in list(data):
-            _key, merger = _get_merger(key, data[key])
-            _key, validator = _get_validator(_key)
+            config_kwargs: dict[str, Addon] = {}
+            template: Optional[TemplateAddon] = None
 
-            data[_key] = _config_factory(
-                data.pop(key), merger=merger, validator=validator
-            )
+            _key, addons = process_addons(key)
+            value = data.pop(key)
+            for addon, name in addons:
+                config_kwargs[addon] = select_addon(addon, name)
+
+            template = config_kwargs.pop(CONFIG_ADDONS.TEMPLATE.value, None)
+            data[_key] = _config_factory(value, **config_kwargs)
+
+            if template is not None:
+                template_data = _config_factory(template.data)
+                if not isinstance(data[_key], type(template_data)):
+                    data[_key] = template_data
+                else:
+                    data[_key] = template_data.modify(data[_key])
         return data
 
     def validate(self):
@@ -108,68 +128,13 @@ class ConfigList(ConfigValue, UserList):
         return [value.cast() for value in self.data]
 
 
-def _config_factory(c, merger=None, validator=None):
+def _config_factory(c, updater=None, validator=None) -> ConfigValue:
     if isinstance(c, ConfigValue):
         return c
     config_types = {dict: ConfigDict, list: ConfigList}
-    return config_types.get(type(c), ConfigValue)(c, merger=merger, validator=validator)
-
-
-def _update(a: ConfigValue, b: ConfigValue):
-    if not isinstance(b, ConfigDict):
-        return b.data
-
-    prev_key = None
-    for k, v in b.items():
-        if k in a:
-            if type(b[k]) != type(a[k]):  # noqa: E721
-                a[k] = b[k]
-            else:
-                a[k].merge(v)
-        else:
-            if prev_key is None:
-                a.data = {**a.data, **{k: v}}
-            else:
-                a.data = _insert(a, prev_key, k, v)
-        prev_key = k
-    return a.data
-
-
-def _get_validator(key: str):
-    validation_match = re.search(_VALIDATION_PATTERN, key)
-    if validation_match is None:
-        return key, None
-
-    key = key.replace(validation_match.group(0), "")
-    validator_str = validation_match.group(1)
-    validator = ConfigValidator.get_validator(validator_str)
-    return key, validator
-
-
-def _get_merger(key: str, value):
-    replace_match = re.search(_REPLACE_PATTERN, key)
-    if replace_match is None:
-        return key, None
-
-    key = key.replace(replace_match.group(0), "")
-    replace = _get_replace(replace_match)
-
-    if isinstance(value, dict) and replace:
-        return key, lambda a, b: b.data
-    if isinstance(value, list) and not replace:
-        return key, lambda a, b: a.data + b.data
-    return key, _update
-
-
-def _get_replace(replace_match: re.Match):
-    replace_str = replace_match.group(1).lower()
-    if replace_str not in ("true", "false"):
-        raise ValueError(replace_str)
-    return replace_str == "true"
-
-
-def _merge(a: ConfigValue, b: ConfigValue):
-    return a.merge(b)
+    return config_types.get(type(c), ConfigValue)(
+        c, updater=updater, validator=validator
+    )
 
 
 def _insert(dictionary, prev_key, k, v):
@@ -181,6 +146,30 @@ def _insert(dictionary, prev_key, k, v):
     return new_dict
 
 
+def _modify(a: ConfigValue, b: ConfigValue):
+    return a.modify(b)
+
+
+def update(a: ConfigValue, b: ConfigValue):
+    if not isinstance(b, ConfigDict):
+        return b.data
+
+    prev_key = None
+    for k, v in b.items():
+        if k in a:
+            if type(b[k]) != type(a[k]):  # noqa: E721
+                a[k] = b[k]
+            else:
+                a[k].modify(v)
+        else:
+            if prev_key is None:
+                a.data = {**a.data, **{k: v}}
+            else:
+                a.data = _insert(a, prev_key, k, v)
+        prev_key = k
+    return a.data
+
+
 def merge(*args: Tuple[dict]) -> ConfigDict:
     """Merges different configs
 
@@ -188,4 +177,4 @@ def merge(*args: Tuple[dict]) -> ConfigDict:
         ConfigDict: merged configs
     """
 
-    return reduce(_merge, map(_config_factory, args), ConfigDict({}))
+    return reduce(_modify, map(_config_factory, args), ConfigDict({}))
