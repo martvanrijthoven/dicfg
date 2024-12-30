@@ -83,12 +83,12 @@ def test_object_no_callable_error():
 
 
 def test_template():
-    user_config = {"validators": {"testing2@template(stringio)": ""}}
+    user_config = {"validators": {"testing2#stringio": {"initial_value": "mart"}}}
     config_reader = ConfigReader(
         name="validators",
         main_config_path="./configs/validators_config.yml",
     )
-    config_reader.read(user_config)
+    print(config_reader.read(user_config))
 
 
 def test_template_same_type():
@@ -110,7 +110,7 @@ def test_merge_config_value():
 
 
 def test_replace_config_value():
-    user_config = {"validators": {"testing2@updater(replace)": "test"}}
+    user_config = {"validators": {"testing2&replace": "test"}}
     config_reader = ConfigReader(
         name="validators",
         main_config_path="./configs/validators_config.yml",

@@ -1,16 +1,54 @@
 
 from dicfg.addons.addons import TemplateAddon
+from enum import Enum
+
+class LogLevel(Enum):
+    """Log level for templates"""
+    DEBUG = "DEBUG"
+    VERBOSE = "VERBOSE"
 
 
-class StringIOTemplate(TemplateAddon):
-    """Validator that checks if a value is not empty or None"""
+class Verbose(TemplateAddon):
+    """Template for io.StringIO object"""
 
-    NAME = "stringio"
+    NAME = "verbose"
 
-    @property
+    @classmethod
     def data(self):
         return {
-            "*object": "io.StringIO",
-            "initial_value@validator(required)": "test",
-            "newline": 3,
+            '*log': LogLevel.VERBOSE
+        }
+
+
+class Debug(TemplateAddon):
+    """Template for io.StringIO object"""
+
+    NAME = "debug"
+
+    @classmethod
+    def data(self):
+        return {
+            '*log': LogLevel.DEBUG
+        }
+
+class Build(TemplateAddon):
+    """Template for io.StringIO object"""
+
+    NAME = "build"
+
+    @classmethod
+    def data(self):
+        return {
+            '*build': True
+        }
+
+class DontBuild(TemplateAddon):
+    """Template for io.StringIO object"""
+
+    NAME = "dontbuild"
+
+    @classmethod
+    def data(self):
+        return {
+            '*build': False
         }

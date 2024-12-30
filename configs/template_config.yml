@@ -1,0 +1,9 @@
+
+test2@validator(required): "test"
+test3@validator(depreciated): 
+testing@validator(object):
+  "*object": "io.StringIO"
+  initial_value: "Hello, World!"
+  newline: "\n"
+
+test_template@validator(required)@template(stringio):

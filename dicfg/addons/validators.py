@@ -24,7 +24,8 @@ class RequiredValidatorAddon(ValidatorAddon):
 
     NAME = "required"
 
-    def validate(self, value):
+    @classmethod
+    def validate(cls, value):
         if not (value != "" and value is not None):
             return ValidationError("Value is required and must not be empty or None.")
 
@@ -33,7 +34,8 @@ class DepreciatedValidatorAddon(ValidatorAddon):
 
     NAME = "depreciated"
 
-    def validate(self, value):
+    @classmethod
+    def validate(cls, value):
         if not (value == "" or value is None):
             return ValidationError("Value is depreciated and should not be used")
 
@@ -43,7 +45,8 @@ class ObjectValidatorAddon(ValidatorAddon):
 
     NAME = "object"
 
-    def validate(self, value: dict) -> ValidationError:
+    @classmethod
+    def validate(cls, value: dict) -> ValidationError:
         if not isinstance(value, dict):
             return ValidationError("Value must be a dictionary.")
 

@@ -9,11 +9,36 @@ class CONFIG_ADDONS(Enum):
     TEMPLATE = "template"
 
 
-_ADDON_PATTERN = r"@(\w+)\(([^)]*)\)"
+# Constants for addon signs
+VALIDATOR_SIGN = "!"
+UPDATER_SIGN = "&"
+TEMPLATE_SIGN = "#"
+
+# Pattern to match addon annotations
+_ADDON_PATTERN = rf"@(\w+)\(([^)]+)\)|([{VALIDATOR_SIGN}{UPDATER_SIGN}{TEMPLATE_SIGN}])(\w+)"
 
 
 def process_addons(key: str):
-    addons = re.findall(_ADDON_PATTERN, key)
+    """
+    Extracts addons and their arguments from the key.
+    Removes all addon annotations from the key and returns the cleaned key.
+    
+    :param key: The input key string with addon annotations.
+    :return: A tuple of cleaned key and a list of extracted addons.
+    """
+    matches = re.findall(_ADDON_PATTERN, key)
+    addons = []
+    
+    for match in matches:
+        if match[0]:  # Match for @addon(name)
+            addons.append((match[0], match[1]))
+        elif match[2] == VALIDATOR_SIGN:  
+            addons.append((CONFIG_ADDONS.VALIDATOR.value, match[3]))
+        elif match[2] == UPDATER_SIGN:  
+            addons.append((CONFIG_ADDONS.UPDATER.value, match[3]))
+        elif match[2] == TEMPLATE_SIGN:  
+            addons.append((CONFIG_ADDONS.TEMPLATE.value, match[3]))
+
     # Remove all annotations from the key
     key = re.sub(_ADDON_PATTERN, "", key)
     # Strip any leading/trailing whitespace or separators (if needed)
@@ -47,7 +72,7 @@ class Addon(ABC):
             raise UnsupportedAddonError(
                 f"Addon {cls.NAME} with name '{name}' not found."
             )
-        return cls.__registry[name]()
+        return cls.__registry[name]
 
 
 class TemplateAddon(Addon):
@@ -55,9 +80,18 @@ class TemplateAddon(Addon):
 
     NAME = "template"
 
-    @property
-    @abstractmethod
-    def data(self):
+    @classmethod
+    def data(cls):
+        dat = {"*object": cls._get_object_ref()}
+        dat.update(cls._data())
+        return dat
+    
+    @classmethod
+    def _get_object_ref(cls):
+        return f"{cls.__module__}.{cls.__name__}"
+
+    @classmethod
+    def _data(cls):
         """Data to be used for template"""
 
 
@@ -66,8 +100,8 @@ class ValidatorAddon(Addon):
 
     NAME = "validator"
 
-    @abstractmethod
-    def validate(self, value):
+    @classmethod
+    def validate(cls, value):
         """Validate the value"""
 
 
@@ -76,8 +110,8 @@ class UpdaterAddon(Addon):
 
     NAME = "updater"
 
-    @abstractmethod
-    def update(self, a, b):
+    @classmethod
+    def update(cls, a, b):
         """Update a with b"""
 
 

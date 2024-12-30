@@ -1,35 +1,15 @@
 import ast
-import json
-from pprint import pprint
 import sys
 from collections import defaultdict
 from copy import deepcopy
 from functools import partial, singledispatch
 from pathlib import Path
 from typing import List, Optional, Union
-
-import yaml
-
 from dicfg.config import merge
 from dicfg.addons.validators import ValidationErrors
 from dicfg.addons import load as _
-
-def open_json_config(config_path):
-    with open(str(config_path), encoding="utf8") as file:
-        return json.load(file)
-
-
-def open_yaml_config(config_path):
-    with open(str(config_path), encoding="utf8") as file:
-        return yaml.load(file, Loader=yaml.SafeLoader)
-
-
-_FILE_READERS = {
-    ".json": open_json_config,
-    ".yml": open_yaml_config,
-    ".yaml": open_yaml_config,
-}
-
+from dicfg.formats import FORMAT_READERS
+from pprint import pprint
 
 class ConfigNotFoundError(Exception):
     """Raised when config file can not be found."""
@@ -51,7 +31,7 @@ class ConfigReader:
         self,
         name: str,
         main_config_path: Union[str, Path] = "./configs/config.yml",
-        presets_folder_name: str = "presets",
+        presets: Union[str, Path] = "presets",
         default_key: str = "default",
         context_keys: tuple = (),
         search_paths: tuple = (),
@@ -72,7 +52,11 @@ class ConfigReader:
         self._presets_folder = None
 
         self._configs_folder = self._main_config_path.parent
-        self._presets_folder = self._configs_folder / presets_folder_name
+
+        if isinstance(presets, Path):
+            self._presets_folder = presets
+        else:
+            self._presets_folder = self._configs_folder / presets
 
     def read(
         self,
@@ -97,14 +81,13 @@ class ConfigReader:
         user_presets_configs = []
         user_config_search_paths = []
         if user_config is not None:
-            if not isinstance(user_config, list):
+            if not isinstance(user_config, (list, tuple)):
                 user_config = [user_config]
 
             for config in user_config:
                 if isinstance(config, (str, Path)) and not isinstance(config, dict):
                     user_config_search_path = Path(config).parent
                     user_config_search_paths.append(user_config_search_path)
-
                 read_user_config = self._read_user_config(config)
                 user_presets = read_user_config.pop("presets", ())
                 user_configs.append(read_user_config)
@@ -124,11 +107,8 @@ class ConfigReader:
 
         configs = self._fuse_configs(configs, self._context_keys, search_paths)
         merged_configs = merge(*configs)
-
         if errors := list(merged_configs.validate()):
-            pprint(merged_configs.cast(), sort_dicts=False)
             raise ValidationErrors(errors)
-
         return merged_configs.cast()
 
     def _set_search_paths(self, user_config_search_paths, search_paths):
@@ -141,16 +121,23 @@ class ConfigReader:
         )
 
     def _read(self, config_path):
-        config = _FILE_READERS[Path(config_path).suffix](config_path=config_path)
+        config = FORMAT_READERS[Path(config_path).suffix](config_path=config_path)
         return {} if config is None else config
 
     def _read_presets(self, presets):
         return tuple((self._read(self._presets_folder / preset) for preset in presets))
 
     def _read_user_config(self, user_config):
-        if isinstance(user_config, dict):
+        user_config = (
+            user_config if isinstance(user_config, dict) else self._read(user_config)
+        )
+
+        try:
             return user_config[self._name]
-        return self._read(user_config)[self._name]
+        except KeyError:
+            raise KeyError(
+                f"Config file: {user_config} does not contain a '{self._name}' key."
+            )
 
     def _read_cli(self, args: List[str]):
         dicts = []
@@ -206,9 +193,9 @@ def _include_configs(config, search_paths):
 
 @_include_configs.register
 def _include_configs_str(config: str, search_paths):
-    if Path(config).suffix in _FILE_READERS:
+    if Path(config).suffix in FORMAT_READERS:
         config_path = _search_config(config, search_paths)
-        open_config = _FILE_READERS[Path(config_path).suffix](config_path)
+        open_config = FORMAT_READERS[Path(config_path).suffix](config_path)
         return _include_configs(open_config, search_paths)
     return config
 

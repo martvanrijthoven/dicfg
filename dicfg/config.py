@@ -1,6 +1,8 @@
 from collections import UserDict, UserList
 from functools import reduce
 from typing import Any, Optional, Tuple
+from enum import Enum
+from collections import defaultdict
 
 from dicfg.addons.addons import (
     CONFIG_ADDONS,
@@ -14,6 +16,13 @@ from dicfg.addons.addons import (
 from dicfg.addons.validators import ValidationError
 
 
+class Affix(Enum):
+    """Affixes for the update function"""
+
+    PRE = "pre"
+    POST = "post"
+
+
 class ConfigValue:
     """Wraps a value into a ConfigValue
 
@@ -25,11 +34,11 @@ class ConfigValue:
     def __init__(
         self,
         data: Any,
-        updater: UpdaterAddon = None,
-        validator: ValidatorAddon = None,
+        updater: tuple[UpdaterAddon] = None,
+        validator: tuple[ValidatorAddon] = None,
     ):
-        self.updater = updater
-        self.validator = validator
+        self.updater = updater or (None,)
+        self.validator = validator or (None,)
         self.data = self._init(data)
 
     def _init(self, data):
@@ -45,26 +54,28 @@ class ConfigValue:
             ConfigValue: self
         """
 
-        if self.updater is None and b.updater is None:
-            self.data = update(self, b)
-        elif b.updater is not None:
-            self.data = b.updater.update(self, b)
-        else:
-            self.data = self.updater.update(self, b)
+        for idx, updater in enumerate(self.updater):
+            if updater is None and b.updater[idx] is None:
+                self.data = update(self, b)
+            elif b.updater[idx] is not None:
+                self.data = b.updater[idx].update(self, b)
+            else:
+                self.data = updater.update(self, b)
         return self
 
     def validate(self):
         """Validate the config"""
-        if self.validator is not None:
-            if error := self.validator.validate(self.data):
-                yield error
+        for validator in self.validator:
+            if validator is not None:
+                if error := validator.validate(self.data):
+                    yield error
 
     def cast(self):
         """Cast wrapped value to builtin python value"""
         return self.data
 
 
-class ConfigDict(ConfigValue, UserDict):
+class ConfigDict(ConfigValue, UserDict[str, ConfigValue]):
     """Wraps a value into a ConfigDict
 
     Args:
@@ -73,26 +84,31 @@ class ConfigDict(ConfigValue, UserDict):
     """
 
     def _init(self, data: dict):
-    
         for key in list(data):
-            config_kwargs: dict[str, Addon] = {}
-            template: Optional[TemplateAddon] = None
-
+            config_kwargs: dict[str, list[Addon]] = defaultdict(list)
             _key, addons = process_addons(key)
             value = data.pop(key)
             for addon, name in addons:
-                config_kwargs[addon] = select_addon(addon, name)
+                config_kwargs[addon].append(select_addon(addon, name))
 
-            template = config_kwargs.pop(CONFIG_ADDONS.TEMPLATE.value, None)
+            templates = config_kwargs.pop(CONFIG_ADDONS.TEMPLATE.value, None)
             data[_key] = _config_factory(value, **config_kwargs)
+            if templates is not None:
+                data[_key] = self._apply_templates(data[_key], templates)
 
-            if template is not None:
-                template_data = _config_factory(template.data)
-                if not isinstance(data[_key], type(template_data)):
-                    data[_key] = template_data
-                else:
-                    data[_key] = template_data.modify(data[_key])
         return data
+
+    def _apply_templates(
+        self, config_value: ConfigValue, templates: list[TemplateAddon]
+    ):
+        """Apply templates to the given config value."""
+        for template in templates:
+            template_data = _config_factory(template.data())
+            if not isinstance(config_value, type(template_data)):
+                config_value = template_data
+            else:
+                config_value = config_value.modify(template_data)
+        return config_value
 
     def validate(self):
         yield from super().validate()
@@ -150,7 +166,7 @@ def _modify(a: ConfigValue, b: ConfigValue):
     return a.modify(b)
 
 
-def update(a: ConfigValue, b: ConfigValue):
+def update(a: ConfigValue, b: ConfigValue, affix: Optional[Affix] = None) -> Any:
     if not isinstance(b, ConfigDict):
         return b.data
 
@@ -162,8 +178,12 @@ def update(a: ConfigValue, b: ConfigValue):
             else:
                 a[k].modify(v)
         else:
-            if prev_key is None:
-                a.data = {**a.data, **{k: v}}
+            if affix == Affix.PRE:
+                a.data = {k: v, **a.data}
+            elif affix == Affix.POST:
+                a.data = {**a.data, k: v}
+            elif prev_key is None:
+                a.data = {**a.data, k: v}
             else:
                 a.data = _insert(a, prev_key, k, v)
         prev_key = k

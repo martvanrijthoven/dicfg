@@ -1,13 +1,9 @@
 default:
-    config_int2@validator(required): 
-    config_int@validator(depreciated): 
-    object:
-      "*object": "io.StringIO"
     config_string: "fire"
     config_list: [1, 2, 3]
     config_none: None
     config_dict:
         sub_config: "water"
-
+    mystringio@template(stringio):
 
         
