@@ -107,7 +107,7 @@ class ConfigDict(ConfigValue, UserDict[str, ConfigValue]):
             if not isinstance(config_value, type(template_data)):
                 config_value = template_data
             else:
-                config_value = config_value.modify(template_data)
+                config_value = template_data.modify(config_value)
         return config_value
 
     def validate(self):

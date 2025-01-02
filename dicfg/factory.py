@@ -20,6 +20,12 @@ LOG_KEY = "*log"
 WHITE_LIST_FACTORY_KEYS = [OBJECT_KEY, ARGS_KEY, KWARGS_KEY, BUILD_KEY, LOG_KEY]
 
 
+class InvalidObjectConfigurationError(Exception):
+    """Custom exception for invalid object configuration errors."""
+
+    pass
+
+
 class _ObjectFactory:
     def __init__(self, config: dict):
         self._configuration = config
@@ -41,17 +47,26 @@ class _ObjectFactory:
         for key, value in config.items():
             if not _build(value):
                 config[key] = value
-            elif _is_object_config(value):
-                if log := value.pop(LOG_KEY, False):
-                    if log == LogLevel.VERBOSE:
-                        print("\tRunning:", key)
-                    if log == LogLevel.DEBUG:
-                        print("\tRunning:", key)
-                        print("\tConfig:", value)
+                continue
+
+            if _is_object_config(value):
+                self._logging(value, key)
                 config[key] = self._build_object(value)
             else:
                 config[key] = self._build(value)
+
         return config
+
+    def _logging(self, value: dict, key: str):
+        """Handle logging based on the configuration value."""
+        if log := value.pop(LOG_KEY, False):
+            if log == LogLevel.VERBOSE:
+                print("\tRunning:", key)
+            elif log == LogLevel.DEBUG:
+                print("\tRunning:", key)
+                print("\tConfig:", value)
+            else:
+                raise ValueError(f"Invalid log level: {log}")
 
     @_build.register(list)
     @_build.register(tuple)
@@ -79,9 +94,11 @@ class _ObjectFactory:
             kwargs.update(value.pop(KWARGS_KEY, {}))
             attribute = self._parse_object_str(object_string)
             return attribute(*args, **kwargs)
-        except (AttributeError, TypeError):
-            raise ValueError(f"Invalid object configuration: {value}")
-            
+        except (ModuleNotFoundError, AttributeError, TypeError) as e:
+            raise InvalidObjectConfigurationError(
+                f"Invalid object configuration:\nObject: {object_string}\nArgs: {value}\nError: {e}"
+            ) from e
+
     def _parse_object_str(self, object_string: str):
         object_split = object_string.split(".")
         module_string = ".".join(object_split[:-1])
