@@ -6,7 +6,7 @@ from pathlib import Path
 from pytest import raises
 
 from dicfg import ConfigReader, build_config, __version__
-from dicfg.addons.addons import UnsupportedAddonError
+from dicfg.addons.addon import UnsupportedAddonError
 from dicfg.reader import ConfigNotFoundError
 
 os.environ["ENV_TEST_VAR"] = "dicfg"

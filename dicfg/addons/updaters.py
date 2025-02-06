@@ -1,4 +1,4 @@
-from dicfg.addons.addons import UpdaterAddon
+from dicfg.addons.addon import UpdaterAddon
 from dicfg.config import Affix, ConfigDict, ConfigList, ConfigValue, update
 
 

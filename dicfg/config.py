@@ -4,7 +4,7 @@ from typing import Any, Optional, Tuple
 from enum import Enum
 from collections import defaultdict
 
-from dicfg.addons.addons import (
+from dicfg.addons.addon import (
     CONFIG_ADDONS,
     Addon,
     TemplateAddon,

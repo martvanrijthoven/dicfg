@@ -3,7 +3,7 @@ import importlib
 
 import inspect
 
-from dicfg.addons.addons import ValidatorAddon
+from dicfg.addons.addon import ValidatorAddon
 from dicfg.factory import WHITE_LIST_FACTORY_KEYS, OBJECT_KEY
 
 
