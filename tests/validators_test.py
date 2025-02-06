@@ -1,5 +1,5 @@
 from pytest import raises
-from dicfg.addons.addons import UnsupportedAddonError, ValidatorAddon
+from dicfg.addons.addon import UnsupportedAddonError, ValidatorAddon
 from dicfg.reader import ConfigReader
 from dicfg.addons.validators import ValidationErrors
 

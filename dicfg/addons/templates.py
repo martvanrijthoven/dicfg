@@ -1,5 +1,5 @@
 
-from dicfg.addons.addons import TemplateAddon
+from dicfg.addons.addon import TemplateAddon
 from enum import Enum
 
 class LogLevel(Enum):
