@@ -6,6 +6,7 @@ from pathlib import Path
 from pytest import raises
 
 from dicfg import ConfigReader, build_config, __version__
+from dicfg.addons.addons import UnsupportedAddonError
 from dicfg.reader import ConfigNotFoundError
 
 os.environ["ENV_TEST_VAR"] = "dicfg"
@@ -35,6 +36,7 @@ def test_dicfg():
 
     assert test_config["defaulttest"] == 10
     assert test_config["overridetest"] == 20
+    assert test_config["test_default_list_replace"] == ["test3", "test4"]
     assert test_config["test_dict"] == {"test2": "test2"}
     assert test_config["test_list_append"] == ["test", "test2"]
     assert test_config["test_list2"] == ["test", "test2"]
@@ -120,7 +122,7 @@ def test_deep_replace_preset_in_config():
 
 
 def test_replace_error():
-    with raises(ValueError):
+    with raises(UnsupportedAddonError):
         user_config_path = Path("./testconfigs/user_config_replace_error.yml")
         _ = config_reader.read(user_config_path)
 

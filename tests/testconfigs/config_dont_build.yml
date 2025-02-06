@@ -6,9 +6,9 @@ default:
     test: test
   test_list_append:
     - test
-  test_list2@replace(false):
+  test_list2@updater(merge):
     - test
-  test_list3@replace(true):
+  test_list3@updater(replace):
     - test
 
   test_object:

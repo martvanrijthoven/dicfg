@@ -4,11 +4,12 @@ testconfig:
     overridetest: 10
     test_dict:
       test: test
+    test_default_list_replace: ["test1", "test2"]
     test_list_append:
       - test
-    test_list2@replace(false):
+    test_list2@updater(merge):
       - test
-    test_list3@replace(true):
+    test_list3@updater(replace):
       - test
 
     test_object:
@@ -25,9 +26,10 @@ testconfig:
 
   testkey:
     overridetest: 20
-    test_dict@replace(true):
+    test_default_list_replace: ["test3", "test4"]
+    test_dict@updater(replace):
       test2: test2
-    test_list_append@replace(false):
+    test_list_append@updater(merge):
       - test2
     test_list2:
       - test2
