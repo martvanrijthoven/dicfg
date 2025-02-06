@@ -9,7 +9,7 @@ class LogLevel(Enum):
 
 
 class Verbose(TemplateAddon):
-    """Template for io.StringIO object"""
+    """Template"""
 
     NAME = "verbose"
 
@@ -21,7 +21,7 @@ class Verbose(TemplateAddon):
 
 
 class Debug(TemplateAddon):
-    """Template for io.StringIO object"""
+    """Template"""
 
     NAME = "debug"
 
@@ -32,7 +32,7 @@ class Debug(TemplateAddon):
         }
 
 class Build(TemplateAddon):
-    """Template for io.StringIO object"""
+    """Template"""
 
     NAME = "build"
 

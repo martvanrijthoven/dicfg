@@ -4,6 +4,6 @@ testing@validator(object):
   "*object": "io.StringIO"
   initial_value: "Hello, World!"
   newline: "\n"
-testing3@template(stringio):
+testing3@template(debug):
   initial_value: "Hello, World!"
 test_merge@updater(merge): 4
