@@ -106,7 +106,9 @@ class ConfigReader:
         )
 
         configs = self._fuse_configs(configs, self._context_keys, search_paths)
+        pprint(configs)
         merged_configs = merge(*configs)
+        
         if errors := list(merged_configs.validate()):
             raise ValidationErrors(errors)
         return merged_configs.cast()

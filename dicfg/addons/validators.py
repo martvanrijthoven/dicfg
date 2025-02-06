@@ -19,6 +19,10 @@ class ValidationErrors(Exception):
         return "\n".join(str(err) for err in self.errors)
 
 
+class DependenciesAddon(ValidatorAddon):
+    NAME = "dependencies"
+    
+
 class RequiredValidatorAddon(ValidatorAddon):
     """Validator that checks if a value is not empty or None"""
 

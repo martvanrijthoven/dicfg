@@ -25,6 +25,11 @@ class InvalidObjectConfigurationError(Exception):
 
     pass
 
+class InvalidReferenceError(Exception):
+    """Custom exception for invalid reference errors."""
+
+    pass
+
 
 class _ObjectFactory:
     def __init__(self, config: dict):
@@ -118,7 +123,7 @@ class _ObjectFactory:
                 return self._object_interpolation(matches[0])
             return self._string_interpolation(reference, matches)
         except (IndexError, KeyError, AttributeError):
-            raise ValueError(f"Invalid reference in: {reference}")
+            raise InvalidReferenceError(reference)
 
     def _object_interpolation(self, reference: str):
         references = reference.split(REFERENCE_MAP_SYMBOL)
