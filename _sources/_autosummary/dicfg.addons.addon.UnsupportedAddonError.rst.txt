@@ -1,0 +1,6 @@
+dicfg.addons.addon.UnsupportedAddonError
+========================================
+
+.. currentmodule:: dicfg.addons.addon
+
+.. autoexception:: UnsupportedAddonError

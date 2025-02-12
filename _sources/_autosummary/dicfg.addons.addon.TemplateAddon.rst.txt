@@ -1,0 +1,33 @@
+dicfg.addons.addon.TemplateAddon
+================================
+
+.. currentmodule:: dicfg.addons.addon
+
+.. autoclass:: TemplateAddon
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TemplateAddon.__init__
+      ~TemplateAddon.data
+      ~TemplateAddon.get_addon
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TemplateAddon.NAME
+   
+   

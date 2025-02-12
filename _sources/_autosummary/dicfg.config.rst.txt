@@ -15,6 +15,7 @@ dicfg.config
       :toctree:                                          
    
       merge
+      update
    
    
 
@@ -26,6 +27,7 @@ dicfg.config
       :toctree:                                         
       :template: custom-class-template.rst               
    
+      Affix
       ConfigDict
       ConfigList
       ConfigValue

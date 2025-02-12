@@ -15,18 +15,25 @@ Release Notes
 
 ----
 
+
+Version 0.0.17
+^^^^^^^^^^^^^^
+
+ - Feature: support addons: updaters, validators, templates
+ - Note: merging dicts and list is now done via updater addon
+
 Version 0.0.16
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
  - Feature: support for validators
 
 Version 0.0.15
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
  - Fix: append new keys instead of prepend
 
 Version 0.0.14
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
  - Feature: multiple user config files
  - Feature: make open_config public
@@ -34,28 +41,28 @@ Version 0.0.14
 
 
 Version 0.0.13
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
  - Feature: allow presets in user configs
  - Python3.12 support
 
 
 Version 0.0.12
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
  - Fix: catch syntax error when evaluating cli
 
 
 
 Version 0.0.11
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
  - Feature: dont build option ("!build": true)
 
 
 
 Version 0.0.10
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
  - Removed logoru from pyproject.toml
 

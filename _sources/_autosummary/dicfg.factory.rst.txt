@@ -24,6 +24,14 @@ dicfg.factory
 
    
    
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      InvalidObjectConfigurationError
+      InvalidReferenceError
+   
    
 
 

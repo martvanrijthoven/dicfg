@@ -28,9 +28,10 @@
    :template: custom-module-template.rst                 
    :recursive:
 
+   addons
    config
    factory
+   formats
    magics
    reader
-   validators
 

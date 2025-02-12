@@ -1,0 +1,33 @@
+dicfg.addons.addon.ValidatorAddon
+=================================
+
+.. currentmodule:: dicfg.addons.addon
+
+.. autoclass:: ValidatorAddon
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ValidatorAddon.__init__
+      ~ValidatorAddon.get_addon
+      ~ValidatorAddon.validate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ValidatorAddon.NAME
+   
+   

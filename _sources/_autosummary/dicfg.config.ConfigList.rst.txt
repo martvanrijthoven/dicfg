@@ -25,7 +25,7 @@ dicfg.config.ConfigList
       ~ConfigList.extend
       ~ConfigList.index
       ~ConfigList.insert
-      ~ConfigList.merge
+      ~ConfigList.modify
       ~ConfigList.pop
       ~ConfigList.remove
       ~ConfigList.reverse

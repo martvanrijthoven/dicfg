@@ -1,0 +1,6 @@
+dicfg.formats.read\_yaml\_config
+================================
+
+.. currentmodule:: dicfg.formats
+
+.. autofunction:: read_yaml_config

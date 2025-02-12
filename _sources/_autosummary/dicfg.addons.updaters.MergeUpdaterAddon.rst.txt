@@ -1,0 +1,33 @@
+dicfg.addons.updaters.MergeUpdaterAddon
+=======================================
+
+.. currentmodule:: dicfg.addons.updaters
+
+.. autoclass:: MergeUpdaterAddon
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MergeUpdaterAddon.__init__
+      ~MergeUpdaterAddon.get_addon
+      ~MergeUpdaterAddon.update
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MergeUpdaterAddon.NAME
+   
+   

@@ -1,0 +1,33 @@
+dicfg.addons.addon.UpdaterAddon
+===============================
+
+.. currentmodule:: dicfg.addons.addon
+
+.. autoclass:: UpdaterAddon
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~UpdaterAddon.__init__
+      ~UpdaterAddon.get_addon
+      ~UpdaterAddon.update
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~UpdaterAddon.NAME
+   
+   

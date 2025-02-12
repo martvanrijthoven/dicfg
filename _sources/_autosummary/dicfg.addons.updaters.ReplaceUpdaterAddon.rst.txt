@@ -1,0 +1,33 @@
+dicfg.addons.updaters.ReplaceUpdaterAddon
+=========================================
+
+.. currentmodule:: dicfg.addons.updaters
+
+.. autoclass:: ReplaceUpdaterAddon
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ReplaceUpdaterAddon.__init__
+      ~ReplaceUpdaterAddon.get_addon
+      ~ReplaceUpdaterAddon.update
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ReplaceUpdaterAddon.NAME
+   
+   

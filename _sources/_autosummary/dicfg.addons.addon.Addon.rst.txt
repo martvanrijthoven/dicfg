@@ -1,0 +1,32 @@
+dicfg.addons.addon.Addon
+========================
+
+.. currentmodule:: dicfg.addons.addon
+
+.. autoclass:: Addon
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Addon.__init__
+      ~Addon.get_addon
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Addon.NAME
+   
+   

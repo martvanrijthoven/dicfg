@@ -1,0 +1,35 @@
+dicfg.addons.templates
+======================
+
+.. automodule:: dicfg.addons.templates
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:                                         
+      :template: custom-class-template.rst               
+   
+      Build
+      Debug
+      DontBuild
+      LogLevel
+      Verbose
+   
+   
+
+   
+   
+   
+
+
+

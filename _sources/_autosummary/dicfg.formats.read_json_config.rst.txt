@@ -1,0 +1,6 @@
+dicfg.formats.read\_json\_config
+================================
+
+.. currentmodule:: dicfg.formats
+
+.. autofunction:: read_json_config

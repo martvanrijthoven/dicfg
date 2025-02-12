@@ -1,0 +1,31 @@
+dicfg.formats
+=============
+
+.. automodule:: dicfg.formats
+  
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      read_json_config
+      read_yaml_config
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

@@ -1,0 +1,33 @@
+dicfg.addons.validators.ObjectValidatorAddon
+============================================
+
+.. currentmodule:: dicfg.addons.validators
+
+.. autoclass:: ObjectValidatorAddon
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ObjectValidatorAddon.__init__
+      ~ObjectValidatorAddon.get_addon
+      ~ObjectValidatorAddon.validate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ObjectValidatorAddon.NAME
+   
+   

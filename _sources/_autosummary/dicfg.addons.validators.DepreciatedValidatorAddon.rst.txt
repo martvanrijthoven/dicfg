@@ -1,0 +1,33 @@
+dicfg.addons.validators.DepreciatedValidatorAddon
+=================================================
+
+.. currentmodule:: dicfg.addons.validators
+
+.. autoclass:: DepreciatedValidatorAddon
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DepreciatedValidatorAddon.__init__
+      ~DepreciatedValidatorAddon.get_addon
+      ~DepreciatedValidatorAddon.validate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DepreciatedValidatorAddon.NAME
+   
+   

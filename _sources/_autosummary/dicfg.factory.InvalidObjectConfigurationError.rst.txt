@@ -1,0 +1,6 @@
+dicfg.factory.InvalidObjectConfigurationError
+=============================================
+
+.. currentmodule:: dicfg.factory
+
+.. autoexception:: InvalidObjectConfigurationError

@@ -9,14 +9,6 @@ dicfg.reader
 
    
    
-   .. rubric:: Functions
-
-   .. autosummary::
-      :toctree:                                          
-   
-      open_json_config
-      open_yaml_config
-   
    
 
    

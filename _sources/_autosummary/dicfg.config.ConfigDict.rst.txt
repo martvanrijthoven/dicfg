@@ -24,7 +24,7 @@ dicfg.config.ConfigDict
       ~ConfigDict.get
       ~ConfigDict.items
       ~ConfigDict.keys
-      ~ConfigDict.merge
+      ~ConfigDict.modify
       ~ConfigDict.pop
       ~ConfigDict.popitem
       ~ConfigDict.setdefault

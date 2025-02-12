@@ -1,0 +1,6 @@
+dicfg.factory.InvalidReferenceError
+===================================
+
+.. currentmodule:: dicfg.factory
+
+.. autoexception:: InvalidReferenceError

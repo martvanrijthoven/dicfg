@@ -1,6 +1,0 @@
-dicfg.validators.ValidationErrors
-=================================
-
-.. currentmodule:: dicfg.validators
-
-.. autoexception:: ValidationErrors

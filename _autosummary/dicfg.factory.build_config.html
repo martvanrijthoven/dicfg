@@ -16,31 +16,34 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=2cd99579" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=d45e8c67"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
@@ -48,10 +51,11 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/dicfg.factory.build_config';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="dicfg.magics" href="dicfg.magics.html" />
+    <link rel="next" title="dicfg.factory.InvalidObjectConfigurationError" href="dicfg.factory.InvalidObjectConfigurationError.html" />
     <link rel="prev" title="dicfg.factory" href="dicfg.factory.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -67,19 +71,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -87,7 +80,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search the docs ..."
          aria-label="Search the docs ..."
          autocomplete="off"
@@ -95,8 +87,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -130,7 +122,7 @@
     
     
     <img src="../_static/logo.svg" class="logo__image only-light" alt="dicfg - Home"/>
-    <script>document.write(`<img src="../_static/logo-darkgrey.svg" class="logo__image only-dark" alt="dicfg - Home"/>`);</script>
+    <img src="../_static/logo-darkgrey.svg" class="logo__image only-dark pst-js-only" alt="dicfg - Home"/>
   
   
 </a></div>
@@ -183,29 +175,21 @@
         <div class="navbar-item navbar-persistent--container">
           
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
       
       
         <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
       
         <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -230,15 +214,11 @@ document.write(`
   
     <div class="navbar-persistent--mobile">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
     </div>
   
 
@@ -257,7 +237,8 @@ document.write(`
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -311,15 +292,11 @@ document.write(`
         
           <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
         
           <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -348,8 +325,50 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="dicfg.html">dicfg</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="dicfg.addons.html">dicfg.addons</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="dicfg.addons.addon.html">dicfg.addons.addon</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.process_addons.html">dicfg.addons.addon.process_addons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.select_addon.html">dicfg.addons.addon.select_addon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.Addon.html">dicfg.addons.addon.Addon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.CONFIG_ADDONS.html">dicfg.addons.addon.CONFIG_ADDONS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.TemplateAddon.html">dicfg.addons.addon.TemplateAddon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.UpdaterAddon.html">dicfg.addons.addon.UpdaterAddon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.ValidatorAddon.html">dicfg.addons.addon.ValidatorAddon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.UnsupportedAddonError.html">dicfg.addons.addon.UnsupportedAddonError</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.addons.load.html">dicfg.addons.load</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="dicfg.addons.templates.html">dicfg.addons.templates</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.Build.html">dicfg.addons.templates.Build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.Debug.html">dicfg.addons.templates.Debug</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.DontBuild.html">dicfg.addons.templates.DontBuild</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.LogLevel.html">dicfg.addons.templates.LogLevel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.Verbose.html">dicfg.addons.templates.Verbose</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="dicfg.addons.updaters.html">dicfg.addons.updaters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.updaters.MergeUpdaterAddon.html">dicfg.addons.updaters.MergeUpdaterAddon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.updaters.NonEmptyUpdater.html">dicfg.addons.updaters.NonEmptyUpdater</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.updaters.PostUpdaterAddon.html">dicfg.addons.updaters.PostUpdaterAddon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.updaters.PreUpdaterAddon.html">dicfg.addons.updaters.PreUpdaterAddon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.updaters.ReplaceUpdaterAddon.html">dicfg.addons.updaters.ReplaceUpdaterAddon</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="dicfg.addons.validators.html">dicfg.addons.validators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.validators.DependenciesAddon.html">dicfg.addons.validators.DependenciesAddon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.validators.DepreciatedValidatorAddon.html">dicfg.addons.validators.DepreciatedValidatorAddon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.validators.ObjectValidatorAddon.html">dicfg.addons.validators.ObjectValidatorAddon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.validators.RequiredValidatorAddon.html">dicfg.addons.validators.RequiredValidatorAddon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.validators.ValidationError.html">dicfg.addons.validators.ValidationError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.validators.ValidationErrors.html">dicfg.addons.validators.ValidationErrors</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="dicfg.config.html">dicfg.config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="dicfg.config.merge.html">dicfg.config.merge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.config.update.html">dicfg.config.update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.config.Affix.html">dicfg.config.Affix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dicfg.config.ConfigDict.html">dicfg.config.ConfigDict</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dicfg.config.ConfigList.html">dicfg.config.ConfigList</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dicfg.config.ConfigValue.html">dicfg.config.ConfigValue</a></li>
@@ -357,6 +376,13 @@ document.write(`
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="dicfg.factory.html">dicfg.factory</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">dicfg.factory.build_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.factory.InvalidObjectConfigurationError.html">dicfg.factory.InvalidObjectConfigurationError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.factory.InvalidReferenceError.html">dicfg.factory.InvalidReferenceError</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="dicfg.formats.html">dicfg.formats</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.formats.read_json_config.html">dicfg.formats.read_json_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicfg.formats.read_yaml_config.html">dicfg.formats.read_yaml_config</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="dicfg.magics.html">dicfg.magics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -364,21 +390,8 @@ document.write(`
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="dicfg.reader.html">dicfg.reader</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="dicfg.reader.open_json_config.html">dicfg.reader.open_json_config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dicfg.reader.open_yaml_config.html">dicfg.reader.open_yaml_config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dicfg.reader.ConfigReader.html">dicfg.reader.ConfigReader</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dicfg.reader.ConfigNotFoundError.html">dicfg.reader.ConfigNotFoundError</a></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="dicfg.validators.html">dicfg.validators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.ConfigNotEmptyValidator.html">dicfg.validators.ConfigNotEmptyValidator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.ConfigObjectValidator.html">dicfg.validators.ConfigObjectValidator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.ConfigPositiveNumberListValidator.html">dicfg.validators.ConfigPositiveNumberListValidator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.ConfigPositiveNumberValidator.html">dicfg.validators.ConfigPositiveNumberValidator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.ConfigValidator.html">dicfg.validators.ConfigValidator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.ValidationError.html">dicfg.validators.ValidationError</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.UnsupportedValidatorError.html">dicfg.validators.UnsupportedValidatorError</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dicfg.validators.ValidationErrors.html">dicfg.validators.ValidationErrors</a></li>
 </ul>
 </details></li>
 </ul>
@@ -390,9 +403,14 @@ document.write(`
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -410,10 +428,6 @@ document.write(`
       
         <div class="header-article-item">
 
-
-
-
-
 <nav aria-label="Breadcrumb" class="d-print-none">
   <ul class="bd-breadcrumbs">
     
@@ -426,12 +440,15 @@ document.write(`
     <li class="breadcrumb-item"><a href="../getstarted.html" class="nav-link">Get Started with Dicfg</a></li>
     
     
-    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    <li class="breadcrumb-item"><a href="../api.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="dicfg.html" class="nav-link">dicfg</a></li>
     
     
     <li class="breadcrumb-item"><a href="dicfg.factory.html" class="nav-link">dicfg.factory</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">dicfg.factor...</li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">dicfg.factory.build_config</span></li>
   </ul>
 </nav>
 </div>
@@ -489,11 +506,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="dicfg.magics.html"
+       href="dicfg.factory.InvalidObjectConfigurationError.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">dicfg.magics</p>
+        <p class="prev-next-title">dicfg.factory.InvalidObjectConfigurationError</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -504,7 +521,8 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -532,8 +550,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -553,7 +571,7 @@ document.write(`
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>
@@ -566,7 +584,8 @@ document.write(`
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>

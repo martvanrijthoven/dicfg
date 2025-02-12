@@ -1,0 +1,33 @@
+dicfg.addons.templates.Build
+============================
+
+.. currentmodule:: dicfg.addons.templates
+
+.. autoclass:: Build
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Build.__init__
+      ~Build.data
+      ~Build.get_addon
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Build.NAME
+   
+   

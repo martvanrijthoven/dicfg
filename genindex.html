@@ -15,31 +15,34 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=2cd99579" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=d45e8c67"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
@@ -49,6 +52,7 @@
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -64,19 +68,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -84,7 +77,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search the docs ..."
          aria-label="Search the docs ..."
          autocomplete="off"
@@ -92,8 +84,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -127,7 +119,7 @@
     
     
     <img src="_static/logo.svg" class="logo__image only-light" alt="dicfg - Home"/>
-    <script>document.write(`<img src="_static/logo-darkgrey.svg" class="logo__image only-dark" alt="dicfg - Home"/>`);</script>
+    <img src="_static/logo-darkgrey.svg" class="logo__image only-dark pst-js-only" alt="dicfg - Home"/>
   
   
 </a></div>
@@ -180,29 +172,21 @@
         <div class="navbar-item navbar-persistent--container">
           
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
       
       
         <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
       
         <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -227,15 +211,11 @@ document.write(`
   
     <div class="navbar-persistent--mobile">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
     </div>
   
 
@@ -252,7 +232,8 @@ document.write(`
       
         
       
-      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
         
 
   
@@ -306,15 +287,11 @@ document.write(`
         
           <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
         
           <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -338,9 +315,14 @@ document.write(`
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -374,6 +356,7 @@ document.write(`
  | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
  | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
@@ -389,28 +372,58 @@ document.write(`
 <h2 id="_">_</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/dicfg.config.ConfigDict.html#dicfg.config.ConfigDict.__init__">__init__() (ConfigDict method)</a>
+      <li><a href="_autosummary/dicfg.addons.addon.Addon.html#dicfg.addons.addon.Addon.__init__">__init__() (Addon method)</a>
 
       <ul>
+        <li><a href="_autosummary/dicfg.config.Affix.html#dicfg.config.Affix.__init__">(Affix method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.templates.Build.html#dicfg.addons.templates.Build.__init__">(Build method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.addon.CONFIG_ADDONS.html#dicfg.addons.addon.CONFIG_ADDONS.__init__">(CONFIG_ADDONS method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.config.ConfigDict.html#dicfg.config.ConfigDict.__init__">(ConfigDict method)</a>
+</li>
         <li><a href="_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList.__init__">(ConfigList method)</a>
 </li>
         <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.__init__">(ConfigMagics method)</a>
 </li>
-        <li><a href="_autosummary/dicfg.validators.ConfigNotEmptyValidator.html#dicfg.validators.ConfigNotEmptyValidator.__init__">(ConfigNotEmptyValidator method)</a>
-</li>
-        <li><a href="_autosummary/dicfg.validators.ConfigObjectValidator.html#dicfg.validators.ConfigObjectValidator.__init__">(ConfigObjectValidator method)</a>
-</li>
-        <li><a href="_autosummary/dicfg.validators.ConfigPositiveNumberListValidator.html#dicfg.validators.ConfigPositiveNumberListValidator.__init__">(ConfigPositiveNumberListValidator method)</a>
-</li>
-        <li><a href="_autosummary/dicfg.validators.ConfigPositiveNumberValidator.html#dicfg.validators.ConfigPositiveNumberValidator.__init__">(ConfigPositiveNumberValidator method)</a>
-</li>
         <li><a href="_autosummary/dicfg.reader.ConfigReader.html#dicfg.reader.ConfigReader.__init__">(ConfigReader method)</a>
-</li>
-        <li><a href="_autosummary/dicfg.validators.ConfigValidator.html#dicfg.validators.ConfigValidator.__init__">(ConfigValidator method)</a>
 </li>
         <li><a href="_autosummary/dicfg.config.ConfigValue.html#dicfg.config.ConfigValue.__init__">(ConfigValue method)</a>
 </li>
-        <li><a href="_autosummary/dicfg.validators.ValidationError.html#dicfg.validators.ValidationError.__init__">(ValidationError method)</a>
+        <li><a href="_autosummary/dicfg.addons.templates.Debug.html#dicfg.addons.templates.Debug.__init__">(Debug method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.validators.DependenciesAddon.html#dicfg.addons.validators.DependenciesAddon.__init__">(DependenciesAddon method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.validators.DepreciatedValidatorAddon.html#dicfg.addons.validators.DepreciatedValidatorAddon.__init__">(DepreciatedValidatorAddon method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.templates.DontBuild.html#dicfg.addons.templates.DontBuild.__init__">(DontBuild method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.templates.LogLevel.html#dicfg.addons.templates.LogLevel.__init__">(LogLevel method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.updaters.MergeUpdaterAddon.html#dicfg.addons.updaters.MergeUpdaterAddon.__init__">(MergeUpdaterAddon method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.updaters.NonEmptyUpdater.html#dicfg.addons.updaters.NonEmptyUpdater.__init__">(NonEmptyUpdater method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.validators.ObjectValidatorAddon.html#dicfg.addons.validators.ObjectValidatorAddon.__init__">(ObjectValidatorAddon method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.updaters.PostUpdaterAddon.html#dicfg.addons.updaters.PostUpdaterAddon.__init__">(PostUpdaterAddon method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.updaters.PreUpdaterAddon.html#dicfg.addons.updaters.PreUpdaterAddon.__init__">(PreUpdaterAddon method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.updaters.ReplaceUpdaterAddon.html#dicfg.addons.updaters.ReplaceUpdaterAddon.__init__">(ReplaceUpdaterAddon method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.validators.RequiredValidatorAddon.html#dicfg.addons.validators.RequiredValidatorAddon.__init__">(RequiredValidatorAddon method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.addon.TemplateAddon.html#dicfg.addons.addon.TemplateAddon.__init__">(TemplateAddon method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.addon.UpdaterAddon.html#dicfg.addons.addon.UpdaterAddon.__init__">(UpdaterAddon method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.validators.ValidationError.html#dicfg.addons.validators.ValidationError.__init__">(ValidationError method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.addon.ValidatorAddon.html#dicfg.addons.addon.ValidatorAddon.__init__">(ValidatorAddon method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.templates.Verbose.html#dicfg.addons.templates.Verbose.__init__">(Verbose method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -421,8 +434,12 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.add_traits">add_traits() (ConfigMagics method)</a>
 </li>
+      <li><a href="_autosummary/dicfg.addons.addon.Addon.html#dicfg.addons.addon.Addon">Addon (class in dicfg.addons.addon)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/dicfg.config.Affix.html#dicfg.config.Affix">Affix (class in dicfg.config)</a>
+</li>
       <li><a href="_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList.append">append() (ConfigList method)</a>
 </li>
       <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.arg_err">arg_err() (ConfigMagics method)</a>
@@ -432,6 +449,10 @@ document.write(`
 
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/dicfg.addons.templates.Build.html#dicfg.addons.templates.Build">Build (class in dicfg.addons.templates)</a>
+</li>
+  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/dicfg.factory.build_config.html#dicfg.factory.build_config">build_config() (in module dicfg.factory)</a>
 </li>
@@ -465,6 +486,8 @@ document.write(`
 </li>
       <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.class_trait_names">class_trait_names() (ConfigMagics class method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.class_traits">class_traits() (ConfigMagics class method)</a>
 </li>
       <li><a href="_autosummary/dicfg.config.ConfigDict.html#dicfg.config.ConfigDict.clear">clear() (ConfigDict method)</a>
@@ -473,27 +496,17 @@ document.write(`
         <li><a href="_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList.clear">(ConfigList method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/dicfg.addons.addon.CONFIG_ADDONS.html#dicfg.addons.addon.CONFIG_ADDONS">CONFIG_ADDONS (class in dicfg.addons.addon)</a>
+</li>
       <li><a href="_autosummary/dicfg.config.ConfigDict.html#dicfg.config.ConfigDict">ConfigDict (class in dicfg.config)</a>
 </li>
       <li><a href="_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList">ConfigList (class in dicfg.config)</a>
 </li>
       <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics">ConfigMagics (class in dicfg.magics)</a>
 </li>
-      <li><a href="_autosummary/dicfg.validators.ConfigNotEmptyValidator.html#dicfg.validators.ConfigNotEmptyValidator">ConfigNotEmptyValidator (class in dicfg.validators)</a>
-</li>
       <li><a href="_autosummary/dicfg.reader.ConfigNotFoundError.html#dicfg.reader.ConfigNotFoundError">ConfigNotFoundError</a>
 </li>
-      <li><a href="_autosummary/dicfg.validators.ConfigObjectValidator.html#dicfg.validators.ConfigObjectValidator">ConfigObjectValidator (class in dicfg.validators)</a>
-</li>
-      <li><a href="_autosummary/dicfg.validators.ConfigPositiveNumberListValidator.html#dicfg.validators.ConfigPositiveNumberListValidator">ConfigPositiveNumberListValidator (class in dicfg.validators)</a>
-</li>
-      <li><a href="_autosummary/dicfg.validators.ConfigPositiveNumberValidator.html#dicfg.validators.ConfigPositiveNumberValidator">ConfigPositiveNumberValidator (class in dicfg.validators)</a>
-</li>
       <li><a href="_autosummary/dicfg.reader.ConfigReader.html#dicfg.reader.ConfigReader">ConfigReader (class in dicfg.reader)</a>
-</li>
-      <li><a href="_autosummary/dicfg.validators.ConfigValidator.html#dicfg.validators.ConfigValidator">ConfigValidator (class in dicfg.validators)</a>
 </li>
       <li><a href="_autosummary/dicfg.config.ConfigValue.html#dicfg.config.ConfigValue">ConfigValue (class in dicfg.config)</a>
 </li>
@@ -507,13 +520,63 @@ document.write(`
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/dicfg.addons.templates.Debug.html#dicfg.addons.templates.Debug">Debug (class in dicfg.addons.templates)</a>
+</li>
       <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.default_option">default_option() (ConfigMagics method)</a>
+</li>
+      <li><a href="_autosummary/dicfg.addons.validators.DependenciesAddon.html#dicfg.addons.validators.DependenciesAddon">DependenciesAddon (class in dicfg.addons.validators)</a>
+</li>
+      <li><a href="_autosummary/dicfg.addons.validators.DepreciatedValidatorAddon.html#dicfg.addons.validators.DepreciatedValidatorAddon">DepreciatedValidatorAddon (class in dicfg.addons.validators)</a>
 </li>
       <li>
     dicfg
 
       <ul>
         <li><a href="_autosummary/dicfg.html#module-dicfg">module</a>
+</li>
+      </ul></li>
+      <li>
+    dicfg.addons
+
+      <ul>
+        <li><a href="_autosummary/dicfg.addons.html#module-dicfg.addons">module</a>
+</li>
+      </ul></li>
+      <li>
+    dicfg.addons.addon
+
+      <ul>
+        <li><a href="_autosummary/dicfg.addons.addon.html#module-dicfg.addons.addon">module</a>
+</li>
+      </ul></li>
+      <li>
+    dicfg.addons.load
+
+      <ul>
+        <li><a href="_autosummary/dicfg.addons.load.html#module-dicfg.addons.load">module</a>
+</li>
+      </ul></li>
+      <li>
+    dicfg.addons.templates
+
+      <ul>
+        <li><a href="_autosummary/dicfg.addons.templates.html#module-dicfg.addons.templates">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    dicfg.addons.updaters
+
+      <ul>
+        <li><a href="_autosummary/dicfg.addons.updaters.html#module-dicfg.addons.updaters">module</a>
+</li>
+      </ul></li>
+      <li>
+    dicfg.addons.validators
+
+      <ul>
+        <li><a href="_autosummary/dicfg.addons.validators.html#module-dicfg.addons.validators">module</a>
 </li>
       </ul></li>
       <li>
@@ -530,8 +593,13 @@ document.write(`
         <li><a href="_autosummary/dicfg.factory.html#module-dicfg.factory">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    dicfg.formats
+
+      <ul>
+        <li><a href="_autosummary/dicfg.formats.html#module-dicfg.formats">module</a>
+</li>
+      </ul></li>
       <li>
     dicfg.magics
 
@@ -546,13 +614,8 @@ document.write(`
         <li><a href="_autosummary/dicfg.reader.html#module-dicfg.reader">module</a>
 </li>
       </ul></li>
-      <li>
-    dicfg.validators
-
-      <ul>
-        <li><a href="_autosummary/dicfg.validators.html#module-dicfg.validators">module</a>
+      <li><a href="_autosummary/dicfg.addons.templates.DontBuild.html#dicfg.addons.templates.DontBuild">DontBuild (class in dicfg.addons.templates)</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -597,9 +660,13 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList.index">index() (ConfigList method)</a>
 </li>
+      <li><a href="_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList.insert">insert() (ConfigList method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList.insert">insert() (ConfigList method)</a>
+      <li><a href="_autosummary/dicfg.factory.InvalidObjectConfigurationError.html#dicfg.factory.InvalidObjectConfigurationError">InvalidObjectConfigurationError</a>
+</li>
+      <li><a href="_autosummary/dicfg.factory.InvalidReferenceError.html#dicfg.factory.InvalidReferenceError">InvalidReferenceError</a>
 </li>
       <li><a href="_autosummary/dicfg.config.ConfigDict.html#dicfg.config.ConfigDict.items">items() (ConfigDict method)</a>
 </li>
@@ -614,17 +681,27 @@ document.write(`
   </ul></td>
 </tr></table>
 
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/dicfg.addons.templates.LogLevel.html#dicfg.addons.templates.LogLevel">LogLevel (class in dicfg.addons.templates)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/dicfg.config.ConfigDict.html#dicfg.config.ConfigDict.merge">merge() (ConfigDict method)</a>
+      <li><a href="_autosummary/dicfg.config.merge.html#dicfg.config.merge">merge() (in module dicfg.config)</a>
+</li>
+      <li><a href="_autosummary/dicfg.addons.updaters.MergeUpdaterAddon.html#dicfg.addons.updaters.MergeUpdaterAddon">MergeUpdaterAddon (class in dicfg.addons.updaters)</a>
+</li>
+      <li><a href="_autosummary/dicfg.config.ConfigDict.html#dicfg.config.ConfigDict.modify">modify() (ConfigDict method)</a>
 
       <ul>
-        <li><a href="_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList.merge">(ConfigList method)</a>
+        <li><a href="_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList.modify">(ConfigList method)</a>
 </li>
-        <li><a href="_autosummary/dicfg.config.ConfigValue.html#dicfg.config.ConfigValue.merge">(ConfigValue method)</a>
-</li>
-        <li><a href="_autosummary/dicfg.config.merge.html#dicfg.config.merge">(in module dicfg.config)</a>
+        <li><a href="_autosummary/dicfg.config.ConfigValue.html#dicfg.config.ConfigValue.modify">(ConfigValue method)</a>
 </li>
       </ul></li>
       <li>
@@ -633,15 +710,27 @@ document.write(`
       <ul>
         <li><a href="_autosummary/dicfg.html#module-dicfg">dicfg</a>
 </li>
+        <li><a href="_autosummary/dicfg.addons.html#module-dicfg.addons">dicfg.addons</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.addon.html#module-dicfg.addons.addon">dicfg.addons.addon</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.load.html#module-dicfg.addons.load">dicfg.addons.load</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.templates.html#module-dicfg.addons.templates">dicfg.addons.templates</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.updaters.html#module-dicfg.addons.updaters">dicfg.addons.updaters</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.validators.html#module-dicfg.addons.validators">dicfg.addons.validators</a>
+</li>
         <li><a href="_autosummary/dicfg.config.html#module-dicfg.config">dicfg.config</a>
 </li>
         <li><a href="_autosummary/dicfg.factory.html#module-dicfg.factory">dicfg.factory</a>
 </li>
+        <li><a href="_autosummary/dicfg.formats.html#module-dicfg.formats">dicfg.formats</a>
+</li>
         <li><a href="_autosummary/dicfg.magics.html#module-dicfg.magics">dicfg.magics</a>
 </li>
         <li><a href="_autosummary/dicfg.reader.html#module-dicfg.reader">dicfg.reader</a>
-</li>
-        <li><a href="_autosummary/dicfg.validators.html#module-dicfg.validators">dicfg.validators</a>
 </li>
       </ul></li>
   </ul></td>
@@ -649,6 +738,10 @@ document.write(`
 
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/dicfg.addons.updaters.NonEmptyUpdater.html#dicfg.addons.updaters.NonEmptyUpdater">NonEmptyUpdater (class in dicfg.addons.updaters)</a>
+</li>
+  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.notify_change">notify_change() (ConfigMagics method)</a>
 </li>
@@ -658,15 +751,13 @@ document.write(`
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.observe">observe() (ConfigMagics method)</a>
-</li>
-      <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.on_trait_change">on_trait_change() (ConfigMagics method)</a>
+      <li><a href="_autosummary/dicfg.addons.validators.ObjectValidatorAddon.html#dicfg.addons.validators.ObjectValidatorAddon">ObjectValidatorAddon (class in dicfg.addons.validators)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/dicfg.reader.open_json_config.html#dicfg.reader.open_json_config">open_json_config() (in module dicfg.reader)</a>
+      <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.observe">observe() (ConfigMagics method)</a>
 </li>
-      <li><a href="_autosummary/dicfg.reader.open_yaml_config.html#dicfg.reader.open_yaml_config">open_yaml_config() (in module dicfg.reader)</a>
+      <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.on_trait_change">on_trait_change() (ConfigMagics method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -686,6 +777,12 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/dicfg.config.ConfigDict.html#dicfg.config.ConfigDict.popitem">popitem() (ConfigDict method)</a>
 </li>
+      <li><a href="_autosummary/dicfg.addons.updaters.PostUpdaterAddon.html#dicfg.addons.updaters.PostUpdaterAddon">PostUpdaterAddon (class in dicfg.addons.updaters)</a>
+</li>
+      <li><a href="_autosummary/dicfg.addons.updaters.PreUpdaterAddon.html#dicfg.addons.updaters.PreUpdaterAddon">PreUpdaterAddon (class in dicfg.addons.updaters)</a>
+</li>
+      <li><a href="_autosummary/dicfg.addons.addon.process_addons.html#dicfg.addons.addon.process_addons">process_addons() (in module dicfg.addons.addon)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -694,11 +791,19 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/dicfg.reader.ConfigReader.html#dicfg.reader.ConfigReader.read">read() (ConfigReader method)</a>
 </li>
+      <li><a href="_autosummary/dicfg.formats.read_json_config.html#dicfg.formats.read_json_config">read_json_config() (in module dicfg.formats)</a>
+</li>
+      <li><a href="_autosummary/dicfg.formats.read_yaml_config.html#dicfg.formats.read_yaml_config">read_yaml_config() (in module dicfg.formats)</a>
+</li>
       <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.register_magics">register_magics() (ConfigMagics class method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList.remove">remove() (ConfigList method)</a>
+</li>
+      <li><a href="_autosummary/dicfg.addons.updaters.ReplaceUpdaterAddon.html#dicfg.addons.updaters.ReplaceUpdaterAddon">ReplaceUpdaterAddon (class in dicfg.addons.updaters)</a>
+</li>
+      <li><a href="_autosummary/dicfg.addons.validators.RequiredValidatorAddon.html#dicfg.addons.validators.RequiredValidatorAddon">RequiredValidatorAddon (class in dicfg.addons.validators)</a>
 </li>
       <li><a href="_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList.reverse">reverse() (ConfigList method)</a>
 </li>
@@ -710,10 +815,12 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.section_names">section_names() (ConfigMagics class method)</a>
 </li>
-      <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.set_trait">set_trait() (ConfigMagics method)</a>
+      <li><a href="_autosummary/dicfg.addons.addon.select_addon.html#dicfg.addons.addon.select_addon">select_addon() (in module dicfg.addons.addon)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.set_trait">set_trait() (ConfigMagics method)</a>
+</li>
       <li><a href="_autosummary/dicfg.config.ConfigDict.html#dicfg.config.ConfigDict.setdefault">setdefault() (ConfigDict method)</a>
 </li>
       <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.setup_instance">setup_instance() (ConfigMagics method)</a>
@@ -724,6 +831,8 @@ document.write(`
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/dicfg.addons.addon.TemplateAddon.html#dicfg.addons.addon.TemplateAddon">TemplateAddon (class in dicfg.addons.addon)</a>
+</li>
       <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.trait_defaults">trait_defaults() (ConfigMagics method)</a>
 </li>
       <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.trait_events">trait_events() (ConfigMagics class method)</a>
@@ -750,13 +859,31 @@ document.write(`
 </li>
       <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.unobserve_all">unobserve_all() (ConfigMagics method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/dicfg.validators.UnsupportedValidatorError.html#dicfg.validators.UnsupportedValidatorError">UnsupportedValidatorError</a>
+      <li><a href="_autosummary/dicfg.addons.addon.UnsupportedAddonError.html#dicfg.addons.addon.UnsupportedAddonError">UnsupportedAddonError</a>
 </li>
       <li><a href="_autosummary/dicfg.config.ConfigDict.html#dicfg.config.ConfigDict.update">update() (ConfigDict method)</a>
+
+      <ul>
+        <li><a href="_autosummary/dicfg.config.update.html#dicfg.config.update">(in module dicfg.config)</a>
 </li>
+        <li><a href="_autosummary/dicfg.addons.updaters.MergeUpdaterAddon.html#dicfg.addons.updaters.MergeUpdaterAddon.update">(MergeUpdaterAddon class method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.updaters.NonEmptyUpdater.html#dicfg.addons.updaters.NonEmptyUpdater.update">(NonEmptyUpdater class method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.updaters.PostUpdaterAddon.html#dicfg.addons.updaters.PostUpdaterAddon.update">(PostUpdaterAddon class method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.updaters.PreUpdaterAddon.html#dicfg.addons.updaters.PreUpdaterAddon.update">(PreUpdaterAddon class method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.updaters.ReplaceUpdaterAddon.html#dicfg.addons.updaters.ReplaceUpdaterAddon.update">(ReplaceUpdaterAddon class method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.addon.UpdaterAddon.html#dicfg.addons.addon.UpdaterAddon.update">(UpdaterAddon class method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/dicfg.magics.ConfigMagics.html#dicfg.magics.ConfigMagics.update_config">update_config() (ConfigMagics method)</a>
+</li>
+      <li><a href="_autosummary/dicfg.addons.addon.UpdaterAddon.html#dicfg.addons.addon.UpdaterAddon">UpdaterAddon (class in dicfg.addons.addon)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -769,26 +896,30 @@ document.write(`
       <ul>
         <li><a href="_autosummary/dicfg.config.ConfigList.html#dicfg.config.ConfigList.validate">(ConfigList method)</a>
 </li>
-        <li><a href="_autosummary/dicfg.validators.ConfigNotEmptyValidator.html#dicfg.validators.ConfigNotEmptyValidator.validate">(ConfigNotEmptyValidator method)</a>
-</li>
-        <li><a href="_autosummary/dicfg.validators.ConfigObjectValidator.html#dicfg.validators.ConfigObjectValidator.validate">(ConfigObjectValidator method)</a>
-</li>
-        <li><a href="_autosummary/dicfg.validators.ConfigPositiveNumberListValidator.html#dicfg.validators.ConfigPositiveNumberListValidator.validate">(ConfigPositiveNumberListValidator method)</a>
-</li>
-        <li><a href="_autosummary/dicfg.validators.ConfigPositiveNumberValidator.html#dicfg.validators.ConfigPositiveNumberValidator.validate">(ConfigPositiveNumberValidator method)</a>
-</li>
-        <li><a href="_autosummary/dicfg.validators.ConfigValidator.html#dicfg.validators.ConfigValidator.validate">(ConfigValidator method)</a>
-</li>
         <li><a href="_autosummary/dicfg.config.ConfigValue.html#dicfg.config.ConfigValue.validate">(ConfigValue method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.validators.DependenciesAddon.html#dicfg.addons.validators.DependenciesAddon.validate">(DependenciesAddon class method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.validators.DepreciatedValidatorAddon.html#dicfg.addons.validators.DepreciatedValidatorAddon.validate">(DepreciatedValidatorAddon class method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.validators.ObjectValidatorAddon.html#dicfg.addons.validators.ObjectValidatorAddon.validate">(ObjectValidatorAddon class method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.validators.RequiredValidatorAddon.html#dicfg.addons.validators.RequiredValidatorAddon.validate">(RequiredValidatorAddon class method)</a>
+</li>
+        <li><a href="_autosummary/dicfg.addons.addon.ValidatorAddon.html#dicfg.addons.addon.ValidatorAddon.validate">(ValidatorAddon class method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/dicfg.validators.ValidationError.html#dicfg.validators.ValidationError">ValidationError (class in dicfg.validators)</a>
+      <li><a href="_autosummary/dicfg.addons.validators.ValidationError.html#dicfg.addons.validators.ValidationError">ValidationError (class in dicfg.addons.validators)</a>
 </li>
-      <li><a href="_autosummary/dicfg.validators.ValidationErrors.html#dicfg.validators.ValidationErrors">ValidationErrors</a>
+      <li><a href="_autosummary/dicfg.addons.validators.ValidationErrors.html#dicfg.addons.validators.ValidationErrors">ValidationErrors</a>
+</li>
+      <li><a href="_autosummary/dicfg.addons.addon.ValidatorAddon.html#dicfg.addons.addon.ValidatorAddon">ValidatorAddon (class in dicfg.addons.addon)</a>
 </li>
       <li><a href="_autosummary/dicfg.config.ConfigDict.html#dicfg.config.ConfigDict.values">values() (ConfigDict method)</a>
+</li>
+      <li><a href="_autosummary/dicfg.addons.templates.Verbose.html#dicfg.addons.templates.Verbose">Verbose (class in dicfg.addons.templates)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -830,8 +961,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -851,7 +982,7 @@ document.write(`
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>
@@ -864,7 +995,8 @@ document.write(`
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>

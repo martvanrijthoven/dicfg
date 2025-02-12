@@ -1,0 +1,6 @@
+dicfg.config.update
+===================
+
+.. currentmodule:: dicfg.config
+
+.. autofunction:: update

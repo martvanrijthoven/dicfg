@@ -1,0 +1,6 @@
+dicfg.addons.addon.process\_addons
+==================================
+
+.. currentmodule:: dicfg.addons.addon
+
+.. autofunction:: process_addons

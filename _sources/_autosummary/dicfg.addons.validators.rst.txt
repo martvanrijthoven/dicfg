@@ -1,0 +1,42 @@
+dicfg.addons.validators
+=======================
+
+.. automodule:: dicfg.addons.validators
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:                                         
+      :template: custom-class-template.rst               
+   
+      DependenciesAddon
+      DepreciatedValidatorAddon
+      ObjectValidatorAddon
+      RequiredValidatorAddon
+      ValidationError
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      ValidationErrors
+   
+   
+
+
+

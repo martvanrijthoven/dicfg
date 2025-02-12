@@ -1,0 +1,50 @@
+dicfg.addons.addon
+==================
+
+.. automodule:: dicfg.addons.addon
+  
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      process_addons
+      select_addon
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:                                         
+      :template: custom-class-template.rst               
+   
+      Addon
+      CONFIG_ADDONS
+      TemplateAddon
+      UpdaterAddon
+      ValidatorAddon
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      UnsupportedAddonError
+   
+   
+
+
+

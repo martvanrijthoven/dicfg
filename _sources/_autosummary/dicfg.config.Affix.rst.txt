@@ -1,0 +1,26 @@
+dicfg.config.Affix
+==================
+
+.. currentmodule:: dicfg.config
+
+.. autoclass:: Affix
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Affix.PRE
+      ~Affix.POST
+   
+   

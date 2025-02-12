@@ -1,0 +1,33 @@
+dicfg.addons.templates.Verbose
+==============================
+
+.. currentmodule:: dicfg.addons.templates
+
+.. autoclass:: Verbose
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Verbose.__init__
+      ~Verbose.data
+      ~Verbose.get_addon
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Verbose.NAME
+   
+   

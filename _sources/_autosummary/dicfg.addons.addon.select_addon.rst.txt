@@ -1,0 +1,6 @@
+dicfg.addons.addon.select\_addon
+================================
+
+.. currentmodule:: dicfg.addons.addon
+
+.. autofunction:: select_addon

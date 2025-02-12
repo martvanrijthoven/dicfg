@@ -1,6 +1,0 @@
-dicfg.reader.open\_json\_config
-===============================
-
-.. currentmodule:: dicfg.reader
-
-.. autofunction:: open_json_config

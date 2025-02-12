@@ -1,0 +1,36 @@
+dicfg.addons
+============
+
+.. automodule:: dicfg.addons
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :template: custom-module-template.rst                 
+   :recursive:
+
+   addon
+   load
+   templates
+   updaters
+   validators
+

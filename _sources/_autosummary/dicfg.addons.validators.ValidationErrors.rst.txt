@@ -1,0 +1,6 @@
+dicfg.addons.validators.ValidationErrors
+========================================
+
+.. currentmodule:: dicfg.addons.validators
+
+.. autoexception:: ValidationErrors
