@@ -76,23 +76,17 @@ User Guide
       Presets
 
 
-  .. button-link:: userguide/notebooks/searchpaths.html
-      :color: primary
-      :expand:
-      
-      Search Paths
-
   .. button-link:: userguide/notebooks/contextkeys.html
       :color: primary
       :expand:
       
       Context Keys
 
-  .. button-link:: userguide/notebooks/validators.html
+  .. button-link:: userguide/notebooks/addons.html
       :color: primary
       :expand:
       
-      Validators
+      Addons
 
 
 
