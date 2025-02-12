@@ -16,7 +16,6 @@ User Guide
    :caption: Supplementary
 
    ./notebooks/presets
-   ./notebooks/searchpaths
    ./notebooks/contextkeys
-   ./notebooks/validators
+   ./notebooks/addons
 
