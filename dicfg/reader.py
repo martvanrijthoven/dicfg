@@ -2,14 +2,14 @@ import ast
 import sys
 from collections import defaultdict
 from copy import deepcopy
-from functools import partial, singledispatch
+from functools import partial
 from pathlib import Path
 from typing import List, Optional, Union
 from dicfg.config import merge
 from dicfg.addons.validators import ValidationErrors
 from dicfg.addons import load as _
 from dicfg.formats import FORMAT_READERS
-from pprint import pprint
+
 
 class ConfigNotFoundError(Exception):
     """Raised when config file can not be found."""
@@ -24,7 +24,6 @@ class ConfigReader:
         presets_folder_name (str, optional): Presets folder. Defaults to 'presets'.
         default_key (str, optional): Default context key. Defaults to "default".
         context_keys (tuple, optional): Addtional context keys. Defaults to ().
-        search_paths (tuple, optional): Search paths for config file interpolation. Defaults to ().
     """
 
     def __init__(
@@ -34,7 +33,6 @@ class ConfigReader:
         presets: Union[str, Path] = "presets",
         default_key: str = "default",
         context_keys: tuple = (),
-        search_paths: tuple = (),
     ):
         self._name = name
         self._main_config_path = Path(main_config_path)
@@ -46,7 +44,6 @@ class ConfigReader:
 
         self._default_key = default_key
         self._context_keys = context_keys
-        self._search_paths = search_paths
 
         self._configs_folder = None
         self._presets_folder = None
@@ -79,15 +76,11 @@ class ConfigReader:
 
         user_configs = []
         user_presets_configs = []
-        user_config_search_paths = []
         if user_config is not None:
             if not isinstance(user_config, (list, tuple)):
                 user_config = [user_config]
 
             for config in user_config:
-                if isinstance(config, (str, Path)) and not isinstance(config, dict):
-                    user_config_search_path = Path(config).parent
-                    user_config_search_paths.append(user_config_search_path)
                 read_user_config = self._read_user_config(config)
                 user_presets = read_user_config.pop("presets", ())
                 user_configs.append(read_user_config)
@@ -101,26 +94,12 @@ class ConfigReader:
             cli_config,
         )
 
-        search_paths = self._set_search_paths(
-            user_config_search_paths, self._search_paths
-        )
-
-        configs = self._fuse_configs(configs, self._context_keys, search_paths)
-        pprint(configs)
+        configs = self._fuse_configs(configs, self._context_keys)
         merged_configs = merge(*configs)
         
         if errors := list(merged_configs.validate()):
             raise ValidationErrors(errors)
         return merged_configs.cast()
-
-    def _set_search_paths(self, user_config_search_paths, search_paths):
-        return (
-            Path(),
-            *tuple(user_config_search_paths),
-            self._configs_folder,
-            self._presets_folder,
-            *search_paths,
-        )
 
     def _read(self, config_path):
         config = FORMAT_READERS[Path(config_path).suffix](config_path=config_path)
@@ -151,14 +130,13 @@ class ConfigReader:
         cli_config = merge(*dicts)
         return cli_config.get(self._name, {})
 
-    def _fuse_configs(self, configs, context_keys, search_paths):
+    def _fuse_configs(self, configs, context_keys):
         fuse_config = partial(
-            self._fuse_config, context_keys=context_keys, search_paths=search_paths
+            self._fuse_config, context_keys=context_keys
         )
         return tuple(map(fuse_config, configs))
 
-    def _fuse_config(self, config: dict, context_keys: tuple, search_paths):
-        config = _include_configs(config, search_paths)
+    def _fuse_config(self, config: dict, context_keys: tuple):
         fused_config = deepcopy(
             {key: deepcopy(config.get("default", {})) for key in context_keys}
         )
@@ -176,34 +154,3 @@ def _create_dict_from_keys(keys: list, value) -> dict:
     else:
         dictionary[keys[0]] = dict(_create_dict_from_keys(keys[1:], value))
     return dict(dictionary)
-
-
-def _search_config(config_name: Union[str, Path], search_paths: tuple) -> Path:
-    for search_path in search_paths:
-        if search_path is None:
-            continue
-        config_path = Path(search_path) / config_name
-        if config_path.exists():
-            return config_path
-    raise ConfigNotFoundError(config_name)
-
-
-@singledispatch
-def _include_configs(config, search_paths):
-    return config
-
-
-@_include_configs.register
-def _include_configs_str(config: str, search_paths):
-    if Path(config).suffix in FORMAT_READERS:
-        config_path = _search_config(config, search_paths)
-        open_config = FORMAT_READERS[Path(config_path).suffix](config_path)
-        return _include_configs(open_config, search_paths)
-    return config
-
-
-@_include_configs.register
-def _include_configs_dict(config: dict, search_paths):
-    for key, value in config.items():
-        config[key] = _include_configs(value, search_paths)
-    return config

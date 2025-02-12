@@ -80,12 +80,6 @@ def test_cli():
     assert {"test1": {"test2": "None"}} == config["default"]
 
 
-def test_config_not_found_error():
-    with raises(ConfigNotFoundError):
-        user_config_path = Path("./testconfigs/user_config_not_found.yml")
-        _ = config_reader.read(user_config_path)
-
-
 def test_main_config_not_found_error():
     with raises(ConfigNotFoundError):
         _ = ConfigReader(name="_", main_config_path="./dont_exists.yml")

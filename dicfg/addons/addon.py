@@ -30,7 +30,7 @@ def process_addons(key: str):
     addons = []
     
     for match in matches:
-        if match[0]:  # Match for @addon(name)
+        if match[0]:
             addons.append((match[0], match[1]))
         elif match[2] == VALIDATOR_SIGN:  
             addons.append((CONFIG_ADDONS.VALIDATOR.value, match[3]))
@@ -39,10 +39,7 @@ def process_addons(key: str):
         elif match[2] == TEMPLATE_SIGN:  
             addons.append((CONFIG_ADDONS.TEMPLATE.value, match[3]))
 
-    # Remove all annotations from the key
-    key = re.sub(_ADDON_PATTERN, "", key)
-    # Strip any leading/trailing whitespace or separators (if needed)
-    key = key.strip()
+    key = re.sub(_ADDON_PATTERN, "", key).strip()
     return key, addons
 
 
