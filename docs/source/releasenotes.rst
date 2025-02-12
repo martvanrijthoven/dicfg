@@ -15,6 +15,11 @@ Release Notes
 
 ----
 
+Version 0.0.18
+^^^^^^^^^^^^^^
+
+ - Depreciated: search path and include configs
+
 
 Version 0.0.17
 ^^^^^^^^^^^^^^
