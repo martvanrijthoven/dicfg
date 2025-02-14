@@ -1,6 +1,5 @@
 import ast
 import base64
-from dataclasses import dataclass
 import datetime
 import json
 import operator as op
@@ -11,7 +10,6 @@ import subprocess
 import uuid
 from pathlib import Path
 
-import requests
 from dicfg.addons.addon import ModifierAddon
 from dicfg.formats import FORMAT_READERS
 
@@ -129,20 +127,6 @@ class DateModifier(ModifierAddon):
     @classmethod
     def modify(cls, format_str="%Y-%m-%d"):
         return datetime.datetime.now().strftime(format_str)
-
-
-class FetchModifier(ModifierAddon):
-    NAME = "fetch"
-
-    @classmethod
-    def modify(cls, url):
-        """Fetches and returns content from a remote URL."""
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-            return response.text
-        except requests.RequestException as e:
-            raise FetchModifierError(f"Failed to fetch content from {url}: {e}")
 
 
 class EncodeBase64Modifier(ModifierAddon):
