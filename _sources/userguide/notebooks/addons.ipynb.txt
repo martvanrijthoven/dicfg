@@ -140,51 +140,43 @@
    "source": [
     "## Templates: use templates with **@template(template-name)** in config files\n",
     "\n",
-    "Templates are predefined configs defined in subclass of TemplateAddon. Here below is an example with StringIO:"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 13,
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "from dicfg.addons.addons import TemplateAddon\n",
-      "\n",
-      "\n",
-      "class StringIOTemplate(TemplateAddon):\n",
-      "    \"\"\"Template for io.StringIO object\"\"\"\n",
-      "\n",
-      "    NAME = \"stringio\"\n",
-      "\n",
-      "    @property\n",
-      "    def data(self):\n",
-      "        return {\n",
-      "            \"*object\": \"io.StringIO\",\n",
-      "            \"initial_value@validator(required)\": \"\",\n",
-      "            \"newline\": 3,\n",
-      "        }\n"
-     ]
-    }
-   ],
-   "source": [
-    "!cat /Users/mart/code/dicfg/dicfg/addons/templates.py"
+    "- **verbose**: Enables verbose logging.\n",
+    "- **debug**: Enables debug logging.\n",
+    "- **build**: Initiates the build process.\n",
+    "- **dontbuild**: Disables the build process.\n",
+    "- **cwd**: Returns the current working directory.\n",
+    "- **systeminfo**: Provides detailed system information.\n",
+    "- **datetimenow**: Outputs the current date and time.\n",
+    "- **uuid4**: Generates a random UUID (version 4).\n",
+    "- **sqlwrite**: Writes data to an SQLite database."
    ]
   },
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "This template can be used as follows:"
+    "## Modifiers: use modifiers with **@modifier(modifier-name)** in config files\n",
+    "\n",
+    "Modifiers are are able to modify a value\n",
+    "\n",
+    "- **include**: Loads and processes external file content based on its format.\n",
+    "- **command**: Executes a shell command and returns its output.\n",
+    "- **slugify**: Converts text into a URL-friendly slug.\n",
+    "- **date**: Returns the current date formatted as specified.\n",
+    "- **encodebase64**: Encodes text into Base64.\n",
+    "- **decodebase64**: Decodes a Base64-encoded string back to text.\n",
+    "- **uuid5**: Generates a version 5 UUID from a given namespace and name.\n",
+    "- **math**: Safely evaluates a mathematical expression.\n",
+    "- **env**: Retrieves the value of an environment variable.\n",
+    "- **sqlread**: Executes an SQL query on a SQLite database and formats the results.\n",
+    "\n",
+    "### Note: \n",
+    "**modifiers dont work with interpolation**. This is because modifiers are applied before building the config. If you need that functionalitiy, please use *object: and modify when building  \n"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 29,
+   "execution_count": 2,
    "metadata": {},
    "outputs": [
     {
@@ -199,7 +191,9 @@
       "    config_none: None\n",
       "    config_dict:\n",
       "        sub_config: \"water\"\n",
-      "    mystringio@template(stringio):\n",
+      "    mydate@template(datetimenow):\n",
+      "    mynumber%math: 2+3*8\n",
+      "    myuuid#uuid4:\n",
       "\n",
       "        \n",
       "Output config:\n",
@@ -208,19 +202,21 @@
       "             'config_list': [1, 2, 3],\n",
       "             'config_none': 'None',\n",
       "             'config_dict': {'sub_config': 'water'},\n",
-      "             'mystringio': {'*object': 'io.StringIO',\n",
-      "                            'initial_value': 'hello_template',\n",
-      "                            'newline': 3}}}\n"
+      "             'mydate': '2025-02-14 15:04:33.745174',\n",
+      "             'mynumber': 26,\n",
+      "             'myuuid': '99946e68-e68a-4691-b30b-c1ad439de35e'}}\n"
      ]
     }
    ],
    "source": [
+    "from pprint import pprint\n",
+    "\n",
+    "from dicfg import ConfigReader\n",
     "print(\"Main config:\\n\")\n",
-    "!cat ./configs/config_with_templates.yml\n",
-    "config_reader = ConfigReader(name=\"myconfig\", main_config_path=\"./configs/config_with_templates.yml\")\n",
-    "user_config = {'myconfig': {'default': {'mystringio': {'initial_value': 'hello_template'}}}}\n",
+    "!cat \"./configs/config_with_addons.yml\"\n",
+    "config_reader = ConfigReader(name=\"myconfig\", main_config_path=\"./configs/config_with_addons.yml\")\n",
     "print(\"\\n\"+\"Output config:\\n\")\n",
-    "pprint(config_reader.read(user_config), sort_dicts=False)  "
+    "pprint(config_reader.read(), sort_dicts=False)  "
    ]
   }
  ],

@@ -1,0 +1,6 @@
+dicfg.addons.modifiers.CommandModifierError
+===========================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoexception:: CommandModifierError

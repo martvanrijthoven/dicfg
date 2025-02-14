@@ -1,0 +1,33 @@
+dicfg.addons.modifiers.DateModifier
+===================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoclass:: DateModifier
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DateModifier.__init__
+      ~DateModifier.get_addon
+      ~DateModifier.modify
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DateModifier.NAME
+   
+   

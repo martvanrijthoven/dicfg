@@ -1,0 +1,33 @@
+dicfg.addons.templates.SystemInfo
+=================================
+
+.. currentmodule:: dicfg.addons.templates
+
+.. autoclass:: SystemInfo
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SystemInfo.__init__
+      ~SystemInfo.data
+      ~SystemInfo.get_addon
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SystemInfo.NAME
+   
+   

@@ -1,0 +1,61 @@
+dicfg.addons.modifiers
+======================
+
+.. automodule:: dicfg.addons.modifiers
+  
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      safe_eval
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:                                         
+      :template: custom-class-template.rst               
+   
+      CommandModifier
+      DateModifier
+      DecodeBase64Modifier
+      EncodeBase64Modifier
+      EnvModifier
+      IncludeModifier
+      MathModifier
+      SQLReaderModifier
+      SlugifyModifier
+      UUIDv5Modifier
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      Base64DecodeModifierError
+      CommandModifierError
+      EnvModifierError
+      FetchModifierError
+      IncludeModifierError
+      MathModifierError
+      SQLReadModifierError
+      UUIDv5ModifierError
+   
+   
+
+
+

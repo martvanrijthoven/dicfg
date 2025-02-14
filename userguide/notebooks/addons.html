@@ -511,42 +511,46 @@ Output config:
 </section>
 <section id="templates-use-templates-with-template-template-name-in-config-files">
 <h2>Templates: use templates with <strong>&#64;template(template-name)</strong> in config files<a class="headerlink" href="#templates-use-templates-with-template-template-name-in-config-files" title="Link to this heading">#</a></h2>
-<p>Templates are predefined configs defined in subclass of TemplateAddon. Here below is an example with StringIO:</p>
+<ul class="simple">
+<li><p><strong>verbose</strong>: Enables verbose logging.</p></li>
+<li><p><strong>debug</strong>: Enables debug logging.</p></li>
+<li><p><strong>build</strong>: Initiates the build process.</p></li>
+<li><p><strong>dontbuild</strong>: Disables the build process.</p></li>
+<li><p><strong>cwd</strong>: Returns the current working directory.</p></li>
+<li><p><strong>systeminfo</strong>: Provides detailed system information.</p></li>
+<li><p><strong>datetimenow</strong>: Outputs the current date and time.</p></li>
+<li><p><strong>uuid4</strong>: Generates a random UUID (version 4).</p></li>
+<li><p><strong>sqlwrite</strong>: Writes data to an SQLite database.</p></li>
+</ul>
+</section>
+<section id="modifiers-use-modifiers-with-modifier-modifier-name-in-config-files">
+<h2>Modifiers: use modifiers with <strong>&#64;modifier(modifier-name)</strong> in config files<a class="headerlink" href="#modifiers-use-modifiers-with-modifier-modifier-name-in-config-files" title="Link to this heading">#</a></h2>
+<p>Modifiers are are able to modify a value</p>
+<ul class="simple">
+<li><p><strong>include</strong>: Loads and processes external file content based on its format.</p></li>
+<li><p><strong>command</strong>: Executes a shell command and returns its output.</p></li>
+<li><p><strong>slugify</strong>: Converts text into a URL-friendly slug.</p></li>
+<li><p><strong>date</strong>: Returns the current date formatted as specified.</p></li>
+<li><p><strong>encodebase64</strong>: Encodes text into Base64.</p></li>
+<li><p><strong>decodebase64</strong>: Decodes a Base64-encoded string back to text.</p></li>
+<li><p><strong>uuid5</strong>: Generates a version 5 UUID from a given namespace and name.</p></li>
+<li><p><strong>math</strong>: Safely evaluates a mathematical expression.</p></li>
+<li><p><strong>env</strong>: Retrieves the value of an environment variable.</p></li>
+<li><p><strong>sqlread</strong>: Executes an SQL query on a SQLite database and formats the results.</p></li>
+</ul>
+<section id="note">
+<h3>Note:<a class="headerlink" href="#note" title="Link to this heading">#</a></h3>
+<p><strong>modifiers dont work with interpolation</strong>. This is because modifiers are applied before building the config. If you need that functionalitiy, please use *object: and modify when building</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span>/Users/mart/code/dicfg/dicfg/addons/templates.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>from dicfg.addons.addons import TemplateAddon
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
 
-
-class StringIOTemplate(TemplateAddon):
-    &quot;&quot;&quot;Template for io.StringIO object&quot;&quot;&quot;
-
-    NAME = &quot;stringio&quot;
-
-    @property
-    def data(self):
-        return {
-            &quot;*object&quot;: &quot;io.StringIO&quot;,
-            &quot;initial_value@validator(required)&quot;: &quot;&quot;,
-            &quot;newline&quot;: 3,
-        }
-</pre></div>
-</div>
-</div>
-</div>
-<p>This template can be used as follows:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Main config:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="o">!</span>cat<span class="w"> </span>./configs/config_with_templates.yml
-<span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;myconfig&quot;</span><span class="p">,</span> <span class="n">main_config_path</span><span class="o">=</span><span class="s2">&quot;./configs/config_with_templates.yml&quot;</span><span class="p">)</span>
-<span class="n">user_config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;myconfig&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mystringio&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;initial_value&#39;</span><span class="p">:</span> <span class="s1">&#39;hello_template&#39;</span><span class="p">}}}}</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dicfg</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigReader</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Main config:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="o">!</span>cat<span class="w"> </span><span class="s2">&quot;./configs/config_with_addons.yml&quot;</span>
+<span class="n">config_reader</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;myconfig&quot;</span><span class="p">,</span> <span class="n">main_config_path</span><span class="o">=</span><span class="s2">&quot;./configs/config_with_addons.yml&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">+</span><span class="s2">&quot;Output config:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">user_config</span><span class="p">),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  
+<span class="n">pprint</span><span class="p">(</span><span class="n">config_reader</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">sort_dicts</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  
 </pre></div>
 </div>
 </div>
@@ -559,7 +563,9 @@ default:
     config_none: None
     config_dict:
         sub_config: &quot;water&quot;
-    mystringio@template(stringio):
+    mydate@template(datetimenow):
+    mynumber%math: 2+3*8
+    myuuid#uuid4:
 
         
 Output config:
@@ -568,13 +574,14 @@ Output config:
              &#39;config_list&#39;: [1, 2, 3],
              &#39;config_none&#39;: &#39;None&#39;,
              &#39;config_dict&#39;: {&#39;sub_config&#39;: &#39;water&#39;},
-             &#39;mystringio&#39;: {&#39;*object&#39;: &#39;io.StringIO&#39;,
-                            &#39;initial_value&#39;: &#39;hello_template&#39;,
-                            &#39;newline&#39;: 3}}}
+             &#39;mydate&#39;: &#39;2025-02-14 15:04:33.745174&#39;,
+             &#39;mynumber&#39;: 26,
+             &#39;myuuid&#39;: &#39;99946e68-e68a-4691-b30b-c1ad439de35e&#39;}}
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 </section>
 </section>
 
@@ -628,6 +635,10 @@ Output config:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validators-use-validators-with-validate-validator-name-in-config-files">Validators: use validators with <strong>@validate(validator-name)</strong> in config files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updaters-use-updates-with-update-updater-name-in-config-files">Updaters: use updates with <strong>@update(updater-name)</strong> in config files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#templates-use-templates-with-template-template-name-in-config-files">Templates: use templates with <strong>@template(template-name)</strong> in config files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifiers-use-modifiers-with-modifier-modifier-name-in-config-files">Modifiers: use modifiers with <strong>@modifier(modifier-name)</strong> in config files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note">Note:</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

@@ -1,0 +1,6 @@
+dicfg.addons.modifiers.Base64DecodeModifierError
+================================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoexception:: Base64DecodeModifierError

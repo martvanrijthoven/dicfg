@@ -1,0 +1,33 @@
+dicfg.addons.modifiers.UUIDv5Modifier
+=====================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoclass:: UUIDv5Modifier
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~UUIDv5Modifier.__init__
+      ~UUIDv5Modifier.get_addon
+      ~UUIDv5Modifier.modify
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~UUIDv5Modifier.NAME
+   
+   

@@ -1,0 +1,6 @@
+dicfg.addons.modifiers.UUIDv5ModifierError
+==========================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoexception:: UUIDv5ModifierError

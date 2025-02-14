@@ -30,6 +30,7 @@ dicfg.addons
 
    addon
    load
+   modifiers
    templates
    updaters
    validators

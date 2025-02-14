@@ -1,0 +1,33 @@
+dicfg.addons.modifiers.EncodeBase64Modifier
+===========================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoclass:: EncodeBase64Modifier
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~EncodeBase64Modifier.__init__
+      ~EncodeBase64Modifier.get_addon
+      ~EncodeBase64Modifier.modify
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~EncodeBase64Modifier.NAME
+   
+   

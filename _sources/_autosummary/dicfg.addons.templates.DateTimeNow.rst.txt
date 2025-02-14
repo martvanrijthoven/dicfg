@@ -1,0 +1,33 @@
+dicfg.addons.templates.DateTimeNow
+==================================
+
+.. currentmodule:: dicfg.addons.templates
+
+.. autoclass:: DateTimeNow
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DateTimeNow.__init__
+      ~DateTimeNow.data
+      ~DateTimeNow.get_addon
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DateTimeNow.NAME
+   
+   

@@ -29,6 +29,7 @@ dicfg.addons.addon
    
       Addon
       CONFIG_ADDONS
+      ModifierAddon
       TemplateAddon
       UpdaterAddon
       ValidatorAddon

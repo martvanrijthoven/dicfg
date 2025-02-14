@@ -1,0 +1,6 @@
+dicfg.addons.modifiers.EnvModifierError
+=======================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoexception:: EnvModifierError

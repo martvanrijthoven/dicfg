@@ -1,0 +1,6 @@
+dicfg.addons.templates.write\_to\_database
+==========================================
+
+.. currentmodule:: dicfg.addons.templates
+
+.. autofunction:: write_to_database

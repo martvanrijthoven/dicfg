@@ -51,8 +51,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/dicfg.addons.templates';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="dicfg.addons.templates.Build" href="dicfg.addons.templates.Build.html" />
-    <link rel="prev" title="dicfg.addons.load" href="dicfg.addons.load.html" />
+    <link rel="next" title="dicfg.addons.templates.get_sqlite_type" href="dicfg.addons.templates.get_sqlite_type.html" />
+    <link rel="prev" title="dicfg.addons.modifiers.UUIDv5ModifierError" href="dicfg.addons.modifiers.UUIDv5ModifierError.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -327,6 +327,7 @@
 <li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.select_addon.html">dicfg.addons.addon.select_addon</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.Addon.html">dicfg.addons.addon.Addon</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.CONFIG_ADDONS.html">dicfg.addons.addon.CONFIG_ADDONS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.ModifierAddon.html">dicfg.addons.addon.ModifierAddon</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.TemplateAddon.html">dicfg.addons.addon.TemplateAddon</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.UpdaterAddon.html">dicfg.addons.addon.UpdaterAddon</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dicfg.addons.addon.ValidatorAddon.html">dicfg.addons.addon.ValidatorAddon</a></li>
@@ -334,11 +335,40 @@
 </ul>
 </details></li>
 <li class="toctree-l3"><a class="reference internal" href="dicfg.addons.load.html">dicfg.addons.load</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="dicfg.addons.modifiers.html">dicfg.addons.modifiers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.safe_eval.html">dicfg.addons.modifiers.safe_eval</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.CommandModifier.html">dicfg.addons.modifiers.CommandModifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.DateModifier.html">dicfg.addons.modifiers.DateModifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.DecodeBase64Modifier.html">dicfg.addons.modifiers.DecodeBase64Modifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.EncodeBase64Modifier.html">dicfg.addons.modifiers.EncodeBase64Modifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.EnvModifier.html">dicfg.addons.modifiers.EnvModifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.IncludeModifier.html">dicfg.addons.modifiers.IncludeModifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.MathModifier.html">dicfg.addons.modifiers.MathModifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.SQLReaderModifier.html">dicfg.addons.modifiers.SQLReaderModifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.SlugifyModifier.html">dicfg.addons.modifiers.SlugifyModifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.UUIDv5Modifier.html">dicfg.addons.modifiers.UUIDv5Modifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.Base64DecodeModifierError.html">dicfg.addons.modifiers.Base64DecodeModifierError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.CommandModifierError.html">dicfg.addons.modifiers.CommandModifierError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.EnvModifierError.html">dicfg.addons.modifiers.EnvModifierError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.FetchModifierError.html">dicfg.addons.modifiers.FetchModifierError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.IncludeModifierError.html">dicfg.addons.modifiers.IncludeModifierError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.MathModifierError.html">dicfg.addons.modifiers.MathModifierError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.SQLReadModifierError.html">dicfg.addons.modifiers.SQLReadModifierError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.modifiers.UUIDv5ModifierError.html">dicfg.addons.modifiers.UUIDv5ModifierError</a></li>
+</ul>
+</details></li>
 <li class="toctree-l3 current active has-children"><a class="current reference internal" href="#">dicfg.addons.templates</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.get_sqlite_type.html">dicfg.addons.templates.get_sqlite_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.write_to_database.html">dicfg.addons.templates.write_to_database</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.Build.html">dicfg.addons.templates.Build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.CurrentWorkingDirectory.html">dicfg.addons.templates.CurrentWorkingDirectory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.DateTimeNow.html">dicfg.addons.templates.DateTimeNow</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.Debug.html">dicfg.addons.templates.Debug</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.DontBuild.html">dicfg.addons.templates.DontBuild</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.LogLevel.html">dicfg.addons.templates.LogLevel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.SQLWriter.html">dicfg.addons.templates.SQLWriter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.SystemInfo.html">dicfg.addons.templates.SystemInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.UUID4.html">dicfg.addons.templates.UUID4</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dicfg.addons.templates.Verbose.html">dicfg.addons.templates.Verbose</a></li>
 </ul>
 </details></li>
@@ -463,14 +493,32 @@
                   
   <section id="module-dicfg.addons.templates">
 <span id="dicfg-addons-templates"></span><h1>dicfg.addons.templates<a class="headerlink" href="#module-dicfg.addons.templates" title="Link to this heading">#</a></h1>
+<p class="rubric">Functions</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="dicfg.addons.templates.get_sqlite_type.html#dicfg.addons.templates.get_sqlite_type" title="dicfg.addons.templates.get_sqlite_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_sqlite_type</span></code></a>(value)</p></td>
+<td><p>Maps a Python value to an appropriate SQLite column type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="dicfg.addons.templates.write_to_database.html#dicfg.addons.templates.write_to_database" title="dicfg.addons.templates.write_to_database"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_to_database</span></code></a>(database, table, rows)</p></td>
+<td><p>Writes a list of dictionaries as rows into the specified table.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p class="rubric">Classes</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="dicfg.addons.templates.Build.html#dicfg.addons.templates.Build" title="dicfg.addons.templates.Build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Build</span></code></a>()</p></td>
-<td><p>Template</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="dicfg.addons.templates.CurrentWorkingDirectory.html#dicfg.addons.templates.CurrentWorkingDirectory" title="dicfg.addons.templates.CurrentWorkingDirectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CurrentWorkingDirectory</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="dicfg.addons.templates.DateTimeNow.html#dicfg.addons.templates.DateTimeNow" title="dicfg.addons.templates.DateTimeNow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DateTimeNow</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="dicfg.addons.templates.Debug.html#dicfg.addons.templates.Debug" title="dicfg.addons.templates.Debug"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Debug</span></code></a>()</p></td>
-<td><p>Template</p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="dicfg.addons.templates.DontBuild.html#dicfg.addons.templates.DontBuild" title="dicfg.addons.templates.DontBuild"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DontBuild</span></code></a>()</p></td>
 <td><p>Template for io.StringIO object</p></td>
@@ -478,8 +526,17 @@
 <tr class="row-even"><td><p><a class="reference internal" href="dicfg.addons.templates.LogLevel.html#dicfg.addons.templates.LogLevel" title="dicfg.addons.templates.LogLevel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LogLevel</span></code></a>(value)</p></td>
 <td><p>Log level for templates</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="dicfg.addons.templates.Verbose.html#dicfg.addons.templates.Verbose" title="dicfg.addons.templates.Verbose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Verbose</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="dicfg.addons.templates.SQLWriter.html#dicfg.addons.templates.SQLWriter" title="dicfg.addons.templates.SQLWriter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SQLWriter</span></code></a>()</p></td>
 <td><p>Template</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="dicfg.addons.templates.SystemInfo.html#dicfg.addons.templates.SystemInfo" title="dicfg.addons.templates.SystemInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SystemInfo</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="dicfg.addons.templates.UUID4.html#dicfg.addons.templates.UUID4" title="dicfg.addons.templates.UUID4"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UUID4</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="dicfg.addons.templates.Verbose.html#dicfg.addons.templates.Verbose" title="dicfg.addons.templates.Verbose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Verbose</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -497,20 +554,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="dicfg.addons.load.html"
+       href="dicfg.addons.modifiers.UUIDv5ModifierError.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">dicfg.addons.load</p>
+        <p class="prev-next-title">dicfg.addons.modifiers.UUIDv5ModifierError</p>
       </div>
     </a>
     <a class="right-next"
-       href="dicfg.addons.templates.Build.html"
+       href="dicfg.addons.templates.get_sqlite_type.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">dicfg.addons.templates.Build</p>
+        <p class="prev-next-title">dicfg.addons.templates.get_sqlite_type</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

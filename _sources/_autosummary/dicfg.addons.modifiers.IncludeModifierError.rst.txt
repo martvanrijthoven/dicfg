@@ -1,0 +1,6 @@
+dicfg.addons.modifiers.IncludeModifierError
+===========================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoexception:: IncludeModifierError

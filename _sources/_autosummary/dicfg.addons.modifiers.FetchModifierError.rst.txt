@@ -1,0 +1,6 @@
+dicfg.addons.modifiers.FetchModifierError
+=========================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoexception:: FetchModifierError
