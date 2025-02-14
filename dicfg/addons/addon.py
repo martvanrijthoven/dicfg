@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from enum import Enum
 import re
 
@@ -7,37 +7,41 @@ class CONFIG_ADDONS(Enum):
     UPDATER = "updater"
     VALIDATOR = "validator"
     TEMPLATE = "template"
+    MODIFIER = "modifier"
 
 
 # Constants for addon signs
 VALIDATOR_SIGN = "!"
 UPDATER_SIGN = "&"
 TEMPLATE_SIGN = "#"
+MODIFIER_SIGN = "%"
 
 # Pattern to match addon annotations
-_ADDON_PATTERN = rf"@(\w+)\(([^)]+)\)|([{VALIDATOR_SIGN}{UPDATER_SIGN}{TEMPLATE_SIGN}])(\w+)"
+_ADDON_PATTERN = rf"@(\w+)\(([^)]+)\)|([{VALIDATOR_SIGN}{UPDATER_SIGN}{TEMPLATE_SIGN}{MODIFIER_SIGN}])(\w+)"
 
 
 def process_addons(key: str):
     """
     Extracts addons and their arguments from the key.
     Removes all addon annotations from the key and returns the cleaned key.
-    
+
     :param key: The input key string with addon annotations.
     :return: A tuple of cleaned key and a list of extracted addons.
     """
     matches = re.findall(_ADDON_PATTERN, key)
     addons = []
-    
+
     for match in matches:
         if match[0]:
             addons.append((match[0], match[1]))
-        elif match[2] == VALIDATOR_SIGN:  
+        elif match[2] == VALIDATOR_SIGN:
             addons.append((CONFIG_ADDONS.VALIDATOR.value, match[3]))
-        elif match[2] == UPDATER_SIGN:  
+        elif match[2] == UPDATER_SIGN:
             addons.append((CONFIG_ADDONS.UPDATER.value, match[3]))
-        elif match[2] == TEMPLATE_SIGN:  
+        elif match[2] == TEMPLATE_SIGN:
             addons.append((CONFIG_ADDONS.TEMPLATE.value, match[3]))
+        elif match[2] == MODIFIER_SIGN:
+            addons.append((CONFIG_ADDONS.MODIFIER.value, match[3]))
 
     key = re.sub(_ADDON_PATTERN, "", key).strip()
     return key, addons
@@ -82,7 +86,7 @@ class TemplateAddon(Addon):
         dat = {"*object": cls._get_object_ref()}
         dat.update(cls._data())
         return dat
-    
+
     @classmethod
     def _get_object_ref(cls):
         return f"{cls.__module__}.{cls.__name__}"
@@ -112,10 +116,21 @@ class UpdaterAddon(Addon):
         """Update a with b"""
 
 
+class ModifierAddon(Addon):
+    """Replace addon for config values to be used to replace or merge data"""
+
+    NAME = "modifier"
+
+    @classmethod
+    def modify(cls, a):
+        """modify a"""
+
+
 _ADDONS = {
     CONFIG_ADDONS.UPDATER: UpdaterAddon,
     CONFIG_ADDONS.VALIDATOR: ValidatorAddon,
     CONFIG_ADDONS.TEMPLATE: TemplateAddon,
+    CONFIG_ADDONS.MODIFIER: ModifierAddon,
 }
 
 

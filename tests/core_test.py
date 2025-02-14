@@ -7,6 +7,7 @@ from pytest import raises
 
 from dicfg import ConfigReader, build_config, __version__
 from dicfg.addons.addon import UnsupportedAddonError
+from dicfg.addons.modifiers import IncludeModifierError
 from dicfg.reader import ConfigNotFoundError
 
 os.environ["ENV_TEST_VAR"] = "dicfg"
@@ -79,6 +80,10 @@ def test_cli():
     config = sys_config_reader.read()
     assert {"test1": {"test2": "None"}} == config["default"]
 
+def test_config_not_found_error():
+    with raises(IncludeModifierError):
+        user_config_path = Path("./testconfigs/user_config_not_found.yml")
+        _ = config_reader.read(user_config_path)
 
 def test_main_config_not_found_error():
     with raises(ConfigNotFoundError):

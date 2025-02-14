@@ -1,0 +1,3 @@
+testconfig:
+  default:
+    not_found%include: include_error

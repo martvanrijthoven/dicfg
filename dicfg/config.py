@@ -7,6 +7,7 @@ from collections import defaultdict
 from dicfg.addons.addon import (
     CONFIG_ADDONS,
     Addon,
+    ModifierAddon,
     TemplateAddon,
     UpdaterAddon,
     ValidatorAddon,
@@ -36,9 +37,16 @@ class ConfigValue:
         data: Any,
         updater: tuple[UpdaterAddon] = None,
         validator: tuple[ValidatorAddon] = None,
+        modifier: tuple[ModifierAddon] = None,
     ):
         self.updater = updater or (None,)
         self.validator = validator or (None,)
+        self.modifier = modifier or (None,)
+        
+        for mod in self.modifier:
+            if mod is not None:
+                data = mod.modify(data)
+
         self.data = self._init(data)
 
     def _init(self, data):
@@ -104,10 +112,11 @@ class ConfigDict(ConfigValue, UserDict[str, ConfigValue]):
         """Apply templates to the given config value."""
         for template in templates:
             template_data = _config_factory(template.data())
-            if not isinstance(config_value, type(template_data)):
-                config_value = template_data
-            else:
+            if isinstance(config_value, ConfigDict) and isinstance(template_data, ConfigDict):
                 config_value = template_data.modify(config_value)
+            else:
+                config_value = template_data
+                
         return config_value
 
     def validate(self):
@@ -144,12 +153,12 @@ class ConfigList(ConfigValue, UserList):
         return [value.cast() for value in self.data]
 
 
-def _config_factory(c, updater=None, validator=None) -> ConfigValue:
+def _config_factory(c, updater=None, validator=None, modifier=None) -> ConfigValue:
     if isinstance(c, ConfigValue):
         return c
     config_types = {dict: ConfigDict, list: ConfigList}
     return config_types.get(type(c), ConfigValue)(
-        c, updater=updater, validator=validator
+        c, updater=updater, validator=validator, modifier=modifier
     )
 
 

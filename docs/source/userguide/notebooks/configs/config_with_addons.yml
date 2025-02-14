@@ -4,6 +4,8 @@ default:
     config_none: None
     config_dict:
         sub_config: "water"
-    mystringio@template(stringio):
+    mydate@template(datetimenow):
+    mynumber%math: 2+3*8
+    myuuid#uuid4:
 
         
