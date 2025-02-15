@@ -5,7 +5,7 @@ from enum import Enum
 from collections import defaultdict
 
 from dicfg.addons.addon import (
-    CONFIG_ADDONS,
+    ADDONS,
     Addon,
     ModifierAddon,
     TemplateAddon,
@@ -99,7 +99,7 @@ class ConfigDict(ConfigValue, UserDict[str, ConfigValue]):
             for addon, name in addons:
                 config_kwargs[addon].append(select_addon(addon, name))
 
-            templates = config_kwargs.pop(CONFIG_ADDONS.TEMPLATE.value, None)
+            templates = config_kwargs.pop(ADDONS.TEMPLATE.value, None)
             data[_key] = _config_factory(value, **config_kwargs)
             if templates is not None:
                 data[_key] = self._apply_templates(data[_key], templates)

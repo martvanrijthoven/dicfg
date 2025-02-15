@@ -3,7 +3,7 @@ from enum import Enum
 import re
 
 
-class CONFIG_ADDONS(Enum):
+class ADDONS(Enum):
     UPDATER = "updater"
     VALIDATOR = "validator"
     TEMPLATE = "template"
@@ -35,13 +35,13 @@ def process_addons(key: str):
         if match[0]:
             addons.append((match[0], match[1]))
         elif match[2] == VALIDATOR_SIGN:
-            addons.append((CONFIG_ADDONS.VALIDATOR.value, match[3]))
+            addons.append((ADDONS.VALIDATOR.value, match[3]))
         elif match[2] == UPDATER_SIGN:
-            addons.append((CONFIG_ADDONS.UPDATER.value, match[3]))
+            addons.append((ADDONS.UPDATER.value, match[3]))
         elif match[2] == TEMPLATE_SIGN:
-            addons.append((CONFIG_ADDONS.TEMPLATE.value, match[3]))
+            addons.append((ADDONS.TEMPLATE.value, match[3]))
         elif match[2] == MODIFIER_SIGN:
-            addons.append((CONFIG_ADDONS.MODIFIER.value, match[3]))
+            addons.append((ADDONS.MODIFIER.value, match[3]))
 
     key = re.sub(_ADDON_PATTERN, "", key).strip()
     return key, addons
@@ -126,17 +126,17 @@ class ModifierAddon(Addon):
         """modify a"""
 
 
-_ADDONS = {
-    CONFIG_ADDONS.UPDATER: UpdaterAddon,
-    CONFIG_ADDONS.VALIDATOR: ValidatorAddon,
-    CONFIG_ADDONS.TEMPLATE: TemplateAddon,
-    CONFIG_ADDONS.MODIFIER: ModifierAddon,
+ADDONS_MAPPING = {
+    ADDONS.UPDATER: UpdaterAddon,
+    ADDONS.VALIDATOR: ValidatorAddon,
+    ADDONS.TEMPLATE: TemplateAddon,
+    ADDONS.MODIFIER: ModifierAddon,
 }
 
 
 def select_addon(addon: str, name: str) -> Addon:
     try:
-        _addon: Addon = _ADDONS[CONFIG_ADDONS(addon)]
+        _addon: Addon = ADDONS_MAPPING[ADDONS(addon)]
     except ValueError:
         raise UnsupportedAddonError(f"Addon {addon} not found.")
     return _addon.get_addon(name)
