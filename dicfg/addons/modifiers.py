@@ -1,4 +1,3 @@
-
 import base64
 import datetime
 
@@ -39,7 +38,6 @@ class GitRepoModifierError(Exception):
     pass
 
 
-
 class IncludeModifier(ModifierAddon):
 
     NAME = "include"
@@ -61,9 +59,7 @@ class PathModifier(ModifierAddon):
     @classmethod
     def modify(cls, value):
         if not isinstance(value, (str, Path)):
-            raise TupleModifierError(
-                f"Value '{value}' is not a str | Path"
-            )
+            raise TupleModifierError(f"Value '{value}' is not a str | Path")
         return Path(value)
 
 
@@ -153,7 +149,6 @@ class DecodeBase64Modifier(ModifierAddon):
             raise Base64DecodeModifierError(
                 "Invalid Base64 string provided for decoding"
             )
-
 
 
 class EnvModifier(ModifierAddon):
