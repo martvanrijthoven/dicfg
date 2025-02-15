@@ -1,25 +1,14 @@
-import ast
+
 import base64
 import datetime
-import json
-import operator as op
+
 import os
 import re
-import sqlite3
 import subprocess
-import uuid
 from pathlib import Path
 
 from dicfg.addons.addon import ModifierAddon
 from dicfg.formats import FORMAT_READERS
-
-
-class MathModifierError(Exception):
-    pass
-
-
-class UUIDv5ModifierError(Exception):
-    pass
 
 
 class FetchModifierError(Exception):
@@ -27,6 +16,10 @@ class FetchModifierError(Exception):
 
 
 class IncludeModifierError(Exception):
+    pass
+
+
+class TupleModifierError(Exception):
     pass
 
 
@@ -42,40 +35,9 @@ class EnvModifierError(Exception):
     pass
 
 
-class SQLReadModifierError(Exception):
+class GitRepoModifierError(Exception):
     pass
 
-
-# Supported operators
-operators = {
-    ast.Add: op.add,
-    ast.Sub: op.sub,
-    ast.Mult: op.mul,
-    ast.Div: op.truediv,
-    ast.Pow: op.pow,
-    ast.BitXor: op.xor,
-    ast.USub: op.neg,
-}
-
-
-def safe_eval(expr):
-    """
-    Safely evaluate a math expression from a string.
-    Only allows basic arithmetic operations.
-    """
-
-    def eval_node(node):
-        if isinstance(node, ast.Num):  # <number>
-            return node.n
-        elif isinstance(node, ast.BinOp):  # <left> <operator> <right>
-            return operators[type(node.op)](eval_node(node.left), eval_node(node.right))
-        elif isinstance(node, ast.UnaryOp):  # <operator> <operand> e.g., -1
-            return operators[type(node.op)](eval_node(node.operand))
-        else:
-            raise TypeError("Unsupported expression: {}".format(node))
-
-    parsed = ast.parse(expr, mode="eval").body
-    return eval_node(parsed)
 
 
 class IncludeModifier(ModifierAddon):
@@ -90,6 +52,45 @@ class IncludeModifier(ModifierAddon):
             raise IncludeModifierError(
                 f"Unsupported file format {Path(a).suffix} for include modifier {a}"
             )
+
+
+class PathModifier(ModifierAddon):
+
+    NAME = "path"
+
+    @classmethod
+    def modify(cls, value):
+        if not isinstance(value, (str, Path)):
+            raise TupleModifierError(
+                f"Value '{value}' is not a str | Path"
+            )
+        return Path(value)
+
+
+class TupleModifier(ModifierAddon):
+
+    NAME = "tuple"
+
+    @classmethod
+    def modify(cls, value):
+        if not isinstance(value, (list, tuple, set, dict)):
+            raise TupleModifierError(
+                f"Value '{value}' is not a list | tuple | set | dict"
+            )
+        return tuple(value)
+
+
+class SetModifier(ModifierAddon):
+
+    NAME = "set"
+
+    @classmethod
+    def modify(cls, value):
+        if not isinstance(value, (list, tuple, set, dict)):
+            raise TupleModifierError(
+                f"Value '{value}' is not a list | tuple | set | dict"
+            )
+        return set(value)
 
 
 class CommandModifier(ModifierAddon):
@@ -154,36 +155,6 @@ class DecodeBase64Modifier(ModifierAddon):
             )
 
 
-class UUIDv5Modifier(ModifierAddon):
-    NAME = "uuid5"
-
-    @classmethod
-    def modify(cls, params):
-        """
-        Expects parameters in the format 'namespace::name'.
-        The namespace must be a valid UUID string.
-        """
-        try:
-            namespace_str, name = params.split("::", 1)
-            namespace = uuid.UUID(namespace_str)
-            return str(uuid.uuid5(namespace, name))
-        except Exception:
-            raise UUIDv5ModifierError(
-                "Invalid parameters for UUIDv5Modifier. Use 'namespace::name'."
-            )
-
-
-class MathModifier(ModifierAddon):
-    NAME = "math"
-
-    @classmethod
-    def modify(cls, expression):
-        try:
-            result = safe_eval(expression)
-            return result
-        except Exception as e:
-            raise MathModifierError(f"Error evaluating expression '{expression}': {e}")
-
 
 class EnvModifier(ModifierAddon):
     NAME = "env"
@@ -196,71 +167,38 @@ class EnvModifier(ModifierAddon):
         return value
 
 
-class SQLReaderModifier(ModifierAddon):
-    NAME = "sqlread"
+class GitRepoModifier(ModifierAddon):
+    NAME = "gitrepo"
 
     @classmethod
-    def modify(cls, params):
+    def modify(cls, repo_path):
         """
-        Expects params as a dictionary with the following keys:
-          - "database": (str) Path to the SQLite database file.
-          - "query": (str) The SQL query to execute.
-          - "params": (optional, list/tuple) Parameters for the SQL query.
-          - "format": (optional, str) Output format: "raw" (default), "table", or "json".
-
-        Example:
-            {
-                "database": "example.db",
-                "query": "SELECT * FROM users WHERE age > ?",
-                "params": [30],
-                "format": "json"
-            }
+        Given a path to a Git repository, returns a string containing
+        the current commit hash and, if the repository is dirty, a " (dirty)" flag.
         """
-        if not isinstance(params, dict):
-            raise SQLReadModifierError(
-                "Input must be a dictionary with keys 'database' and 'query'."
+        repo = Path(repo_path)
+        # Check if the repository exists and has a .git directory
+        if not repo.exists() or not (repo / ".git").exists():
+            raise GitRepoModifierError(
+                f"Path '{repo_path}' is not a valid Git repository."
             )
 
-        database = params.get("database")
-        query = params.get("query")
-        query_params = params.get("params", None)
-        output_format = params.get("format", "data")
-
-        if not database or not query:
-            raise SQLReadModifierError("The 'database' and 'query' keys are required.")
-
-        conn = None
         try:
-            conn = sqlite3.connect(database)
-            cursor = conn.cursor()
+            # Get the current commit hash
+            commit_hash = subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], cwd=str(repo), text=True
+            ).strip()
+        except Exception as e:
+            raise GitRepoModifierError(f"Error retrieving commit hash: {e}")
 
-            if query_params:
-                cursor.execute(query, query_params)
-            else:
-                cursor.execute(query)
+        try:
+            # Check for uncommitted changes using 'git status --porcelain'
+            status_output = subprocess.check_output(
+                ["git", "status", "--porcelain"], cwd=str(repo), text=True
+            ).strip()
+            is_dirty = bool(status_output)
+        except Exception as e:
+            raise GitRepoModifierError(f"Error checking repository status: {e}")
 
-            rows = cursor.fetchall()
-            # Get column names for formatting
-            headers = (
-                [desc[0] for desc in cursor.description] if cursor.description else []
-            )
-            if output_format == "data":
-                output = {str(idx): dict(zip(headers, row)) for idx,row in enumerate(rows)}
-            elif output_format == "table":
-                # Fallback to simple formatting if tabulate isn't installed
-                header_line = " | ".join(headers)
-                row_lines = "\n".join(
-                    " | ".join(str(cell) for cell in row) for row in rows
-                )
-                output = header_line + "\n" + row_lines
-            elif output_format == "json":
-                json_rows = [dict(zip(headers, row)) for row in rows]
-                output =  json.dumps(json_rows, indent=2)
-            else:
-                output = str(rows)
-            return {'data': output}
-        except sqlite3.Error as e:
-            raise SQLReadModifierError(f"Database error: {e}")
-        finally:
-            if conn:
-                conn.close()
+        # Return the commit hash with a " (dirty)" suffix if changes exist.
+        return f"{commit_hash}{' (dirty)' if is_dirty else ''}"
