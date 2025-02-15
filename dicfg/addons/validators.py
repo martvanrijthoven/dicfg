@@ -23,6 +23,16 @@ class DependenciesAddon(ValidatorAddon):
     NAME = "dependencies"
     
 
+class AssignedValidatorAddon(ValidatorAddon):
+    """Validator that checks if a value is not empty or None"""
+
+    NAME = "assigned"
+
+    @classmethod
+    def validate(cls, value):
+        if  not (value == "" or value is None):
+            return ValidationError("Value is assigned and must not be set by user")
+
 class RequiredValidatorAddon(ValidatorAddon):
     """Validator that checks if a value is not empty or None"""
 
