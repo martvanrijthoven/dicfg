@@ -13,6 +13,7 @@ operators = {
     ast.USub: op.neg,
 }
 
+
 def safe_eval(expr):
     """
     Safely evaluate a math expression from a string.

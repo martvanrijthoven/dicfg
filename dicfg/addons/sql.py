@@ -1,7 +1,8 @@
 import json
 import sqlite3
-from dicfg.addons.addon import ModifierAddon, TemplateAddon
 from pathlib import Path
+
+from dicfg.addons.addon import ModifierAddon, TemplateAddon
 
 
 class SQLReadModifierError(Exception):
