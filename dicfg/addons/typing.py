@@ -34,7 +34,7 @@ class IntTypeValidator(TypeValidator):
     """
 
     NAME: str = "int"
-    EXPECTED_TYPE: Type = int
+    EXPECTED_TYPE = int
 
 
 class FloatTypeValidator(TypeValidator):
@@ -43,7 +43,7 @@ class FloatTypeValidator(TypeValidator):
     """
 
     NAME: str = "float"
-    EXPECTED_TYPE: Type = float
+    EXPECTED_TYPE = float
 
 
 class NumberTypeValidator(TypeValidator):
@@ -52,7 +52,7 @@ class NumberTypeValidator(TypeValidator):
     """
 
     NAME: str = "number"
-    EXPECTED_TYPE: Union[Type, tuple[Type, ...]] = (int, float)
+    EXPECTED_TYPE = (int, float)
 
 
 class StrTypeValidator(TypeValidator):
@@ -61,7 +61,7 @@ class StrTypeValidator(TypeValidator):
     """
 
     NAME: str = "str"
-    EXPECTED_TYPE: Type = str
+    EXPECTED_TYPE = str
 
 
 class BoolTypeValidator(TypeValidator):
@@ -70,7 +70,7 @@ class BoolTypeValidator(TypeValidator):
     """
 
     NAME: str = "bool"
-    EXPECTED_TYPE: Type = bool
+    EXPECTED_TYPE = bool
 
 
 class ListTypeValidator(TypeValidator):
@@ -79,7 +79,7 @@ class ListTypeValidator(TypeValidator):
     """
 
     NAME: str = "list"
-    EXPECTED_TYPE: Type = list
+    EXPECTED_TYPE = list
 
 
 class TupleTypeValidator(TypeValidator):
@@ -88,7 +88,7 @@ class TupleTypeValidator(TypeValidator):
     """
 
     NAME: str = "tuple"
-    EXPECTED_TYPE: Type = tuple
+    EXPECTED_TYPE = tuple
 
 
 class SetTypeValidator(TypeValidator):
@@ -97,7 +97,7 @@ class SetTypeValidator(TypeValidator):
     """
 
     NAME: str = "set"
-    EXPECTED_TYPE: Type = set
+    EXPECTED_TYPE = set
 
 
 class DictTypeValidator(TypeValidator):
@@ -106,7 +106,7 @@ class DictTypeValidator(TypeValidator):
     """
 
     NAME: str = "dict"
-    EXPECTED_TYPE: Type = dict
+    EXPECTED_TYPE = dict
 
 
 class SequenceTypeValidator(TypeValidator):
@@ -115,7 +115,7 @@ class SequenceTypeValidator(TypeValidator):
     """
 
     NAME: str = "sequence"
-    EXPECTED_TYPE: Union[Type, tuple[Type, ...]] = (list, tuple)
+    EXPECTED_TYPE = (list, tuple)
 
 
 class ContainerTypeValidator(TypeValidator):
@@ -124,7 +124,7 @@ class ContainerTypeValidator(TypeValidator):
     """
 
     NAME: str = "container"
-    EXPECTED_TYPE: Union[Type, tuple[Type, ...]] = (list, tuple, set)
+    EXPECTED_TYPE = (list, tuple, set)
 
 
 class CollectionTypeValidator(TypeValidator):
@@ -133,7 +133,7 @@ class CollectionTypeValidator(TypeValidator):
     """
 
     NAME: str = "collection"
-    EXPECTED_TYPE: Union[Type, tuple[Type, ...]] = (list, tuple, set, dict)
+    EXPECTED_TYPE = (list, tuple, set, dict)
 
 
 class NoneTypeValidator(TypeValidator):
@@ -142,10 +142,10 @@ class NoneTypeValidator(TypeValidator):
     """
 
     NAME: str = "none"
-    EXPECTED_TYPE: Type = type(None)
+    EXPECTED_TYPE = type(None)
 
 
-class ObjectTypeValidatorAddon(DictValidator):
+class ObjectTypeValidatorAddon(DictTypeValidator):
     """Validator that checks if a value is a valid object configuration"""
 
     NAME = "object"
