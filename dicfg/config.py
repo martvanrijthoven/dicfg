@@ -24,7 +24,24 @@ class Affix(Enum):
     POST = "post"
 
 
-class ConfigValue:
+
+class ConfigMeta(type):
+    def __call__(cls, data: Any, *args, **kwargs):
+        modifier: list[ModifierAddon] = kwargs.pop('modifier', None)
+        mods = modifier or (None,)
+        for mod in mods:
+            if mod is not None:
+                data = mod.modify(data)
+                
+        if cls is ConfigValue:
+            config_types = {dict: ConfigDict, list: ConfigList, tuple: ConfigTuple, set: ConfigSet}
+            target_cls = config_types.get(type(data), cls)
+            cls = target_cls
+        
+        # Call __new__ and __init__ with the modified data.
+        return super().__call__(data, *args, **kwargs)
+
+class ConfigValue(metaclass=ConfigMeta):
     """Wraps a value into a ConfigValue
 
     Args:
@@ -37,16 +54,9 @@ class ConfigValue:
         data: Any,
         updater: tuple[UpdaterAddon] = None,
         validator: tuple[ValidatorAddon] = None,
-        modifier: tuple[ModifierAddon] = None,
     ):
         self.updater = updater or (None,)
         self.validator = validator or (None,)
-        self.modifier = modifier or (None,)
-        
-        for mod in self.modifier:
-            if mod is not None:
-                data = mod.modify(data)
-
         self.data = self._init(data)
 
     def _init(self, data):
@@ -61,7 +71,6 @@ class ConfigValue:
         Returns:
             ConfigValue: self
         """
-
         for idx, updater in enumerate(self.updater):
             if updater is None and b.updater[idx] is None:
                 self.data = update(self, b)
@@ -83,7 +92,11 @@ class ConfigValue:
         return self.data
 
 
-class ConfigDict(ConfigValue, UserDict[str, ConfigValue]):
+# Create a combined metaclass that inherits from both ConfigMeta and type(UserDict)
+class CombinedMetaDict(ConfigMeta, type(UserDict)):
+    pass
+
+class ConfigDict(ConfigValue, UserDict[str, ConfigValue], metaclass=CombinedMetaDict):
     """Wraps a value into a ConfigDict
 
     Args:
@@ -112,11 +125,13 @@ class ConfigDict(ConfigValue, UserDict[str, ConfigValue]):
         """Apply templates to the given config value."""
         for template in templates:
             template_data = _config_factory(template.data())
-            if isinstance(config_value, ConfigDict) and isinstance(template_data, ConfigDict):
+            if isinstance(config_value, ConfigDict) and isinstance(
+                template_data, ConfigDict
+            ):
                 config_value = template_data.modify(config_value)
             else:
                 config_value = template_data
-                
+
         return config_value
 
     def validate(self):
@@ -129,8 +144,11 @@ class ConfigDict(ConfigValue, UserDict[str, ConfigValue]):
         """Cast wrapped value to builtin python value"""
         return {key: value.cast() for key, value in self.data.items()}
 
+# Create a combined metaclass that inherits from both ConfigMeta and type(UserDict)
+class CombinedMetaList(ConfigMeta, type(UserList)):
+    pass
 
-class ConfigList(ConfigValue, UserList):
+class ConfigList(ConfigValue, UserList, metaclass=CombinedMetaList):
     """Wraps a value into a ConfigList
 
     Args:
@@ -153,13 +171,60 @@ class ConfigList(ConfigValue, UserList):
         return [value.cast() for value in self.data]
 
 
+
+class CombinedMetaTuple(ConfigMeta, type(tuple)):
+    pass
+
+class ConfigTuple(ConfigValue, tuple, metaclass=CombinedMetaTuple):
+    """Wraps a value into a ConfigList
+
+    Args:
+        data (list): value of the config
+
+    """
+
+    def _init(self, data: tuple):
+        return tuple(_config_factory(value) for value in data)
+
+    def validate(self):
+        yield from super().validate()
+        for value in self.data:
+            yield from value.validate()
+
+    def cast(self):
+        """Cast wrapped value to builtin python value"""
+        return tuple(value.cast() for value in self.data)
+
+
+class CombinedMetaSet(ConfigMeta, type(set)):
+    pass
+
+class ConfigSet(ConfigValue, set, metaclass=CombinedMetaSet):
+    """Wraps a value into a ConfigList
+
+    Args:
+        data (list): value of the config
+
+    """
+
+    def _init(self, data: set):
+        return set(_config_factory(value) for value in data)
+
+    def validate(self):
+        yield from super().validate()
+        for value in self.data:
+            yield from value.validate()
+
+    def cast(self):
+        """Cast wrapped value to builtin python value"""
+        return set(value.cast() for value in self.data)
+
+
+
 def _config_factory(c, updater=None, validator=None, modifier=None) -> ConfigValue:
     if isinstance(c, ConfigValue):
         return c
-    config_types = {dict: ConfigDict, list: ConfigList}
-    return config_types.get(type(c), ConfigValue)(
-        c, updater=updater, validator=validator, modifier=modifier
-    )
+    return ConfigValue(c, updater=updater, validator=validator, modifier=modifier)
 
 
 def _insert(dictionary, prev_key, k, v):

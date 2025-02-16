@@ -58,7 +58,7 @@ class SQLReaderModifier(ModifierAddon):
                 [desc[0] for desc in cursor.description] if cursor.description else []
             )
             if output_format == "data":
-                output = {
+                return {
                     str(idx): dict(zip(headers, row)) for idx, row in enumerate(rows)
                 }
             elif output_format == "table":
@@ -67,13 +67,13 @@ class SQLReaderModifier(ModifierAddon):
                 row_lines = "\n".join(
                     " | ".join(str(cell) for cell in row) for row in rows
                 )
-                output = header_line + "\n" + row_lines
+                return header_line + "\n" + row_lines
             elif output_format == "json":
                 json_rows = [dict(zip(headers, row)) for row in rows]
-                output = json.dumps(json_rows, indent=2)
-            else:
-                output = str(rows)
-            return {"data": output}
+                return json.dumps(json_rows, indent=2)
+            
+            return str(rows)
+         
         except sqlite3.Error as e:
             raise SQLReadModifierError(f"Database error: {e}")
         finally:

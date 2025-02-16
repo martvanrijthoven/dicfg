@@ -1,0 +1,20 @@
+
+default:
+  time#datetimenow:
+  info#systeminfo:
+  new_id#uuid4:
+  people%readsql:
+    database: /tmp/test.db
+    query: SELECT * FROM people
+  mart: ${default:people:data:0} 
+  value%math: (1+1*4)/10
+  c%command: echo "Hello World"
+  my_int!int: 10
+  my_float!float: 10.0
+  my_str!str: "name"
+  my_dict!dict: 
+    key1: value1
+    key2: value2
+  my_list: [1,1,2,3]
+  my_tuple%tuple&merge!tuple: [1,2,3]
+  my_set%set!set: [1,1,1,2,2,3]

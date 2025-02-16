@@ -1,5 +1,5 @@
 from dicfg.addons.addon import UpdaterAddon
-from dicfg.config import Affix, ConfigDict, ConfigList, ConfigValue, update
+from dicfg.config import Affix, ConfigDict, ConfigList,ConfigTuple, ConfigSet, ConfigValue, update
 
 
 class ReplaceUpdaterAddon(UpdaterAddon):
@@ -19,8 +19,11 @@ class MergeUpdaterAddon(UpdaterAddon):
 
     @classmethod
     def update(cls, a: ConfigValue, b: ConfigValue):
-        if isinstance(a, ConfigList):
+        if isinstance(a, (ConfigList, ConfigTuple)):
             return a.data + b.data
+        if isinstance(a, ConfigSet):
+            return a.data.union(b.data)
+        
         return update(a, b)
 
 
