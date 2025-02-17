@@ -24,24 +24,7 @@ class Affix(Enum):
     POST = "post"
 
 
-
-class ConfigMeta(type):
-    def __call__(cls, data: Any, *args, **kwargs):
-        modifier: list[ModifierAddon] = kwargs.pop('modifier', None)
-        mods = modifier or (None,)
-        for mod in mods:
-            if mod is not None:
-                data = mod.modify(data)
-                
-        if cls is ConfigValue:
-            config_types = {dict: ConfigDict, list: ConfigList, tuple: ConfigTuple, set: ConfigSet}
-            target_cls = config_types.get(type(data), cls)
-            cls = target_cls
-        
-        # Call __new__ and __init__ with the modified data.
-        return super().__call__(data, *args, **kwargs)
-
-class ConfigValue(metaclass=ConfigMeta):
+class ConfigValue:
     """Wraps a value into a ConfigValue
 
     Args:
@@ -92,11 +75,7 @@ class ConfigValue(metaclass=ConfigMeta):
         return self.data
 
 
-# Create a combined metaclass that inherits from both ConfigMeta and type(UserDict)
-class CombinedMetaDict(ConfigMeta, type(UserDict)):
-    pass
-
-class ConfigDict(ConfigValue, UserDict[str, ConfigValue], metaclass=CombinedMetaDict):
+class ConfigDict(ConfigValue, UserDict[str, ConfigValue]):
     """Wraps a value into a ConfigDict
 
     Args:
@@ -144,11 +123,8 @@ class ConfigDict(ConfigValue, UserDict[str, ConfigValue], metaclass=CombinedMeta
         """Cast wrapped value to builtin python value"""
         return {key: value.cast() for key, value in self.data.items()}
 
-# Create a combined metaclass that inherits from both ConfigMeta and type(UserDict)
-class CombinedMetaList(ConfigMeta, type(UserList)):
-    pass
 
-class ConfigList(ConfigValue, UserList, metaclass=CombinedMetaList):
+class ConfigList(ConfigValue, UserList):
     """Wraps a value into a ConfigList
 
     Args:
@@ -171,17 +147,10 @@ class ConfigList(ConfigValue, UserList, metaclass=CombinedMetaList):
         return [value.cast() for value in self.data]
 
 
-
-class CombinedMetaTuple(ConfigMeta, type(tuple)):
-    pass
-
-class ConfigTuple(ConfigValue, tuple, metaclass=CombinedMetaTuple):
-    """Wraps a value into a ConfigList
-
-    Args:
-        data (list): value of the config
-
-    """
+class ConfigTuple(ConfigValue, tuple):
+    def __new__(cls, data, updater=None, validator=None):
+        config_values = tuple(_config_factory(value) for value in data)
+        return tuple.__new__(cls, config_values)
 
     def _init(self, data: tuple):
         return tuple(_config_factory(value) for value in data)
@@ -192,20 +161,13 @@ class ConfigTuple(ConfigValue, tuple, metaclass=CombinedMetaTuple):
             yield from value.validate()
 
     def cast(self):
-        """Cast wrapped value to builtin python value"""
         return tuple(value.cast() for value in self.data)
 
 
-class CombinedMetaSet(ConfigMeta, type(set)):
-    pass
-
-class ConfigSet(ConfigValue, set, metaclass=CombinedMetaSet):
-    """Wraps a value into a ConfigList
-
-    Args:
-        data (list): value of the config
-
-    """
+class ConfigSet(ConfigValue, set):
+    def __new__(cls, data, updater=None, validator=None):
+        processed = set(_config_factory(value) for value in data)
+        return set.__new__(cls, processed)
 
     def _init(self, data: set):
         return set(_config_factory(value) for value in data)
@@ -216,16 +178,31 @@ class ConfigSet(ConfigValue, set, metaclass=CombinedMetaSet):
             yield from value.validate()
 
     def cast(self):
-        """Cast wrapped value to builtin python value"""
         return set(value.cast() for value in self.data)
 
+class ConfigFactory:
+    def create(data: Any, updater, validator, modifier):
+        mods = modifier or (None,)
+        for mod in mods:
+            if mod is not None:
+                data = mod.modify(data)
 
+        if isinstance(data, ConfigValue):
+            return data
+        config_types = {
+            dict: ConfigDict,
+            list: ConfigList,
+            tuple: ConfigTuple,
+            set: ConfigSet,
+        }
+        target_cls = config_types.get(type(data), ConfigValue)
 
+        return target_cls(data, updater, validator)
+    
 def _config_factory(c, updater=None, validator=None, modifier=None) -> ConfigValue:
-    if isinstance(c, ConfigValue):
-        return c
-    return ConfigValue(c, updater=updater, validator=validator, modifier=modifier)
-
+    return ConfigFactory.create(
+        c, updater=updater, validator=validator, modifier=modifier
+    )
 
 def _insert(dictionary, prev_key, k, v):
     new_dict = {}
@@ -241,7 +218,7 @@ def _modify(a: ConfigValue, b: ConfigValue):
 
 
 def update(a: ConfigValue, b: ConfigValue, affix: Optional[Affix] = None) -> Any:
-    if not isinstance(b, ConfigDict):
+    if not isinstance(b, UserDict):
         return b.data
 
     prev_key = None
