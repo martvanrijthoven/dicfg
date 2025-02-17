@@ -5,11 +5,10 @@ from copy import deepcopy
 from functools import partial
 from pathlib import Path
 from typing import List, Optional, Union
-from dicfg.config import merge
 from dicfg.addons.validators import ValidationErrors
 from dicfg.addons import load as _
 from dicfg.formats import FORMAT_READERS
-
+from dicfg.configs.configdict import merge
 
 class ConfigNotFoundError(Exception):
     """Raised when config file can not be found."""
