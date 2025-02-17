@@ -25,6 +25,7 @@ class InvalidObjectConfigurationError(Exception):
 
     pass
 
+
 class InvalidReferenceError(Exception):
     """Custom exception for invalid reference errors."""
 
