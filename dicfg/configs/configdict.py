@@ -10,7 +10,6 @@ from dicfg.addons.addon import (
 )
 from dicfg.addons.validators import ValidationError
 from dicfg.configs.configvalue import ConfigValue
-from dicfg.configs.factory import create_config
 
 
 class ConfigDict(ConfigValue, UserDict[str, ConfigValue], data_type=dict):
@@ -30,7 +29,7 @@ class ConfigDict(ConfigValue, UserDict[str, ConfigValue], data_type=dict):
                 config_kwargs[addon].append(select_addon(addon, name))
 
             templates = config_kwargs.pop(ADDONS.TEMPLATE.value, None)
-            data[_key] = create_config(value, **config_kwargs)
+            data[_key] = ConfigValue.factory(value, **config_kwargs)
             if templates is not None:
                 data[_key] = self._apply_templates(data[_key], templates)
 
@@ -41,7 +40,7 @@ class ConfigDict(ConfigValue, UserDict[str, ConfigValue], data_type=dict):
     ):
         """Apply templates to the given config value."""
         for template in templates:
-            template_data = create_config(template.data())
+            template_data = ConfigValue.factory(template.data())
             if isinstance(config_value, ConfigDict) and isinstance(
                 template_data, ConfigDict
             ):
@@ -73,4 +72,4 @@ def merge(*args: tuple[dict]) -> ConfigDict:
         ConfigDict: merged configs
     """
 
-    return reduce(_modify, map(create_config, args), ConfigDict({}))
+    return reduce(_modify, map(ConfigValue.factory, args), ConfigDict({}))

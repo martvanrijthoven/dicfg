@@ -2,7 +2,7 @@ from collections import UserDict
 from enum import Enum
 from typing import Any, Optional
 
-from dicfg.addons.addon import UpdaterAddon, ValidatorAddon
+from dicfg.addons.addon import ModifierAddon, UpdaterAddon, ValidatorAddon
 
 
 class Affix(Enum):
@@ -26,6 +26,26 @@ class ConfigValue:
         super().__init_subclass__(**kwargs)
         if data_type is not None:
             ConfigValue._registry[data_type] = cls
+
+    @classmethod
+    def factory(
+        cls,
+        data,
+        updater: list[UpdaterAddon] = None,
+        validator: list[ValidatorAddon] = None,
+        modifier: list[ModifierAddon] = None,
+    ):
+
+        if isinstance(data, cls):
+            return data
+
+        mods = modifier or (None,)
+        for mod in mods:
+            if mod is not None:
+                data = mod.modify(data)
+
+        target_cls = cls._registry.get(type(data), cls)
+        return target_cls(data, updater, validator)
 
     def __init__(
         self,

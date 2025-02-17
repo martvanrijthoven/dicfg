@@ -1,7 +1,6 @@
 from collections import UserList
 
 from dicfg.configs.configvalue import ConfigValue
-from dicfg.configs.factory import create_config
 
 
 class ConfigList(ConfigValue, UserList, data_type=list):
@@ -14,7 +13,7 @@ class ConfigList(ConfigValue, UserList, data_type=list):
 
     def _init(self, data: list):
         for idx, value in enumerate(data):
-            data[idx] = create_config(value)
+            data[idx] = ConfigValue.factory(value)
         return data
 
     def validate(self):
