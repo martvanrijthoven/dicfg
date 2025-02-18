@@ -1,6 +1,0 @@
-dicfg.addons.templates.get\_sqlite\_type
-========================================
-
-.. currentmodule:: dicfg.addons.templates
-
-.. autofunction:: get_sqlite_type

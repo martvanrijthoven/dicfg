@@ -1,0 +1,33 @@
+dicfg.addons.typing.StrTypeValidator
+====================================
+
+.. currentmodule:: dicfg.addons.typing
+
+.. autoclass:: StrTypeValidator
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~StrTypeValidator.__init__
+      ~StrTypeValidator.get_addon
+      ~StrTypeValidator.validate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~StrTypeValidator.NAME
+   
+   

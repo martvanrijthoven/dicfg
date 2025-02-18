@@ -1,0 +1,33 @@
+dicfg.addons.typing.TupleTypeValidator
+======================================
+
+.. currentmodule:: dicfg.addons.typing
+
+.. autoclass:: TupleTypeValidator
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TupleTypeValidator.__init__
+      ~TupleTypeValidator.get_addon
+      ~TupleTypeValidator.validate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TupleTypeValidator.NAME
+   
+   

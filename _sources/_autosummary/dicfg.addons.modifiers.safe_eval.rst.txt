@@ -1,6 +1,0 @@
-dicfg.addons.modifiers.safe\_eval
-=================================
-
-.. currentmodule:: dicfg.addons.modifiers
-
-.. autofunction:: safe_eval

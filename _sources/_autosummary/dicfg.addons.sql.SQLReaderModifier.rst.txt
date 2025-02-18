@@ -1,0 +1,33 @@
+dicfg.addons.sql.SQLReaderModifier
+==================================
+
+.. currentmodule:: dicfg.addons.sql
+
+.. autoclass:: SQLReaderModifier
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SQLReaderModifier.__init__
+      ~SQLReaderModifier.get_addon
+      ~SQLReaderModifier.modify
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SQLReaderModifier.NAME
+   
+   

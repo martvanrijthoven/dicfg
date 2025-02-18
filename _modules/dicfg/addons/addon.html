@@ -369,14 +369,14 @@
                 <article class="bd-article">
                   
   <h1>Source code for dicfg.addons.addon</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 
-<div class="viewcode-block" id="CONFIG_ADDONS">
-<a class="viewcode-back" href="../../../_autosummary/dicfg.addons.addon.CONFIG_ADDONS.html#dicfg.addons.addon.CONFIG_ADDONS">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">CONFIG_ADDONS</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="ADDONS">
+<a class="viewcode-back" href="../../../_autosummary/dicfg.addons.addon.ADDONS.html#dicfg.addons.addon.ADDONS">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ADDONS</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="n">UPDATER</span> <span class="o">=</span> <span class="s2">&quot;updater&quot;</span>
     <span class="n">VALIDATOR</span> <span class="o">=</span> <span class="s2">&quot;validator&quot;</span>
     <span class="n">TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;template&quot;</span>
@@ -411,13 +411,13 @@
         <span class="k">if</span> <span class="n">match</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
             <span class="n">addons</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">match</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">match</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
         <span class="k">elif</span> <span class="n">match</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">VALIDATOR_SIGN</span><span class="p">:</span>
-            <span class="n">addons</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">CONFIG_ADDONS</span><span class="o">.</span><span class="n">VALIDATOR</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">match</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+            <span class="n">addons</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ADDONS</span><span class="o">.</span><span class="n">VALIDATOR</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">match</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
         <span class="k">elif</span> <span class="n">match</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">UPDATER_SIGN</span><span class="p">:</span>
-            <span class="n">addons</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">CONFIG_ADDONS</span><span class="o">.</span><span class="n">UPDATER</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">match</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+            <span class="n">addons</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ADDONS</span><span class="o">.</span><span class="n">UPDATER</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">match</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
         <span class="k">elif</span> <span class="n">match</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">TEMPLATE_SIGN</span><span class="p">:</span>
-            <span class="n">addons</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">CONFIG_ADDONS</span><span class="o">.</span><span class="n">TEMPLATE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">match</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+            <span class="n">addons</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ADDONS</span><span class="o">.</span><span class="n">TEMPLATE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">match</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
         <span class="k">elif</span> <span class="n">match</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">MODIFIER_SIGN</span><span class="p">:</span>
-            <span class="n">addons</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">CONFIG_ADDONS</span><span class="o">.</span><span class="n">MODIFIER</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">match</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+            <span class="n">addons</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ADDONS</span><span class="o">.</span><span class="n">MODIFIER</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">match</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
 
     <span class="n">key</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">_ADDON_PATTERN</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">key</span><span class="p">,</span> <span class="n">addons</span></div>
@@ -530,11 +530,11 @@
 
 
 
-<span class="n">_ADDONS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">CONFIG_ADDONS</span><span class="o">.</span><span class="n">UPDATER</span><span class="p">:</span> <span class="n">UpdaterAddon</span><span class="p">,</span>
-    <span class="n">CONFIG_ADDONS</span><span class="o">.</span><span class="n">VALIDATOR</span><span class="p">:</span> <span class="n">ValidatorAddon</span><span class="p">,</span>
-    <span class="n">CONFIG_ADDONS</span><span class="o">.</span><span class="n">TEMPLATE</span><span class="p">:</span> <span class="n">TemplateAddon</span><span class="p">,</span>
-    <span class="n">CONFIG_ADDONS</span><span class="o">.</span><span class="n">MODIFIER</span><span class="p">:</span> <span class="n">ModifierAddon</span><span class="p">,</span>
+<span class="n">ADDONS_MAPPING</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">ADDONS</span><span class="o">.</span><span class="n">UPDATER</span><span class="p">:</span> <span class="n">UpdaterAddon</span><span class="p">,</span>
+    <span class="n">ADDONS</span><span class="o">.</span><span class="n">VALIDATOR</span><span class="p">:</span> <span class="n">ValidatorAddon</span><span class="p">,</span>
+    <span class="n">ADDONS</span><span class="o">.</span><span class="n">TEMPLATE</span><span class="p">:</span> <span class="n">TemplateAddon</span><span class="p">,</span>
+    <span class="n">ADDONS</span><span class="o">.</span><span class="n">MODIFIER</span><span class="p">:</span> <span class="n">ModifierAddon</span><span class="p">,</span>
 <span class="p">}</span>
 
 
@@ -542,7 +542,7 @@
 <a class="viewcode-back" href="../../../_autosummary/dicfg.addons.addon.select_addon.html#dicfg.addons.addon.select_addon">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">select_addon</span><span class="p">(</span><span class="n">addon</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Addon</span><span class="p">:</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">_addon</span><span class="p">:</span> <span class="n">Addon</span> <span class="o">=</span> <span class="n">_ADDONS</span><span class="p">[</span><span class="n">CONFIG_ADDONS</span><span class="p">(</span><span class="n">addon</span><span class="p">)]</span>
+        <span class="n">_addon</span><span class="p">:</span> <span class="n">Addon</span> <span class="o">=</span> <span class="n">ADDONS_MAPPING</span><span class="p">[</span><span class="n">ADDONS</span><span class="p">(</span><span class="n">addon</span><span class="p">)]</span>
     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">UnsupportedAddonError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Addon </span><span class="si">{</span><span class="n">addon</span><span class="si">}</span><span class="s2"> not found.&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_addon</span><span class="o">.</span><span class="n">get_addon</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>

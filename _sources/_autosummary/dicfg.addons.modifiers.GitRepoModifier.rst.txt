@@ -1,0 +1,33 @@
+dicfg.addons.modifiers.GitRepoModifier
+======================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoclass:: GitRepoModifier
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GitRepoModifier.__init__
+      ~GitRepoModifier.get_addon
+      ~GitRepoModifier.modify
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GitRepoModifier.NAME
+   
+   

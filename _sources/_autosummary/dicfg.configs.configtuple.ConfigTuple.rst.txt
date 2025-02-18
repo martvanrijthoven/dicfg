@@ -1,0 +1,31 @@
+dicfg.configs.configtuple.ConfigTuple
+=====================================
+
+.. currentmodule:: dicfg.configs.configtuple
+
+.. autoclass:: ConfigTuple
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ConfigTuple.__init__
+      ~ConfigTuple.cast
+      ~ConfigTuple.count
+      ~ConfigTuple.factory
+      ~ConfigTuple.index
+      ~ConfigTuple.modify
+      ~ConfigTuple.validate
+   
+   
+
+   
+   
+   

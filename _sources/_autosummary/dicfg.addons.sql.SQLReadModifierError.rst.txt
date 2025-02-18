@@ -1,0 +1,6 @@
+dicfg.addons.sql.SQLReadModifierError
+=====================================
+
+.. currentmodule:: dicfg.addons.sql
+
+.. autoexception:: SQLReadModifierError

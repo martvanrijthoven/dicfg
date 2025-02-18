@@ -1,0 +1,6 @@
+dicfg.addons.modifiers.TupleModifierError
+=========================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoexception:: TupleModifierError

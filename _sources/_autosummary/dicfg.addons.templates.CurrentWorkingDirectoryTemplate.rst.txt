@@ -1,0 +1,33 @@
+dicfg.addons.templates.CurrentWorkingDirectoryTemplate
+======================================================
+
+.. currentmodule:: dicfg.addons.templates
+
+.. autoclass:: CurrentWorkingDirectoryTemplate
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CurrentWorkingDirectoryTemplate.__init__
+      ~CurrentWorkingDirectoryTemplate.data
+      ~CurrentWorkingDirectoryTemplate.get_addon
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CurrentWorkingDirectoryTemplate.NAME
+   
+   

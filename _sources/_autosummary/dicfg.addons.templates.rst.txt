@@ -9,14 +9,6 @@ dicfg.addons.templates
 
    
    
-   .. rubric:: Functions
-
-   .. autosummary::
-      :toctree:                                          
-   
-      get_sqlite_type
-      write_to_database
-   
    
 
    
@@ -27,16 +19,15 @@ dicfg.addons.templates
       :toctree:                                         
       :template: custom-class-template.rst               
    
-      Build
-      CurrentWorkingDirectory
-      DateTimeNow
-      Debug
-      DontBuild
+      BuildTemplate
+      CurrentWorkingDirectoryTemplate
+      DateTimeNowTemplate
+      DebugTemplate
+      DontBuildTemplate
       LogLevel
-      SQLWriter
       SystemInfo
-      UUID4
-      Verbose
+      UUID4Template
+      VerboseTemplate
    
    
 

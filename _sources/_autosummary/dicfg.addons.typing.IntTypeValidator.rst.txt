@@ -1,0 +1,33 @@
+dicfg.addons.typing.IntTypeValidator
+====================================
+
+.. currentmodule:: dicfg.addons.typing
+
+.. autoclass:: IntTypeValidator
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~IntTypeValidator.__init__
+      ~IntTypeValidator.get_addon
+      ~IntTypeValidator.validate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~IntTypeValidator.NAME
+   
+   

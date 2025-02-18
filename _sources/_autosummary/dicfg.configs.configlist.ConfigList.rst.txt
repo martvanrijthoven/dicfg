@@ -1,0 +1,40 @@
+dicfg.configs.configlist.ConfigList
+===================================
+
+.. currentmodule:: dicfg.configs.configlist
+
+.. autoclass:: ConfigList
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ConfigList.__init__
+      ~ConfigList.append
+      ~ConfigList.cast
+      ~ConfigList.clear
+      ~ConfigList.copy
+      ~ConfigList.count
+      ~ConfigList.extend
+      ~ConfigList.factory
+      ~ConfigList.index
+      ~ConfigList.insert
+      ~ConfigList.modify
+      ~ConfigList.pop
+      ~ConfigList.remove
+      ~ConfigList.reverse
+      ~ConfigList.sort
+      ~ConfigList.validate
+   
+   
+
+   
+   
+   

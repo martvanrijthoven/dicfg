@@ -1,0 +1,33 @@
+dicfg.addons.modifiers.PathModifier
+===================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoclass:: PathModifier
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PathModifier.__init__
+      ~PathModifier.get_addon
+      ~PathModifier.modify
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~PathModifier.NAME
+   
+   

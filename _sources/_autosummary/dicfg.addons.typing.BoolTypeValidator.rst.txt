@@ -1,0 +1,33 @@
+dicfg.addons.typing.BoolTypeValidator
+=====================================
+
+.. currentmodule:: dicfg.addons.typing
+
+.. autoclass:: BoolTypeValidator
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BoolTypeValidator.__init__
+      ~BoolTypeValidator.get_addon
+      ~BoolTypeValidator.validate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BoolTypeValidator.NAME
+   
+   

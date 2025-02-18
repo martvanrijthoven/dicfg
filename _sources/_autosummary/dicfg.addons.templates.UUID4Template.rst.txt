@@ -1,0 +1,33 @@
+dicfg.addons.templates.UUID4Template
+====================================
+
+.. currentmodule:: dicfg.addons.templates
+
+.. autoclass:: UUID4Template
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~UUID4Template.__init__
+      ~UUID4Template.data
+      ~UUID4Template.get_addon
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~UUID4Template.NAME
+   
+   

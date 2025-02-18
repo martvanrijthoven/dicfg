@@ -1,0 +1,33 @@
+dicfg.addons.typing.NoneTypeValidator
+=====================================
+
+.. currentmodule:: dicfg.addons.typing
+
+.. autoclass:: NoneTypeValidator
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~NoneTypeValidator.__init__
+      ~NoneTypeValidator.get_addon
+      ~NoneTypeValidator.validate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~NoneTypeValidator.NAME
+   
+   

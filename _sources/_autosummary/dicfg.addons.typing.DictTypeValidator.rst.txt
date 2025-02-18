@@ -1,0 +1,33 @@
+dicfg.addons.typing.DictTypeValidator
+=====================================
+
+.. currentmodule:: dicfg.addons.typing
+
+.. autoclass:: DictTypeValidator
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DictTypeValidator.__init__
+      ~DictTypeValidator.get_addon
+      ~DictTypeValidator.validate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DictTypeValidator.NAME
+   
+   

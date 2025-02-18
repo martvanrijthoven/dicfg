@@ -1,0 +1,31 @@
+dicfg.configs.configlist
+========================
+
+.. automodule:: dicfg.configs.configlist
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:                                         
+      :template: custom-class-template.rst               
+   
+      ConfigList
+   
+   
+
+   
+   
+   
+
+
+

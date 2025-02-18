@@ -1,0 +1,33 @@
+dicfg.addons.typing.FloatTypeValidator
+======================================
+
+.. currentmodule:: dicfg.addons.typing
+
+.. autoclass:: FloatTypeValidator
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~FloatTypeValidator.__init__
+      ~FloatTypeValidator.get_addon
+      ~FloatTypeValidator.validate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FloatTypeValidator.NAME
+   
+   

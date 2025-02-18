@@ -1,0 +1,33 @@
+dicfg.addons.templates.DebugTemplate
+====================================
+
+.. currentmodule:: dicfg.addons.templates
+
+.. autoclass:: DebugTemplate
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DebugTemplate.__init__
+      ~DebugTemplate.data
+      ~DebugTemplate.get_addon
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DebugTemplate.NAME
+   
+   

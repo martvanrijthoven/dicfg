@@ -27,8 +27,8 @@ dicfg.addons.addon
       :toctree:                                         
       :template: custom-class-template.rst               
    
+      ADDONS
       Addon
-      CONFIG_ADDONS
       ModifierAddon
       TemplateAddon
       UpdaterAddon

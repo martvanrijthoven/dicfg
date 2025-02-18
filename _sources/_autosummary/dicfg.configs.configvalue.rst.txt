@@ -1,0 +1,39 @@
+dicfg.configs.configvalue
+=========================
+
+.. automodule:: dicfg.configs.configvalue
+  
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      update
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:                                         
+      :template: custom-class-template.rst               
+   
+      Affix
+      ConfigValue
+   
+   
+
+   
+   
+   
+
+
+

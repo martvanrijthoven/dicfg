@@ -1,0 +1,6 @@
+dicfg.addons.sql.write\_to\_database
+====================================
+
+.. currentmodule:: dicfg.addons.sql
+
+.. autofunction:: write_to_database

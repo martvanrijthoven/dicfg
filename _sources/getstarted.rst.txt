@@ -23,11 +23,9 @@ Installation
 User Guide
 ^^^^^^^^^^
 
-**Essentials**
 
 .. role:: raw-html(raw)
     :format: html
-
 
 
 .. grid:: 1 1 5 5
@@ -63,9 +61,6 @@ User Guide
       Dependency Injection
 
 
-
-
-**Supplementary**
 
 .. grid:: 1 1 5 5
       

@@ -1,0 +1,33 @@
+dicfg.addons.typing.ListTypeValidator
+=====================================
+
+.. currentmodule:: dicfg.addons.typing
+
+.. autoclass:: ListTypeValidator
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ListTypeValidator.__init__
+      ~ListTypeValidator.get_addon
+      ~ListTypeValidator.validate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ListTypeValidator.NAME
+   
+   

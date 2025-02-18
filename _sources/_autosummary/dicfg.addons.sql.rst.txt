@@ -1,0 +1,46 @@
+dicfg.addons.sql
+================
+
+.. automodule:: dicfg.addons.sql
+  
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      write_to_database
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:                                         
+      :template: custom-class-template.rst               
+   
+      SQLReaderModifier
+      SQLWriterTemplate
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      SQLReadModifierError
+   
+   
+
+
+

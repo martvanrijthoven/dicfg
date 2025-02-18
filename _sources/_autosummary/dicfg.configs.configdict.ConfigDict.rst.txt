@@ -1,0 +1,40 @@
+dicfg.configs.configdict.ConfigDict
+===================================
+
+.. currentmodule:: dicfg.configs.configdict
+
+.. autoclass:: ConfigDict
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ConfigDict.__init__
+      ~ConfigDict.cast
+      ~ConfigDict.clear
+      ~ConfigDict.copy
+      ~ConfigDict.factory
+      ~ConfigDict.fromkeys
+      ~ConfigDict.get
+      ~ConfigDict.items
+      ~ConfigDict.keys
+      ~ConfigDict.modify
+      ~ConfigDict.pop
+      ~ConfigDict.popitem
+      ~ConfigDict.setdefault
+      ~ConfigDict.update
+      ~ConfigDict.validate
+      ~ConfigDict.values
+   
+   
+
+   
+   
+   

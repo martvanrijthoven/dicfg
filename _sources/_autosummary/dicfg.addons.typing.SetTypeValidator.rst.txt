@@ -1,0 +1,33 @@
+dicfg.addons.typing.SetTypeValidator
+====================================
+
+.. currentmodule:: dicfg.addons.typing
+
+.. autoclass:: SetTypeValidator
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SetTypeValidator.__init__
+      ~SetTypeValidator.get_addon
+      ~SetTypeValidator.validate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SetTypeValidator.NAME
+   
+   

@@ -1,0 +1,33 @@
+dicfg.addons.modifiers.TupleModifier
+====================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoclass:: TupleModifier
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TupleModifier.__init__
+      ~TupleModifier.get_addon
+      ~TupleModifier.modify
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TupleModifier.NAME
+   
+   

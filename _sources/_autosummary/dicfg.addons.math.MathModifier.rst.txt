@@ -1,0 +1,33 @@
+dicfg.addons.math.MathModifier
+==============================
+
+.. currentmodule:: dicfg.addons.math
+
+.. autoclass:: MathModifier
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MathModifier.__init__
+      ~MathModifier.get_addon
+      ~MathModifier.modify
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MathModifier.NAME
+   
+   

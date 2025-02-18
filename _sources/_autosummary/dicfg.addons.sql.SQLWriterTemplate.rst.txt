@@ -1,0 +1,33 @@
+dicfg.addons.sql.SQLWriterTemplate
+==================================
+
+.. currentmodule:: dicfg.addons.sql
+
+.. autoclass:: SQLWriterTemplate
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SQLWriterTemplate.__init__
+      ~SQLWriterTemplate.data
+      ~SQLWriterTemplate.get_addon
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SQLWriterTemplate.NAME
+   
+   

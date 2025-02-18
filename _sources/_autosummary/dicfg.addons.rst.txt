@@ -30,8 +30,11 @@ dicfg.addons
 
    addon
    load
+   math
    modifiers
+   sql
    templates
+   typing
    updaters
    validators
 

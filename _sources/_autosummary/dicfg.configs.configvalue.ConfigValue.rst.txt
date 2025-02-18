@@ -1,0 +1,29 @@
+dicfg.configs.configvalue.ConfigValue
+=====================================
+
+.. currentmodule:: dicfg.configs.configvalue
+
+.. autoclass:: ConfigValue
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ConfigValue.__init__
+      ~ConfigValue.cast
+      ~ConfigValue.factory
+      ~ConfigValue.modify
+      ~ConfigValue.validate
+   
+   
+
+   
+   
+   

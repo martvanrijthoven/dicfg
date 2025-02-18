@@ -1,6 +1,0 @@
-dicfg.addons.modifiers.MathModifierError
-========================================
-
-.. currentmodule:: dicfg.addons.modifiers
-
-.. autoexception:: MathModifierError

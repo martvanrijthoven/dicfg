@@ -29,7 +29,7 @@
    :recursive:
 
    addons
-   config
+   configs
    factory
    formats
    magics

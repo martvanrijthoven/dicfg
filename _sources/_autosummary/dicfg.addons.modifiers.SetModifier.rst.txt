@@ -1,0 +1,33 @@
+dicfg.addons.modifiers.SetModifier
+==================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoclass:: SetModifier
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SetModifier.__init__
+      ~SetModifier.get_addon
+      ~SetModifier.modify
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SetModifier.NAME
+   
+   

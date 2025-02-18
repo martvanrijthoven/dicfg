@@ -1,0 +1,6 @@
+dicfg.configs.configdict.merge
+==============================
+
+.. currentmodule:: dicfg.configs.configdict
+
+.. autofunction:: merge

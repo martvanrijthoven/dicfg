@@ -1,0 +1,45 @@
+dicfg.addons.math
+=================
+
+.. automodule:: dicfg.addons.math
+  
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      safe_eval
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:                                         
+      :template: custom-class-template.rst               
+   
+      MathModifier
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      MathModifierError
+   
+   
+
+
+

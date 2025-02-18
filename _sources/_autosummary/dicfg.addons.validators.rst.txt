@@ -19,9 +19,9 @@ dicfg.addons.validators
       :toctree:                                         
       :template: custom-class-template.rst               
    
+      AssignedValidatorAddon
       DependenciesAddon
       DepreciatedValidatorAddon
-      ObjectValidatorAddon
       RequiredValidatorAddon
       ValidationError
    

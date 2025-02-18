@@ -9,13 +9,6 @@ dicfg.addons.modifiers
 
    
    
-   .. rubric:: Functions
-
-   .. autosummary::
-      :toctree:                                          
-   
-      safe_eval
-   
    
 
    
@@ -31,11 +24,12 @@ dicfg.addons.modifiers
       DecodeBase64Modifier
       EncodeBase64Modifier
       EnvModifier
+      GitRepoModifier
       IncludeModifier
-      MathModifier
-      SQLReaderModifier
+      PathModifier
+      SetModifier
       SlugifyModifier
-      UUIDv5Modifier
+      TupleModifier
    
    
 
@@ -50,10 +44,9 @@ dicfg.addons.modifiers
       CommandModifierError
       EnvModifierError
       FetchModifierError
+      GitRepoModifierError
       IncludeModifierError
-      MathModifierError
-      SQLReadModifierError
-      UUIDv5ModifierError
+      TupleModifierError
    
    
 

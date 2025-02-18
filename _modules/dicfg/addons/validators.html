@@ -370,12 +370,8 @@
                   
   <h1>Source code for dicfg.addons.validators</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">dicfg.addons.addon</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValidatorAddon</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">dicfg.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">WHITE_LIST_FACTORY_KEYS</span><span class="p">,</span> <span class="n">OBJECT_KEY</span>
 
 
 <div class="viewcode-block" id="ValidationError">
@@ -383,6 +379,7 @@
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ValidationError</span><span class="p">:</span>
     <span class="n">message</span><span class="p">:</span> <span class="nb">str</span></div>
+
 
 
 <div class="viewcode-block" id="ValidationErrors">
@@ -401,7 +398,24 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">DependenciesAddon</span><span class="p">(</span><span class="n">ValidatorAddon</span><span class="p">):</span>
     <span class="n">NAME</span> <span class="o">=</span> <span class="s2">&quot;dependencies&quot;</span></div>
 
-    
+
+
+<div class="viewcode-block" id="AssignedValidatorAddon">
+<a class="viewcode-back" href="../../../_autosummary/dicfg.addons.validators.AssignedValidatorAddon.html#dicfg.addons.validators.AssignedValidatorAddon">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AssignedValidatorAddon</span><span class="p">(</span><span class="n">ValidatorAddon</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validator&quot;&quot;&quot;</span>
+
+    <span class="n">NAME</span> <span class="o">=</span> <span class="s2">&quot;assigned&quot;</span>
+
+<div class="viewcode-block" id="AssignedValidatorAddon.validate">
+<a class="viewcode-back" href="../../../_autosummary/dicfg.addons.validators.AssignedValidatorAddon.html#dicfg.addons.validators.AssignedValidatorAddon.validate">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;Value is assigned and must not be set by user&quot;</span><span class="p">)</span></div>
+</div>
+
+
 
 <div class="viewcode-block" id="RequiredValidatorAddon">
 <a class="viewcode-back" href="../../../_autosummary/dicfg.addons.validators.RequiredValidatorAddon.html#dicfg.addons.validators.RequiredValidatorAddon">[docs]</a>
@@ -419,6 +433,7 @@
 </div>
 
 
+
 <div class="viewcode-block" id="DepreciatedValidatorAddon">
 <a class="viewcode-back" href="../../../_autosummary/dicfg.addons.validators.DepreciatedValidatorAddon.html#dicfg.addons.validators.DepreciatedValidatorAddon">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DepreciatedValidatorAddon</span><span class="p">(</span><span class="n">ValidatorAddon</span><span class="p">):</span>
@@ -432,52 +447,6 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;Value is depreciated and should not be used&quot;</span><span class="p">)</span></div>
-</div>
-
-
-
-<div class="viewcode-block" id="ObjectValidatorAddon">
-<a class="viewcode-back" href="../../../_autosummary/dicfg.addons.validators.ObjectValidatorAddon.html#dicfg.addons.validators.ObjectValidatorAddon">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">ObjectValidatorAddon</span><span class="p">(</span><span class="n">ValidatorAddon</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validator that checks if a value is a valid object configuration&quot;&quot;&quot;</span>
-
-    <span class="n">NAME</span> <span class="o">=</span> <span class="s2">&quot;object&quot;</span>
-
-<div class="viewcode-block" id="ObjectValidatorAddon.validate">
-<a class="viewcode-back" href="../../../_autosummary/dicfg.addons.validators.ObjectValidatorAddon.html#dicfg.addons.validators.ObjectValidatorAddon.validate">[docs]</a>
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValidationError</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;Value must be a dictionary.&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">OBJECT_KEY</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ValidationError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;The key </span><span class="si">{</span><span class="n">OBJECT_KEY</span><span class="si">}</span><span class="s2"> must be present in the configuration.&quot;</span>
-            <span class="p">)</span>
-
-        <span class="n">object_path</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="n">OBJECT_KEY</span><span class="p">]</span><span class="o">.</span><span class="n">cast</span><span class="p">()</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">module_name</span><span class="p">,</span> <span class="n">object_name</span> <span class="o">=</span> <span class="n">object_path</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
-            <span class="n">obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">object_name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">ValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">object_path</span><span class="si">}</span><span class="s2">&#39; is not callable.&quot;</span><span class="p">)</span>
-        <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ValidationError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Failed to import or access callable for </span><span class="si">{</span><span class="n">OBJECT_KEY</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="p">)</span>
-
-        <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-
-        <span class="n">remaining_keys</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">key</span><span class="p">:</span> <span class="n">value</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">value</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WHITE_LIST_FACTORY_KEYS</span>
-        <span class="p">}</span>
-
-        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">remaining_keys</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">ValidationError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39; is not a valid argument for &#39;</span><span class="si">{</span><span class="n">object_path</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
-                <span class="p">)</span></div>
 </div>
 
 </pre></div>

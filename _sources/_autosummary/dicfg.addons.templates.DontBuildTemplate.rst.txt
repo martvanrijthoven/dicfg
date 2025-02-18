@@ -1,0 +1,33 @@
+dicfg.addons.templates.DontBuildTemplate
+========================================
+
+.. currentmodule:: dicfg.addons.templates
+
+.. autoclass:: DontBuildTemplate
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DontBuildTemplate.__init__
+      ~DontBuildTemplate.data
+      ~DontBuildTemplate.get_addon
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DontBuildTemplate.NAME
+   
+   

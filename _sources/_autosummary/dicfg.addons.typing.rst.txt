@@ -1,0 +1,45 @@
+dicfg.addons.typing
+===================
+
+.. automodule:: dicfg.addons.typing
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:                                         
+      :template: custom-class-template.rst               
+   
+      BoolTypeValidator
+      CollectionTypeValidator
+      ContainerTypeValidator
+      DictTypeValidator
+      FloatTypeValidator
+      IntTypeValidator
+      ListTypeValidator
+      NoneTypeValidator
+      NumberTypeValidator
+      ObjectTypeValidatorAddon
+      SequenceTypeValidator
+      SetTypeValidator
+      StrTypeValidator
+      TupleTypeValidator
+      TypeValidator
+   
+   
+
+   
+   
+   
+
+
+

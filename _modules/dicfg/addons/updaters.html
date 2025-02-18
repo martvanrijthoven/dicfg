@@ -370,7 +370,11 @@
                   
   <h1>Source code for dicfg.addons.updaters</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dicfg.addons.addon</span><span class="w"> </span><span class="kn">import</span> <span class="n">UpdaterAddon</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">dicfg.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Affix</span><span class="p">,</span> <span class="n">ConfigDict</span><span class="p">,</span> <span class="n">ConfigList</span><span class="p">,</span> <span class="n">ConfigValue</span><span class="p">,</span> <span class="n">update</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dicfg.configs.configdict</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigDict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dicfg.configs.configlist</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigList</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dicfg.configs.configset</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigSet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dicfg.configs.configtuple</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigTuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dicfg.configs.configvalue</span><span class="w"> </span><span class="kn">import</span> <span class="n">Affix</span><span class="p">,</span> <span class="n">ConfigValue</span><span class="p">,</span> <span class="n">update</span>
 
 
 <div class="viewcode-block" id="ReplaceUpdaterAddon">
@@ -400,8 +404,11 @@
 <a class="viewcode-back" href="../../../_autosummary/dicfg.addons.updaters.MergeUpdaterAddon.html#dicfg.addons.updaters.MergeUpdaterAddon.update">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ConfigValue</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">ConfigValue</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">ConfigList</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">ConfigList</span><span class="p">,</span> <span class="n">ConfigTuple</span><span class="p">)):</span>
             <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">ConfigSet</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">update</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>
 </div>
 
@@ -433,20 +440,6 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ConfigValue</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">ConfigValue</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">update</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">affix</span><span class="o">=</span><span class="n">Affix</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span></div>
-</div>
-
-
-<div class="viewcode-block" id="NonEmptyUpdater">
-<a class="viewcode-back" href="../../../_autosummary/dicfg.addons.updaters.NonEmptyUpdater.html#dicfg.addons.updaters.NonEmptyUpdater">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">NonEmptyUpdater</span><span class="p">(</span><span class="n">UpdaterAddon</span><span class="p">):</span>
-    
-    <span class="n">NAME</span> <span class="o">=</span> <span class="s2">&quot;~&quot;</span>
-
-<div class="viewcode-block" id="NonEmptyUpdater.update">
-<a class="viewcode-back" href="../../../_autosummary/dicfg.addons.updaters.NonEmptyUpdater.html#dicfg.addons.updaters.NonEmptyUpdater.update">[docs]</a>
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ConfigValue</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">ConfigValue</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">a</span></div>
 </div>
 
 </pre></div>

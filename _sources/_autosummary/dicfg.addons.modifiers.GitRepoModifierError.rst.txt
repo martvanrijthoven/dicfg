@@ -1,0 +1,6 @@
+dicfg.addons.modifiers.GitRepoModifierError
+===========================================
+
+.. currentmodule:: dicfg.addons.modifiers
+
+.. autoexception:: GitRepoModifierError

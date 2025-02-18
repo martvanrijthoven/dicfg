@@ -1,0 +1,46 @@
+dicfg.configs.configset.ConfigSet
+=================================
+
+.. currentmodule:: dicfg.configs.configset
+
+.. autoclass:: ConfigSet
+   :members:                                   
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ConfigSet.__init__
+      ~ConfigSet.add
+      ~ConfigSet.cast
+      ~ConfigSet.clear
+      ~ConfigSet.copy
+      ~ConfigSet.difference
+      ~ConfigSet.difference_update
+      ~ConfigSet.discard
+      ~ConfigSet.factory
+      ~ConfigSet.intersection
+      ~ConfigSet.intersection_update
+      ~ConfigSet.isdisjoint
+      ~ConfigSet.issubset
+      ~ConfigSet.issuperset
+      ~ConfigSet.modify
+      ~ConfigSet.pop
+      ~ConfigSet.remove
+      ~ConfigSet.symmetric_difference
+      ~ConfigSet.symmetric_difference_update
+      ~ConfigSet.union
+      ~ConfigSet.update
+      ~ConfigSet.validate
+   
+   
+
+   
+   
+   

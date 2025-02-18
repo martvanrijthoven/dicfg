@@ -1,0 +1,36 @@
+dicfg.configs
+=============
+
+.. automodule:: dicfg.configs
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :template: custom-module-template.rst                 
+   :recursive:
+
+   configdict
+   configlist
+   configset
+   configtuple
+   configvalue
+

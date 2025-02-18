@@ -1,0 +1,6 @@
+dicfg.addons.math.safe\_eval
+============================
+
+.. currentmodule:: dicfg.addons.math
+
+.. autofunction:: safe_eval
