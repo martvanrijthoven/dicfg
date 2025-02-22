@@ -154,6 +154,9 @@ class ObjectTypeValidatorAddon(DictTypeValidator):
     def validate(cls, value: dict) -> ValidationError:
         super().validate(value)
 
+        if not isinstance(value, dict):
+           return ValidationError("Value must be a dictionary.")
+      
         if OBJECT_KEY not in value:
             return ValidationError(
                 f"The key {OBJECT_KEY} must be present in the configuration."

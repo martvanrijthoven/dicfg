@@ -10,7 +10,7 @@ class ValidationError:
 
 class ValidationErrors(Exception):
     def __init__(self, errors):
-        self.errors = errors
+        self.errors = ['\n']+errors
 
     def __str__(self):
         return "\n".join(str(err) for err in self.errors)

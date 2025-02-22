@@ -92,3 +92,17 @@ class UUID4Template(TemplateAddon):
     def data(cls):
         """Returns a random version 4 UUID."""
         return str(uuid.uuid4())
+
+
+def call_on(callable, *args, **kwargs):
+    return callable(*args, **kwargs)
+
+
+class CallTemplate(TemplateAddon):
+    NAME = "call"
+
+    @classmethod
+    def data(cls):
+        return {"*object": f"{cls.__module__}.call_on", "callable!required": None}
+
+
