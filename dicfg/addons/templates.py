@@ -104,5 +104,3 @@ class CallTemplate(TemplateAddon):
     @classmethod
     def data(cls):
         return {"*object": f"{cls.__module__}.call_on", "callable!required": None}
-
-

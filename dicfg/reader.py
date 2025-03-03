@@ -10,6 +10,7 @@ from dicfg.addons import load as _
 from dicfg.formats import FORMAT_READERS
 from dicfg.configs.configdict import merge
 
+
 class ConfigNotFoundError(Exception):
     """Raised when config file can not be found."""
 
@@ -95,7 +96,7 @@ class ConfigReader:
 
         configs = self._fuse_configs(configs, self._context_keys)
         merged_configs = merge(*configs)
-        
+
         if errors := list(merged_configs.validate()):
             raise ValidationErrors(errors)
         return merged_configs.cast()
@@ -130,9 +131,7 @@ class ConfigReader:
         return cli_config.get(self._name, {})
 
     def _fuse_configs(self, configs, context_keys):
-        fuse_config = partial(
-            self._fuse_config, context_keys=context_keys
-        )
+        fuse_config = partial(self._fuse_config, context_keys=context_keys)
         return tuple(map(fuse_config, configs))
 
     def _fuse_config(self, config: dict, context_keys: tuple):
