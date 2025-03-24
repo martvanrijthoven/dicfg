@@ -71,9 +71,9 @@ class SQLReaderModifier(ModifierAddon):
             elif output_format == "json":
                 json_rows = [dict(zip(headers, row)) for row in rows]
                 return json.dumps(json_rows, indent=2)
-            
+
             return str(rows)
-         
+
         except sqlite3.Error as e:
             raise SQLReadModifierError(f"Database error: {e}")
         finally:
