@@ -9,7 +9,7 @@ from dicfg.addons.validators import ValidationErrors
 from dicfg.addons import load as _
 from dicfg.formats import FORMAT_READERS
 from dicfg.configs.configdict import merge
-
+from pprint import pprint
 class ConfigNotFoundError(Exception):
     """Raised when config file can not be found."""
 
@@ -21,8 +21,7 @@ class ConfigReader:
         name (str): Name of config. Used as a reference in user configs and cli settings.
         main_config_path (Union[str, Path], optional): Path to main config. Defaults to  "./configs/config.yml".
         presets_folder_name (str, optional): Presets folder. Defaults to 'presets'.
-        default_key (str, optional): Default context key. Defaults to "default".
-        context_keys (tuple, optional): Addtional context keys. Defaults to ().
+        default_key (str, optional): Default key. Defaults to "default".
     """
 
     def __init__(
@@ -31,7 +30,6 @@ class ConfigReader:
         main_config_path: Union[str, Path] = "./configs/config.yml",
         presets: Union[str, Path] = "presets",
         default_key: str = "default",
-        context_keys: tuple = (),
     ):
         self._name = name
         self._main_config_path = Path(main_config_path)
@@ -42,11 +40,9 @@ class ConfigReader:
             )
 
         self._default_key = default_key
-        self._context_keys = context_keys
-
         self._configs_folder = None
         self._presets_folder = None
-
+        self._preset_key = presets if isinstance(presets, str) else "presets"
         self._configs_folder = self._main_config_path.parent
 
         if isinstance(presets, Path):
@@ -81,7 +77,7 @@ class ConfigReader:
 
             for config in user_config:
                 read_user_config = self._read_user_config(config)
-                user_presets = read_user_config.pop("presets", ())
+                user_presets = read_user_config.pop(self._preset_key, ())
                 user_configs.append(read_user_config)
                 user_presets_configs.extend(self._read_presets(user_presets))
 
@@ -93,7 +89,7 @@ class ConfigReader:
             cli_config,
         )
 
-        configs = self._fuse_configs(configs, self._context_keys)
+        configs = self._fuse_configs(configs)
         merged_configs = merge(*configs)
         
         if errors := list(merged_configs.validate()):
@@ -111,7 +107,7 @@ class ConfigReader:
         user_config = (
             user_config if isinstance(user_config, dict) else self._read(user_config)
         )
-
+        pprint(user_config, sort_dicts=False)
         try:
             return user_config[self._name]
         except KeyError:
@@ -129,13 +125,13 @@ class ConfigReader:
         cli_config = merge(*dicts)
         return cli_config.get(self._name, {})
 
-    def _fuse_configs(self, configs, context_keys):
-        fuse_config = partial(
-            self._fuse_config, context_keys=context_keys
-        )
+    def _fuse_configs(self, configs):
+        fuse_config = partial(self._fuse_config)
         return tuple(map(fuse_config, configs))
 
-    def _fuse_config(self, config: dict, context_keys: tuple):
+    def _fuse_config(self, config: dict):
+        context_keys = set(config.keys())
+        context_keys.discard(self._default_key)
         fused_config = deepcopy(
             {key: deepcopy(config.get("default", {})) for key in context_keys}
         )

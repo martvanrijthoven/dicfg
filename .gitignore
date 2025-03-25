@@ -131,3 +131,9 @@ dmypy.json
 docs/build/*
 docs/jupyter_execute/*
 docs/source/_autosummary/*
+
+
+*.gz
+*ubyte
+model.pt
+.DS_Store

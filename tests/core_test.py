@@ -23,14 +23,17 @@ class MyProject:
     project_component: ProjectComponent
 
 
-config_reader = ConfigReader(name="testconfig", context_keys=("testkey",))
+config_reader = ConfigReader(name="testconfig")
 
 
 def test_dicfg():
     user_config_path = Path("./testconfigs/user_config.yml")
     config = config_reader.read()
-    config = config_reader.read({"testconfig": {"default": None}})
+    # config = config_reader.read({"testconfig": {"default": None}})
     config = config_reader.read(user_config_path)
+    print()
+    print("-------"*20)
+    print(config)
     test_config = build_config(
         config["testkey"],
     )
@@ -52,7 +55,6 @@ def test_cli():
     sys_config_reader = ConfigReader(
         name="testconfig",
         main_config_path="./configs/test.yml",
-        context_keys=("testkey",),
     )
     sys_argv = sys.argv
 

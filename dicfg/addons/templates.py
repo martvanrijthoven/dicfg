@@ -5,6 +5,8 @@ from enum import Enum
 from pathlib import Path
 
 from dicfg.addons.addon import TemplateAddon
+from dicfg.addons.modifiers import IncludeModifierError
+from dicfg.formats import FORMAT_READERS
 
 
 class LogLevel(Enum):
@@ -104,5 +106,21 @@ class CallTemplate(TemplateAddon):
     @classmethod
     def data(cls):
         return {"*object": f"{cls.__module__}.call_on", "callable!required": None}
+
+
+def include(file):
+    if Path(file).suffix in FORMAT_READERS:
+        return FORMAT_READERS[Path(file).suffix](file)
+    else:
+        raise IncludeModifierError(
+            f"Unsupported file format {Path(a).suffix} for include modifier {a}"
+        )
+
+class IncludeTemplate(TemplateAddon):
+    NAME = "include"
+
+    @classmethod
+    def data(cls):
+        return {"*object": f"{cls.__module__}.include", "file!required": None}
 
 
