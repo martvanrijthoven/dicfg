@@ -48,8 +48,9 @@ class PostUpdaterAddon(UpdaterAddon):
     def update(cls, a: ConfigValue, b: ConfigValue):
         return update(a, b, affix=Affix.POST)
 
+
 class NonEmptyUpdater(UpdaterAddon):
-    
+
     NAME = "~"
 
     @classmethod
