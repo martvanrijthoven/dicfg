@@ -116,11 +116,10 @@ def include(file):
             f"Unsupported file format {Path(a).suffix} for include modifier {a}"
         )
 
+
 class IncludeTemplate(TemplateAddon):
     NAME = "include"
 
     @classmethod
     def data(cls):
         return {"*object": f"{cls.__module__}.include", "file!required": None}
-
-
