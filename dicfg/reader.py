@@ -10,6 +10,8 @@ from dicfg.addons import load as _
 from dicfg.formats import FORMAT_READERS
 from dicfg.configs.configdict import merge
 from pprint import pprint
+
+
 class ConfigNotFoundError(Exception):
     """Raised when config file can not be found."""
 
@@ -91,7 +93,7 @@ class ConfigReader:
 
         configs = self._fuse_configs(configs)
         merged_configs = merge(*configs)
-        
+
         if errors := list(merged_configs.validate()):
             raise ValidationErrors(errors)
         return merged_configs.cast()
